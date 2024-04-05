@@ -1,16 +1,14 @@
 package com.hishamfactory;
 public class Main {
     public static void main(String[] args) {
-        Passenger passenger = new Passenger();
-        Passenger.addNewPassenger();
-        Passenger.addNewPassenger();
-        Passenger.addNewPassenger();
+        Employee employee = new Employee();
+        employee.addNewEmployee();
+        employee.addNewEmployee();
+        employee.addNewEmployee();
+        employee.printAllEmployees();
+
+        employee.editEmployeeInfo("Hisham Mohammed");
+        employee.deleteEmployee("Okan Ali");
         Passenger.printAllPassengers();
-
-        passenger.editPassengerInfo("Hisham Mohammed");
-        passenger.deletePassenger("Okan Ali");
-        Passenger.printAllPassengers();
-
-
     }
 }
