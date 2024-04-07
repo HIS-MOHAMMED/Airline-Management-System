@@ -149,4 +149,9 @@ public class Airport {
                 break;
         }
     }
+    public void deleteAirport(String id){
+        Airport airport = getAirportByID(id);
+        airports.remove(airport);
+        System.out.println("The airport " + airport.getAirport_name() + "was deleted..");
+    }
 }
