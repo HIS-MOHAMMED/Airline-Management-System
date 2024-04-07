@@ -46,9 +46,6 @@ public class Person {
     public void setId(String id) {
         this.id = id;
     }
-
-
-
     Person(){}
     Person(String first_name,String last_name,int age,String tel_number,String id){
         this.first_name =first_name;

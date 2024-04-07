@@ -141,4 +141,9 @@ public class Plane {
             System.out.println("The given value is null.check it");
         }
     }
+    public void deletePlane(String id){
+        Plane plane = getPlaneById(id);
+        planes.remove(plane);
+        System.out.println("Plane deleted...");
+    }
 }
