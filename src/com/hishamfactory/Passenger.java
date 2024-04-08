@@ -13,7 +13,7 @@ public class Passenger extends  Person {
         super(first_name,last_name,age,tel_number,id);
         //System.out.println("New Passenger Add");
     }
-    public static void addNewPassenger(){
+    public  void addNewPassenger(){
         System.out.print("Enter the first name: ");
         String first_name = sc.next();
         System.out.print("Enter the last name: ");
@@ -40,21 +40,13 @@ public class Passenger extends  Person {
         }
         return null;//must handle nullPointerException when using this method....
     }
-    public static void printAllPassengers(){
+    public  void printAllPassengers(){
+        System.out.println(".......................");
         for(Passenger passenger : passengers){
-            System.out.print("Name: ");
-            System.out.println(passenger.getFirst_name() + " " + passenger.getLast_name());
-            System.out.println();
-            System.out.print("Age:");
-            System.out.println(passenger.getAge());
-            System.out.println();
-            System.out.print("Tel Number: ");
-            System.out.println(passenger.getTel_number());
-            System.out.println();
-            System.out.print("Id: ");
-            System.out.println(passenger.getId());
-            System.out.println(".........................................................");
+            System.out.println("Name: " + passenger.getFirst_name() + passenger.getLast_name());
+            System.out.print("Age" + passenger.getId());
         }
+        System.out.println("........................");
     }
     public void editPassengerInfo(String name){
             Passenger passenger = getPassengerByName(name);

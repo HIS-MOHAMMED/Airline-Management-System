@@ -11,17 +11,19 @@ public class Plane {
     private String plane_year;
     private int plane_capacity;
     private int plane_current_passengers;
+    private String plane_type;
     private ArrayList<Plane> planes = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     Plane(){
     }
-    Plane(String plane_id,String plane_model,String plane_manufacturer,String plane_year,int plane_capacity,int plane_current_passengers){
+    Plane(String plane_id,String plane_model,String plane_manufacturer,String plane_year,int plane_capacity,int plane_current_passengers,String plane_type){
         this.plane_id = plane_id;
         this.plane_model = plane_model;
         this.plane_capacity  = plane_capacity;
         this.plane_manufacturer = plane_manufacturer;
         this.plane_current_passengers = plane_current_passengers;
         this.plane_year =plane_year;
+        this.plane_type = plane_type;
     }
     public String getPlane_id() {
         return plane_id;
@@ -70,6 +72,12 @@ public class Plane {
     public void setPlane_current_passengers(int plane_current_passengers) {
         this.plane_current_passengers = plane_current_passengers;
     }
+    public String getPlane_type(){
+        return this.plane_type;
+    }
+    public void setPlane_type(String plane_type){
+        this.plane_type = plane_type;
+    }
     public void addNewPlane(){
         System.out.print("Enter plane id: ");
         String id = sc.next();
@@ -81,9 +89,11 @@ public class Plane {
         String plane_year_manufacturerd = sc.next();
         System.out.print("Enter plane capacity: ");
         int capacity = sc.nextInt();
+        System.out.print("Enter plane type: ");
+        String plane_type = sc.next();
         System.out.println("...............................");
 
-        Plane newPlane = new Plane(id,model,plane_year_manufacturerd,plane_year_manufacturerd,capacity,0);
+        Plane newPlane = new Plane(id,model,plane_year_manufacturerd,plane_year_manufacturerd,capacity,0,plane_type);
 
         planes.add(newPlane);
 
@@ -94,11 +104,12 @@ public class Plane {
         }
         return null;
     }
-    public void printAllplanes(){
+    public void printAllPlanes(){
+        System.out.println(".........................");
         for(Plane plane: planes){
-            System.out.println(plane.toString());
-            System.out.println("............................");
+            System.out.println(plane.getPlane_id());
         }
+        System.out.println(".........................");
     }
     public void editPlane(){
         System.out.print("Write plane Id: ");
@@ -144,6 +155,6 @@ public class Plane {
     public void deletePlane(String id){
         Plane plane = getPlaneById(id);
         planes.remove(plane);
-        System.out.println("Plane deleted...");
+        System.out.println("Plane has "+ plane.getPlane_id() + " was deleted...");
     }
 }
