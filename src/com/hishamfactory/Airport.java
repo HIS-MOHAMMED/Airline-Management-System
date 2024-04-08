@@ -86,7 +86,7 @@ public class Airport {
         int airport_gates = sc.nextInt();
         System.out.print("Enter airport list of flights: ");
         int airport_list_flights = sc.nextInt();
-
+        System.out.println("......................................... ");
         Airport airport = new Airport(airport_id,airport_name,airport_location,airport_runways,airport_gates,airport_list_flights);
         airports.add(airport);
     }
@@ -101,16 +101,20 @@ public class Airport {
             System.out.println(airport.toString());
         }
     }
-    public void editAirport(){
-        System.out.print("Write airport id : ");
-        String id = sc.next();
+    public void editAirport(String id){
         Airport airport = getAirportByID(id);
         System.out.print("1.Edit airportId");
+        System.out.println();
         System.out.print("2.Edit airportName");
+        System.out.println();
         System.out.print("3.Edit airportLocation");
+        System.out.println();
         System.out.print("4.Edit airport Number of Runways");
+        System.out.println();
         System.out.print("5.Edit airport Number of Gates");
+        System.out.println();
         System.out.print("6.Edit airport List of Flights");
+        System.out.println();
         System.out.print("Which one you want to editing?");
         int option = sc.nextInt();
         switch (option){
@@ -152,6 +156,17 @@ public class Airport {
     public void deleteAirport(String id){
         Airport airport = getAirportByID(id);
         airports.remove(airport);
-        System.out.println("The airport " + airport.getAirport_name() + "was deleted..");
+        System.out.println("The airport " + airport.getAirport_name() + " was deleted..");
+    }
+    @Override
+    public String toString() {
+        return "Airport{" +
+                "airport_id='" + airport_id + '\'' +
+                ", airport_name='" + airport_name + '\'' +
+                ", airport_location='" + airport_location + '\'' +
+                ", airport_number_runways=" + airport_number_runways +
+                ", airport_number_gates=" + airport_number_gates +
+                ", airport_list_of_flights=" + airport_list_of_flights +
+                '}';
     }
 }
