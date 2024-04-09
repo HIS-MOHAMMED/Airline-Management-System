@@ -11,19 +11,16 @@ public class Plane {
     private String plane_year;
     private int plane_capacity;
     private int plane_current_passengers;
-    private String plane_type;
-    private ArrayList<Plane> planes = new ArrayList<>();
+
     Scanner sc = new Scanner(System.in);
     Plane(){
     }
-    Plane(String plane_id,String plane_model,String plane_manufacturer,String plane_year,int plane_capacity,int plane_current_passengers,String plane_type){
-        this.plane_id = plane_id;
+    Plane(String plane_model,String plane_manufacturer,String plane_year,int plane_capacity){
         this.plane_model = plane_model;
         this.plane_capacity  = plane_capacity;
         this.plane_manufacturer = plane_manufacturer;
-        this.plane_current_passengers = plane_current_passengers;
+        this.plane_current_passengers = 0 ;
         this.plane_year =plane_year;
-        this.plane_type = plane_type;
     }
     public String getPlane_id() {
         return plane_id;
@@ -72,12 +69,6 @@ public class Plane {
     public void setPlane_current_passengers(int plane_current_passengers) {
         this.plane_current_passengers = plane_current_passengers;
     }
-    public String getPlane_type(){
-        return this.plane_type;
-    }
-    public void setPlane_type(String plane_type){
-        this.plane_type = plane_type;
-    }
     public void addNewPlane(){
         System.out.print("Enter plane id: ");
         String id = sc.next();
@@ -95,7 +86,7 @@ public class Plane {
 
         Plane newPlane = new Plane(id,model,plane_year_manufacturerd,plane_year_manufacturerd,capacity,0,plane_type);
 
-        planes.add(newPlane);
+        Company.planes.add(newPlane);
 
     }
     public Plane getPlaneById(String id){

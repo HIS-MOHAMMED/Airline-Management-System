@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Passenger extends  Person {
-    private  static ArrayList<Passenger> passengers = new ArrayList<>();
-    private int test;
+
    static Scanner sc = new Scanner(System.in);
-    Passenger(){}
-    Passenger(String first_name,String last_name,int age,String tel_number,String id){
-        super(first_name,last_name,age,tel_number,id);
+    Passenger(String first_name,String last_name,int age,String tel_number){
+        super(first_name,last_name,age,tel_number);
         //System.out.println("New Passenger Add");
     }
     public  void addNewPassenger(){
@@ -22,19 +20,17 @@ public class Passenger extends  Person {
         int age =sc.nextInt();
         System.out.print("Enter the telefon number: ");
         String tel_number = sc.next();
-        System.out.print("Enter the id: ");
-        String id = sc.next();
         System.out.println("..................................");
-        Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number,id);
-        passengers.add(newPassenger);
+        Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number);
+        Company.passengers.add(newPassenger);
 
     }
     public Passenger getPassengerByName(String first_last_name){
         int i = 0;
-        while(i < passengers.size()){
-            String name = passengers.get(i).getFirst_name()+ " " + passengers.get(i).getLast_name();
+        while(i < Company.passengers.size()){
+            String name = Company.passengers.get(i).getFirst_name()+ " " + Company.passengers.get(i).getLast_name();
             if(first_last_name.equals(name)){
-                return passengers.get(i);
+                return Company.passengers.get(i);
             }
             i++;
         }
@@ -42,7 +38,7 @@ public class Passenger extends  Person {
     }
     public  void printAllPassengers(){
         System.out.println(".......................");
-        for(Passenger passenger : passengers){
+        for(Passenger passenger : Company.passengers){
             System.out.println("Name: " + passenger.getFirst_name() + passenger.getLast_name());
             System.out.print("Age" + passenger.getId());
         }
@@ -93,7 +89,7 @@ public class Passenger extends  Person {
         }
     public void deletePassenger(String name){
         Passenger passenger = getPassengerByName(name);
-        passengers.remove(passenger);
+        Company.passengers.remove(passenger);
 
     }
 }

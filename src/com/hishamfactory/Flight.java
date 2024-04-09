@@ -131,7 +131,6 @@ public class Flight {
     }
 
     public void bookFlight() {
-        Passenger passenger = new Passenger();
         passenger.addNewPassenger();
         passengers.add(passenger);
     }

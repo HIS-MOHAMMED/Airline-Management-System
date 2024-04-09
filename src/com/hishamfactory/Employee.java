@@ -6,11 +6,10 @@ import java.util.Scanner;
 public class Employee extends  Person {
     private String address;
     private String status;
-    private ArrayList<Employee> employees = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
-    Employee(){}
-    Employee(String first_name,String last_name,int age,String tel_number,String id,String address){
-        super(first_name,last_name,age,tel_number,id);
+
+    Employee(String first_name,String last_name,int age,String tel_number,String address){
+        super(first_name,last_name,age,tel_number);
         this.address = address;
         this.status = "Active";
     }
@@ -28,36 +27,20 @@ public class Employee extends  Person {
     public void setStatus(String status) {
         this.status = status;
     }
-    public void addNewEmployee(){
-        System.out.print("Enter the first name: ");
-        String first_name = sc.next();
-        System.out.print("Enter the last name: ");
-        String last_name = sc.next();
-        System.out.print("Enter the age: ");
-        int age =sc.nextInt();
-        System.out.print("Enter the telefon number: ");
-        String tel_number = sc.next();
-        System.out.print("Enter the id: ");
-        String id = sc.next();
-        System.out.print("Enter the address: ");
-        String address = sc.next();
-        System.out.println("..................................");
-        Employee newEmployee = new Employee(first_name,last_name,age,tel_number,id,address);
-        employees.add(newEmployee);
-    }
+
     public Employee getEmployeeByName(String first_last_name){
         int i = 0;
-        while(i < employees.size()){
-            String name = employees.get(i).getFirst_name()+ " " + employees.get(i).getLast_name();
+        while(i < Company.employees.size()){
+            String name = Company.employees.get(i).getFirst_name()+ " " + Company.employees.get(i).getLast_name();
             if(first_last_name.equals(name)){
-                return employees.get(i);
+                return Company.employees.get(i);
             }
             i++;
         }
         return null;
     }
     public void printAllEmployees(){
-        for(Employee employee : employees){
+        for(Employee employee : Company.employees){
             System.out.print("Name: ");
             System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
             System.out.println();
@@ -118,7 +101,7 @@ public class Employee extends  Person {
         }
     }
     public void deleteEmployee(String name){
-        employees.remove(getEmployeeByName(name));
+        Company.employees.remove(getEmployeeByName(name));
     }
     public void fireEmployee(String name){
         //Update Employee Status
