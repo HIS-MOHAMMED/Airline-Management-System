@@ -48,8 +48,8 @@ public class Company {
         return uuid;
     }
 
-    public static Employee addEmployee(String first_name,String last_name,int age, String tel_number,String address){
-        Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address);
+    public static Employee addEmployee(String first_name,String last_name,int age, String tel_number,String address,String employee_pin,Company company){
+        Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,employee_pin,company);
         employees.add(newEmployee);
         return newEmployee;
     }

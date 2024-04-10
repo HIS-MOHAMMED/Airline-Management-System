@@ -20,7 +20,7 @@ public class Main {
         String address = sc.next();
         System.out.println("..................................");
 
-        Employee employee = Company.addEmployee(first_name,last_name,age,tel_number,address);
+        //Employee employee = Company.addEmployee(first_name,last_name,age,tel_number,address);
 
     }
 }

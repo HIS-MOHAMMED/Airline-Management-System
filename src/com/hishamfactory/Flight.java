@@ -23,12 +23,10 @@ public class Flight {
     Scanner sc = new Scanner(System.in);
 
     Flight() {
-        airports = new Airport();
         planes = new Plane();
     }
 
-    Flight(String flight_id, Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane, double ticket_price) {
-        this.flight_id = flight_id;
+    Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane, double ticket_price) {
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
         this.departure_time = departure_time;
@@ -118,8 +116,8 @@ public class Flight {
         System.out.print("Enter ticket price: ");
         double ticket_price = sc.nextDouble();
 
-        Flight newFlight = new Flight(flight_id, departure_airport, destination_airport, departure_time, des_time, plane, ticket_price);
-        flights.add(newFlight);
+//        Flight newFlight = new Flight(flight_id, departure_airport, destination_airport, departure_time, des_time, plane, ticket_price);
+//        flights.add(newFlight);
     }
 
     public void showAllFlights() {
@@ -131,8 +129,8 @@ public class Flight {
     }
 
     public void bookFlight() {
-        passenger.addNewPassenger();
-        passengers.add(passenger);
+        //passenger.addNewPassenger();
+        //passengers.add(passenger);
     }
 
     public Flight getFlightById(String id) {

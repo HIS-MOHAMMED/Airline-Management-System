@@ -8,10 +8,11 @@ public class Employee extends  Person {
     private String status;
     Scanner sc = new Scanner(System.in);
 
-    Employee(String first_name,String last_name,int age,String tel_number,String address){
-        super(first_name,last_name,age,tel_number);
+    Employee(String first_name,String last_name,int age,String tel_number,String address,String user_pin,Company company){
+        super(first_name,last_name,age,tel_number,user_pin,company);
         this.address = address;
         this.status = "Active";
+        System.out.printf("New Employee %s, %s with ID %s.\n",first_name,last_name,this.uuid);
     }
     public String getAddress() {
         return address;

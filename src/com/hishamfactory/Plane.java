@@ -1,7 +1,5 @@
 package com.hishamfactory;
 
-import java.security.spec.RSAOtherPrimeInfo;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Plane {
@@ -84,20 +82,16 @@ public class Plane {
         String plane_type = sc.next();
         System.out.println("...............................");
 
-        Plane newPlane = new Plane(id,model,plane_year_manufacturerd,plane_year_manufacturerd,capacity,0,plane_type);
-
-        Company.planes.add(newPlane);
-
     }
     public Plane getPlaneById(String id){
-        for(Plane plane:planes){
+        for(Plane plane:Company.planes){
             if(id.equals(plane.getPlane_id())) return plane;
         }
         return null;
     }
     public void printAllPlanes(){
         System.out.println(".........................");
-        for(Plane plane: planes){
+        for(Plane plane: Company.planes){
             System.out.println(plane.getPlane_id());
         }
         System.out.println(".........................");
@@ -145,7 +139,7 @@ public class Plane {
     }
     public void deletePlane(String id){
         Plane plane = getPlaneById(id);
-        planes.remove(plane);
+        Company.planes.remove(plane);
         System.out.println("Plane has "+ plane.getPlane_id() + " was deleted...");
     }
 }
