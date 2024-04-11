@@ -1,9 +1,5 @@
 package com.hishamfactory;
 
-import com.sun.security.jgss.GSSUtil;
-
-import java.security.cert.PolicyNode;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -154,7 +150,7 @@ public class Flight {
         System.out.println("...........................................");
         for (Passenger passenger : this.passengers) {
             System.out.println("Name: " + passenger.getFirst_name() + passenger.getLast_name());
-            System.out.print("Age" + passenger.getId());
+            System.out.print("Age" + passenger.getUuid());
         }
         System.out.println("...........................................");
     }

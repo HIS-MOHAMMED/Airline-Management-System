@@ -3,16 +3,15 @@ package com.hishamfactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Person {
-    private String first_name;
-    private String last_name;
-    private int age;
-    private String  tel_number;
+    protected String first_name;
+    protected String last_name;
+    protected int age;
+    protected String  tel_number;
     protected String uuid;
-    private byte pinHash[];
+    protected byte pinHash[];
 
     Person(String first_name,String last_name,int age,String tel_number,String person_pin,Company company){
         this.first_name =first_name;
@@ -62,20 +61,8 @@ public class Person {
         this.tel_number = tel_number;
     }
 
-    public String  getId() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setId(String uuid) {
-        this.uuid = uuid;
-    }
-    public String createUniqueId(){
-        Random rm = new Random();
-        String id;
-        int i =0;
-        while(i < 10){
-
-        }
-        return null;
-    }
 }

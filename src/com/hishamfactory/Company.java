@@ -48,29 +48,29 @@ public class Company {
         return uuid;
     }
 
-    public static Employee addEmployee(String first_name,String last_name,int age, String tel_number,String address,String employee_pin,Company company){
-        Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,employee_pin,company);
+    public  Employee addEmployee(String first_name,String last_name,int age, String tel_number,String address,String role,String employee_pin,Company company){
+        Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,role,employee_pin,company);
         employees.add(newEmployee);
         return newEmployee;
     }
 
-    public static Passenger addPassenger(String first_name,String last_name,int age,String tel_number){
-        Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number);
+    public  Passenger addPassenger(String first_name,String last_name,int age,String tel_number,String passenger_pin,Company company){
+        Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number,passenger_pin,company);
         passengers.add(newPassenger);
         return newPassenger;
     }
 
-    public static Plane addPlane(String model,String manufacturer,String year_manufacturer,int capacity){
+    public  Plane addPlane(String model,String manufacturer,String year_manufacturer,int capacity){
         Plane newPlane = new Plane(model,manufacturer,year_manufacturer,capacity);
         planes.add(newPlane);
         return newPlane;
     }
-    public static Airport addAiport(String airport_code,String airport_name,String airport_location,int airport_runways,int airport_gates){
+    public  Airport addAirport(String airport_code,String airport_name,String airport_location,int airport_runways,int airport_gates){
         Airport newAirport = new Airport(airport_code,airport_name,airport_location,airport_runways,airport_gates);
         airports.add(newAirport);
         return newAirport;
     }
-    public static Flight addFlight(Airport dep_airport,Airport des_airport,String dep_time,String arrival_time,Plane plane,double ticket_price){
+    public  Flight addFlight(Airport dep_airport,Airport des_airport,String dep_time,String arrival_time,Plane plane,double ticket_price){
         Flight newFlight = new Flight(dep_airport,des_airport,dep_time,arrival_time,plane,ticket_price);
         flights.add(newFlight);
         return newFlight;
