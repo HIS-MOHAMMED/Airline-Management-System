@@ -5,22 +5,16 @@ import java.util.Scanner;
 
 public class Flight {
     private String flight_id;
-    public Airport airports;
     public Airport departure_airport;
     public Airport destination_airport;
     private String departure_time;
     private String arrival_time;
     public Plane plane;
-    public Plane planes;
     private double ticket_price;
 
-    ArrayList<Flight> flights = new ArrayList<>();
-    ArrayList<Passenger> passengers = new ArrayList<>();
+    public ArrayList<Flight> flights = new ArrayList<>();
+    public ArrayList<Passenger> passengers = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
-
-    Flight() {
-        planes = new Plane();
-    }
 
     Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane, double ticket_price) {
         this.departure_airport = departure_airport;
@@ -41,10 +35,6 @@ public class Flight {
 
     public String getFlight_id() {
         return flight_id;
-    }
-
-    public void setFlight_id(String flight_id) {
-        this.flight_id = flight_id;
     }
 
     public Airport getDeparture_airport() {
@@ -87,77 +77,35 @@ public class Flight {
         this.ticket_price = ticket_price;
     }
 
-    public void addNewFlight() {
-        System.out.print("Enter flight id: ");
-        String flight_id = sc.next();
+//    public void addNewFlight() {
+//        System.out.print("Enter flight id: ");
+//        String flight_id = sc.next();
+//
+//        Company.airports.printAllAirports();
+//        System.out.print("Choose departure id airport: ");
+//        this.departure_airport = Company.airports.getAirportByID(sc.next());
+//
+//        airports.printAllAirports();
+//        System.out.print("Choose destination id airport: ");
+//        destination_airport = airports.getAirportByID(sc.next());
+//
+//        System.out.print("Enter departure time(DD/MM/YYYY): ");
+//        String dep_time = sc.next();
+//
+//        System.out.print("Enter destination time(DD/MM/YYYY): ");
+//        String des_time = sc.next();
+//
+//        planes.printAllPlanes();
+//        System.out.print("Choose id plane: ");
+//        plane = planes.getPlaneById(sc.next());
+//
+//        System.out.print("Enter ticket price: ");
+//        double ticket_price = sc.nextDouble();
+//
+////        Flight newFlight = new Flight(flight_id, departure_airport, destination_airport, departure_time, des_time, plane, ticket_price);
+////        flights.add(newFlight);
+//    }
 
-        airports.printAllAirports();
-        System.out.print("Choose departure id airport: ");
-        this.departure_airport = airports.getAirportByID(sc.next());
-
-        airports.printAllAirports();
-        System.out.print("Choose destination id airport: ");
-        destination_airport = airports.getAirportByID(sc.next());
-
-        System.out.print("Enter departure time(DD/MM/YYYY): ");
-        String dep_time = sc.next();
-
-        System.out.print("Enter destination time(DD/MM/YYYY): ");
-        String des_time = sc.next();
-
-        planes.printAllPlanes();
-        System.out.print("Choose id plane: ");
-        plane = planes.getPlaneById(sc.next());
-
-        System.out.print("Enter ticket price: ");
-        double ticket_price = sc.nextDouble();
-
-//        Flight newFlight = new Flight(flight_id, departure_airport, destination_airport, departure_time, des_time, plane, ticket_price);
-//        flights.add(newFlight);
-    }
-
-    public void showAllFlights() {
-        System.out.println(".........................");
-        for (Flight flight : flights) {
-            System.out.println(flight.toString());
-        }
-        System.out.println(".........................");
-    }
-
-    public void bookFlight() {
-        //passenger.addNewPassenger();
-        //passengers.add(passenger);
-    }
-
-    public Flight getFlightById(String id) {
-        for (Flight flight : flights) {
-            if (flight.getFlight_id().equals(id)) return flight;
-        }
-        return null;
-    }
-
-    public void showFlightDetails(String id) {
-        try {
-            Flight flight = getFlightById(id);
-            System.out.println(flight.toString());
-        } catch (Exception e) {
-            System.out.println("There is no flight match this id..");
-        }
-
-    }
-
-    public void showFlightPassengers() {
-        System.out.println("...........................................");
-        for (Passenger passenger : this.passengers) {
-            System.out.println("Name: " + passenger.getFirst_name() + passenger.getLast_name());
-            System.out.print("Age" + passenger.getUuid());
-        }
-        System.out.println("...........................................");
-    }
-    public  void cancelFlight(String id){
-        Flight flight = getFlightById(id);
-        flights.remove(flight);
-    }
     @Override
     public String toString() {
         return "Flight{" +

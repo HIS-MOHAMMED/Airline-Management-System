@@ -65,4 +65,7 @@ public class Person {
         return uuid;
     }
 
+    public byte[] getPinHash() {
+        return pinHash;
+    }
 }

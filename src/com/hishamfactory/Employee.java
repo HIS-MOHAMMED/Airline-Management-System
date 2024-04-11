@@ -1,5 +1,8 @@
 package com.hishamfactory;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -31,7 +34,17 @@ public class Employee extends  Person {
     public void setStatus(String status) {
         this.status = status;
     }
-
+    public boolean validatePin(String employee_pin){
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            return MessageDigest.isEqual(md.digest(employee_pin.getBytes(StandardCharsets.UTF_8)),this.pinHash);
+        }catch (NoSuchAlgorithmException e){
+            System.out.println("error, caught NoSuchAlgorithmException..");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
+    }
     @Override
     public String toString() {
         return "Employee{" +

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Airport {
-    private String airport_code;
+    private final String airport_code;
     private String airport_name;
     private String airport_location;
     private int airport_number_runways;
@@ -57,90 +57,23 @@ public class Airport {
         return airport_code;
     }
 
-    public void setAirport_code(String airport_id) {
-        this.airport_code = airport_id;
-    }
-
-    public void addNewAirport(){
-        System.out.print("Enter airport id: ");
-        String airport_id = sc.next();
-        System.out.print("Enter airport name:");
-        String airport_name = sc.next();
-        System.out.print("Enter airport location: ");
-        String airport_location = sc.next();
-        System.out.print("Enter airport number of runways: ");
-        int airport_runways = sc.nextInt();
-        System.out.print("Enter airport number gates: ");
-        int airport_gates = sc.nextInt();
-        System.out.print("Enter airport list of flights: ");
-        int airport_list_flights = sc.nextInt();
-        System.out.println("......................................... ");
-//        Airport airport = new Airport(airport_id,airport_name,airport_location,airport_runways,airport_gates,airport_list_flights);
-//        airports.add(airport);
-    }
-    public Airport getAirportByID(String id){
-        for (Airport airport : Company.airports) {
-            if(airport.getAirport_code().equals(id)) return airport;
-        }
-        return null;
-    }
-    public void printAllAirports(){
-        for (Airport airport : Company.airports) {
-            System.out.println(airport.toString());
-        }
-    }
-    public void editAirport(String id){
-        Airport airport = getAirportByID(id);
-        System.out.print("1.Edit airportId");
-        System.out.println();
-        System.out.print("2.Edit airportName");
-        System.out.println();
-        System.out.print("3.Edit airportLocation");
-        System.out.println();
-        System.out.print("4.Edit airport Number of Runways");
-        System.out.println();
-        System.out.print("5.Edit airport Number of Gates");
-        System.out.println();
-        System.out.print("6.Edit airport List of Flights");
-        System.out.println();
-        System.out.print("Which one you want to editing?");
-        int option = sc.nextInt();
-        switch (option){
-            case 1 :
-                System.out.print("Enter new airport id : ");
-                airport.setAirport_code(sc.next());
-                System.out.println("Airport Id changed..");
-                break;
-            case 2:
-                System.out.print("Enter new airport name: ");
-                airport.setAirport_name(sc.next());
-                System.out.println("Airport name changes..");
-                break;
-            case 3:
-                System.out.print("Enter new airport location: ");
-                airport.setAirport_location(sc.next());
-                System.out.println("Airport location changed..");
-                break;
-            case 4:
-                System.out.print("Enter airport new number of runways: ");
-                airport.setAirport_number_runways(sc.nextInt());
-                System.out.println("Airport number of runways changed..");
-                break;
-            case 5:
-                System.out.print("Enter airport new number of gates: ");
-                airport.setAirport_number_gates(sc.nextInt());
-                System.out.println("Airport number of gates changed..");
-                break;
-            default:
-                System.out.println("You choose wrong number");
-                break;
-        }
-    }
-    public void deleteAirport(String id){
-        Airport airport = getAirportByID(id);
-        Company.airports.remove(airport);
-        System.out.println("The airport " + airport.getAirport_name() + " was deleted..");
-    }
+//    public void addNewAirport(){
+//        System.out.print("Enter airport id: ");
+//        String airport_id = sc.next();
+//        System.out.print("Enter airport name:");
+//        String airport_name = sc.next();
+//        System.out.print("Enter airport location: ");
+//        String airport_location = sc.next();
+//        System.out.print("Enter airport number of runways: ");
+//        int airport_runways = sc.nextInt();
+//        System.out.print("Enter airport number gates: ");
+//        int airport_gates = sc.nextInt();
+//        System.out.print("Enter airport list of flights: ");
+//        int airport_list_flights = sc.nextInt();
+//        System.out.println("......................................... ");
+////        Airport airport = new Airport(airport_id,airport_name,airport_location,airport_runways,airport_gates,airport_list_flights);
+////        airports.add(airport);
+//    }
     @Override
     public String toString() {
         return "Airport{" +

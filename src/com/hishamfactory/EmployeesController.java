@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class EmployeesController {
     Scanner sc = new Scanner(System.in);
-    public Employee getEmployeeByName(String first_last_name){
+    public static Employee getEmployeeByName(String first_last_name){
         int i = 0;
         while(i < Company.employees.size()){
             String name = Company.employees.get(i).getFirst_name()+ " " + Company.employees.get(i).getLast_name();
