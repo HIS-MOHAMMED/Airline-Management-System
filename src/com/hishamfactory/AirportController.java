@@ -4,9 +4,16 @@ import java.util.Scanner;
 
 public class AirportController {
     Scanner sc = new Scanner(System.in);
-    public Airport getAirportByID(String id){
-        for (Airport airport : Company.airports) {
-            if(airport.getAirport_code().equals(id)) return airport;
+    public static Airport getAirportByID(String code){
+        try{
+            for (Airport airport : Company.airports) {
+                if(airport.getAirport_code().equals(code)){
+                    return airport;
+                }
+            }
+        }catch (NullPointerException e){
+            System.out.println("Null Exception");
+            System.exit(1);
         }
         return null;
     }
@@ -15,8 +22,9 @@ public class AirportController {
             System.out.println(airport.toString());
         }
     }
-    public void editAirport(String id){
-        Airport airport = getAirportByID(id);
+    public void editAirport(){
+        System.out.print("Enter airport code: ");
+        Airport airport = getAirportByID(sc.next());
         System.out.print("1.Edit airportName");
         System.out.println();
         System.out.print("2.Edit airportLocation");
@@ -55,10 +63,32 @@ public class AirportController {
                 break;
         }
     }
-    public void deleteAirport(String id){
-        Airport airport = getAirportByID(id);
+    public void deleteAirport(){
+        System.out.print("Enter airport code: ");
+        Airport airport = getAirportByID(sc.next());
         Company.airports.remove(airport);
         System.out.println("The airport " + airport.getAirport_name() + " was deleted..");
     }
-
+    public void showAirportMenu(Company company,AirportController controller){
+        System.out.println("1.Add new airport");
+        System.out.println("2.Show all airport");
+        System.out.println("3.Edit airport info");
+        System.out.println("4.Delete airport");
+        System.out.print("Enter a choice: ");
+        int option = sc.nextInt();
+        switch (option){
+            case 1:
+                company.addAirport();
+                break;
+            case 2:
+                controller.printAllAirports();
+                break;
+            case 3:
+                controller.editAirport();
+                break;
+            case 4:
+                controller.deleteAirport();
+                break;
+        }
+    }
 }

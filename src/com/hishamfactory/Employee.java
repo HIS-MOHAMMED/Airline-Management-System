@@ -11,14 +11,14 @@ public class Employee extends  Person {
     private String address;
     private String status;
     private String role;
-    Scanner sc = new Scanner(System.in);
 
     Employee(String first_name,String last_name,int age,String tel_number,String address,String role,String user_pin,Company company){
         super(first_name,last_name,age,tel_number,user_pin,company);
         this.address = address;
         this.role = role;
         this.status = "Active";
-        System.out.printf("New Employee %s, %s with ID %s.\n",first_name,last_name,this.uuid);
+        System.out.println("New employee " + this.first_name + ", " + this.last_name + " "  + this.uuid);
+      //  System.out.printf("New Employee %s, %s with ID %s.\n",first_name,last_name,this.uuid);
     }
     public String getAddress() {
         return address;

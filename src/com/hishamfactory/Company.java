@@ -54,7 +54,7 @@ public class Company {
         return uuid;
     }
 
-    public Employee addEmployee(Company company){
+    public void addEmployee(Company company){
         System.out.print("Enter employee first name: ");
         String first_name = sc.next();
         System.out.print("Enter employee last name: ");
@@ -69,15 +69,28 @@ public class Company {
         String role = sc.next();
         System.out.print("Enter employee pin: ");
         String employee_pin = sc.next();
+        sc.nextLine();
+        System.out.println();
         Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,role,employee_pin,company);
         employees.add(newEmployee);
-        return newEmployee;
     }
 
-    public  Passenger addPassenger(String first_name,String last_name,int age,String tel_number,String passenger_pin,Company company){
-        Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number,passenger_pin,company);
+    public void addPassenger(Company company){
+        System.out.print("Enter passenger first name: ");
+        String first_name = sc.next();
+        System.out.print("Enter passenger last name: ");
+        String last_name = sc.next();
+        System.out.print("Enter passenger age: ");
+        int age = sc.nextInt();
+        System.out.print("Enter passenger tel_number: ");
+        String tel_number = sc.next();
+        System.out.print("Enter Flight code: ");
+        String flight_code = sc.next();
+        System.out.print("Enter employee pin: ");
+        String passenger_pin = sc.next();
+        sc.nextLine();
+        Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number,FlightController.getFlightById(flight_code),passenger_pin,company);
         passengers.add(newPassenger);
-        return newPassenger;
     }
     public Employee employeeLogin(String employee_id, String employee_pin){
         for (Employee employee : Company.employees) {
@@ -85,19 +98,50 @@ public class Company {
         }
         return null;
     }
-    public  Plane addPlane(String model,String manufacturer,String year_manufacturer,int capacity){
+    public  void addPlane(){
+        System.out.print("Enter plane model: ");
+        String model = sc.next();
+        System.out.print("Enter plane manufacturer: ");
+        String manufacturer = sc.next();
+        System.out.println("Enter year of manufacturer: ");
+        String year_manufacturer = sc.next();
+        System.out.print("Enter capacity: ");
+        int capacity = sc.nextInt();
+
         Plane newPlane = new Plane(model,manufacturer,year_manufacturer,capacity);
         planes.add(newPlane);
-        return newPlane;
     }
-    public  Airport addAirport(String airport_code,String airport_name,String airport_location,int airport_runways,int airport_gates){
+    public  void addAirport(){
+        System.out.print("Enter airport code: ");
+        String airport_code = sc.next();
+        System.out.print("Enter airport_name: ");
+        String airport_name = sc.next();
+        System.out.print("Enter airport_location: ");
+        String airport_location = sc.next();
+        System.out.print("Enter airport_runways");
+        int airport_runways = sc.nextInt();
+        System.out.print("Enter airport gates: ");
+        int airport_gates = sc.nextInt();
+
+
         Airport newAirport = new Airport(airport_code,airport_name,airport_location,airport_runways,airport_gates);
         airports.add(newAirport);
-        return newAirport;
     }
-    public  Flight addFlight(Airport dep_airport,Airport des_airport,String dep_time,String arrival_time,Plane plane,double ticket_price){
-        Flight newFlight = new Flight(dep_airport,des_airport,dep_time,arrival_time,plane,ticket_price);
+    public void addFlight(Company company){
+        System.out.print("Enter dep airport code: ");
+        Airport dep_airport = AirportController.getAirportByID(sc.next());
+        System.out.print("Enter des airport: ");
+        Airport des_airport = AirportController.getAirportByID(sc.next());
+        System.out.print("Enter dep time: ");
+        String dep_time = sc.next();
+        System.out.print("Enter arrival time: ");
+        String arrival_time = sc.next();
+        System.out.print("Enter plane code: ");
+        Plane plane = PlaneController.getPlaneById(sc.next());
+        System.out.print("Enter ticket price: ");
+        double ticket_price = sc.nextDouble();
+
+        Flight newFlight = new Flight(dep_airport,des_airport,dep_time,arrival_time,plane,ticket_price,company);
         flights.add(newFlight);
-        return newFlight;
     }
 }

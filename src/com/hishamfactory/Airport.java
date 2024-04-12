@@ -56,24 +56,6 @@ public class Airport {
     public String getAirport_code() {
         return airport_code;
     }
-
-//    public void addNewAirport(){
-//        System.out.print("Enter airport id: ");
-//        String airport_id = sc.next();
-//        System.out.print("Enter airport name:");
-//        String airport_name = sc.next();
-//        System.out.print("Enter airport location: ");
-//        String airport_location = sc.next();
-//        System.out.print("Enter airport number of runways: ");
-//        int airport_runways = sc.nextInt();
-//        System.out.print("Enter airport number gates: ");
-//        int airport_gates = sc.nextInt();
-//        System.out.print("Enter airport list of flights: ");
-//        int airport_list_flights = sc.nextInt();
-//        System.out.println("......................................... ");
-////        Airport airport = new Airport(airport_id,airport_name,airport_location,airport_runways,airport_gates,airport_list_flights);
-////        airports.add(airport);
-//    }
     @Override
     public String toString() {
         return "Airport{" +

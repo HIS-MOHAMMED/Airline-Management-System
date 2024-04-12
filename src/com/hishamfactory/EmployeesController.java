@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class EmployeesController {
     Scanner sc = new Scanner(System.in);
-    public static Employee getEmployeeByName(String first_last_name){
+    public  Employee getEmployeeByName(String first_last_name){
         int i = 0;
         while(i < Company.employees.size()){
             String name = Company.employees.get(i).getFirst_name()+ " " + Company.employees.get(i).getLast_name();
@@ -15,8 +15,9 @@ public class EmployeesController {
         }
         return null;
     }
-    public void printAllEmployees(){
+    public  void printAllEmployees(){
         for(Employee employee : Company.employees){
+            System.out.println(".......................................................");
             System.out.print("Name: ");
             System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
             System.out.println();
@@ -33,7 +34,7 @@ public class EmployeesController {
             System.out.println(".........................................................");
         }
     }
-    public void editEmployeeInfo(String name){
+    public  void editEmployeeInfo(String name){
         Employee passenger = getEmployeeByName(name);
         String passenger_name = passenger.getFirst_name() +" " + passenger.getLast_name();
         try {
@@ -76,13 +77,56 @@ public class EmployeesController {
     public void fireEmployee(String name){
         //Update Employee Status
         Employee employee = getEmployeeByName(name);
-        employee.setStatus("Active");
+        employee.setStatus("non-active");
         System.out.println("Status: " + employee.getStatus());
         //Notify Relevant Parties
         System.out.println("Send to relevant parties...done");
         //Revoke Access Privileges
         System.out.println("Revoke Access Privileges...done");
     }
+    public void showEmployeeMenu(Company company,EmployeesController controller){
+        System.out.println(".......................Employee Menu..........................");
+        System.out.println("1.Add new employee");
+        System.out.println("2.Get employee by name");
+        System.out.println("3.Print all employees");
+        System.out.println("4.Edit employee info");
+        System.out.println("5.Delete employee");
+        System.out.println("6.Fire employee");
+        System.out.print("Enter a choice: ");
+        int option1 = sc.nextInt();
+        String name = "";
+        if(option1 != 1){
+            System.out.print("Enter employee first name: ");
+            name = sc.next();
+            System.out.print("Enter employee last name: ");
+            name += " " + sc.next();
+        }
+        switch (option1) {
+            case 1:
+                company.addEmployee(company);
+                break;
+            case 2:
+                try {
+                    Employee employee = controller.getEmployeeByName(name);
+                    System.out.println(employee.toString());
 
-
+                } catch (NullPointerException e) {
+                    System.out.println("returned null");
+                }
+                break;
+            case 3:
+                System.out.println("show all employees: ");
+                controller.printAllEmployees();
+                break;
+            case 4:
+                controller.editEmployeeInfo(name);
+                break;
+            case 5:
+                controller.deleteEmployee(name);
+                break;
+            case 6:
+                controller.fireEmployee(name);
+                break;
+        }
+    }
 }

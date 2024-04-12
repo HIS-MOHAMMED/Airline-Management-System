@@ -59,4 +59,16 @@ public class Plane {
     public void setPlane_current_passengers(int plane_current_passengers) {
         this.plane_current_passengers = plane_current_passengers;
     }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "plane_id='" + plane_id + '\'' +
+                ", plane_model='" + plane_model + '\'' +
+                ", plane_manufacturer='" + plane_manufacturer + '\'' +
+                ", plane_year='" + plane_year + '\'' +
+                ", plane_capacity=" + plane_capacity +
+                ", plane_current_passengers=" + plane_current_passengers +
+                '}';
+    }
 }

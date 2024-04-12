@@ -64,5 +64,38 @@ public class PassengersController {
         Passenger passenger = getPassengerByName(name);
         Company.passengers.remove(passenger);
     }
-
+    public void showPassengerMenu(Company company,PassengersController controller){
+        System.out.println(".......................Passenger Menu...............................");
+        System.out.println("1.Add new passenger");
+        System.out.println("2.Get passenger by name");
+        System.out.println("3.Show all passengers");
+        System.out.println("4.Edit passenger info");
+        System.out.println("5.Delete passenger");
+        System.out.print("Enter a choice: ");
+        int option2 = sc.nextInt();
+        String name ="";
+        if(option2 != 1 && option2 != 3){
+            System.out.print("Enter first name: ");
+            name = sc.next();
+            System.out.print("Enter last name: ");
+            name += " " + sc.next();
+        }
+        switch (option2){
+            case 1:
+                company.addPassenger(company);
+                break;
+            case 2:
+                controller.getPassengerByName(name);
+                break;
+            case 3:
+                controller.printAllPassengers();
+                break;
+            case 4:
+                controller.editPassengerInfo(name);
+                break;
+            case 5:
+                controller.deletePassenger(name);
+                break;
+        }
+    }
 }
