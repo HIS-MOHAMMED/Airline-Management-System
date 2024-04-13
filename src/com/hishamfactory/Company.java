@@ -54,7 +54,7 @@ public class Company {
         return uuid;
     }
 
-    public void addEmployee(Company company){
+    public Employee addEmployee(Company company){
         System.out.print("Enter employee first name: ");
         String first_name = sc.next();
         System.out.print("Enter employee last name: ");
@@ -67,12 +67,12 @@ public class Company {
         String address = sc.next();
         System.out.print("Enter employee role: ");
         String role = sc.next();
-        System.out.print("Enter employee pin: ");
-        String employee_pin = sc.next();
         sc.nextLine();
-        System.out.println();
+        System.out.print("Enter employee password: ");
+        String employee_pin = sc.next();
         Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,role,employee_pin,company);
         employees.add(newEmployee);
+        return  newEmployee;
     }
 
     public void addPassenger(Company company){
@@ -86,7 +86,7 @@ public class Company {
         String tel_number = sc.next();
         System.out.print("Enter Flight code: ");
         String flight_code = sc.next();
-        System.out.print("Enter employee pin: ");
+        System.out.print("Enter passenger password: ");
         String passenger_pin = sc.next();
         sc.nextLine();
         Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number,FlightController.getFlightById(flight_code),passenger_pin,company);
@@ -98,33 +98,31 @@ public class Company {
         }
         return null;
     }
-    public  void addPlane(){
+    public  void addPlane(Company company){
         System.out.print("Enter plane model: ");
         String model = sc.next();
         System.out.print("Enter plane manufacturer: ");
         String manufacturer = sc.next();
-        System.out.println("Enter year of manufacturer: ");
+        System.out.print("Enter year of manufacturer: ");
         String year_manufacturer = sc.next();
         System.out.print("Enter capacity: ");
         int capacity = sc.nextInt();
 
-        Plane newPlane = new Plane(model,manufacturer,year_manufacturer,capacity);
+        Plane newPlane = new Plane(model,manufacturer,year_manufacturer,capacity,company);
         planes.add(newPlane);
     }
-    public  void addAirport(){
-        System.out.print("Enter airport code: ");
-        String airport_code = sc.next();
+    public  void addAirport(Company company){
         System.out.print("Enter airport_name: ");
         String airport_name = sc.next();
         System.out.print("Enter airport_location: ");
         String airport_location = sc.next();
-        System.out.print("Enter airport_runways");
+        System.out.print("Enter airport_runways: ");
         int airport_runways = sc.nextInt();
         System.out.print("Enter airport gates: ");
         int airport_gates = sc.nextInt();
 
 
-        Airport newAirport = new Airport(airport_code,airport_name,airport_location,airport_runways,airport_gates);
+        Airport newAirport = new Airport(airport_name,airport_location,airport_runways,airport_gates,company);
         airports.add(newAirport);
     }
     public void addFlight(Company company){

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Airport {
-    private final String airport_code;
+    private  String airport_code;
     private String airport_name;
     private String airport_location;
     private int airport_number_runways;
@@ -14,12 +14,13 @@ public class Airport {
 
     Scanner sc = new Scanner(System.in);
 
-    Airport(String airport_code,String airport_name,String airport_location,int airport_number_runways,int airport_number_gates){
-        this.airport_code = airport_code;
+    Airport(String airport_name,String airport_location,int airport_number_runways,int airport_number_gates,Company company){
         this.airport_name = airport_name;
         this.airport_location = airport_location;
         this.airport_number_runways = airport_number_runways;
         this.airport_number_gates= airport_number_gates;
+        this.airport_code = company.getNewUUID();
+        System.out.println("New airport added with code " + this.airport_code);
     }
     public int getAirport_number_gates() {
         return airport_number_gates;

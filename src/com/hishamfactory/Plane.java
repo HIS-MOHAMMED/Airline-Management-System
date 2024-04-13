@@ -10,12 +10,14 @@ public class Plane {
     private int plane_capacity;
     private int plane_current_passengers;
 
-    Plane(String plane_model,String plane_manufacturer,String plane_year,int plane_capacity){
+    Plane(String plane_model,String plane_manufacturer,String plane_year,int plane_capacity,Company company){
         this.plane_model = plane_model;
         this.plane_capacity  = plane_capacity;
         this.plane_manufacturer = plane_manufacturer;
         this.plane_current_passengers = 0 ;
         this.plane_year =plane_year;
+        this.plane_id =company.getNewUUID();
+        System.out.println("New pane added with code " + this.plane_id);
     }
     public String getPlane_id() {
         return plane_id;

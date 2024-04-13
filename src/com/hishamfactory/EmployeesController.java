@@ -16,22 +16,19 @@ public class EmployeesController {
         return null;
     }
     public  void printAllEmployees(){
+        System.out.println("..................Employees List............................");
         for(Employee employee : Company.employees){
-            System.out.println(".......................................................");
             System.out.print("Name: ");
             System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
-            System.out.println();
             System.out.print("Age:");
             System.out.println(employee.getAge());
-            System.out.println();
             System.out.print("Tel Number: ");
             System.out.println(employee.getTel_number());
-            System.out.println();
             System.out.print("Id: ");
             System.out.println(employee.getUuid());
             System.out.print("Address: ");
             System.out.println(employee.getAddress());
-            System.out.println(".........................................................");
+            System.out.println(".............................");
         }
     }
     public  void editEmployeeInfo(String name){
@@ -88,20 +85,20 @@ public class EmployeesController {
         System.out.println(".......................Employee Menu..........................");
         System.out.println("1.Add new employee");
         System.out.println("2.Get employee by name");
-        System.out.println("3.Print all employees");
+        System.out.println("3.Show all employees");
         System.out.println("4.Edit employee info");
         System.out.println("5.Delete employee");
         System.out.println("6.Fire employee");
         System.out.print("Enter a choice: ");
-        int option1 = sc.nextInt();
+        int option = sc.nextInt();
         String name = "";
-        if(option1 != 1){
+        if(option != 1  && option != 3){
             System.out.print("Enter employee first name: ");
             name = sc.next();
             System.out.print("Enter employee last name: ");
             name += " " + sc.next();
         }
-        switch (option1) {
+        switch (option) {
             case 1:
                 company.addEmployee(company);
                 break;

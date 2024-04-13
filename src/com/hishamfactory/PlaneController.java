@@ -1,12 +1,18 @@
 package com.hishamfactory;
 
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Scanner;
 
 public class PlaneController {
     Scanner sc = new Scanner(System.in);
     public static Plane getPlaneById(String id){
-        for(Plane plane:Company.planes){
-            if(id.equals(plane.getPlane_id())) return plane;
+        try{
+            for(Plane plane:Company.planes){
+                if(id.equals(plane.getPlane_id())) return plane;
+            }
+        }catch (NullPointerException e){
+            System.out.println("Null returned");
+            System.exit(1);
         }
         return null;
     }
@@ -62,6 +68,7 @@ public class PlaneController {
         System.out.println("Plane has "+ plane.getPlane_id() + " was deleted...");
     }
     public void showPlaneMenu(Company company,PlaneController controller){
+        System.out.println(".....................Plane Menu....................");
         System.out.println("1.Add new plane");
         System.out.println("2.Print all planes");
         System.out.println("3.Edit plane info");
@@ -71,7 +78,7 @@ public class PlaneController {
         int option = sc.nextInt();
         switch (option){
             case 1:
-                company.addPlane();
+                company.addPlane(company);
                 break;
             case 2:
                 controller.printAllPlanes();

@@ -70,15 +70,16 @@ public class AirportController {
         System.out.println("The airport " + airport.getAirport_name() + " was deleted..");
     }
     public void showAirportMenu(Company company,AirportController controller){
+        System.out.println(".....................Airport Menu..........................");
         System.out.println("1.Add new airport");
         System.out.println("2.Show all airport");
         System.out.println("3.Edit airport info");
-        System.out.println("4.Delete airport");
+        System.out.println("4.Delete airport\n");
         System.out.print("Enter a choice: ");
         int option = sc.nextInt();
         switch (option){
             case 1:
-                company.addAirport();
+                company.addAirport(company);
                 break;
             case 2:
                 controller.printAllAirports();

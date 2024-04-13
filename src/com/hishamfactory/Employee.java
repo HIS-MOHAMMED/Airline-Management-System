@@ -17,8 +17,7 @@ public class Employee extends  Person {
         this.address = address;
         this.role = role;
         this.status = "Active";
-        System.out.println("New employee " + this.first_name + ", " + this.last_name + " "  + this.uuid);
-      //  System.out.printf("New Employee %s, %s with ID %s.\n",first_name,last_name,this.uuid);
+        System.out.println(this.role + " " + this.first_name + ", " + this.last_name + " has ID "  + this.uuid);
     }
     public String getAddress() {
         return address;
