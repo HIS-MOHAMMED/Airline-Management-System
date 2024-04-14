@@ -8,8 +8,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-        boolean flag = true;
+        boolean flag;
         do {
+            flag = true;
             System.out.println("......................................................");
             System.out.println("Welcome to Airline System Management");
             System.out.println("...................................,..................");
