@@ -52,10 +52,10 @@ public class Main {
         System.out.println("........................Home Menu.....................");
         System.out.println(person.getFirst_name() + ", " + person.getLast_name() + ".Welcome to " + company.getName());
         System.out.println("1.Employees");
-        System.out.println("2.Passengers");
+        System.out.println("2.Airports");
         System.out.println("3.Planes");
-        System.out.println("4.Airports");
-        System.out.println("5.Flights");
+        System.out.println("4.Flights");
+        System.out.println("5.Passengers");
         System.out.println("6.Quit");
         System.out.print("Enter a choice: ");
         int option = sc.nextInt();
@@ -65,32 +65,32 @@ public class Main {
                         controller.showEmployeeMenu(company, controller);
                         break;
                     case 2:
-                        if(Company.flights.isEmpty()){
-                            System.out.println("You must create flight before");
-                            break;
-                        }
-                        PassengersController controller1 = new PassengersController();
-                        controller1.showPassengerMenu(company, controller1);
+                        AirportController controller3 = new AirportController();
+                        controller3.showAirportMenu(company, controller3);
                         break;
                     case 3:
                         if(Company.airports.isEmpty()){
-                            System.out.println("You must create airport before");
+                            System.out.println("**You must create airport before**");
                             break;
                         }
                         PlaneController controller2 = new PlaneController();
                         controller2.showPlaneMenu(company, controller2);
                         break;
                     case 4:
-                        AirportController controller3 = new AirportController();
-                        controller3.showAirportMenu(company, controller3);
-                        break;
-                    case 5:
                         if(Company.planes.isEmpty()){
-                            System.out.println("You must create plane before");
+                            System.out.println("**You must create plane before**");
                             break;
                         }
                         FlightController controller4 = new FlightController();
                         controller4.showFlightMenu(company, controller4);
+                        break;
+                    case 5:
+                        if(Company.flights.isEmpty()){
+                            System.out.println("**You must create flight before**");
+                            break;
+                        }
+                        PassengersController controller1 = new PassengersController();
+                        controller1.showPassengerMenu(company, controller1);
                         break;
                     case 6:
                         flag = false;
