@@ -16,12 +16,12 @@ public class PassengersController {
         return null;//must handle nullPointerException when using this method....
     }
     public  void printAllPassengers(){
-        System.out.println(".......................");
+        System.out.println("................................................................");
         for(Passenger passenger : Company.passengers){
-            System.out.println("Name: " + passenger.getFirst_name() + passenger.getLast_name());
-            System.out.print("Age" + passenger.getUuid());
+            System.out.println(passenger.toString());
+            System.out.println("...............................");
         }
-        System.out.println("........................");
+        System.out.println("................................................................");
     }
     public void editPassengerInfo(String name){
         Passenger passenger = getPassengerByName(name);
