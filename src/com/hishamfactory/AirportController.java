@@ -24,17 +24,14 @@ public class AirportController {
     public void editAirport(){
         System.out.print("Enter airport code: ");
         Airport airport = getAirportByID(sc.next());
-        System.out.print("1.Edit airportName");
+        System.out.print("1.Edit airport Name");
         System.out.println();
-        System.out.print("2.Edit airportLocation");
+        System.out.print("2.Edit airport Location");
         System.out.println();
         System.out.print("3.Edit airport Number of Runways");
         System.out.println();
         System.out.print("4.Edit airport Number of Gates");
-        System.out.println();
-        System.out.print("5.Edit airport List of Flights");
-        System.out.println();
-        System.out.print("Which one you want to editing?");
+        System.out.print("Enter a choice? ");
         int option = sc.nextInt();
         switch (option){
             case 1:

@@ -19,7 +19,6 @@ public class PassengersController {
         System.out.println("................................................................");
         for(Passenger passenger : Company.passengers){
             System.out.println(passenger.toString());
-            System.out.println("...............................");
         }
         System.out.println("................................................................");
     }
@@ -85,7 +84,7 @@ public class PassengersController {
                 company.addPassenger(company);
                 break;
             case 2:
-                controller.getPassengerByName(name);
+                System.out.println(controller.getPassengerByName(name).toString());
                 break;
             case 3:
                 controller.printAllPassengers();
