@@ -13,7 +13,6 @@ public class AirportController {
             }
         }catch (NullPointerException e){
             System.out.println("Null Exception");
-            System.exit(1);
         }
         return null;
     }
