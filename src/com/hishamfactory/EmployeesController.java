@@ -28,6 +28,8 @@ public class EmployeesController {
             System.out.println(employee.getTel_number());
             System.out.print("Id: ");
             System.out.println(employee.getUuid());
+            System.out.print("Role: ");
+            System.out.println(employee.getRole());
             System.out.print("Address: ");
             System.out.println(employee.getAddress());
             System.out.println(".............................");

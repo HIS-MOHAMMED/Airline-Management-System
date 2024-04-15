@@ -12,7 +12,7 @@ public class Employee extends  Person {
     private String status;
     private String role;
 
-    Employee(String first_name,String last_name,int age,String tel_number,String address,String role,String user_pin,Company company){
+    Employee(String first_name, String last_name, int age, String tel_number, String address, String role, String user_pin, Company company){
         super(first_name,last_name,age,tel_number,user_pin,company);
         this.address = address;
         this.role = role;
@@ -32,6 +32,13 @@ public class Employee extends  Person {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
     public boolean validatePin(String employee_pin){
         try{

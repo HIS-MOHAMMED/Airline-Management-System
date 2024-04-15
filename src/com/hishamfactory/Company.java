@@ -98,6 +98,12 @@ public class Company {
         }
         return null;
     }
+    public Passenger passengerLogin(String passenger_id,String passenger_pin){
+        for (Passenger passenger : passengers) {
+            if(passenger.getUuid().compareTo(passenger_id) == 0 && passenger.validatePin(passenger_pin)) return passenger;
+        }
+        return null;
+    }
     public  void addPlane(Company company){
         System.out.print("Enter plane model: ");
         String model = sc.next();

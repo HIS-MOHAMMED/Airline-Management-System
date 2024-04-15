@@ -8,9 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-        boolean flag;
         do {
-            flag = true;
             System.out.println("......................................................");
             System.out.println("Welcome to Airline System Management");
             System.out.println("...................................,..................");
@@ -19,31 +17,43 @@ public class Main {
                 company.addEmployee(company);
                 System.out.println("..................................................");
             }
-            Person person = showLoginMenu(company, sc);
-            while (flag) {
-                flag = showUserMenu(company, person, sc);
-            }
+            showLoginMenu(company, sc);
         } while (true);
     }
 
-    public static Employee showLoginMenu(Company company, Scanner sc) {
-        Employee employeeAuth = null;
+    public static void showLoginMenu(Company company, Scanner sc) {
+        Person personAuth = null;
+        boolean flag;
         try {
             do {
-                System.out.print("Enter  ID: ");
-                String employee_id = sc.next();
-                System.out.print("Enter  password: ");
-                String employee_pin = sc.next();
-
-                employeeAuth = company.employeeLogin(employee_id, employee_pin);
-                if (employeeAuth == null) {
+                flag = true;
+                int person_type;
+                String person_id = "";
+                String person_pin = "";
+                if(!Company.employees.isEmpty()){
+                    System.out.print("Are you 1.Employee or 2.Passenger: ");
+                    person_type = sc.nextInt();
+                    System.out.print("Enter  ID: ");
+                    person_id = sc.next();
+                    System.out.print("Enter  password: ");
+                    person_pin = sc.next();
+                    if(person_type == 1){
+                        personAuth = company.employeeLogin(person_id, person_pin);
+                        while (flag) {
+                            flag = showUserMenu(company, personAuth, sc);
+                        }
+                    }else{
+                        company.passengerLogin(person_id,person_pin);
+                    }
+                }
+                personAuth = company.employeeLogin(person_id, person_pin);
+                if (personAuth == null) {
                     System.out.println("ID or password incorrect.please try again");
                 }
-            } while (employeeAuth == null);
+            } while (personAuth == null);
         } catch (NullPointerException e) {
             System.out.println("There is no person had created");
         }
-        return employeeAuth;
     }
 
     public static boolean showUserMenu(Company company, Person person, Scanner sc) {
