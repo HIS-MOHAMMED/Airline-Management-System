@@ -39,16 +39,27 @@ public class Main {
                     person_pin = sc.next();
                     if(person_type == 1){
                         personAuth = company.employeeLogin(person_id, person_pin);
-                        while (flag) {
-                            flag = showUserMenu(company, personAuth, sc);
+                        if (personAuth == null) {
+                            System.out.println("ID or password incorrect.please try again");
+                        }else {
+                            while (flag) {
+                                flag = showUserMenu(company, personAuth, sc);
+                            }
                         }
                     }else{
-                        company.passengerLogin(person_id,person_pin);
+                        Passenger passenger = company.passengerLogin(person_id,person_pin);
+                        if (passenger == null) {
+                            System.out.println("ID or password incorrect.please try again");
+                        }
+                        else{
+                            System.out.println(".....................Passenger Flights.......................");
+                            for (Flight flight : passenger.passenger_flights) {
+                                System.out.println(flight.toString());
+                            }
+                            System.out.println(".............................................................");
+                        }
                     }
-                }
-                personAuth = company.employeeLogin(person_id, person_pin);
-                if (personAuth == null) {
-                    System.out.println("ID or password incorrect.please try again");
+
                 }
             } while (personAuth == null);
         } catch (NullPointerException e) {
