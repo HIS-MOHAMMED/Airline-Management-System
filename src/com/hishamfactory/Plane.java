@@ -59,7 +59,7 @@ public class Plane {
         return plane_current_passengers;
     }
     public void setPlane_current_passengers(int plane_current_passengers) {
-        this.plane_current_passengers = plane_current_passengers;
+        this.plane_current_passengers += plane_current_passengers;
     }
 
     @Override
