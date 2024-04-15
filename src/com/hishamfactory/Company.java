@@ -24,6 +24,7 @@ public class Company {
         airports = new ArrayList<>();
         flights = new ArrayList<>();
         uuids = new ArrayList<>();
+        System.out.println("You are working on "+this.name + " company");
     }
     public String getName(){
         return this.name;

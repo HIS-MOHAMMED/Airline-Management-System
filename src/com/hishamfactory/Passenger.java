@@ -13,7 +13,7 @@ public class Passenger extends  Person {
         super(first_name,last_name,age,tel_number,passenger_pin,company);
         flight.passengers.add(this);
         flight.plane.setPlane_current_passengers(1);
-        System.out.println("New passenger added with ID " + this.getUuid());
+        System.out.println(this.first_name +" "+this.last_name+" passenger added with ID " + this.getUuid());
         passenger_flights.add(flight);
     }
     public boolean validatePin(String passenger_pin){

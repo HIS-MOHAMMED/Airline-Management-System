@@ -20,7 +20,7 @@ public class Airport {
         this.airport_number_runways = airport_number_runways;
         this.airport_number_gates= airport_number_gates;
         this.airport_code = company.getNewUUID();
-        System.out.println("New airport added with code " + this.airport_code);
+        System.out.println(this.airport_name +" airport added with code " + this.airport_code);
     }
     public int getAirport_number_gates() {
         return airport_number_gates;

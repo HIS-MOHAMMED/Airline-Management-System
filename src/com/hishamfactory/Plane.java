@@ -17,7 +17,7 @@ public class Plane {
         this.plane_current_passengers = 0 ;
         this.plane_year =plane_year;
         this.plane_id =company.getNewUUID();
-        System.out.println("New plane added with code " + this.plane_id);
+        System.out.println(this.plane_model + "'s plane added with code " + this.plane_id);
     }
     public String getPlane_id() {
         return plane_id;
