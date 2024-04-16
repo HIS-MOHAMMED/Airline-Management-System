@@ -1,6 +1,7 @@
 package com.hishamfactory;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -55,43 +56,50 @@ public class Company {
         return uuid;
     }
 
-    public Employee addEmployee(Company company){
-        System.out.print("Enter employee first name: ");
-        String first_name = sc.next();
-        System.out.print("Enter employee last name: ");
-        String last_name = sc.next();
-        System.out.print("Enter employee age: ");
-        int age = sc.nextInt();
-        System.out.print("Enter employee tel_number: ");
-        String tel_number = sc.next();
-        System.out.print("Enter employee address: ");
-        String address = sc.next();
-        System.out.print("Enter employee role: ");
-        String role = sc.next();
-        sc.nextLine();
-        System.out.print("Enter employee password: ");
-        String employee_pin = sc.next();
-        Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,role,employee_pin,company);
-        employees.add(newEmployee);
-        return  newEmployee;
-    }
+    public void addEmployee(Company company){
+        try {
+            System.out.print("Enter employee first name: ");
+            String first_name = sc.next();
+            System.out.print("Enter employee last name: ");
+            String last_name = sc.next();
+            System.out.print("Enter employee age: ");
+            int age = sc.nextInt();
+            System.out.print("Enter employee tel_number: ");
+            String tel_number = sc.next();
+            System.out.print("Enter employee address: ");
+            String address = sc.next();
+            System.out.print("Enter employee role: ");
+            String role = sc.next();
+            sc.nextLine();
+            System.out.print("Enter employee password: ");
+            String employee_pin = sc.next();
 
+            Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+            employees.add(newEmployee);
+        }catch (NoSuchElementException e ){
+            System.out.println("Input not found. Please enter text without spaces");
+        }
+    }
     public void addPassenger(Company company){
-        System.out.print("Enter passenger first name: ");
-        String first_name = sc.next();
-        System.out.print("Enter passenger last name: ");
-        String last_name = sc.next();
-        System.out.print("Enter passenger age: ");
-        int age = sc.nextInt();
-        System.out.print("Enter passenger tel_number: ");
-        String tel_number = sc.next();
-        System.out.print("Enter Flight code: ");
-        String flight_code = sc.next();
-        System.out.print("Enter passenger password: ");
-        String passenger_pin = sc.next();
-        sc.nextLine();
-        Passenger newPassenger = new Passenger(first_name,last_name,age,tel_number,FlightController.getFlightById(flight_code),passenger_pin,company);
-        passengers.add(newPassenger);
+        try {
+            System.out.print("Enter passenger first name: ");
+            String first_name = sc.next();
+            System.out.print("Enter passenger last name: ");
+            String last_name = sc.next();
+            System.out.print("Enter passenger age: ");
+            int age = sc.nextInt();
+            System.out.print("Enter passenger tel_number: ");
+            String tel_number = sc.next();
+            System.out.print("Enter Flight code: ");
+            String flight_code = sc.next();
+            System.out.print("Enter passenger password: ");
+            String passenger_pin = sc.next();
+            sc.nextLine();
+            Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, FlightController.getFlightById(flight_code), passenger_pin, company);
+            passengers.add(newPassenger);
+        }catch(NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+        }
     }
     public Employee employeeLogin(String employee_id, String employee_pin){
         for (Employee employee : Company.employees) {
@@ -105,48 +113,60 @@ public class Company {
         }
         return null;
     }
-    public  void addPlane(Company company){
-        System.out.print("Enter plane model: ");
-        String model = sc.next();
-        System.out.print("Enter plane manufacturer: ");
-        String manufacturer = sc.next();
-        System.out.print("Enter year of manufacturer: ");
-        String year_manufacturer = sc.next();
-        System.out.print("Enter capacity: ");
-        int capacity = sc.nextInt();
+    public void addPlane(Company company){
+        try {
+            System.out.print("Enter plane model: ");
+            String model = sc.next();
+            System.out.print("Enter plane manufacturer: ");
+            String manufacturer = sc.next();
+            System.out.print("Enter year of manufacturer: ");
+            String year_manufacturer = sc.next();
+            System.out.print("Enter capacity: ");
+            int capacity = sc.nextInt();
 
-        Plane newPlane = new Plane(model,manufacturer,year_manufacturer,capacity,company);
-        planes.add(newPlane);
+            Plane newPlane = new Plane(model, manufacturer, year_manufacturer, capacity, company);
+            planes.add(newPlane);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+        }
     }
-    public  void addAirport(Company company){
-        System.out.print("Enter airport_name: ");
-        String airport_name = sc.next();
-        System.out.print("Enter airport_location: ");
-        String airport_location = sc.next();
-        System.out.print("Enter airport_runways: ");
-        int airport_runways = sc.nextInt();
-        System.out.print("Enter airport gates: ");
-        int airport_gates = sc.nextInt();
+    public void addAirport(Company company){
+        try {
+            System.out.print("Enter airport_name: ");
+            String airport_name = sc.next();
+            System.out.print("Enter airport_location: ");
+            String airport_location = sc.next();
+            System.out.print("Enter airport_runways: ");
+            int airport_runways = sc.nextInt();
+            System.out.print("Enter airport gates: ");
+            int airport_gates = sc.nextInt();
 
 
-        Airport newAirport = new Airport(airport_name,airport_location,airport_runways,airport_gates,company);
-        airports.add(newAirport);
+            Airport newAirport = new Airport(airport_name, airport_location, airport_runways, airport_gates, company);
+            airports.add(newAirport);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+        }
     }
     public void addFlight(Company company){
-        System.out.print("Enter dep airport code: ");
-        Airport dep_airport = AirportController.getAirportByID(sc.next());
-        System.out.print("Enter des airport: ");
-        Airport des_airport = AirportController.getAirportByID(sc.next());
-        System.out.print("Enter dep time: ");
-        String dep_time = sc.next();
-        System.out.print("Enter arrival time: ");
-        String arrival_time = sc.next();
-        System.out.print("Enter plane code: ");
-        Plane plane = PlaneController.getPlaneById(sc.next());
-        System.out.print("Enter ticket price: ");
-        double ticket_price = sc.nextDouble();
+        try {
+            System.out.print("Enter dep airport code: ");
+            Airport dep_airport = AirportController.getAirportByID(sc.next());
+            System.out.print("Enter des airport: ");
+            Airport des_airport = AirportController.getAirportByID(sc.next());
+            System.out.print("Enter dep time: ");
+            String dep_time = sc.next();
+            System.out.print("Enter arrival time: ");
+            String arrival_time = sc.next();
+            System.out.print("Enter plane code: ");
+            Plane plane = PlaneController.getPlaneById(sc.next());
+            System.out.print("Enter ticket price: ");
+            double ticket_price = sc.nextDouble();
 
-        Flight newFlight = new Flight(dep_airport,des_airport,dep_time,arrival_time,plane,ticket_price,company);
-        flights.add(newFlight);
+            Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane, ticket_price, company);
+            flights.add(newFlight);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+        }
     }
 }
