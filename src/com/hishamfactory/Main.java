@@ -1,6 +1,8 @@
 package com.hishamfactory;
 
 import java.security.spec.RSAOtherPrimeInfo;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -20,53 +22,58 @@ public class Main {
             showLoginMenu(company, sc);
         } while (true);
     }
-
     public static void showLoginMenu(Company company, Scanner sc) {
         Person personAuth = null;
         boolean flag;
-        try {
-            do {
+        do {
+            try {
                 flag = true;
                 int person_type;
                 String person_id = "";
                 String person_pin = "";
-                if(!Company.employees.isEmpty()){
+                if (!Company.employees.isEmpty()) {
                     System.out.print("Are you 1.Employee or 2.Passenger: ");
                     person_type = sc.nextInt();
-                    System.out.print("Enter  ID: ");
-                    person_id = sc.next();
-                    System.out.print("Enter  password: ");
-                    person_pin = sc.next();
-                    if(person_type == 1){
+                    if (person_type == 1) {
+                        System.out.print("Enter  ID: ");
+                        person_id = sc.next();
+                        System.out.print("Enter  password: ");
+                        person_pin = sc.next();
                         personAuth = company.employeeLogin(person_id, person_pin);
                         if (personAuth == null) {
                             System.out.println("ID or password incorrect.please try again");
-                        }else {
+                        } else {
                             while (flag) {
                                 flag = showUserMenu(company, personAuth, sc);
                             }
                         }
-                    }else{
-                        Passenger passenger = company.passengerLogin(person_id,person_pin);
+                    } else if(person_type == 2) {
+                        System.out.print("Enter  ID: ");
+                        person_id = sc.next();
+                        System.out.print("Enter  password: ");
+                        person_pin = sc.next();
+                        Passenger passenger = company.passengerLogin(person_id, person_pin);
                         if (passenger == null) {
                             System.out.println("ID or password incorrect.please try again");
-                        }
-                        else{
+                        } else {
                             System.out.println(".....................Passenger Flights.......................");
                             for (Flight flight : passenger.passenger_flights) {
                                 System.out.println(flight.toString());
                             }
                             System.out.println(".............................................................");
                         }
+                    }else{
+                        System.out.println("Answer not found. Please enter only 1(employees) or 2(passengers)");
                     }
-
                 }
-            } while (personAuth == null);
-        } catch (NullPointerException e) {
-            System.out.println("There is no person had created");
-        }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input. Please enter valid integer input");
+                sc.next();
+            }catch (NoSuchElementException e){
+                System.out.println("Input not found. Please enter text without spaces");
+            }
+        } while (personAuth == null);
     }
-
     public static boolean showUserMenu(Company company, Person person, Scanner sc) {
         boolean flag = true;
         System.out.println();

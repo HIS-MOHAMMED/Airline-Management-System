@@ -20,7 +20,7 @@ public class Flight {
         this.plane = plane;
         this.ticket_price = ticket_price;
         this.flight_code =company.getNewUUID();
-        System.out.println("From "+this.departure_airport +" to " +this.destination_airport+" flight booked with code " + this.flight_code);
+        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
     }
 
     public Airport getDestination_airport() {
