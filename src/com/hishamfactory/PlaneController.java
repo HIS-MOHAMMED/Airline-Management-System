@@ -1,19 +1,15 @@
 package com.hishamfactory;
 
 import java.security.spec.RSAOtherPrimeInfo;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class PlaneController {
     Scanner sc = new Scanner(System.in);
     public static Plane getPlaneById(String id){
-        try{
             for(Plane plane:Company.planes){
                 if(id.equals(plane.getPlane_id())) return plane;
             }
-        }catch (NullPointerException e){
-            System.out.println("Null returned");
-            System.exit(1);
-        }
         return null;
     }
     public void printAllPlanes(){
@@ -26,9 +22,9 @@ public class PlaneController {
 
     }
     public void editPlane(){
+        try{
         System.out.print("Write plane Id: ");
         Plane plane = getPlaneById(sc.next());
-        try {
             System.out.println("1.Edit Model");
             System.out.println("2.Edit Manufacturer");
             System.out.println("3.Edit Capacity");
@@ -56,41 +52,58 @@ public class PlaneController {
                     break;
             }
 
-        }catch (Exception e){
-            System.out.println("The given value is null.check it");
+        }catch (NullPointerException e){
+            System.out.println("A NullPointerException occurred.System will exit");
+            System.exit(0);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
         }
     }
     public void deletePlane(){
+        try{
         System.out.print("Enter plane id: ");
         String id = sc.next();
         Plane plane = getPlaneById(id);
         Company.planes.remove(plane);
         System.out.println("Plane has "+ plane.getPlane_id() + " was deleted...");
+        }catch (NullPointerException e){
+            System.out.println("A NullPointerException occurred.System will exit");
+            System.exit(0);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
+        }
     }
-    public void showPlaneMenu(Company company,PlaneController controller){
-        System.out.println(".....................Plane Menu....................");
-        System.out.println("1.Add new plane");
-        System.out.println("2.Print all planes");
-        System.out.println("3.Edit plane info");
-        System.out.println("4.Delete plane");
-        System.out.println("5.Quit");
-        System.out.print("Enter a choice: ");
-        int option = sc.nextInt();
-        switch (option){
-            case 1:
-                company.addPlane(company);
-                break;
-            case 2:
-                controller.printAllPlanes();
-                break;
-            case 3:
-                controller.editPlane();
-                break;
-            case 4:
-                controller.deletePlane();
-            default:
-                System.out.println("Thank you..");
-                break;
+    public void showPlaneMenu(Company company,PlaneController controller) {
+        try {
+            System.out.println(".....................Plane Menu....................");
+            System.out.println("1.Add new plane");
+            System.out.println("2.Print all planes");
+            System.out.println("3.Edit plane info");
+            System.out.println("4.Delete plane");
+            System.out.println("5.Quit");
+            System.out.print("Enter a choice: ");
+            int option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    company.addPlane(company);
+                    break;
+                case 2:
+                    controller.printAllPlanes();
+                    break;
+                case 3:
+                    controller.editPlane();
+                    break;
+                case 4:
+                    controller.deletePlane();
+                default:
+                    System.out.println("Thank you..");
+                    break;
+            }
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
         }
     }
 }
