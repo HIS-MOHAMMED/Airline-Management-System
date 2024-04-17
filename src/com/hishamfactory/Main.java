@@ -90,7 +90,7 @@ public class Main {
         switch (option) {
                     case 1:
                         EmployeesController controller = new EmployeesController();
-                        controller.showEmployeeMenu(company, controller);
+                        controller.showEmployeeMenu(company, controller,person);
                         break;
                     case 2:
                         AirportController controller3 = new AirportController();

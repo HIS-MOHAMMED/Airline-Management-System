@@ -4,6 +4,7 @@ import com.sun.security.jgss.GSSUtil;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentMap;
 
 public class EmployeesController {
     Scanner sc = new Scanner(System.in);
@@ -36,9 +37,23 @@ public class EmployeesController {
             System.out.println(".............................");
         }
     }
-    public  void editEmployeeInfo(String name){
+    public  void editEmployeeInfo(String name,Person u){
         try {
         Employee employee = getEmployeeByName(name);
+        Employee user = getEmployeeByName(u.getFirst_name()+" "+u.last_name);
+        boolean flag = false;
+            for (String permissionsUuid : Company.permissions_uuids) {
+                System.out.println(permissionsUuid);
+                if(user.uuid.equals(permissionsUuid)){
+                    flag = true;
+                    break;
+                }
+            }
+            if(!flag){
+                System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
+                System.out.println("System will exit");
+                System.exit(0);
+            }
         String employee_name = employee.getFirst_name() +" " + employee.getLast_name();
             if(employee_name.equals(name)){
                 System.out.println("1.Edit Name");
@@ -95,7 +110,7 @@ public class EmployeesController {
             System.exit(0);
         }
     }
-    public void showEmployeeMenu(Company company,EmployeesController controller) {
+    public void showEmployeeMenu(Company company,EmployeesController controller,Person user) {
         try {
             System.out.println(".......................Employee Menu..........................");
             System.out.println("1.Add new employee");
@@ -126,7 +141,7 @@ public class EmployeesController {
                     controller.printAllEmployees();
                     break;
                 case 4:
-                    controller.editEmployeeInfo(name);
+                    controller.editEmployeeInfo(name,user);
                     break;
                 case 5:
                     controller.deleteEmployee(name);

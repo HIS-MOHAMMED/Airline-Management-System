@@ -13,6 +13,8 @@ public class Company {
     public static ArrayList<Airport> airports;
     public static ArrayList<Flight> flights;
     public static ArrayList<String> uuids;
+    public static ArrayList<String> permissions_uuids;
+    private String uuid;
 
     Random rm = new Random();
     Scanner sc = new Scanner(System.in);
@@ -25,6 +27,7 @@ public class Company {
         airports = new ArrayList<>();
         flights = new ArrayList<>();
         uuids = new ArrayList<>();
+        permissions_uuids = new ArrayList<>();
         System.out.println("You are working on "+this.name + " company");
     }
     public String getName(){
@@ -53,6 +56,7 @@ public class Company {
             }
         }while (uniqueUuid);
         uuids.add(uuid);
+        this.uuid = uuid;
         return uuid;
     }
 
@@ -73,8 +77,11 @@ public class Company {
             sc.nextLine();
             System.out.print("Enter employee password: ");
             String employee_pin = sc.next();
+            System.out.print("has editing permissions: ");
+            boolean permission_access = sc.nextBoolean();
 
             Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+            hasPermission(permission_access);
             employees.add(newEmployee);
         }catch (NoSuchElementException e ){
             System.out.println("Input not found. Please enter text without spaces");
@@ -95,6 +102,10 @@ public class Company {
             System.out.print("Enter passenger password: ");
             String passenger_pin = sc.next();
             sc.nextLine();
+            System.out.print("has editing permissions: ");
+            boolean permission_access = sc.nextBoolean();
+            hasPermission(permission_access);
+
             Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, FlightController.getFlightById(flight_code), passenger_pin, company);
             passengers.add(newPassenger);
         }catch(NoSuchElementException e){
@@ -167,6 +178,11 @@ public class Company {
             flights.add(newFlight);
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
+        }
+    }
+    public void hasPermission(boolean permission_access){
+        if(permission_access) {
+            permissions_uuids.add(this.uuid);
         }
     }
 }
