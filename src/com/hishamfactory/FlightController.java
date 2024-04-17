@@ -1,6 +1,7 @@
 package com.hishamfactory;
 
 import java.util.FormatterClosedException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FlightController {
@@ -29,15 +30,18 @@ public class FlightController {
     }
 
     public void showFlightInfo() {
-        System.out.print("Enter flight code: ");
-        String flight_code = sc.next();
         try {
+            System.out.print("Enter flight code: ");
+            String flight_code = sc.next();
             Flight flight = getFlightById(flight_code);
             System.out.println(flight.toString());
-        } catch (Exception e) {
-            System.out.println("There is no flight match this id..");
+        }catch (NullPointerException e){
+            System.out.println("A NullPointerException occurred.System will exit");
+            System.exit(0);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
         }
-
     }
     public void showFlightPassengers() {
         System.out.println("...........................................");
@@ -48,41 +52,56 @@ public class FlightController {
         System.out.println("...........................................");
     }
     public  void cancelFlight(){
-        System.out.print("Enter flight code: ");
-        String flight_code = sc.next();
-        Flight flight = getFlightById(flight_code);
-        Company.flights.remove(flight);
+        try {
+            System.out.print("Enter flight code: ");
+            String flight_code = sc.next();
+            Flight flight = getFlightById(flight_code);
+            Company.flights.remove(flight);
+        }catch (NullPointerException e){
+            System.out.println("A NullPointerException occurred.System will exit");
+            System.exit(0);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
+        }
     }
     public void showFlightMenu(Company company, FlightController controller){
-        System.out.println(".................Flight Menu...........................");
-        System.out.println("1.Book flight");
-        System.out.println("2.Show all flights");
-        System.out.println("3.Get flight by Code");
-        System.out.println("4.Show flights info");
-        System.out.println("5.Show flight passengers");
-        System.out.println("6.Cancel flight");
-        System.out.print("Enter a choice: ");
-        int option = sc.nextInt();
-        switch (option){
-            case 1:
-                company.addFlight(company);
-                break;
-            case 2:
-                controller.showAllFlights();
-                break;
-            case 3:
-                controller.getFlightById();
-                break;
-            case 4:
-                controller.showFlightInfo();
-                break;
-            case 5:
-                controller.showFlightPassengers();
-                break;
-            case 6:
-                controller.cancelFlight();
-                break;
+        try {
+            System.out.println(".................Flight Menu...........................");
+            System.out.println("1.Book flight");
+            System.out.println("2.Show all flights");
+            System.out.println("3.Get flight by Code");
+            System.out.println("4.Show flights info");
+            System.out.println("5.Show flight passengers");
+            System.out.println("6.Cancel flight");
+            System.out.print("Enter a choice: ");
+            int option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    company.addFlight(company);
+                    break;
+                case 2:
+                    controller.showAllFlights();
+                    break;
+                case 3:
+                    controller.getFlightById();
+                    break;
+                case 4:
+                    controller.showFlightInfo();
+                    break;
+                case 5:
+                    controller.showFlightPassengers();
+                    break;
+                case 6:
+                    controller.cancelFlight();
+                    break;
+            }
+        }catch (NullPointerException e){
+            System.out.println("A NullPointerException occurred.System will exit");
+            System.exit(0);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
         }
-
     }
 }
