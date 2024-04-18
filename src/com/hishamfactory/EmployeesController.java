@@ -43,7 +43,6 @@ public class EmployeesController {
         Employee user = getEmployeeByName(u.getFirst_name()+" "+u.last_name);
         boolean flag = false;
             for (String permissionsUuid : Company.permissions_uuids) {
-                System.out.println(permissionsUuid);
                 if(user.uuid.equals(permissionsUuid)){
                     flag = true;
                     break;

@@ -161,6 +161,11 @@ public class Company {
     }
     public void addFlight(Company company){
         try {
+            System.out.println("..........................Available Airports..............................");
+            for (Airport airport : Company.airports) {
+                System.out.println(airport.toString());
+            }
+            System.out.println("..........................................................................");
             System.out.print("Enter dep airport code: ");
             Airport dep_airport = AirportController.getAirportByID(sc.next());
             System.out.print("Enter des airport: ");
@@ -169,6 +174,11 @@ public class Company {
             String dep_time = sc.next();
             System.out.print("Enter arrival time: ");
             String arrival_time = sc.next();
+            System.out.println("............................Available Planes................................");
+            for (Plane plane : Company.planes) {
+                System.out.println(plane.toString());
+            }
+            System.out.println("...........................................................................");
             System.out.print("Enter plane code: ");
             Plane plane = PlaneController.getPlaneById(sc.next());
             System.out.print("Enter ticket price: ");
