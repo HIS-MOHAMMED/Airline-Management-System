@@ -109,7 +109,8 @@ public class EmployeesController {
             System.exit(0);
         }
     }
-    public void showEmployeeMenu(Company company,EmployeesController controller,Person user) {
+    public boolean showEmployeeMenu(Company company,EmployeesController controller,Person user) {
+        boolean flag = true;
         try {
             System.out.println(".......................Employee Menu..........................");
             System.out.println("1.Add new employee");
@@ -118,10 +119,11 @@ public class EmployeesController {
             System.out.println("4.Edit employee info");
             System.out.println("5.Delete employee");
             System.out.println("6.Fire employee");
+            System.out.println("7.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
             String name = "";
-            if (option != 1 && option != 3) {
+            if (option != 1 && option != 3 && option != 7) {
                 System.out.print("Enter employee first name: ");
                 name = sc.next();
                 System.out.print("Enter employee last name: ");
@@ -148,10 +150,14 @@ public class EmployeesController {
                 case 6:
                     controller.fireEmployee(name);
                     break;
+                default:
+                    flag = false;
+                    break;
             }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
             sc.next();
         }
+        return  flag;
     }
 }

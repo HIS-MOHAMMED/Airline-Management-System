@@ -75,7 +75,8 @@ public class PassengersController {
             System.exit(0);
         }
     }
-    public void showPassengerMenu(Company company,PassengersController controller) {
+    public boolean showPassengerMenu(Company company,PassengersController controller) {
+        boolean flag = true;
         try {
             System.out.println(".......................Passenger Menu...............................");
             System.out.println("1.Add new passenger");
@@ -83,16 +84,17 @@ public class PassengersController {
             System.out.println("3.Show all passengers");
             System.out.println("4.Edit passenger info");
             System.out.println("5.Delete passenger");
+            System.out.println("6.Quit");
             System.out.print("Enter a choice: ");
-            int option2 = sc.nextInt();
+            int option = sc.nextInt();
             String name = "";
-            if (option2 != 1 && option2 != 3) {
+            if (option != 1 && option != 3 && !(option > 5)) {
                 System.out.print("Enter first name: ");
                 name = sc.next();
                 System.out.print("Enter last name: ");
                 name += " " + sc.next();
             }
-            switch (option2) {
+            switch (option) {
                 case 1:
                     company.addPassenger(company);
                     break;
@@ -108,6 +110,9 @@ public class PassengersController {
                 case 5:
                     controller.deletePassenger(name);
                     break;
+                default:
+                    flag = false;
+                    break;
             }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
@@ -116,5 +121,6 @@ public class PassengersController {
             System.out.println("A NullPointerException occurred.System will exit");
             System.exit(0);
         }
+        return flag;
     }
 }

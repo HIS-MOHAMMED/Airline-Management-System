@@ -65,7 +65,8 @@ public class FlightController {
             sc.next();
         }
     }
-    public void showFlightMenu(Company company, FlightController controller){
+    public boolean showFlightMenu(Company company, FlightController controller) {
+        boolean flag = true;
         try {
             System.out.println(".................Flight Menu...........................");
             System.out.println("1.Book flight");
@@ -74,6 +75,7 @@ public class FlightController {
             System.out.println("4.Show flights info");
             System.out.println("5.Show flight passengers");
             System.out.println("6.Cancel flight");
+            System.out.println("7.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
             switch (option) {
@@ -95,13 +97,17 @@ public class FlightController {
                 case 6:
                     controller.cancelFlight();
                     break;
+                default:
+                    flag = false;
+                    break;
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("A NullPointerException occurred.System will exit");
             System.exit(0);
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println("Input not found. Please enter text without spaces");
             sc.next();
         }
+        return flag;
     }
 }

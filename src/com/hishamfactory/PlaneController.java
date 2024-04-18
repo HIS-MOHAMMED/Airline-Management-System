@@ -75,7 +75,8 @@ public class PlaneController {
             sc.next();
         }
     }
-    public void showPlaneMenu(Company company,PlaneController controller) {
+    public boolean showPlaneMenu(Company company,PlaneController controller) {
+        boolean flag = true;
         try {
             System.out.println(".....................Plane Menu....................");
             System.out.println("1.Add new plane");
@@ -98,12 +99,13 @@ public class PlaneController {
                 case 4:
                     controller.deletePlane();
                 default:
-                    System.out.println("Thank you..");
+                    flag = false;
                     break;
             }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
             sc.next();
         }
+        return flag;
     }
 }
