@@ -62,52 +62,62 @@ public class Company {
 
     public void addEmployee(Company company){
         try {
-            System.out.print("Enter employee first name: ");
-            String first_name = sc.next();
-            System.out.print("Enter employee last name: ");
-            String last_name = sc.next();
-            System.out.print("Enter employee age: ");
-            int age = sc.nextInt();
-            System.out.print("Enter employee tel_number: ");
-            String tel_number = sc.next();
-            System.out.print("Enter employee address: ");
-            String address = sc.next();
-            System.out.print("Enter employee role: ");
-            String role = sc.next();
-            sc.nextLine();
-            System.out.print("Enter employee password: ");
-            String employee_pin = sc.next();
-            System.out.print("has editing permissions: ");
-            boolean permission_access = sc.nextBoolean();
+                System.out.print("Enter employee first name: ");
+                String first_name = sc.next();
+                System.out.print("Enter employee last name: ");
+                String last_name = sc.next();
+                System.out.print("Enter employee age: ");
+                int age = sc.nextInt();
+                System.out.print("Enter employee tel_number: ");
+                String tel_number = sc.next();
+                System.out.print("Enter employee address: ");
+                String address = sc.next();
+                System.out.print("Enter employee role: ");
+                String role = sc.next();
+                sc.nextLine();
+                System.out.print("Enter employee password: ");
+                String employee_pin = sc.next();
+                System.out.print("has editing permissions: ");
+                boolean permission_access = sc.nextBoolean();
 
-            Employee newEmployee = new Employee(first_name,last_name,age,tel_number,address,role,employee_pin,company);
-            hasPermission(permission_access);
-            employees.add(newEmployee);
-        }catch (NoSuchElementException e ){
+                Employee newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin, company);
+                hasPermission(permission_access);
+                employees.add(newEmployee);
+        }catch(NoSuchElementException e ){
             System.out.println("Input not found. Please enter text without spaces");
         }
     }
     public void addPassenger(Company company){
+        boolean flag = true;
+        String first_name;
+        String last_name;
         try {
-            System.out.print("Enter passenger first name: ");
-            String first_name = sc.next();
-            System.out.print("Enter passenger last name: ");
-            String last_name = sc.next();
-            System.out.print("Enter passenger age: ");
-            int age = sc.nextInt();
-            System.out.print("Enter passenger tel_number: ");
-            String tel_number = sc.next();
-            System.out.print("Enter Flight code: ");
-            String flight_code = sc.next();
-            System.out.print("Enter passenger password: ");
-            String passenger_pin = sc.next();
-            sc.nextLine();
-            System.out.print("has editing permissions: ");
-            boolean permission_access = sc.nextBoolean();
-            hasPermission(permission_access);
+            while(flag) {
+                System.out.print("Enter passenger first name: ");
+                first_name = sc.next();
+                System.out.print("Enter passenger last name: ");
+                last_name = sc.next();
+                if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
+                    System.out.println("****This name had already created****");
+                    continue;
+                }
+                flag = false;
+                System.out.print("Enter passenger age: ");
+                int age = sc.nextInt();
+                System.out.print("Enter passenger tel_number: ");
+                String tel_number = sc.next();
+                System.out.print("Enter Flight code: ");
+                String flight_code = sc.next();
+                System.out.print("Enter passenger password: ");
+                String passenger_pin = sc.next();
+                sc.nextLine();
+                System.out.print("has editing permissions: ");
+                boolean permission_access = sc.nextBoolean();
+                hasPermission(permission_access);
 
-            Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, FlightController.getFlightById(flight_code), passenger_pin, company);
-            passengers.add(newPassenger);
+                Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, FlightController.getFlightById(flight_code), passenger_pin, company);
+                passengers.add(newPassenger);
+            }
         }catch(NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
         }

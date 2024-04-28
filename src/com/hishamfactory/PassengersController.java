@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class PassengersController {
     Scanner sc = new Scanner(System.in);
-    public Passenger getPassengerByName(String first_last_name){
+    public static Passenger getPassengerByName(String first_last_name){
         int i = 0;
         while(i < Company.passengers.size()){
             String name = Company.passengers.get(i).getFirst_name()+ " " + Company.passengers.get(i).getLast_name();
@@ -122,5 +122,14 @@ public class PassengersController {
             System.exit(0);
         }
         return flag;
+    }
+    public static boolean checkPassengerNotExist(String name){
+        for (Passenger passenger : Company.passengers) {
+            String passenger_name = passenger.getFirst_name() + " " +passenger.getLast_name();
+            if(passenger_name.equalsIgnoreCase(name)){
+                return false;
+            }
+        }
+        return true;
     }
 }
