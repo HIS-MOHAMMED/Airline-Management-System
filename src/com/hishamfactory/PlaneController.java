@@ -25,11 +25,12 @@ public class PlaneController {
     public void editPlane(String plane_code) {
         Plane plane = getPlaneById(plane_code);
         if(plane != null) {
+            System.out.println("...........................Editing Menu..........................");
             System.out.println("1.Edit Model");
             System.out.println("2.Edit Manufacturer");
-            System.out.println("3.Edit Capacity");
-            // System.out.println("4.Edit Current Passengers: ");
-            System.out.println("4.Quit");
+            System.out.println("3.Edit year of manufactured");
+            System.out.println("4.Edit Capacity");
+            System.out.println("5.Quit");
             System.out.print("select option: ");
             try {
                 int option = sc.nextInt();
@@ -47,15 +48,19 @@ public class PlaneController {
                         break;
 
                     case 3:
+                        System.out.print("Enter new year of manufactured: ");
+                        plane.setPlane_year(sc.next());
+                        System.out.println("Year of manufactured changed to " + plane.getPlane_year());
+                        break;
+                    case 4:
                         System.out.print("Enter new Capacity: ");
                         plane.setPlane_capacity(sc.nextInt());
                         System.out.println("Capacity changed");
                         break;
-                    case 4:
+                    case 5:
                         break;
                     default:
                         System.out.println("*** Please enter a valid choice ***");
-                        break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("*** Please enter capacity as integer ***");
