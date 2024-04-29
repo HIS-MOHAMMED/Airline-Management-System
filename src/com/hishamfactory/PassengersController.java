@@ -77,6 +77,50 @@ public class PassengersController {
             sc.next();
         }
     }
+    public void editPassengerInfo(Passenger passenger) {
+        try {
+            System.out.println("....................Editing Menu..........................");
+            System.out.println("1.Edit Name");
+            System.out.println("2.Edit Age");
+            System.out.println("3.Edit Tel Number");
+            System.out.println("4.Edit password");
+            System.out.println("5.Quit");
+            System.out.print("select option: ");
+            int option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    System.out.print("Enter new first name: ");
+                    passenger.setFirst_name(sc.next());
+                    System.out.print("Enter new last name: ");
+                    passenger.setLast_name(sc.next());
+                    System.out.println("Name Changed to " + passenger.getFirst_name() + " " + passenger.getLast_name());
+                    break;
+                case 2:
+                    System.out.print("Enter new age: ");
+                    passenger.setAge(sc.nextInt());
+                    System.out.println("Age changed to " + passenger.getAge());
+                    break;
+
+                case 3:
+                    System.out.print("Enter new tel number: ");
+                    passenger.setTel_number(sc.next());
+                    System.out.println("Tel number changed to " + passenger.getTel_number());
+                    break;
+                case 4:
+                    System.out.print("Enter new password: ");
+                    passenger.setPinHash(sc.next());
+                    System.out.println("Password changed");
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("*** Please enter a valid choice ***");
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
+        }
+    }
 
     public void deletePassenger(String name) {
         Passenger passenger = getPassengerByName(name);
@@ -87,7 +131,7 @@ public class PassengersController {
         }
     }
 
-    public boolean showPassengerMenu1(Company company, PassengersController controller) {
+    public boolean showPassengerMenu(Company company, PassengersController controller) {
         boolean flag = true;
         try {
             System.out.println(".......................Passenger Menu...............................");
@@ -134,27 +178,32 @@ public class PassengersController {
         }
         return flag;
     }
-    public boolean showPassengerMenu2(PassengersController controller,Passenger passenger ){
+    public boolean showPassengerMenu(PassengersController controller,Passenger passenger ){
         boolean flag = true;
         try {
             System.out.println(".......................Passenger Menu...............................");
             System.out.println("1.Book Flight");
             System.out.println("2.Edit Info");
-            System.out.println("3.Cancel Flight");
-            System.out.println("4.Quit");
+            System.out.println("3.Show all flights");
+            System.out.println("4.Cancel Flight");
+            System.out.println("5.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            FlightController flightController = new FlightController();
             switch (option) {
                 case 1:
-                    FlightController flightController = new FlightController();
                     flightController.bookFlight(passenger);
                     break;
                 case 2:
+                    editPassengerInfo(passenger);
                     break;
                 case 3:
-                    controller.printAllPassengers();
+                    flightController.showAllFlights(passenger);
                     break;
                 case 4:
+                    flightController.cancelFlight(passenger);
+                    break;
+                case 5:
                     flag = false;
                     break;
                 default:

@@ -62,7 +62,7 @@ public class Main {
                         } else {
                             while(flag){
                                 PassengersController controller = new PassengersController();
-                                flag = controller.showPassengerMenu2(controller,passenger);
+                                flag = controller.showPassengerMenu(controller,passenger);
                             }
                         }
                     }else{
@@ -139,7 +139,7 @@ public class Main {
                         }
                         PassengersController controller4 = new PassengersController();
                         while (inner_flag2) {
-                            inner_flag2 = controller4.showPassengerMenu1(company, controller4);
+                            inner_flag2 = controller4.showPassengerMenu(company, controller4);
                         }
                         break;
                     case 6:

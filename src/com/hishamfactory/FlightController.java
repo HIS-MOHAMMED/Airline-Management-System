@@ -14,6 +14,12 @@ public class FlightController {
             System.out.println(flight.toString());
         }
     }
+    public void showAllFlights(Passenger passenger) {
+        System.out.println(".......................List of Flights..........................");
+        for (Flight flight : passenger.passenger_flights) {
+            System.out.println(flight.toString());
+        }
+    }
     public static Flight getFlightById(String id) {
         for (Flight flight : Company.flights) {
             if (flight.getFlight_code().equals(id)) return flight;
@@ -45,6 +51,19 @@ public class FlightController {
         Flight flight = getFlightById(flight_code);
         if(flight != null){
             Company.flights.remove(flight);
+        }else{
+            System.out.println("*** This flight not exists ***");
+        }
+    }
+    public  void cancelFlight(Passenger passenger){
+        System.out.println(".......................Future Flights........................");
+        for (Flight passengerFlight : passenger.passenger_flights) {
+            System.out.println(passengerFlight);
+        }
+        System.out.print("Enter flight code you want cancel: ");
+        Flight flight = getFlightById(sc.next());
+        if(flight != null){
+            passenger.passenger_flights.remove(flight);
         }else{
             System.out.println("*** This flight not exists ***");
         }
