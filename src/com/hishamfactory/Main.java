@@ -60,11 +60,10 @@ public class Main {
                         if (passenger == null) {
                             System.out.println("ID or password incorrect.please try again");
                         } else {
-                            System.out.println(".....................Passenger Flights.......................");
-                            for (Flight flight : passenger.passenger_flights) {
-                                System.out.println(flight.toString());
+                            while(flag){
+                                PassengersController controller = new PassengersController();
+                                flag = controller.showPassengerMenu2(controller,passenger);
                             }
-                            System.out.println(".............................................................");
                         }
                     }else{
                         System.out.println("Answer not found. Please enter only 1(employees) or 2(passengers)");
@@ -140,7 +139,7 @@ public class Main {
                         }
                         PassengersController controller4 = new PassengersController();
                         while (inner_flag2) {
-                            inner_flag2 = controller4.showPassengerMenu(company, controller4);
+                            inner_flag2 = controller4.showPassengerMenu1(company, controller4);
                         }
                         break;
                     case 6:

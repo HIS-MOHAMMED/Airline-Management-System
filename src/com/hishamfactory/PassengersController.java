@@ -87,7 +87,7 @@ public class PassengersController {
         }
     }
 
-    public boolean showPassengerMenu(Company company, PassengersController controller) {
+    public boolean showPassengerMenu1(Company company, PassengersController controller) {
         boolean flag = true;
         try {
             System.out.println(".......................Passenger Menu...............................");
@@ -125,6 +125,40 @@ public class PassengersController {
                 default:
                     flag = false;
                     break;
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
+        } catch (NullPointerException e) {
+            System.out.println("*** This passenger doesn't exits ***");
+        }
+        return flag;
+    }
+    public boolean showPassengerMenu2(PassengersController controller,Passenger passenger ){
+        boolean flag = true;
+        try {
+            System.out.println(".......................Passenger Menu...............................");
+            System.out.println("1.Book Flight");
+            System.out.println("2.Edit Info");
+            System.out.println("3.Cancel Flight");
+            System.out.println("4.Quit");
+            System.out.print("Enter a choice: ");
+            int option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    FlightController flightController = new FlightController();
+                    flightController.bookFlight(passenger);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    controller.printAllPassengers();
+                    break;
+                case 4:
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("*** Please enter a valid choice ***");
             }
         } catch (NoSuchElementException e) {
             System.out.println("Input not found. Please enter text without spaces");

@@ -49,11 +49,49 @@ public class FlightController {
             System.out.println("*** This flight not exists ***");
         }
     }
+    public  void bookFlight(Passenger passenger){
+        boolean flight_exit = false;
+        boolean passenger_exit = false;
+        System.out.print("Enter dep airport code: ");
+        Airport dep_airport = AirportController.getAirportByID(sc.next());
+        System.out.print("Enter des airport code : ");
+        Airport des_airport = AirportController.getAirportByID(sc.next());
+        System.out.println("...................Available Flights...........................");
+        for (Flight flight : Company.flights) {
+            if (flight.getDeparture_airport().equals(dep_airport) && flight.getDestination_airport().equals(des_airport)) {
+                System.out.println(flight.toString());
+                flight_exit = true;
+            }
+        }
+        if (flight_exit) {
+            System.out.print("Enter flight code: ");
+            Flight flight = getFlightById(sc.next());
+            if (flight != null) {
+                for (Passenger passenger1 : flight.passengers) {
+                    if (passenger1.getUuid().equals(passenger.getUuid())) {
+                        passenger_exit = true;
+                        break;
+                    }
+                }
+                if (!passenger_exit) {
+                    passenger.passenger_flights.add(flight);
+                    flight.passengers.add(passenger);
+                    System.out.println("Flight booked from " + flight.getDeparture_airport().getAirport_name() + " to " + flight.getDestination_airport().getAirport_name() + " at " + flight.getDeparture_time());
+                } else {
+                    System.out.println("*** You already booked into this flight ***");
+                }
+            } else {
+                System.out.println("*** This flight doesn't exists ***");
+            }
+        } else {
+            System.out.println("*** Sorry, There aren't any flight to your Trip ***");
+        }
+    }
     public boolean showFlightMenu(Company company, FlightController controller) {
         boolean flag = true;
         try {
             System.out.println(".................Flight Menu..............................");
-            System.out.println("1.Book flight");
+            System.out.println("1.add flight");
             System.out.println("2.Show all flights");
             System.out.println("3.Show flight passengers");
             System.out.println("4.Show flight info");
