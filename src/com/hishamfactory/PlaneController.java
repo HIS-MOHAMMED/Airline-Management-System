@@ -6,25 +6,23 @@ import java.util.Scanner;
 
 public class PlaneController {
     Scanner sc = new Scanner(System.in);
-    public static Plane getPlaneById(String id){
+    public static Plane getPlaneById(String plane_code){
             for(Plane plane:Company.planes){
-                if(id.equals(plane.getPlane_id())) return plane;
+                if(plane_code.equals(plane.getPlane_id())) return plane;
             }
         return null;
     }
     public void printAllPlanes(){
-        System.out.println(".........................");
+        System.out.println("................List of Planes.............");
         for(Plane plane: Company.planes){
             System.out.println(plane.toString());
-            System.out.println(".........................");
         }
-        System.out.println(".............................");
+        System.out.println("...........................................");
 
     }
-    public void editPlane(){
+    public void editPlane(String plane_code){
         try{
-        System.out.print("Write plane Id: ");
-        Plane plane = getPlaneById(sc.next());
+        Plane plane = getPlaneById(plane_code);
             System.out.println("1.Edit Model");
             System.out.println("2.Edit Manufacturer");
             System.out.println("3.Edit Capacity");
@@ -60,11 +58,9 @@ public class PlaneController {
             sc.next();
         }
     }
-    public void deletePlane(){
+    public void deletePlane(String plane_code){
         try{
-        System.out.print("Enter plane id: ");
-        String id = sc.next();
-        Plane plane = getPlaneById(id);
+        Plane plane = getPlaneById(plane_code);
         Company.planes.remove(plane);
         System.out.println("Plane has "+ plane.getPlane_id() + " was deleted...");
         }catch (NullPointerException e){
@@ -86,6 +82,11 @@ public class PlaneController {
             System.out.println("5.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            String plane_code = null;
+            if(option >= 3 && option <= 4){
+                System.out.println("Enter plane code: ");
+                plane_code = sc.next();
+            }
             switch (option) {
                 case 1:
                     company.addPlane(company);
@@ -94,13 +95,15 @@ public class PlaneController {
                     controller.printAllPlanes();
                     break;
                 case 3:
-                    controller.editPlane();
+                    controller.editPlane(plane_code);
                     break;
                 case 4:
-                    controller.deletePlane();
-                default:
+                    controller.deletePlane(plane_code);
+                case 5:
                     flag = false;
                     break;
+                default:
+                    System.out.println("*** Please enter a valid choice ***");
             }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
