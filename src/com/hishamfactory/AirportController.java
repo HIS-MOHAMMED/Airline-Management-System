@@ -13,6 +13,12 @@ public class AirportController {
             }
         return null;
     }
+    public static Airport getAirportByName(String airport_name){
+        for (Airport airport : Company.airports) {
+            if(airport.getAirport_name().equalsIgnoreCase(airport_name)) return airport;
+        }
+        return null;
+    }
     public void printAllAirports(){
         System.out.println("......................List of Airports......................");
         for (Airport airport : Company.airports) {
