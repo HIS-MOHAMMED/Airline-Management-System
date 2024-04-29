@@ -64,7 +64,16 @@ public class Person {
     public String getUuid() {
         return uuid;
     }
-
+    public void setPinHash(String person_pin){
+        try{
+            MessageDigest md =MessageDigest.getInstance("SHA-256");
+            this.pinHash =md.digest(person_pin.getBytes(StandardCharsets.UTF_8));
+        }catch (NoSuchAlgorithmException e){
+            System.err.println("error, caught NoSuchAlgorithmException.");
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
     public byte[] getPinHash() {
         return pinHash;
     }

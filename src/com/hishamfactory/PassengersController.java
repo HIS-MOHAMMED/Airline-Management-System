@@ -34,10 +34,11 @@ public class PassengersController {
             if (passenger == null) {
                 System.out.println("*** This passenger doesn't exists ***");
             } else {
+                System.out.println("....................Editing Menu..........................");
                 System.out.println("1.Edit Name");
                 System.out.println("2.Edit Age");
                 System.out.println("3.Edit Tel Number");
-                System.out.println("4.Edit Id");
+                System.out.println("4.Edit password");
                 System.out.println("5.Quit");
                 System.out.print("select option: ");
                 int option = sc.nextInt();
@@ -47,19 +48,28 @@ public class PassengersController {
                         passenger.setFirst_name(sc.next());
                         System.out.print("Enter new last name: ");
                         passenger.setLast_name(sc.next());
-                        System.out.println("Name Changed");
+                        System.out.println("Name Changed to " + passenger.getFirst_name() + " " + passenger.getLast_name());
                         break;
                     case 2:
                         System.out.print("Enter new age: ");
                         passenger.setAge(sc.nextInt());
-                        System.out.println("Age changed");
+                        System.out.println("Age changed to " + passenger.getAge());
                         break;
 
                     case 3:
                         System.out.print("Enter new tel number: ");
                         passenger.setTel_number(sc.next());
-                        System.out.println("Tel number changed");
+                        System.out.println("Tel number changed to " + passenger.getTel_number());
                         break;
+                    case 4:
+                        System.out.print("Enter new password: ");
+                        passenger.setPinHash(sc.next());
+                        System.out.println("Password changed");
+                        break;
+                    case 5:
+                        break;
+                    default:
+                        System.out.println("*** Please enter a valid choice ***");
                 }
             }
         } catch (NoSuchElementException e) {
