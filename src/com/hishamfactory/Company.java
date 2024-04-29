@@ -147,8 +147,9 @@ public class Company {
 
             Plane newPlane = new Plane(model, manufacturer, year_manufacturer, capacity, company);
             planes.add(newPlane);
-        }catch (NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
+        }catch (InputMismatchException e){
+            System.out.println("*** Please enter capacity as integer ***");
+            sc.next();
         }
     }
     public void addAirport(Company company){
