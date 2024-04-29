@@ -1,9 +1,6 @@
 package com.hishamfactory;
 
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Company {
     private String name;
@@ -120,11 +117,14 @@ public class Company {
             }
         }catch(NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
+        }catch (NullPointerException e){
+            System.out.println("*** The Flight code is wrong ***");
         }
     }
-    public Employee employeeLogin(String employee_id, String employee_pin){
+    public Employee employeeLogin(String employee_id, String employee_pin) {
         for (Employee employee : Company.employees) {
-            if(employee.getUuid().compareTo(employee_id) == 0 && employee.validatePin(employee_pin)) return employee;
+            if (employee.getUuid().compareTo(employee_id) == 0 && employee.validatePin(employee_pin)) return employee;
         }
         return null;
     }
