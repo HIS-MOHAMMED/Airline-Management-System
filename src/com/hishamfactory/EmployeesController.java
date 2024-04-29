@@ -40,59 +40,75 @@ public class EmployeesController{
     public void editEmployeeInfo(String name,Person u) {
         boolean outer_flag = true;
         boolean flag = false;
-        Employee employee = null;
+        Employee employee;
         while (outer_flag) {
-            try {
                 employee = getEmployeeByName(name);
-                Employee user = getEmployeeByName(u.getFirst_name() + u.getLast_name());
-                for (String permissionsUuid : Company.permissions_uuids) {
-                    if (user.uuid.equals(permissionsUuid)) {
-                        flag = true;
+                if(employee != null) {
+                    Employee user = getEmployeeByName(u.getFirst_name() + u.getLast_name());
+                    for (String permissionsUuid : Company.permissions_uuids) {
+                        if (user.uuid.equals(permissionsUuid)) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
                         break;
                     }
-                }
-                if (!flag) {
-                    System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
-                    break;
-                }
-            } catch (NullPointerException e) {
-                System.out.println("***This account doesn't exists***");
-                break;
-            }
-            try {
-                System.out.println(".....................Editing Menu....................");
-                System.out.println("1.Edit Name");
-                System.out.println("2.Edit Age");
-                System.out.println("3.Edit Tel Number");
-                System.out.println("4.Edit Id");
-                System.out.println("5.Quit");
-                System.out.print("select option: ");
-                int option = sc.nextInt();
-                switch (option) {
-                    case 1:
-                        System.out.print("Enter new first name: ");
-                        employee.setFirst_name(sc.next());
-                        System.out.print("Enter new last name: ");
-                        employee.setLast_name(sc.next());
-                        System.out.println("Name Changed");
-                        break;
-                    case 2:
-                        System.out.print("Enter new age: ");
-                        employee.setAge(sc.nextInt());
-                        System.out.println("Age changed");
-                        break;
+                    try {
+                        System.out.println(".....................Editing Menu....................");
+                        System.out.println("1.Edit Name");
+                        System.out.println("2.Edit Age");
+                        System.out.println("3.Edit Tel Number");
+                        System.out.println("4.Edit Role");
+                        System.out.println("5.Edit Address");
+                        System.out.println("6.Quit");
+                        System.out.print("select option: ");
+                        int option = sc.nextInt();
+                        switch (option) {
+                            case 1:
+                                System.out.print("Enter new first name: ");
+                                employee.setFirst_name(sc.next());
+                                System.out.print("Enter new last name: ");
+                                employee.setLast_name(sc.next());
+                                System.out.println("Name Changed to " + employee.getFirst_name() + " " + employee.getLast_name());
+                                break;
+                            case 2:
+                                System.out.print("Enter new age: ");
+                                employee.setAge(sc.nextInt());
+                                System.out.println("Age changed to " + employee.getAge());
+                                break;
 
-                    case 3:
-                        System.out.print("Enter new tel number: ");
-                        employee.setTel_number(sc.next());
-                        System.out.println("Tel number changed");
-                        break;
+                            case 3:
+                                System.out.print("Enter new tel number: ");
+                                employee.setTel_number(sc.next());
+                                System.out.println("Tel number changed to " + employee.getTel_number());
+                                break;
+                            case 4:
+                                System.out.print("Enter new role: ");
+                                employee.setRole(sc.next());
+                                System.out.println("Role changed to " + employee.getRole());
+                                break;
+                            case 5:
+                                System.out.print("Enter new address: ");
+                                employee.setAddress(sc.next());
+                                System.out.println("Address changed to " + employee.getAddress());
+                                break;
+                            case 6:
+
+                                break;
+                            default:
+                                System.out.println("*** Please enter a valid choice ***");
+                        }
+                    } catch (NoSuchElementException e) {
+                        System.out.println("Input not found. Please enter text without spaces");
+                        sc.next();
+                    }
+                }else {
+                    System.out.println("*** This employee doesn't exists ***");
                 }
-            } catch (NoSuchElementException e) {
-                System.out.println("Input not found. Please enter text without spaces");
-                sc.next();
-            }
             outer_flag = false;
+
         }
     }
     public void deleteEmployee(String name){
