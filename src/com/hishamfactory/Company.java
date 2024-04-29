@@ -179,24 +179,36 @@ public class Company {
             System.out.println("..........................................................................");
             System.out.print("Enter dep airport code: ");
             Airport dep_airport = AirportController.getAirportByID(sc.next());
-            System.out.print("Enter des airport: ");
-            Airport des_airport = AirportController.getAirportByID(sc.next());
-            System.out.print("Enter dep time: ");
-            String dep_time = sc.next();
-            System.out.print("Enter arrival time: ");
-            String arrival_time = sc.next();
-            System.out.println("............................Available Planes................................");
-            for (Plane plane : Company.planes) {
-                System.out.println(plane.toString());
-            }
-            System.out.println("...........................................................................");
-            System.out.print("Enter plane code: ");
-            Plane plane = PlaneController.getPlaneById(sc.next());
-            System.out.print("Enter ticket price: ");
-            double ticket_price = sc.nextDouble();
+            if(dep_airport != null) {
+                System.out.print("Enter des airport: ");
+                Airport des_airport = AirportController.getAirportByID(sc.next());
+                if(des_airport != null) {
+                    System.out.print("Enter dep time: ");
+                    String dep_time = sc.next();
+                    System.out.print("Enter arrival time: ");
+                    String arrival_time = sc.next();
+                    System.out.println("............................Available Planes................................");
+                    for (Plane plane : Company.planes) {
+                        System.out.println(plane.toString());
+                    }
+                    System.out.println("...........................................................................");
+                    System.out.print("Enter plane code: ");
+                    Plane plane = PlaneController.getPlaneById(sc.next());
+                    if(plane != null) {
+                        System.out.print("Enter ticket price: ");
+                        double ticket_price = sc.nextDouble();
 
-            Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane, ticket_price, company);
-            flights.add(newFlight);
+                        Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane, ticket_price, company);
+                        flights.add(newFlight);
+                    }else{
+                        System.out.println("*** This flight not exits ***");
+                    }
+                }else{
+                    System.out.println("*** The des airport not exits ***");
+                }
+            }else {
+                System.out.println("*** The dep airport not exits ***");
+            }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
         }
