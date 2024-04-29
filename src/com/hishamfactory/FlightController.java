@@ -52,14 +52,14 @@ public class FlightController {
     public  void bookFlight(Passenger passenger){
         boolean flight_exit = false;
         boolean passenger_exit = false;
-        System.out.print("Enter dep airport code: ");
-        Airport dep_airport = AirportController.getAirportByID(sc.next());
-        System.out.print("Enter des airport code : ");
-        Airport des_airport = AirportController.getAirportByID(sc.next());
+        System.out.print("Enter dep airport name: ");
+        Airport dep_airport = AirportController.getAirportByName(sc.next());
+        System.out.print("Enter des airport name : ");
+        Airport des_airport = AirportController.getAirportByName(sc.next());
         System.out.println("...................Available Flights...........................");
         for (Flight flight : Company.flights) {
             if (flight.getDeparture_airport().equals(dep_airport) && flight.getDestination_airport().equals(des_airport)) {
-                System.out.println(flight.toString());
+                System.out.println(flight);
                 flight_exit = true;
             }
         }
