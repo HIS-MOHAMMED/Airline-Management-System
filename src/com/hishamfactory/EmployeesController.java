@@ -6,12 +6,12 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentMap;
 
-public class EmployeesController {
+public class EmployeesController{
     Scanner sc = new Scanner(System.in);
     public Employee getEmployeeByName(String first_last_name){
         int i = 0;
         while(i < Company.employees.size()){
-            String name = Company.employees.get(i).getFirst_name()+ " " + Company.employees.get(i).getLast_name();
+            String name = Company.employees.get(i).getFirst_name()+Company.employees.get(i).getLast_name();
             if(first_last_name.equals(name)){
                 return Company.employees.get(i);
             }
@@ -37,24 +37,30 @@ public class EmployeesController {
             System.out.println(".............................");
         }
     }
-    public  void editEmployeeInfo(String name,Person u){
-        try {
-        Employee employee = getEmployeeByName(name);
-        Employee user = getEmployeeByName(u.getFirst_name()+" "+u.last_name);
+    public void editEmployeeInfo(String name,Person u) {
+        boolean outer_flag = true;
         boolean flag = false;
-            for (String permissionsUuid : Company.permissions_uuids) {
-                if(user.uuid.equals(permissionsUuid)){
-                    flag = true;
+        Employee employee = null;
+        while (outer_flag) {
+            try {
+                employee = getEmployeeByName(name);
+                Employee user = getEmployeeByName(u.getFirst_name() + u.getLast_name());
+                for (String permissionsUuid : Company.permissions_uuids) {
+                    if (user.uuid.equals(permissionsUuid)) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
                     break;
                 }
+            } catch (NullPointerException e) {
+                System.out.println("***This account doesn't exists***");
+                break;
             }
-            if(!flag){
-                System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
-                System.out.println("System will exit");
-                System.exit(0);
-            }
-        String employee_name = employee.getFirst_name() +" " + employee.getLast_name();
-            if(employee_name.equals(name)){
+            try {
+                System.out.println(".....................Editing Menu....................");
                 System.out.println("1.Edit Name");
                 System.out.println("2.Edit Age");
                 System.out.println("3.Edit Tel Number");
@@ -62,8 +68,8 @@ public class EmployeesController {
                 System.out.println("5.Quit");
                 System.out.print("select option: ");
                 int option = sc.nextInt();
-                switch (option){
-                    case  1:
+                switch (option) {
+                    case 1:
                         System.out.print("Enter new first name: ");
                         employee.setFirst_name(sc.next());
                         System.out.print("Enter new last name: ");
@@ -82,17 +88,20 @@ public class EmployeesController {
                         System.out.println("Tel number changed");
                         break;
                 }
+            } catch (NoSuchElementException e) {
+                System.out.println("Input not found. Please enter text without spaces");
+                sc.next();
             }
-        }catch (NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
-        }catch (NullPointerException e){
-            System.out.println("A NullPointerException occurred.System will exit");
-            System.exit(0);
+            outer_flag = false;
         }
     }
     public void deleteEmployee(String name){
-        Company.employees.remove(getEmployeeByName(name));
+        Employee employee = getEmployeeByName(name);
+        if(employee != null){
+            Company.employees.remove(employee);
+        }else{
+            System.out.println("*** This account doesn't exists ***");
+        }
     }
     public void fireEmployee(String name){
         //Update Employee Status
@@ -105,8 +114,7 @@ public class EmployeesController {
             //Revoke Access Privileges
             System.out.println("Revoke Access Privileges...done");
         }catch (NullPointerException e){
-            System.out.println("A NullPointerException occurred.System will exit");
-            System.exit(0);
+            System.out.println("***This account doesn't exists");
         }
     }
     public boolean showEmployeeMenu(Company company,EmployeesController controller,Person user) {
@@ -127,7 +135,7 @@ public class EmployeesController {
                 System.out.print("Enter employee first name: ");
                 name = sc.next();
                 System.out.print("Enter employee last name: ");
-                name += " " + sc.next();
+                name += sc.next();
             }
             switch (option) {
                 case 1:
