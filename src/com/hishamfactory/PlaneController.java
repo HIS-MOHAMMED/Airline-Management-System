@@ -16,12 +16,10 @@ public class PlaneController {
     }
 
     public void printAllPlanes() {
-        System.out.println("................List of Planes.............");
+        System.out.println(".......................List of Planes.............");
         for (Plane plane : Company.planes) {
             System.out.println(plane.toString());
         }
-        System.out.println("...........................................");
-
     }
 
     public void editPlane(String plane_code) {
@@ -71,10 +69,10 @@ public class PlaneController {
         Plane plane = getPlaneById(plane_code);
         if(plane != null) {
             Company.planes.remove(plane);
-            System.out.println("Plane has " + plane.getPlane_id() + " was deleted...");
+            System.out.println("Plane has ID " + plane.getPlane_id() + " was deleted...");
         }
         else{
-            System.out.println("*** This plane not exits");
+            System.out.println("*** This plane not exits ***");
         }
     }
     public boolean showPlaneMenu(Company company,PlaneController controller) {
@@ -90,7 +88,7 @@ public class PlaneController {
             int option = sc.nextInt();
             String plane_code = null;
             if(option >= 3 && option <= 4){
-                System.out.println("Enter plane code: ");
+                System.out.print("Enter plane code: ");
                 plane_code = sc.next();
             }
             switch (option) {
