@@ -32,38 +32,40 @@ public class AirportController {
                 System.out.println();
                 System.out.print("4.Edit airport Number of Gates");
                 System.out.println();
+                System.out.println("5.Quit");
                 System.out.print("Enter a choice? ");
                 int option = sc.nextInt();
                 switch (option) {
                     case 1:
                         System.out.print("Enter new airport name: ");
                         airport.setAirport_name(sc.next());
-                        System.out.println("Airport name changes..");
+                        System.out.println("Airport name changed to " + airport.getAirport_name());
                         break;
                     case 2:
                         System.out.print("Enter new airport location: ");
                         airport.setAirport_location(sc.next());
-                        System.out.println("Airport location changed..");
+                        System.out.println("Airport location changed to " + airport.getAirport_location());
                         break;
                     case 3:
                         System.out.print("Enter airport new number of runways: ");
                         airport.setAirport_number_runways(sc.nextInt());
-                        System.out.println("Airport number of runways changed..");
+                        System.out.println("Airport number of runways changed to " + airport.getAirport_number_runways());
                         break;
                     case 4:
                         System.out.print("Enter airport new number of gates: ");
                         airport.setAirport_number_gates(sc.nextInt());
-                        System.out.println("Airport number of gates changed..");
+                        System.out.println("Airport number of gates changed to " + airport.getAirport_number_gates());
+                        break;
+                    case 5:
                         break;
                     default:
-                        System.out.println("Please enter a valid choice");
-                        break;
+                        System.out.println("*** Please enter a valid choice ****");
                 }
             } else {
                 System.out.println("*** This airport not exists ***");
             }
         } catch (NoSuchElementException e) {
-            System.out.println("Input not found. Please enter text without spaces");
+            System.out.println("*** Input not found. Please enter text without spaces ***");
             sc.next();
         }
     }
