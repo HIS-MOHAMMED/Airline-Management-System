@@ -12,6 +12,8 @@ public class Company {
     public static ArrayList<String> uuids;
     public static ArrayList<String> permissions_uuids;
     private String uuid;
+    public static ArrayList<Employee> administrators;
+    public static ArrayList<Employee> customerServices;
 
     Random rm = new Random();
     Scanner sc = new Scanner(System.in);
@@ -25,6 +27,8 @@ public class Company {
         flights = new ArrayList<>();
         uuids = new ArrayList<>();
         permissions_uuids = new ArrayList<>();
+        administrators = new ArrayList<>();
+        customerServices = new ArrayList<>();
         System.out.println("You are working on "+this.name + " company");
     }
     public String getName(){
@@ -59,7 +63,6 @@ public class Company {
 
     public void addEmployee(Company company){
         try {
-
                 System.out.print("Enter employee first name: ");
                 String first_name = sc.next();
                 System.out.print("Enter employee last name: ");
@@ -75,11 +78,16 @@ public class Company {
                 sc.nextLine();
                 System.out.print("Enter employee password: ");
                 String employee_pin = sc.next();
-                System.out.print("has editing permissions: ");
-                boolean permission_access = sc.nextBoolean();
-
+                boolean  isAdmin = setUserRules();
+              //  System.out.print("has editing permissions: ");
+              //  boolean permission_access = sc.nextBoolean();
                 Employee newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin, company);
-                hasPermission(permission_access);
+                if(isAdmin){
+                    Company.administrators.add(newEmployee);
+                }else{
+                    Company.customerServices.add(newEmployee);
+                }
+               // hasPermission(permission_access);
                 employees.add(newEmployee);
         }catch(NoSuchElementException e ){
             System.out.println("Input not found. Please enter text without spaces");
@@ -218,6 +226,20 @@ public class Company {
     public void hasPermission(boolean permission_access){
         if(permission_access) {
             permissions_uuids.add(this.uuid);
+        }
+    }
+    public boolean setUserRules(){
+        while(true){
+            System.out.print("Is 1.Administrator or 2.CostumerService: ");
+            int choice = sc.nextInt();
+            if(choice == 1){
+                return true;
+            }else if(choice == 2){
+                return false;
+            }else{
+                System.out.println("*** Please enter a valid choice ***");
+                sc.next();
+            }
         }
     }
 }
