@@ -59,6 +59,7 @@ public class Company {
 
     public void addEmployee(Company company){
         try {
+
                 System.out.print("Enter employee first name: ");
                 String first_name = sc.next();
                 System.out.print("Enter employee last name: ");
@@ -82,6 +83,7 @@ public class Company {
                 employees.add(newEmployee);
         }catch(NoSuchElementException e ){
             System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
         }
     }
     public void addPassenger(Company company){
