@@ -61,7 +61,7 @@ public class Main {
                         } else {
                             while (flag) {
                                 PassengersController controller = new PassengersController();
-                                flag = controller.showPassengerMenu(controller, passenger);
+                                flag = controller.showPassengerMenu(passenger);
                             }
                         }
                     } else {

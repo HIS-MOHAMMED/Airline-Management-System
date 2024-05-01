@@ -176,7 +176,7 @@ public class PassengersController {
         }
         return flag;
     }
-    public boolean showPassengerMenu(PassengersController controller,Passenger passenger ){
+    public boolean showPassengerMenu(Passenger passenger ){
         boolean flag = true;
         try {
             System.out.println(".......................Passenger Menu...............................");
