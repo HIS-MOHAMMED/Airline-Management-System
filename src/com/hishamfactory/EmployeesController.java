@@ -108,25 +108,39 @@ public class EmployeesController{
         }
     }
     public void deleteEmployee(String name){
-        Employee employee = getEmployeeByName(name);
-        if(employee != null){
-            Company.employees.remove(employee);
+        if(Company.administrators.size() == 1){
+            System.out.println("*** You can't delete this account***");
         }else{
-            System.out.println("*** This account doesn't exists ***");
+            Employee employee = getEmployeeByName(name);
+            if(employee != null){
+                if(Company.administrators.contains(employee)){
+                    Company.administrators.remove(employee);
+                    Company.employees.remove(employee);
+                }else{
+                    Company.customerServices.remove(employee);
+                    Company.employees.remove(employee);
+                }
+            }else{
+                System.out.println("*** This account doesn't exists ***");
+            }
         }
     }
     public void fireEmployee(String name){
-        //Update Employee Status
-        try {
-            Employee employee = getEmployeeByName(name);
-            employee.setStatus("non-active");
-            System.out.println("Status: " + employee.getStatus());
-            //Notify Relevant Parties
-            System.out.println("Send to relevant parties...done");
-            //Revoke Access Privileges
-            System.out.println("Revoke Access Privileges...done");
-        }catch (NullPointerException e){
-            System.out.println("***This account doesn't exists");
+        Employee employee = getEmployeeByName(name);
+        if(Company.administrators.size() == 1){
+            System.out.println("*** You can't delete this account ***");
+        }else {
+            if (employee != null) {
+                employee.setStatus("non-active");
+                System.out.println("Status: " + employee.getStatus());
+                //Notify Relevant Parties
+                System.out.println("Send to relevant parties...done");
+                //Revoke Access Privileges
+                deleteEmployee(name);
+                System.out.println("Delete Access Privileges...done");
+            } else {
+                System.out.println("*** This account doesn't exists ***");
+            }
         }
     }
     public boolean showEmployeeMenu(Company company,EmployeesController controller,Person user) {
