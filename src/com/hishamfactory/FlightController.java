@@ -160,6 +160,8 @@ public class FlightController {
                         System.out.println("*** Please enter a valid choice ***");
                 }
             }
+        }else{
+            System.out.println("*** This flight doesn't exists ***");
         }
     }
     public void showFlightPassengers(String flight_code) {
@@ -246,7 +248,7 @@ public class FlightController {
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
             String flight_code = null;
-            if(option >= 3 && option <= 5){
+            if(option >= 3 && option <= 6){
                 System.out.print("Enter flight code: ");
                 flight_code = sc.next();
             }
