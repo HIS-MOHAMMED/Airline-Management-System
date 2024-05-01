@@ -179,6 +179,7 @@ public class FlightController {
         Flight flight = getFlightById(flight_code);
         if(flight != null){
             Company.flights.remove(flight);
+            System.out.println("Flight " + flight.getFlight_code() +" removed from system");
         }else{
             System.out.println("*** This flight not exists ***");
         }
@@ -267,7 +268,6 @@ public class FlightController {
                     break;
                 case 5:
                     controller.editFlightInfo(flight_code,person,company);
-                    sc.next();
                     break;
                 case 6:
                     controller.cancelFlight(flight_code);
