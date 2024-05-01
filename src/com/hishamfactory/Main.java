@@ -1,8 +1,7 @@
 package com.hishamfactory;
 
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,8 +45,12 @@ public class Main {
                         if (personAuth == null) {
                             System.out.println("ID or password incorrect.please try again");
                         } else {
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
+                            String date = simpleDateFormat.format(new Date());
+                            new LoginHistory(date,personAuth);
                             while (flag) {
                                 flag = showUserMenu(company, personAuth, sc);
+
                             }
                         }
                     } else if (person_type == 2) {
@@ -59,6 +62,9 @@ public class Main {
                         if (passenger == null) {
                             System.out.println("ID or password incorrect.please try again");
                         } else {
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
+                            String date = simpleDateFormat.format(new Date());
+                            new LoginHistory(date,personAuth);
                             while (flag) {
                                 PassengersController controller = new PassengersController();
                                 flag = controller.showPassengerMenu(passenger);
@@ -91,10 +97,11 @@ public class Main {
                 System.out.println("3.Planes");
                 System.out.println("4.Flights");
                 System.out.println("5.Passengers");
-                System.out.println("6.Quit");
+                System.out.println("6.Show login history");
+                System.out.println("7.Quit");
                 System.out.print("Enter a choice: ");
                 option = sc.nextInt();
-                if (option >= 1 && option <= 6) {
+                if (option >= 1 && option <= 7) {
                     inner_flag1 = false;
                 } else {
                     System.out.println("Just form 1 to 6 you can choose");
@@ -144,6 +151,9 @@ public class Main {
                     }
                     break;
                 case 6:
+                    new LoginHistory().printLoginHistory();
+                    break;
+                case 7:
                     flag = false;
                     break;
             }
