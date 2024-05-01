@@ -140,6 +140,42 @@ public class Company {
             System.out.println("*** The Flight code is wrong ***");
         }
     }
+    public void addPassenger(Company company,Flight flight){
+        boolean flag = true;
+        String first_name;
+        String last_name;
+        try {
+            while(flag) {
+                System.out.print("Enter passenger first name: ");
+                first_name = sc.next();
+                System.out.print("Enter passenger last name: ");
+                last_name = sc.next();
+                if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
+                    System.out.println("****This name had already created****");
+                    continue;
+                }
+                flag = false;
+                System.out.print("Enter passenger age: ");
+                int age = sc.nextInt();
+                System.out.print("Enter passenger tel_number: ");
+                String tel_number = sc.next();
+                System.out.print("Enter passenger password: ");
+                String passenger_pin = sc.next();
+                sc.nextLine();
+                System.out.print("has editing permissions: ");
+                boolean permission_access = sc.nextBoolean();
+                hasPermission(permission_access);
+
+                Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, flight, passenger_pin, company);
+                passengers.add(newPassenger);
+            }
+        }catch(NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.next();
+        }catch (NullPointerException e){
+            System.out.println("*** The Flight code is wrong ***");
+        }
+    }
     public Employee employeeLogin(String employee_id, String employee_pin) {
         for (Employee employee : Company.employees) {
             if (employee.getUuid().compareTo(employee_id) == 0 && employee.validatePin(employee_pin)) return employee;

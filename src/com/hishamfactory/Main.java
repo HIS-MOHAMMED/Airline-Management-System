@@ -130,7 +130,7 @@ public class Main {
                     }
                     FlightController controller3 = new FlightController();
                     while (inner_flag2) {
-                        inner_flag2 = controller3.showFlightMenu(company, controller3);
+                        inner_flag2 = controller3.showFlightMenu(company, controller3,person);
                     }
                     break;
                 case 5:
@@ -187,7 +187,7 @@ public class Main {
                 }
                 FlightController controller3 = new FlightController();
                 while (inner_flag2) {
-                    inner_flag2 = controller3.showFlightMenu(company, controller3);
+                    inner_flag2 = controller3.showFlightMenu(company, controller3,person);
                 }
                 break;
             case 4:

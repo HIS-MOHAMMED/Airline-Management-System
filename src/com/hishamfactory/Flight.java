@@ -57,6 +57,13 @@ public class Flight {
     public void setArrival_time(String arrival_time) {
         this.arrival_time = arrival_time;
     }
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
 
     public Plane getAircraft_type() {
         return plane;
