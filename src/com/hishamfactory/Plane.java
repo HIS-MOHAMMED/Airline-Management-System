@@ -1,7 +1,5 @@
 package com.hishamfactory;
 
-import java.util.Scanner;
-
 public class Plane {
     private String plane_id;
     private String plane_model;

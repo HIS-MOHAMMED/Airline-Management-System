@@ -3,9 +3,7 @@ package com.hishamfactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+
 
 public class Employee extends  Person {
     private String address;

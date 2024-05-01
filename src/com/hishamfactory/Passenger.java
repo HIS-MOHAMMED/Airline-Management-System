@@ -3,9 +3,7 @@ package com.hishamfactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Passenger extends  Person {
     public ArrayList<Flight> passenger_flights = new ArrayList<>();

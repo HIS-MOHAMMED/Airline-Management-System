@@ -1,8 +1,5 @@
 package com.hishamfactory;
-
-import java.util.FormatterClosedException;
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FlightController {

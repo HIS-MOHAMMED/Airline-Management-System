@@ -1,7 +1,5 @@
 package com.hishamfactory;
 
-import jdk.dynalink.NamedOperation;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 

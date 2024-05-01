@@ -3,7 +3,6 @@ package com.hishamfactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
 public class Person {
     protected String first_name;

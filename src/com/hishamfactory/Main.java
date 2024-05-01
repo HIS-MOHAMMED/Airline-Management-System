@@ -1,10 +1,8 @@
 package com.hishamfactory;
 
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {

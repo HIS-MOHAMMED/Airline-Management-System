@@ -79,14 +79,18 @@ public class Company {
                 System.out.print("Enter employee password: ");
                 String employee_pin = sc.next();
                 boolean  isAdmin = setUserRules();
+                boolean permission_access = false;
                 Employee newEmployee;
                 if(Company.administrators.isEmpty()){
+                    System.out.print("Has editing permissions: ");
+                    permission_access = sc.nextBoolean();
                     newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin,isAdmin, company);
                 }else{
                     newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin, company);
                 }
                 if(isAdmin){
                     Company.administrators.add(newEmployee);
+                    hasPermission(permission_access,newEmployee);
                     employees.add(newEmployee);
                 }else if(!Company.administrators.isEmpty()){
                     Company.customerServices.add(newEmployee);
@@ -227,6 +231,11 @@ public class Company {
             System.out.println("Input not found. Please enter text without spaces");
         }
     }
+    public void hasPermission(boolean permission_access,Employee employee){
+        if(permission_access) {
+            permissions_uuids.add(employee.getUuid());
+        }
+    }
     public void hasPermission(boolean permission_access){
         if(permission_access) {
             permissions_uuids.add(this.uuid);
@@ -237,9 +246,6 @@ public class Company {
             System.out.print("Is 1.Administrator or 2.CostumerService: ");
             int choice = sc.nextInt();
             if(choice == 1){
-                System.out.print("Has editing permissions: ");
-                boolean permission_access = sc.nextBoolean();
-                hasPermission(permission_access);
                 return true;
             }else if(choice == 2){
                 return false;

@@ -30,7 +30,6 @@ public class Flight {
     public void setDestination_airport(Airport destination_airport) {
         this.destination_airport = destination_airport;
     }
-
     public String getFlight_code() {
         return flight_code;
     }
