@@ -10,14 +10,18 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
+        boolean isNew = true;
         do {
             System.out.println("......................................................");
             System.out.println("Welcome to Airline System Management");
             System.out.println("...................................,..................");
-            if (Company.employees.isEmpty()) {
+            while(isNew){
                 System.out.println("**As first employee you must to create Admin user**");
                 company.addEmployee(company);
                 System.out.println("..................................................");
+                if (!Company.administrators.isEmpty()) {
+                    isNew = false;
+                }
             }
             showLoginMenu(company, sc);
         } while (true);

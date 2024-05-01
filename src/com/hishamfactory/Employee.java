@@ -17,7 +17,17 @@ public class Employee extends  Person {
         this.address = address;
         this.role = role;
         this.status = "Active";
+
         System.out.println(this.role + " " + this.first_name + ", " + this.last_name + " added with ID "  + this.uuid);
+    }
+    Employee(String first_name, String last_name, int age, String tel_number, String address, String role, String user_pin,boolean isAdmin, Company company) {
+        super(first_name, last_name, age, tel_number, user_pin, company);
+        this.address = address;
+        this.role = role;
+        this.status = "Active";
+        if (isAdmin){
+            System.out.println(this.role + " " + this.first_name + ", " + this.last_name + " added with ID " + this.uuid);
+    }
     }
     public String getAddress() {
         return address;
