@@ -126,9 +126,6 @@ public class Company {
                 System.out.print("Enter passenger password: ");
                 String passenger_pin = sc.next();
                 sc.nextLine();
-                System.out.print("has editing permissions: ");
-                boolean permission_access = sc.nextBoolean();
-                hasPermission(permission_access);
 
                 Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, FlightController.getFlightById(flight_code), passenger_pin, company);
                 passengers.add(newPassenger);
@@ -162,9 +159,6 @@ public class Company {
                 System.out.print("Enter passenger password: ");
                 String passenger_pin = sc.next();
                 sc.nextLine();
-                System.out.print("has editing permissions: ");
-                boolean permission_access = sc.nextBoolean();
-                hasPermission(permission_access);
 
                 Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, flight, passenger_pin, company);
                 passengers.add(newPassenger);
