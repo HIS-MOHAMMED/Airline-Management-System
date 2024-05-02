@@ -1,36 +1,38 @@
 package com.hishamfactory;
+import com.sun.security.jgss.GSSUtil;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EmployeesController{
     Scanner sc = new Scanner(System.in);
     public Employee getEmployeeByName(String first_last_name){
-        int i = 0;
-        while(i < Company.employees.size()){
-            String name = Company.employees.get(i).getFirst_name()+Company.employees.get(i).getLast_name();
-            if(first_last_name.equals(name)){
-                return Company.employees.get(i);
-            }
-            i++;
+        for (Employee employee1 : Company.employees) {
+            String name = employee1.getFirst_name()+employee1.getLast_name();
+            if(first_last_name.equalsIgnoreCase(name))return employee1;
         }
         return null;
     }
     public  void printAllEmployees(){
-        System.out.println("..................Employees List............................");
-        for(Employee employee : Company.employees){
-            System.out.print("Name: ");
-            System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
-            System.out.print("Age:");
-            System.out.println(employee.getAge());
-            System.out.print("Tel Number: ");
-            System.out.println(employee.getTel_number());
-            System.out.print("Id: ");
-            System.out.println(employee.getUuid());
-            System.out.print("Role: ");
-            System.out.println(employee.getRole());
-            System.out.print("Address: ");
-            System.out.println(employee.getAddress());
-            System.out.println(".............................");
+        if(Company.employees.isEmpty()){
+            System.out.println("** Sorry,The list of employees is empty **");
+        }else{
+            System.out.println("..................Employees List............................");
+            for(Employee employee : Company.employees){
+                System.out.print("Name: ");
+                System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
+                System.out.print("Age:");
+                System.out.println(employee.getAge());
+                System.out.print("Tel Number: ");
+                System.out.println(employee.getTel_number());
+                System.out.print("Id: ");
+                System.out.println(employee.getUuid());
+                System.out.print("Role: ");
+                System.out.println(employee.getRole());
+                System.out.print("Address: ");
+                System.out.println(employee.getAddress());
+                System.out.println(".............................");
+            }
         }
     }
     public void editEmployeeInfo(String name,Person u) {
@@ -169,10 +171,13 @@ public class EmployeesController{
                     break;
                 case 2:
                     Employee employee = controller.getEmployeeByName(name);
-                    System.out.println(employee.toString());
+                    if(employee != null){
+                        System.out.println(employee);
+                    }else {
+                        System.out.println("*** This employee don't exists ***");
+                    }
                     break;
                 case 3:
-                    System.out.println("show all employees: ");
                     controller.printAllEmployees();
                     break;
                 case 4:

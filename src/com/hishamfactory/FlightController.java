@@ -9,15 +9,23 @@ public class FlightController {
     Scanner sc = new Scanner(System.in);
 
     public void showAllFlights() {
-        System.out.println(".......................List of Flights..........................");
-        for (Flight flight : Company.flights) {
-            System.out.println(flight.toString());
+        if(Company.flights.isEmpty()){
+            System.out.println("** Sorry,The list of flights is empty **");
+        }else{
+            System.out.println(".......................List of Flights..........................");
+            for (Flight flight : Company.flights) {
+                System.out.println(flight.toString());
+            }
         }
     }
     public void showAllFlights(Passenger passenger) {
-        System.out.println(".......................List of Flights..........................");
-        for (Flight flight : passenger.passenger_flights) {
-            System.out.println(flight.toString());
+        if(passenger.passenger_flights.isEmpty()){
+            System.out.println("*** Sorry,There is not any flight booked ***");
+        }else{
+            System.out.println(".......................List of Flights..........................");
+            for (Flight flight : passenger.passenger_flights) {
+                System.out.println(flight.toString());
+            }
         }
     }
     public static Flight getFlightById(String id) {
@@ -167,11 +175,15 @@ public class FlightController {
     public void showFlightPassengers(String flight_code) {
         Flight flight = getFlightById(flight_code);
         if(flight != null) {
-            System.out.println(".................Passengers of flight..........................");
-            for (Passenger passenger :flight.passengers) {
-                System.out.println(passenger.toString());
+            if(flight.passengers.isEmpty()){
+                System.out.println("** Sorry.The Passengers list of this flight is empty ***");
+            }else{
+                System.out.println(".................Passengers of flight..........................");
+                for (Passenger passenger :flight.passengers) {
+                    System.out.println(passenger.toString());
+                }
             }
-        }else {
+            }else {
             System.out.println("*** This flight not exits ***");
         }
     }
