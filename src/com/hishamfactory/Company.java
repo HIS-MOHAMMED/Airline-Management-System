@@ -225,11 +225,11 @@ public class Company {
                 System.out.println(airport.toString());
             }
             System.out.println("..........................................................................");
-            System.out.print("Enter dep airport code: ");
-            Airport dep_airport = AirportController.getAirportByID(sc.next());
+            System.out.print("Enter departure airport name: ");
+            Airport dep_airport = AirportController.getAirportByName(sc.next());
             if(dep_airport != null) {
-                System.out.print("Enter des airport: ");
-                Airport des_airport = AirportController.getAirportByID(sc.next());
+                System.out.print("Enter destination airport name: ");
+                Airport des_airport = AirportController.getAirportByName(sc.next());
                 if(des_airport != null) {
                     System.out.print("Enter dep time: ");
                     String dep_time = sc.next();
