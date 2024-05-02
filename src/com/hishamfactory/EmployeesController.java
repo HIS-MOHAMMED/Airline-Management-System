@@ -1,17 +1,15 @@
 package com.hishamfactory;
+import com.sun.security.jgss.GSSUtil;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EmployeesController{
     Scanner sc = new Scanner(System.in);
     public Employee getEmployeeByName(String first_last_name){
-        int i = 0;
-        while(i < Company.employees.size()){
-            String name = Company.employees.get(i).getFirst_name()+Company.employees.get(i).getLast_name();
-            if(first_last_name.equals(name)){
-                return Company.employees.get(i);
-            }
-            i++;
+        for (Employee employee1 : Company.employees) {
+            String name = employee1.getFirst_name()+employee1.getLast_name();
+            if(first_last_name.equalsIgnoreCase(name))return employee1;
         }
         return null;
     }
@@ -173,10 +171,13 @@ public class EmployeesController{
                     break;
                 case 2:
                     Employee employee = controller.getEmployeeByName(name);
-                    System.out.println(employee.toString());
+                    if(employee != null){
+                        System.out.println(employee);
+                    }else {
+                        System.out.println("*** This employee don't exists ***");
+                    }
                     break;
                 case 3:
-                    System.out.println("show all employees: ");
                     controller.printAllEmployees();
                     break;
                 case 4:
