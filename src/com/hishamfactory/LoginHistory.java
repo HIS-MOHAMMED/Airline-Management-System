@@ -10,7 +10,6 @@ public class LoginHistory {
     public LoginHistory(String date_and_time,Person user){
         this.date_and_time = date_and_time;
         this.user = user;
-        System.out.println(this.getUser().getFirst_name());
         login_history.add(this);
     }
     public void printLoginHistory(){

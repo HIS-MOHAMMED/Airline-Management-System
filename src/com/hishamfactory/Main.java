@@ -64,7 +64,7 @@ public class Main {
                         } else {
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                             String date = simpleDateFormat.format(new Date());
-                            new LoginHistory(date,personAuth);
+                            new LoginHistory(date,passenger);
                             while (flag) {
                                 PassengersController controller = new PassengersController();
                                 flag = controller.showPassengerMenu(passenger);
