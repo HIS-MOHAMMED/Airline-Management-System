@@ -20,9 +20,13 @@ public class AirportController {
         return null;
     }
     public void printAllAirports(){
-        System.out.println("......................List of Airports......................");
-        for (Airport airport : Company.airports) {
-            System.out.println(airport.toString());
+        if(Company.airports.isEmpty()){
+            System.out.println("** Sorry.The airport list is empty **");
+        }else{
+            System.out.println("......................List of Airports......................");
+            for (Airport airport : Company.airports) {
+                System.out.println(airport.toString());
+            }
         }
     }
     public void editAirport(String airport_code){

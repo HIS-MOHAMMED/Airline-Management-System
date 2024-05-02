@@ -15,9 +15,13 @@ public class PlaneController {
     }
 
     public void printAllPlanes() {
-        System.out.println(".......................List of Planes.............");
-        for (Plane plane : Company.planes) {
-            System.out.println(plane.toString());
+        if(Company.flights.isEmpty()){
+            System.out.println("** Sorry.The plane list is empty **");
+        }else{
+            System.out.println(".......................List of Planes.............");
+            for (Plane plane : Company.planes) {
+                System.out.println(plane.toString());
+            }
         }
     }
 

@@ -19,11 +19,14 @@ public class PassengersController {
     }
 
     public void printAllPassengers() {
-        System.out.println("................................................................");
-        for (Passenger passenger : Company.passengers) {
-            System.out.println(passenger.toString());
+        if(Company.passengers.isEmpty()){
+            System.out.println("*** Sorry,The list of passengers is empty ***");
+        }else{
+            System.out.println("................................................................");
+            for (Passenger passenger : Company.passengers) {
+                System.out.println(passenger.toString());
+            }
         }
-        System.out.println("................................................................");
     }
 
     public void editPassengerInfo(String name) {

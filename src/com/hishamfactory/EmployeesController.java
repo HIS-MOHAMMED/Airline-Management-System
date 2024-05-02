@@ -16,21 +16,25 @@ public class EmployeesController{
         return null;
     }
     public  void printAllEmployees(){
-        System.out.println("..................Employees List............................");
-        for(Employee employee : Company.employees){
-            System.out.print("Name: ");
-            System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
-            System.out.print("Age:");
-            System.out.println(employee.getAge());
-            System.out.print("Tel Number: ");
-            System.out.println(employee.getTel_number());
-            System.out.print("Id: ");
-            System.out.println(employee.getUuid());
-            System.out.print("Role: ");
-            System.out.println(employee.getRole());
-            System.out.print("Address: ");
-            System.out.println(employee.getAddress());
-            System.out.println(".............................");
+        if(Company.employees.isEmpty()){
+            System.out.println("** Sorry,The list of employees is empty **");
+        }else{
+            System.out.println("..................Employees List............................");
+            for(Employee employee : Company.employees){
+                System.out.print("Name: ");
+                System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
+                System.out.print("Age:");
+                System.out.println(employee.getAge());
+                System.out.print("Tel Number: ");
+                System.out.println(employee.getTel_number());
+                System.out.print("Id: ");
+                System.out.println(employee.getUuid());
+                System.out.print("Role: ");
+                System.out.println(employee.getRole());
+                System.out.print("Address: ");
+                System.out.println(employee.getAddress());
+                System.out.println(".............................");
+            }
         }
     }
     public void editEmployeeInfo(String name,Person u) {
