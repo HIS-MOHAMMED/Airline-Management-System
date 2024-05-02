@@ -10,6 +10,14 @@ public class Airport {
 
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Create new airport
+     * @param airport_name              the name of the airport
+     * @param airport_location          the location of the airport
+     * @param airport_number_runways    the number of runways of the airport
+     * @param airport_number_gates      the number of gates of the airport
+     * @param company                   the company who has the system
+     */
     Airport(String airport_name,String airport_location,int airport_number_runways,int airport_number_gates,Company company){
         this.airport_name = airport_name;
         this.airport_location = airport_location;

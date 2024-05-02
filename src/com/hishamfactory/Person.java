@@ -63,6 +63,11 @@ public class Person {
     public String getUuid() {
         return uuid;
     }
+
+    /**
+     * Sets the hash value of the person's password using SHA-256 encryption.
+     * @param person_pin The PIN of the person to be hashed.
+     */
     public void setPinHash(String person_pin){
         try{
             MessageDigest md =MessageDigest.getInstance("SHA-256");

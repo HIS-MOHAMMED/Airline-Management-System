@@ -6,6 +6,12 @@ import java.util.Scanner;
 
 public class EmployeesController{
     Scanner sc = new Scanner(System.in);
+
+    /**
+     * Get employee after check if it's exist
+     * @param first_last_name   the first and last names of employee
+     * @return                  the employee if it's exist or null if it's not
+     */
     public Employee getEmployeeByName(String first_last_name){
         for (Employee employee1 : Company.employees) {
             String name = employee1.getFirst_name()+employee1.getLast_name();
@@ -13,6 +19,10 @@ public class EmployeesController{
         }
         return null;
     }
+
+    /**
+     * print all employees that exists on system
+     */
     public  void printAllEmployees(){
         if(Company.employees.isEmpty()){
             System.out.println("** Sorry,The list of employees is empty **");
@@ -35,6 +45,12 @@ public class EmployeesController{
             }
         }
     }
+
+    /**
+     * Modify any information of employee
+     * @param name  the name of the employee
+     * @param u     the employee who do the modification
+     */
     public void editEmployeeInfo(String name,Person u) {
         boolean outer_flag = true;
         boolean flag = false;
@@ -109,6 +125,11 @@ public class EmployeesController{
 
         }
     }
+
+    /**
+     * Delete any employee from system
+     * @param name  the name of employee wanted to delete
+     */
     public void deleteEmployee(String name){
         if(Company.administrators.size() == 1){
             System.out.println("*** You can't delete this account***");
@@ -127,6 +148,11 @@ public class EmployeesController{
             }
         }
     }
+
+    /**
+     * Process of firing any employee
+     * @param name  the name of employee wanted to fire
+     */
     public void fireEmployee(String name){
         Employee employee = getEmployeeByName(name);
         if(Company.administrators.size() == 1){
@@ -145,6 +171,14 @@ public class EmployeesController{
             }
         }
     }
+
+    /**
+     * show employee menu to do any employee's operation
+     * @param company       the company who has the system
+     * @param controller    the controller object whose do operation by it
+     * @param user          the employee who do the operation
+     * @return              the boolean value stay on employee menu or go out from it
+     */
     public boolean showEmployeeMenu(Company company,EmployeesController controller,Person user) {
         boolean flag = true;
         try {

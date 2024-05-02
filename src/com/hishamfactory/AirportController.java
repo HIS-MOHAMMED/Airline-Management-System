@@ -5,6 +5,12 @@ import java.util.Scanner;
 
 public class AirportController {
     Scanner sc = new Scanner(System.in);
+
+    /**
+     * Get airport after check by code if it's exist or not
+     * @param airport_code    the airport code to identify by it
+     * @return                the airport object if exist or null if it's not
+     */
     public static Airport getAirportByID(String airport_code){
             for (Airport airport : Company.airports) {
                 if(airport.getAirport_code().equals(airport_code)){
@@ -13,12 +19,21 @@ public class AirportController {
             }
         return null;
     }
+    /**
+     * Get airport after check by name if it's exist or not
+     * @param airport_name  the airport name to identify by it
+     * @return              the airport if exist or null if it's not
+     */
     public static Airport getAirportByName(String airport_name){
         for (Airport airport : Company.airports) {
             if(airport.getAirport_name().equalsIgnoreCase(airport_name)) return airport;
         }
         return null;
     }
+
+    /**
+     * Print all airports that exist on system
+     */
     public void printAllAirports(){
         if(Company.airports.isEmpty()){
             System.out.println("** Sorry.The airport list is empty **");
@@ -29,6 +44,11 @@ public class AirportController {
             }
         }
     }
+
+    /**
+     * Edit airport information
+     * @param airport_code  the airport code identifying the airport to be deleted
+     */
     public void editAirport(String airport_code){
         try {
             Airport airport = getAirportByID(airport_code);
@@ -79,6 +99,10 @@ public class AirportController {
             sc.next();
         }
     }
+    /**
+     * Delete airport from system
+     * @param airport_code  the airport code identifying the airport to be deleted
+     */
     public void deleteAirport(String airport_code){
             Airport airport = getAirportByID(airport_code);
             if(airport != null) {
@@ -88,6 +112,13 @@ public class AirportController {
             System.out.println("*** This airport not exists ***");
         }
     }
+
+    /**
+     * Show airport menu to do operation on airport section
+     * @param company       the company who owns the system
+     * @param controller    the controller object used to perform operations
+     * @return              the boolean value to stay login on menu or logout
+     */
     public boolean showAirportMenu(Company company,AirportController controller) {
         boolean flag = true;
         try {

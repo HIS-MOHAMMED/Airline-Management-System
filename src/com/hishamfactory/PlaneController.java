@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class PlaneController {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Get plane after check if it's exist or not
+     * @param plane_code    the plane code identifying the plane to be returned
+     * @return              the plane if it's exist or null if it's not
+     */
     public static Plane getPlaneById(String plane_code) {
         for (Plane plane : Company.planes) {
             if (plane_code.equals(plane.getPlane_id())) return plane;
@@ -14,6 +19,9 @@ public class PlaneController {
         return null;
     }
 
+    /**
+     * Print all planes the company has its
+     */
     public void printAllPlanes() {
         if(Company.flights.isEmpty()){
             System.out.println("** Sorry.The plane list is empty **");
@@ -25,6 +33,10 @@ public class PlaneController {
         }
     }
 
+    /**
+     * Edit the plane information
+     * @param plane_code    the plane code identifying the plane to be edited
+     */
     public void editPlane(String plane_code) {
         Plane plane = getPlaneById(plane_code);
         if(plane != null) {
@@ -73,6 +85,11 @@ public class PlaneController {
             System.out.println("*** This plane not exits ***");
         }
     }
+
+    /**
+     * Delete a plane from the company database
+     * @param plane_code    the code identifying the plane to be deleted
+     */
     public void deletePlane(String plane_code){
         Plane plane = getPlaneById(plane_code);
         if(plane != null) {
@@ -83,6 +100,13 @@ public class PlaneController {
             System.out.println("*** This plane not exits ***");
         }
     }
+
+    /**
+     * Show plane menu to do operations related to plane section
+     * @param company       the company who has these planes
+     * @param controller    the controller object to perform operations
+     * @return              boolean value to stay login or logout from menu
+     */
     public boolean showPlaneMenu(Company company,PlaneController controller) {
         boolean flag = true;
         try {

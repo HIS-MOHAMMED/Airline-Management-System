@@ -6,6 +6,11 @@ import java.util.Scanner;
 public class PassengersController {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Get a passenger after check if it's exists or not
+     * @param first_last_name       the name of the passenger
+     * @return                      the passenger if it's exist or null it's not
+     */
     public static Passenger getPassengerByName(String first_last_name) {
         int i = 0;
         while (i < Company.passengers.size()) {
@@ -18,6 +23,9 @@ public class PassengersController {
         return null;
     }
 
+    /**
+     * Print all passenger on the system
+     */
     public void printAllPassengers() {
         if(Company.passengers.isEmpty()){
             System.out.println("*** Sorry,The list of passengers is empty ***");
@@ -29,6 +37,10 @@ public class PassengersController {
         }
     }
 
+    /**
+     * Edit the passenger information by employee
+     * @param name the name of the passenger
+     */
     public void editPassengerInfo(String name) {
         try {
             Passenger passenger = getPassengerByName(name);
@@ -78,6 +90,11 @@ public class PassengersController {
             sc.next();
         }
     }
+
+    /**
+     * Edit the passenger information by passenger himself
+     * @param passenger     the name of passenger
+     */
     public void editPassengerInfo(Passenger passenger) {
         try {
             System.out.println("....................Editing Menu..........................");
@@ -123,6 +140,10 @@ public class PassengersController {
         }
     }
 
+    /**
+     * Delete a passenger from the system
+     * @param name  the name fo the passenger
+     */
     public void deletePassenger(String name) {
         Passenger passenger = getPassengerByName(name);
         if (passenger != null) {
@@ -132,6 +153,12 @@ public class PassengersController {
         }
     }
 
+    /**
+     * Show all available operations can perform on passenger section by employee
+     * @param company       the company who has the system
+     * @param controller    the controller object to perform operation by it
+     * @return              boolean value to stay login on menu or log out from it
+     */
     public boolean showPassengerMenu(Company company, PassengersController controller) {
         boolean flag = true;
         try {
@@ -179,6 +206,12 @@ public class PassengersController {
         }
         return flag;
     }
+
+    /**
+     * Show all available operations can perform by passenger
+     * @param passenger     the passenger who do the operation
+     * @return              boolean value ot stay login on menu or log out from it
+     */
     public boolean showPassengerMenu(Passenger passenger ){
         boolean flag = true;
         try {
@@ -219,6 +252,11 @@ public class PassengersController {
         return flag;
     }
 
+    /**
+     * Check if the passenger itself has already exist on specific flight or not
+     * @param name  the name of passenger
+     * @return      already exist or not
+     */
     public static boolean checkPassengerNotExist(String name) {
         for (Passenger passenger : Company.passengers) {
             String passenger_name = passenger.getFirst_name() + " " + passenger.getLast_name();

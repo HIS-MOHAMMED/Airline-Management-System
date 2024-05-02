@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class FlightController {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Print all available flights on the system
+     */
     public void showAllFlights() {
         if(Company.flights.isEmpty()){
             System.out.println("** Sorry,The list of flights is empty **");
@@ -18,6 +21,11 @@ public class FlightController {
             }
         }
     }
+
+    /**
+     * Print all flights booked by specific passenger
+     * @param passenger     the passenger who has these flights
+     */
     public void showAllFlights(Passenger passenger) {
         if(passenger.passenger_flights.isEmpty()){
             System.out.println("*** Sorry,There is not any flight booked ***");
@@ -28,6 +36,12 @@ public class FlightController {
             }
         }
     }
+
+    /**
+     * Get flight by id after check it's exist or not
+     * @param id    the flight id identifying the flight
+     * @return      the flight if it's exist or null it's not
+     */
     public static Flight getFlightById(String id) {
         for (Flight flight : Company.flights) {
             if (flight.getFlight_code().equals(id)) return flight;
@@ -35,6 +49,10 @@ public class FlightController {
         return null;
     }
 
+    /**
+     * Show all necessary information of flight
+     * @param flight_code   the flight code identifying the flight
+     */
     public void showFlightInfo(String flight_code) {
         try {
             Flight flight = getFlightById(flight_code);
@@ -44,6 +62,13 @@ public class FlightController {
             sc.next();
         }
     }
+
+    /**
+     * Edit information that related to flight section
+     * @param flight_code   the code identifying the flight to be edited
+     * @param person        the employee who do this modification
+     * @param company       the company who has this system
+     */
     public void editFlightInfo(String flight_code,Person person,Company company) {
         Flight flight = getFlightById(flight_code);
         if (flight != null) {
@@ -172,6 +197,11 @@ public class FlightController {
             System.out.println("*** This flight doesn't exists ***");
         }
     }
+
+    /**
+     * Print all passengers recorded on this flight
+     * @param flight_code   the code identifying the flight to print its passengers
+     */
     public void showFlightPassengers(String flight_code) {
         Flight flight = getFlightById(flight_code);
         if(flight != null) {
@@ -187,6 +217,11 @@ public class FlightController {
             System.out.println("*** This flight not exits ***");
         }
     }
+
+    /**
+     * Cancel flight from the system of airline company
+     * @param flight_code   the code identifying flight to be canceled
+     */
     public  void cancelFlight(String flight_code){
         Flight flight = getFlightById(flight_code);
         if(flight != null){
@@ -196,6 +231,11 @@ public class FlightController {
             System.out.println("*** This flight not exists ***");
         }
     }
+
+    /**
+     * Cancel flight from account of passenger
+     * @param passenger     the passenger who want to cancel this flight
+     */
     public  void cancelFlight(Passenger passenger){
         System.out.println(".......................Future Flights........................");
         for (Flight passengerFlight : passenger.passenger_flights) {
@@ -209,6 +249,11 @@ public class FlightController {
             System.out.println("*** This flight not exists ***");
         }
     }
+
+    /**
+     * Passenger can book any available flight
+     * @param passenger     the passenger who want to book a flight
+     */
     public  void bookFlight(Passenger passenger){
         boolean flight_exit = false;
         boolean passenger_exit = false;
@@ -247,6 +292,14 @@ public class FlightController {
             System.out.println("*** Sorry, There aren't any flight to your Trip ***");
         }
     }
+
+    /**
+     * Show operations can be performed on flight
+     * @param company       the airline company who has this system
+     * @param controller    the controller object can perform operation by it
+     * @param person        the person who do these operations
+     * @return              boolean value to stay on login on this menu or log out from it
+     */
     public boolean showFlightMenu(Company company, FlightController controller,Person person) {
         boolean flag = true;
         try {

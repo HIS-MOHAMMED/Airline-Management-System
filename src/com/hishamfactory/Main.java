@@ -24,6 +24,11 @@ public class Main {
         } while (true);
     }
 
+    /**
+     * Show login menu to check has access to use system or not
+     * @param company   the company who has the system
+     * @param sc        the scanner object to user input
+     */
     public static void showLoginMenu(Company company, Scanner sc) {
         Person personAuth = null;
         boolean flag;
@@ -83,6 +88,13 @@ public class Main {
         } while (personAuth == null);
     }
 
+    /**
+     * Show home menu to user to do operation
+     * @param company   the company who has  the system
+     * @param person    the person who do the operation
+     * @param sc        the scanner object to input user
+     * @return          the boolean value to stay login or log out
+     */
     public static boolean showUserMenu(Company company, Person person, Scanner sc) {
         boolean flag = true;
         boolean inner_flag1 = true;

@@ -12,6 +12,10 @@ public class LoginHistory {
         this.user = user;
         login_history.add(this);
     }
+
+    /**
+     * Print all login history since the system starts
+     */
     public void printLoginHistory(){
         System.out.println("..............................Login History.............................");
         System.out.println("    Date and Time       |       User");

@@ -18,6 +18,10 @@ public class Company {
     Random rm = new Random();
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Create new company with empty employee list and so on
+     * @param name  the name of the company
+     */
     public Company(String name){
         this.name = name;
         employees = new ArrayList<>();
@@ -37,6 +41,11 @@ public class Company {
     public void setName(String name){
         this.name = name;
     }
+
+    /**
+     *Generate new universally unique ID for any object on company
+     * @return  the uuid
+     */
     public String getNewUUID(){
         String uuid;
         int len = 10;
@@ -61,6 +70,10 @@ public class Company {
         return uuid;
     }
 
+    /**
+     * Add new employee to the system
+     * @param company   the company who new employee works for
+     */
     public void addEmployee(Company company){
         try {
                 System.out.print("Enter employee first name: ");
@@ -102,6 +115,11 @@ public class Company {
             sc.next();
         }
     }
+
+    /**
+     * Add new passenger manually by employee
+     * @param company   the company who has the system
+     */
     public void addPassenger(Company company){
         boolean flag = true;
         String first_name;
@@ -137,6 +155,12 @@ public class Company {
             System.out.println("*** The Flight code is wrong ***");
         }
     }
+
+    /**
+     * Add passenger on the specific flight
+     * @param company   the company who has this system
+     * @param flight    the flight who add to it the new passenger
+     */
     public void addPassenger(Company company,Flight flight){
         boolean flag = true;
         String first_name;
@@ -170,18 +194,37 @@ public class Company {
             System.out.println("*** The Flight code is wrong ***");
         }
     }
+
+    /**
+     * Get the employee object associated with a particular UUID and pin, if they are valid
+     * @param employee_id   the UUID of the employee to log in
+     * @param employee_pin  the password of the employee
+     * @return              the employee if the log is successful, or null if it's not
+     */
     public Employee employeeLogin(String employee_id, String employee_pin) {
         for (Employee employee : Company.employees) {
             if (employee.getUuid().compareTo(employee_id) == 0 && employee.validatePin(employee_pin)) return employee;
         }
         return null;
     }
+
+    /**
+     *Get the passenger object associated with a particular UUID and pin, if they are valid
+     * @param passenger_id  the UUID of the passenger to log in
+     * @param passenger_pin the password of the employee
+     * @return              the employee if the log is successful, or null if it's not
+     */
     public Passenger passengerLogin(String passenger_id,String passenger_pin){
         for (Passenger passenger : passengers) {
             if(passenger.getUuid().compareTo(passenger_id) == 0 && passenger.validatePin(passenger_pin)) return passenger;
         }
         return null;
     }
+
+    /**
+     * Add new plane to the company's plane fleet
+     * @param company   the company who has the system
+     */
     public void addPlane(Company company){
         try {
             System.out.print("Enter plane model: ");
@@ -200,6 +243,11 @@ public class Company {
             sc.next();
         }
     }
+
+    /**
+     * Add new airport to the system of company
+     * @param company   the company who has the system
+     */
     public void addAirport(Company company){
         try {
             System.out.print("Enter airport_name: ");
@@ -218,6 +266,11 @@ public class Company {
             System.out.println("Input not found. Please enter text without spaces");
         }
     }
+
+    /**
+     * Add new flight to the system of company
+     * @param company   the company who has the system
+     */
     public void addFlight(Company company){
         try {
             System.out.println("..........................Available Airports..............................");
@@ -261,6 +314,12 @@ public class Company {
             System.out.println("Input not found. Please enter text without spaces");
         }
     }
+
+    /**
+     * Check if the passed employee has permission to  whole system or nto
+     * @param permission_access     the employee has permission or not
+     * @param employee              the employee who used the system currently
+     */
     public void hasPermission(boolean permission_access,Employee employee){
         if(permission_access) {
             permissions_uuids.add(employee.getUuid());
@@ -271,6 +330,11 @@ public class Company {
             permissions_uuids.add(this.uuid);
         }
     }
+
+    /**
+     * Set roll of the employee is admin or normal employee
+     * @return      it is admin or not
+     */
     public boolean setUserRules(){
         while(true){
             System.out.print("Is 1.Administrator or 2.CostumerService: ");

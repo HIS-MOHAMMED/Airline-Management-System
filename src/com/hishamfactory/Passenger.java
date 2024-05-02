@@ -14,6 +14,12 @@ public class Passenger extends  Person {
         System.out.println(this.first_name +" "+this.last_name+" passenger added with ID " + this.getUuid() + "to flight "+ flight.getFlight_code());
         passenger_flights.add(flight);
     }
+
+    /**
+     * Check whether a given password matches the passenger password or not
+     * @param passenger_pin     the password of passenger
+     * @return                  whether the password is valid or not
+     */
     public boolean validatePin(String passenger_pin){
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-256");
