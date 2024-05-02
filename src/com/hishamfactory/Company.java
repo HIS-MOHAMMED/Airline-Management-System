@@ -94,18 +94,15 @@ public class Company {
                 boolean  isAdmin = setUserRules();
                 boolean permission_access = false;
                 Employee newEmployee;
-                if(Company.administrators.isEmpty()){
+                if(isAdmin){
                     System.out.print("Has editing permissions: ");
                     permission_access = sc.nextBoolean();
                     newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin,isAdmin, company);
-                }else{
-                    newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin, company);
-                }
-                if(isAdmin){
                     Company.administrators.add(newEmployee);
                     hasPermission(permission_access,newEmployee);
                     employees.add(newEmployee);
                 }else if(!Company.administrators.isEmpty()){
+                    newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin, company);
                     Company.customerServices.add(newEmployee);
                     employees.add(newEmployee);
                 }
