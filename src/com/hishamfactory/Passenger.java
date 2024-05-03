@@ -7,12 +7,10 @@ import java.util.ArrayList;
 
 public class Passenger extends  Person {
     public ArrayList<Flight> passenger_flights = new ArrayList<>();
-    Passenger(String first_name,String last_name,int age,String tel_number,Flight flight,String passenger_pin,Company company){
+    Passenger(String first_name,String last_name,int age,String tel_number,String passenger_pin,Company company){
         super(first_name,last_name,age,tel_number,passenger_pin,company);
-        flight.passengers.add(this);
-        flight.plane.setPlane_current_passengers(1);
-        System.out.println(this.first_name +" "+this.last_name+" passenger added with ID " + this.getUuid() + "to flight "+ flight.getFlight_code());
-        passenger_flights.add(flight);
+        Company.passengers.add(this);
+        System.out.println(this.first_name +" "+this.last_name+" passenger account created with ID " + this.getUuid());
     }
 
     /**
