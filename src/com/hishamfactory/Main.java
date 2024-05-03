@@ -9,13 +9,10 @@ public class Main {
         Company company = new Company("Turkish Airline");
         boolean isNew = true;
         do {
-            System.out.println("......................................................");
             System.out.println("Welcome to Airline System Management");
-            System.out.println("...................................,..................");
             while(isNew){
                 System.out.println("**As first employee you must to create Admin user**");
                 company.addEmployee(company);
-                System.out.println("..................................................");
                 if (!Company.administrators.isEmpty()) {
                     isNew = false;
                 }
@@ -39,7 +36,9 @@ public class Main {
                 String person_id = "";
                 String person_pin = "";
                 if (!Company.employees.isEmpty()) {
-                    System.out.print("Are you 1.Employee or 2.Passenger: ");
+                    System.out.println(".................User Type............................");
+                    System.out.println("1.Employee                  2.Passenger");
+                    System.out.print("Enter a choice: ");
                     person_type = sc.nextInt();
                     if (person_type == 1) {
                         System.out.print("Enter  ID: ");
@@ -59,6 +58,20 @@ public class Main {
                             }
                         }
                     } else if (person_type == 2) {
+                        while(true){
+                            System.out.println(".................Welcome Menu..........................");
+                            System.out.println("1.Create new account            2.Login");
+                            System.out.print("Enter a choice: ");
+                            int option = sc.nextInt();
+                            if(option == 1){
+                                company.addPassenger(company);
+                            }else if(option == 2){
+                                break;
+                            }else {
+                                System.out.println("** Please enter a valid choice ***");
+                            }
+                        }
+                        System.out.println(".....................Login Menu.......................");
                         System.out.print("Enter  ID: ");
                         person_id = sc.next();
                         System.out.print("Enter  password: ");
@@ -80,10 +93,10 @@ public class Main {
                     }
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid Input. Please enter valid integer input");
+                System.out.println("*** Invalid Input. Please enter valid integer input ***");
                 sc.next();
             } catch (NoSuchElementException e) {
-                System.out.println("Input not found. Please enter text without spaces");
+                System.out.println("*** Input not found. Please enter text without spaces ***");
             }
         } while (personAuth == null);
     }
