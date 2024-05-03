@@ -14,6 +14,7 @@ public class Company {
     private String uuid;
     public static ArrayList<Employee> administrators;
     public static ArrayList<Employee> customerServices;
+    public static ArrayList<Coupon> coupons;
 
     Random rm = new Random();
     Scanner sc = new Scanner(System.in);
@@ -33,6 +34,7 @@ public class Company {
         permissions_uuids = new ArrayList<>();
         administrators = new ArrayList<>();
         customerServices = new ArrayList<>();
+        coupons = new ArrayList<>();
         System.out.println("You are working on "+this.name + " company");
     }
     public String getName(){
@@ -309,6 +311,19 @@ public class Company {
             }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
+        }
+    }
+    public void CreateCoupon(Company company){
+        try {
+            System.out.print("Enter coupon code: ");
+            String coupon_code = sc.next();
+            System.out.print("Enter coupon in percentage: ");
+            int coupon_in_percentage = sc.nextInt();
+
+            Coupon coupon = new Coupon(coupon_code, coupon_in_percentage);
+            Company.coupons.add(coupon);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found.Please enter text without spaces");
         }
     }
 

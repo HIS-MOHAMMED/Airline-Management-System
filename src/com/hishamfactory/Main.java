@@ -110,11 +110,12 @@ public class Main {
                     System.out.println("3.Planes");
                     System.out.println("4.Flights");
                     System.out.println("5.Passengers");
-                    System.out.println("6.Show login history");
-                    System.out.println("7.Quit");
+                    System.out.println("6.Create Coupon");
+                    System.out.println("7.Show login history");
+                    System.out.println("8.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
-                    if (option >= 1 && option <= 7) {
+                    if (option >= 1 && option <= 8) {
                         inner_flag1 = false;
                     } else {
                         System.out.println("Just form 1 to 6 you can choose");
@@ -164,9 +165,12 @@ public class Main {
                         }
                         break;
                     case 6:
-                        new LoginHistory().printLoginHistory();
+                        company.CreateCoupon(company);
                         break;
                     case 7:
+                        new LoginHistory().printLoginHistory();
+                        break;
+                    case 8:
                         flag = false;
                         break;
                 }

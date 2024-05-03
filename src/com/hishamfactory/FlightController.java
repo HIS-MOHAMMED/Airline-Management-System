@@ -1,6 +1,7 @@
 package com.hishamfactory;
 import com.sun.security.jgss.GSSUtil;
 
+import javax.swing.*;
 import java.security.spec.RSAOtherPrimeInfo;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -279,6 +280,16 @@ public class FlightController {
                     }
                 }
                 if (!passenger_exit) {
+                    CouponController coupon_controller = new CouponController();
+                    System.out.print("Do you have a coupon code: ");
+                    String coupon_code = sc.next();
+                    Coupon coupon = coupon_controller.getCouponByCode(coupon_code);
+                    if(coupon != null){
+                        flight.setTicket_price(flight.getTicket_price() - coupon_controller.discountCalculation(flight.getTicket_price(),coupon.getCoupon_in_percentage()));
+                        System.out.println("The ticked after coupon is " + flight.getTicket_price());
+                    }else {
+                        System.out.println("** This is wrong coupon code,please be sure!! **");
+                    }
                     passenger.passenger_flights.add(flight);
                     flight.passengers.add(passenger);
                     System.out.println("Flight booked from " + flight.getDeparture_airport().getAirport_name() + " to " + flight.getDestination_airport().getAirport_name() + " at " + flight.getDeparture_time());
