@@ -126,6 +126,7 @@ public class Company {
         String last_name;
         try {
             while(flag) {
+                System.out.println(".................Create New Passenger...................");
                 System.out.print("Enter passenger first name: ");
                 first_name = sc.next();
                 System.out.print("Enter passenger last name: ");
@@ -139,13 +140,11 @@ public class Company {
                 int age = sc.nextInt();
                 System.out.print("Enter passenger tel_number: ");
                 String tel_number = sc.next();
-                System.out.print("Enter Flight code: ");
-                String flight_code = sc.next();
                 System.out.print("Enter passenger password: ");
                 String passenger_pin = sc.next();
                 sc.nextLine();
 
-                Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, FlightController.getFlightById(flight_code), passenger_pin, company);
+                Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, passenger_pin, company);
                 passengers.add(newPassenger);
             }
         }catch(NoSuchElementException e){
@@ -184,8 +183,9 @@ public class Company {
                 String passenger_pin = sc.next();
                 sc.nextLine();
 
-                Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, flight, passenger_pin, company);
+                Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, passenger_pin, company);
                 passengers.add(newPassenger);
+                flight.passengers.add(newPassenger);
             }
         }catch(NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
