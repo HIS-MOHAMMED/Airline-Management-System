@@ -245,6 +245,7 @@ public class FlightController {
         Flight flight = getFlightById(sc.next());
         if(flight != null){
             passenger.passenger_flights.remove(flight);
+            flight.passengers.remove(passenger);
         }else{
             System.out.println("*** This flight not exists ***");
         }
@@ -261,29 +262,35 @@ public class FlightController {
         Airport dep_airport = AirportController.getAirportByName(sc.next());
         System.out.print("Enter des airport name : ");
         Airport des_airport = AirportController.getAirportByName(sc.next());
-        System.out.println("...................Available Flights...........................");
+        System.out.println("...................Available Flights.......................");
         for (Flight flight : Company.flights) {
             if (flight.getDeparture_airport().equals(dep_airport) && flight.getDestination_airport().equals(des_airport)) {
                 System.out.println(flight);
                 flight_exit = true;
             }
+            System.out.println("...........................................................");
         }
         if (flight_exit) {
+
             System.out.print("Enter flight code: ");
             Flight flight = getFlightById(sc.next());
             if (flight != null) {
-                for (Passenger passenger1 : flight.passengers) {
-                    if (passenger1.getUuid().equals(passenger.getUuid())) {
-                        passenger_exit = true;
-                        break;
+                if(flight.hasAvailableSeat(flight)) {
+                    for (Passenger passenger1 : flight.passengers) {
+                        if (passenger1.getUuid().equals(passenger.getUuid())) {
+                            passenger_exit = true;
+                            break;
+                        }
                     }
-                }
-                if (!passenger_exit) {
-                    passenger.passenger_flights.add(flight);
-                    flight.passengers.add(passenger);
-                    System.out.println("Flight booked from " + flight.getDeparture_airport().getAirport_name() + " to " + flight.getDestination_airport().getAirport_name() + " at " + flight.getDeparture_time());
-                } else {
-                    System.out.println("*** You already booked into this flight ***");
+                    if (!passenger_exit) {
+                        passenger.passenger_flights.add(flight);
+                        flight.passengers.add(passenger);
+                        System.out.println("Flight booked from " + flight.getDeparture_airport().getAirport_name() + " to " + flight.getDestination_airport().getAirport_name() + " at " + flight.getDeparture_time());
+                    } else {
+                        System.out.println("*** You already booked into this flight ***");
+                    }
+                }else{
+                    System.out.println("** Sorry this flight is full ***");
                 }
             } else {
                 System.out.println("*** This flight doesn't exists ***");

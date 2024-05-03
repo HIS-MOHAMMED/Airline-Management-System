@@ -80,6 +80,9 @@ public class Flight {
     public void setTicket_price(double ticket_price) {
         this.ticket_price = ticket_price;
     }
+    public boolean hasAvailableSeat(Flight flight){
+        return flight.passengers.size() < flight.getPlane().getPlane_capacity();
+    }
     @Override
     public String toString() {
         return "Flight{" +
