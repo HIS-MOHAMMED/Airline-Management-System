@@ -1,6 +1,7 @@
 package com.hishamfactory;
 import com.sun.security.jgss.GSSUtil;
 
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -79,44 +80,50 @@ public class EmployeesController{
                         System.out.println("6.Quit");
                         System.out.print("select option: ");
                         int option = sc.nextInt();
+                        sc.nextLine();
                         switch (option) {
                             case 1:
                                 System.out.print("Enter new first name: ");
                                 employee.setFirst_name(sc.next());
+                                sc.nextLine();
                                 System.out.print("Enter new last name: ");
                                 employee.setLast_name(sc.next());
+                                sc.nextLine();
                                 System.out.println("Name Changed to " + employee.getFirst_name() + " " + employee.getLast_name());
                                 break;
                             case 2:
                                 System.out.print("Enter new age: ");
                                 employee.setAge(sc.nextInt());
+                                sc.nextLine();
                                 System.out.println("Age changed to " + employee.getAge());
                                 break;
 
                             case 3:
                                 System.out.print("Enter new tel number: ");
                                 employee.setTel_number(sc.next());
+                                sc.nextLine();
                                 System.out.println("Tel number changed to " + employee.getTel_number());
                                 break;
                             case 4:
                                 System.out.print("Enter new role: ");
-                                employee.setRole(sc.next());
+                                employee.setRole(sc.nextLine());
+                                sc.nextLine();
                                 System.out.println("Role changed to " + employee.getRole());
                                 break;
                             case 5:
                                 System.out.print("Enter new address: ");
-                                employee.setAddress(sc.next());
+                                employee.setAddress(sc.nextLine());
+                                sc.nextLine();
                                 System.out.println("Address changed to " + employee.getAddress());
                                 break;
                             case 6:
-
                                 break;
                             default:
                                 System.out.println("*** Please enter a valid choice ***");
                         }
-                    } catch (NoSuchElementException e) {
-                        System.out.println("Input not found. Please enter text without spaces");
-                        sc.next();
+                    } catch (InputMismatchException e) {
+                        System.out.println("*** The input you provided is not valid ***");
+                        sc.nextLine();
                     }
                 }else {
                     System.out.println("*** This employee doesn't exists ***");
@@ -192,12 +199,15 @@ public class EmployeesController{
             System.out.println("7.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            sc.nextLine();
             String name = "";
             if (option != 1 && option != 3 && option != 7) {
                 System.out.print("Enter employee first name: ");
                 name = sc.next();
+                sc.nextLine();
                 System.out.print("Enter employee last name: ");
                 name += sc.next();
+                sc.nextLine();
             }
             switch (option) {
                 case 1:
@@ -228,8 +238,8 @@ public class EmployeesController{
                     break;
             }
         }catch (NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            System.out.println(" *** Please enter a valid choice *** ");
+            sc.nextLine();
         }
         return  flag;
     }

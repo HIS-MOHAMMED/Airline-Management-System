@@ -80,25 +80,30 @@ public class Company {
         try {
                 System.out.print("Enter employee first name: ");
                 String first_name = sc.next();
+                sc.nextLine();
                 System.out.print("Enter employee last name: ");
                 String last_name = sc.next();
+                sc.nextLine();
                 System.out.print("Enter employee age: ");
                 int age = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Enter employee tel_number: ");
                 String tel_number = sc.next();
-                System.out.print("Enter employee address: ");
-                String address = sc.next();
-                System.out.print("Enter employee role: ");
-                String role = sc.next();
                 sc.nextLine();
+                System.out.print("Enter employee address: ");
+                String address = sc.nextLine();
+                System.out.print("Enter employee role: ");
+                String role = sc.nextLine();
                 System.out.print("Enter employee password: ");
                 String employee_pin = sc.next();
+                sc.nextLine();
                 boolean  isAdmin = setUserRules();
                 boolean permission_access = false;
                 Employee newEmployee;
                 if(isAdmin){
                     System.out.print("Has editing permissions: ");
                     permission_access = sc.nextBoolean();
+                    sc.nextLine();
                     newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin,isAdmin, company);
                     Company.administrators.add(newEmployee);
                     hasPermission(permission_access,newEmployee);
@@ -111,7 +116,7 @@ public class Company {
 
         }catch(NoSuchElementException e ){
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         }
     }
 
@@ -128,8 +133,10 @@ public class Company {
                 System.out.println(".................Create New Passenger...................");
                 System.out.print("Enter passenger first name: ");
                 first_name = sc.next();
+                sc.nextLine();
                 System.out.print("Enter passenger last name: ");
                 last_name = sc.next();
+                sc.nextLine();
                 if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
                     System.out.println("****This name had already created****");
                     continue;
@@ -137,8 +144,10 @@ public class Company {
                 flag = false;
                 System.out.print("Enter passenger age: ");
                 int age = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Enter passenger tel_number: ");
                 String tel_number = sc.next();
+                sc.nextLine();
                 System.out.print("Enter passenger password: ");
                 String passenger_pin = sc.next();
                 sc.nextLine();
@@ -148,9 +157,10 @@ public class Company {
             }
         }catch(NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         }catch (NullPointerException e){
             System.out.println("*** The Flight code is wrong ***");
+            sc.nextLine();
         }
     }
 
@@ -168,8 +178,10 @@ public class Company {
                 while (flag) {
                     System.out.print("Enter passenger first name: ");
                     first_name = sc.next();
+                    sc.nextLine();
                     System.out.print("Enter passenger last name: ");
                     last_name = sc.next();
+                    sc.nextLine();
                     if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
                         System.out.println("****This name had already created****");
                         continue;
@@ -177,8 +189,10 @@ public class Company {
                     flag = false;
                     System.out.print("Enter passenger age: ");
                     int age = sc.nextInt();
+                    sc.nextLine();
                     System.out.print("Enter passenger tel_number: ");
                     String tel_number = sc.next();
+                    sc.nextLine();
                     System.out.print("Enter passenger password: ");
                     String passenger_pin = sc.next();
                     sc.nextLine();
@@ -190,9 +204,10 @@ public class Company {
                 }
             } catch (NoSuchElementException e) {
                 System.out.println("Input not found. Please enter text without spaces");
-                sc.next();
+                sc.nextLine();
             } catch (NullPointerException e) {
                 System.out.println("*** The Flight code is wrong ***");
+                sc.nextLine();
             }
         }else{
             System.out.println("*** Sorry this flight is full ***");
@@ -233,18 +248,20 @@ public class Company {
         try {
             System.out.print("Enter plane model: ");
             String model = sc.next();
+            sc.nextLine();
             System.out.print("Enter plane manufacturer: ");
-            String manufacturer = sc.next();
+            String manufacturer = sc.nextLine();
             System.out.print("Enter year of manufacturer: ");
             String year_manufacturer = sc.next();
             System.out.print("Enter capacity: ");
             int capacity = sc.nextInt();
+            sc.nextLine();
 
             Plane newPlane = new Plane(model, manufacturer, year_manufacturer, capacity, company);
             planes.add(newPlane);
         }catch (InputMismatchException e){
             System.out.println("*** Please enter capacity as integer ***");
-            sc.next();
+            sc.nextLine();
         }
     }
 
@@ -256,18 +273,21 @@ public class Company {
         try {
             System.out.print("Enter airport_name: ");
             String airport_name = sc.next();
+            sc.nextLine();
             System.out.print("Enter airport_location: ");
-            String airport_location = sc.next();
+            String airport_location = sc.nextLine();
             System.out.print("Enter airport_runways: ");
             int airport_runways = sc.nextInt();
+            sc.nextLine();
             System.out.print("Enter airport gates: ");
             int airport_gates = sc.nextInt();
-
+            sc.nextLine();
 
             Airport newAirport = new Airport(airport_name, airport_location, airport_runways, airport_gates, company);
             airports.add(newAirport);
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
+            sc.nextLine();
         }
     }
 
@@ -284,14 +304,18 @@ public class Company {
             System.out.println("..........................................................................");
             System.out.print("Enter departure airport name: ");
             Airport dep_airport = AirportController.getAirportByName(sc.next());
+            sc.nextLine();
             if(dep_airport != null) {
                 System.out.print("Enter destination airport name: ");
                 Airport des_airport = AirportController.getAirportByName(sc.next());
+                sc.nextLine();
                 if(des_airport != null) {
                     System.out.print("Enter dep time: ");
                     String dep_time = sc.next();
+                    sc.nextLine();
                     System.out.print("Enter arrival time: ");
                     String arrival_time = sc.next();
+                    sc.nextLine();
                     System.out.println("............................Available Planes................................");
                     for (Plane plane : Company.planes) {
                         System.out.println(plane.toString());
@@ -299,9 +323,11 @@ public class Company {
                     System.out.println("...........................................................................");
                     System.out.print("Enter plane code: ");
                     Plane plane = PlaneController.getPlaneById(sc.next());
+                    sc.nextLine();
                     if(plane != null) {
                         System.out.print("Enter ticket price: ");
                         double ticket_price = sc.nextDouble();
+                        sc.nextLine();
 
                         Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane, ticket_price, company);
                         flights.add(newFlight);
@@ -316,19 +342,23 @@ public class Company {
             }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
+            sc.nextLine();
         }
     }
     public void CreateCoupon(Company company){
         try {
             System.out.print("Enter coupon code: ");
             String coupon_code = sc.next();
+            sc.nextLine();
             System.out.print("Enter coupon in percentage: ");
             int coupon_in_percentage = sc.nextInt();
+            sc.nextLine();
 
             Coupon coupon = new Coupon(coupon_code, coupon_in_percentage);
             Company.coupons.add(coupon);
         }catch (NoSuchElementException e){
             System.out.println("Input not found.Please enter text without spaces");
+            sc.nextLine();
         }
     }
 
@@ -356,13 +386,14 @@ public class Company {
         while(true){
             System.out.print("Is 1.Administrator or 2.CostumerService: ");
             int choice = sc.nextInt();
+            sc.nextLine();
             if(choice == 1){
                 return true;
             }else if(choice == 2){
                 return false;
             }else{
                 System.out.println("*** Please enter a valid choice ***");
-                sc.next();
+                sc.nextLine();
             }
         }
     }

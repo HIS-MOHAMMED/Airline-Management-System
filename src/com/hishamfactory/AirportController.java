@@ -65,25 +65,30 @@ public class AirportController {
                 System.out.println("5.Quit");
                 System.out.print("Enter a choice? ");
                 int option = sc.nextInt();
+                sc.nextLine();
                 switch (option) {
                     case 1:
                         System.out.print("Enter new airport name: ");
                         airport.setAirport_name(sc.next());
+                        sc.nextLine();
                         System.out.println("Airport name changed to " + airport.getAirport_name());
                         break;
                     case 2:
                         System.out.print("Enter new airport location: ");
-                        airport.setAirport_location(sc.next());
+                        airport.setAirport_location(sc.nextLine());
+                        sc.nextLine();
                         System.out.println("Airport location changed to " + airport.getAirport_location());
                         break;
                     case 3:
                         System.out.print("Enter airport new number of runways: ");
                         airport.setAirport_number_runways(sc.nextInt());
+                        sc.nextLine();
                         System.out.println("Airport number of runways changed to " + airport.getAirport_number_runways());
                         break;
                     case 4:
                         System.out.print("Enter airport new number of gates: ");
                         airport.setAirport_number_gates(sc.nextInt());
+                        sc.nextLine();
                         System.out.println("Airport number of gates changed to " + airport.getAirport_number_gates());
                         break;
                     case 5:
@@ -96,7 +101,7 @@ public class AirportController {
             }
         } catch (NoSuchElementException e) {
             System.out.println("*** Input not found. Please enter text without spaces ***");
-            sc.next();
+            sc.nextLine();
         }
     }
     /**
@@ -131,10 +136,12 @@ public class AirportController {
             System.out.println("6.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            sc.nextLine();
             String airport_code = null;
             if(option >=3 && option <= 5) {
                 System.out.print("Enter airport code: ");
                 airport_code = sc.next();
+                sc.nextLine();
             }
             switch (option) {
                 case 1:
@@ -168,7 +175,7 @@ public class AirportController {
             System.exit(0);
         } catch (NoSuchElementException e) {
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         }
         return flag;
     }
