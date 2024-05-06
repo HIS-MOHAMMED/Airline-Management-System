@@ -94,6 +94,7 @@ public class FlightController {
                 System.out.println("9.Quit");
                 System.out.print("Enter a choice: ");
                 int option = sc.nextInt();
+                sc.nextLine();
                 switch (option) {
                     case 1:
                         System.out.println("......................Airports Available...................");
@@ -103,6 +104,7 @@ public class FlightController {
                         System.out.println("...........................................................");
                         System.out.print("Enter new departure airport name: ");
                         Airport departure_airport = AirportController.getAirportByName(sc.next());
+                        sc.nextLine();
                         if ( departure_airport!= null) {
                             flight.setDeparture_airport(departure_airport);
                             System.out.println("Flight's departure airport changed to " + departure_airport.getAirport_name());
@@ -118,6 +120,7 @@ public class FlightController {
                         System.out.println("...........................................................");
                         System.out.print("Enter new destination airport name: ");
                         Airport destination_airport = AirportController.getAirportByName(sc.next());
+                        sc.nextLine();
                         if (destination_airport != null) {
                             flight.setDestination_airport(destination_airport);
                             System.out.println("Flight's destination airport changed to " + destination_airport.getAirport_name());
@@ -128,6 +131,7 @@ public class FlightController {
                     case 3:
                         System.out.print("Enter new departure time: ");
                         String departure_time=sc.next();
+                        sc.nextLine();
                         if(departure_time != null){
                             flight.setDeparture_time(departure_time);
                             System.out.println("Flight's departure time change to " + flight.getDeparture_time());
@@ -138,6 +142,7 @@ public class FlightController {
                     case 4:
                         System.out.print("Enter new arrival time: ");
                         String arrival_time=sc.next();
+                        sc.nextLine();
                         if(arrival_time != null){
                             flight.setArrival_time(arrival_time);
                             System.out.println("Flight's arrival time changed to " + flight.getArrival_time());
@@ -153,6 +158,7 @@ public class FlightController {
                         System.out.println("...........................................................");
                         System.out.print("Enter new plane code: ");
                         Plane plane = PlaneController.getPlaneById(sc.next());
+                        sc.nextLine();
                         if(plane != null){
                             flight.setPlane(plane);
                             System.out.println("Flight's plane change to Plane has ID " + plane.getPlane_id());
@@ -163,6 +169,7 @@ public class FlightController {
                     case 6:
                         System.out.print("Enter new price of flight: ");
                         double ticket_price_new = sc.nextDouble();
+                        sc.nextLine();
                         flight.setTicket_price(ticket_price_new);
                         System.out.println("Flight's price changed to " + flight.getTicket_price());
                         break;
@@ -177,8 +184,10 @@ public class FlightController {
                         System.out.println("............................................................");
                         System.out.print("Enter passenger first name: ");
                         String passenger_first_name_to_remove = sc.next();
+                        sc.nextLine();
                         System.out.print("Enter passenger last name: ");
                         String passenger_last_name_to_remove = sc.next();
+                        sc.nextLine();
                         Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + " " + passenger_last_name_to_remove);
                         if(passenger_to_remove != null){
                             flight.passengers.remove(passenger_to_remove);
@@ -243,6 +252,7 @@ public class FlightController {
         }
         System.out.print("Enter flight code you want cancel: ");
         Flight flight = getFlightById(sc.next());
+        sc.nextLine();
         if(flight != null){
             passenger.passenger_flights.remove(flight);
             flight.passengers.remove(passenger);
@@ -260,8 +270,10 @@ public class FlightController {
         boolean passenger_exit = false;
         System.out.print("Enter dep airport name: ");
         Airport dep_airport = AirportController.getAirportByName(sc.next());
+        sc.nextLine();
         System.out.print("Enter des airport name : ");
         Airport des_airport = AirportController.getAirportByName(sc.next());
+        sc.nextLine();
         System.out.println("...................Available Flights.......................");
         for (Flight flight : Company.flights) {
             if (flight.getDeparture_airport().equals(dep_airport) && flight.getDestination_airport().equals(des_airport)) {
@@ -274,6 +286,7 @@ public class FlightController {
 
             System.out.print("Enter flight code: ");
             Flight flight = getFlightById(sc.next());
+            sc.nextLine();
             if (flight != null) {
                 if(flight.hasAvailableSeat(flight)) {
                     for (Passenger passenger1 : flight.passengers) {
@@ -320,10 +333,12 @@ public class FlightController {
             System.out.println("7.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            sc.nextLine();
             String flight_code = null;
             if(option >= 3 && option <= 6){
                 System.out.print("Enter flight code: ");
                 flight_code = sc.next();
+                sc.nextLine();
             }
             switch (option) {
                 case 1:
@@ -352,9 +367,10 @@ public class FlightController {
             }
         } catch (NullPointerException e) {
             System.out.println("*** This flight not exists ***");
+            sc.nextLine();
         } catch (InputMismatchException e) {
             System.out.println("*** Please enter a valid choice ***");
-            sc.next();
+            sc.nextLine();
         }
         return flag;
     }

@@ -128,6 +128,7 @@ public class Main {
                     System.out.println("8.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
+                    sc.nextLine();
                     if (option >= 1 && option <= 8) {
                         inner_flag1 = false;
                     } else {
@@ -197,6 +198,8 @@ public class Main {
                     System.out.println("4.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
+                    sc.nextLine();
+                    sc.nextLine();
                     if (option >= 1 && option <= 6) {
                         inner_flag1 = false;
                     } else {
@@ -237,7 +240,7 @@ public class Main {
             }
         }catch (InputMismatchException e){
             System.out.println("*** Don't input text only integers accepted here ***");
-            sc.next();
+            sc.nextLine();
         }
         return flag;
     }

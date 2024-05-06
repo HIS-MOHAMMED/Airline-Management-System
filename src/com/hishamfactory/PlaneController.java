@@ -53,23 +53,27 @@ public class PlaneController {
                     case 1:
                         System.out.print("Enter new Model: ");
                         plane.setPlane_model(sc.next());
+                        sc.nextLine();
                         System.out.println("Model changed");
                         break;
 
                     case 2:
                         System.out.print("Enter new Manufacturer: ");
                         plane.setPlane_manufacturer(sc.next());
+                        sc.nextLine();
                         System.out.println("Manufacturer changed");
                         break;
 
                     case 3:
                         System.out.print("Enter new year of manufactured: ");
                         plane.setPlane_year(sc.next());
+                        sc.nextLine();
                         System.out.println("Year of manufactured changed to " + plane.getPlane_year());
                         break;
                     case 4:
                         System.out.print("Enter new Capacity: ");
                         plane.setPlane_capacity(sc.nextInt());
+                        sc.nextLine();
                         System.out.println("Capacity changed");
                         break;
                     case 5:
@@ -79,7 +83,7 @@ public class PlaneController {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("*** Please enter capacity as integer ***");
-                sc.next();
+                sc.nextLine();
             }
         }else {
             System.out.println("*** This plane not exits ***");
@@ -118,10 +122,12 @@ public class PlaneController {
             System.out.println("5.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            sc.nextLine();
             String plane_code = null;
             if(option >= 3 && option <= 4){
                 System.out.print("Enter plane code: ");
                 plane_code = sc.next();
+                sc.nextLine();
             }
             switch (option) {
                 case 1:
@@ -144,7 +150,7 @@ public class PlaneController {
             }
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         }
         return flag;
     }

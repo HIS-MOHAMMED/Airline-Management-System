@@ -55,28 +55,34 @@ public class PassengersController {
                 System.out.println("5.Quit");
                 System.out.print("select option: ");
                 int option = sc.nextInt();
+                sc.nextLine();
                 switch (option) {
                     case 1:
                         System.out.print("Enter new first name: ");
                         passenger.setFirst_name(sc.next());
+                        sc.nextLine();
                         System.out.print("Enter new last name: ");
                         passenger.setLast_name(sc.next());
+                        sc.nextLine();
                         System.out.println("Name Changed to " + passenger.getFirst_name() + " " + passenger.getLast_name());
                         break;
                     case 2:
                         System.out.print("Enter new age: ");
                         passenger.setAge(sc.nextInt());
+                        sc.nextLine();
                         System.out.println("Age changed to " + passenger.getAge());
                         break;
 
                     case 3:
                         System.out.print("Enter new tel number: ");
                         passenger.setTel_number(sc.next());
+                        sc.nextLine();
                         System.out.println("Tel number changed to " + passenger.getTel_number());
                         break;
                     case 4:
                         System.out.print("Enter new password: ");
                         passenger.setPinHash(sc.next());
+                        sc.nextLine();
                         System.out.println("Password changed");
                         break;
                     case 5:
@@ -87,7 +93,7 @@ public class PassengersController {
             }
         } catch (NoSuchElementException e) {
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         }
     }
 
@@ -109,24 +115,29 @@ public class PassengersController {
                 case 1:
                     System.out.print("Enter new first name: ");
                     passenger.setFirst_name(sc.next());
+                    sc.nextLine();
                     System.out.print("Enter new last name: ");
                     passenger.setLast_name(sc.next());
+                    sc.nextLine();
                     System.out.println("Name Changed to " + passenger.getFirst_name() + " " + passenger.getLast_name());
                     break;
                 case 2:
                     System.out.print("Enter new age: ");
                     passenger.setAge(sc.nextInt());
+                    sc.nextLine();
                     System.out.println("Age changed to " + passenger.getAge());
                     break;
 
                 case 3:
                     System.out.print("Enter new tel number: ");
                     passenger.setTel_number(sc.next());
+                    sc.nextLine();
                     System.out.println("Tel number changed to " + passenger.getTel_number());
                     break;
                 case 4:
                     System.out.print("Enter new password: ");
                     passenger.setPinHash(sc.next());
+                    sc.nextLine();
                     System.out.println("Password changed");
                     break;
                 case 5:
@@ -136,7 +147,7 @@ public class PassengersController {
             }
         } catch (NoSuchElementException e) {
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         }
     }
 
@@ -171,12 +182,15 @@ public class PassengersController {
             System.out.println("6.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            sc.nextLine();
             String name = "";
             if (option != 1 && option != 3 && !(option > 5)) {
                 System.out.print("Enter first name: ");
                 name = sc.next();
+                sc.nextLine();
                 System.out.print("Enter last name: ");
                 name += " " + sc.next();
+                sc.nextLine();
             }
             switch (option) {
                 case 1:
@@ -200,9 +214,10 @@ public class PassengersController {
             }
         } catch (NoSuchElementException e) {
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         } catch (NullPointerException e) {
             System.out.println("*** This passenger doesn't exits ***");
+            sc.nextLine();
         }
         return flag;
     }
@@ -223,6 +238,7 @@ public class PassengersController {
             System.out.println("5.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
+            sc.nextLine();
             FlightController flightController = new FlightController();
             switch (option) {
                 case 1:
@@ -245,9 +261,10 @@ public class PassengersController {
             }
         } catch (NoSuchElementException e) {
             System.out.println("Input not found. Please enter text without spaces");
-            sc.next();
+            sc.nextLine();
         } catch (NullPointerException e) {
             System.out.println("*** This passenger doesn't exits ***");
+            sc.nextLine();
         }
         return flag;
     }
