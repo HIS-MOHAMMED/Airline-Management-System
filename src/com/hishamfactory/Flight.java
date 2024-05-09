@@ -2,7 +2,7 @@ package com.hishamfactory;
 
 import java.util.ArrayList;
 
-public class Flight {
+public class Flight implements Identifiable{
     private String flight_code;
     public Airport departure_airport;
     public Airport destination_airport;
@@ -94,5 +94,10 @@ public class Flight {
                 ", plane=" + plane.getPlane_id() +
                 ", ticket_price=" + ticket_price +
                 '}';
+    }
+
+    @Override
+    public String identify() {
+        return this.flight_code;
     }
 }

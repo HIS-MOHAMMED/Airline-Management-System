@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Person {
+public class Person implements Identifiable {
     protected String first_name;
     protected String last_name;
     protected int age;
@@ -80,5 +80,10 @@ public class Person {
     }
     public byte[] getPinHash() {
         return pinHash;
+    }
+
+    @Override
+    public String identify() {
+        return this.uuid;
     }
 }
