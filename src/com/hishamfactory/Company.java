@@ -40,7 +40,8 @@ public class Company {
         customerServices = new ArrayList<>();
         pilots = new ArrayList<>();
         coupons = new ArrayList<>();
-        System.out.println("You are working on "+this.name + " company");
+        this.uuid = getNewUUID();
+        System.out.println("You are working on "+this.name + " company with ID " + this.uuid);
     }
     public String getName(){
         return this.name;
