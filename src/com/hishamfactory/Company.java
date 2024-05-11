@@ -4,16 +4,19 @@ import java.util.*;
 
 public class Company {
     private String name;
+    private String uuid;
+    public static ArrayList<User> users;
     public static ArrayList<Employee> employees;
-    public static ArrayList<Passenger> passengers;
+    public static SuperVisor superVisor;
     public static ArrayList<Plane> planes;
     public static ArrayList<Airport> airports;
     public static ArrayList<Flight> flights;
     public static ArrayList<String> uuids;
-    public static ArrayList<String> permissions_uuids;
-    private String uuid;
-    public static ArrayList<Employee> administrators;
+    public static ArrayList<String> permissions_editing_uuids;
+    public static ArrayList<User> administrators;
     public static ArrayList<Employee> customerServices;
+    public static ArrayList<Pilot> pilots;
+    public static ArrayList<Passenger> passengers;
     public static ArrayList<Coupon> coupons;
 
     Random rm = new Random();
@@ -25,15 +28,17 @@ public class Company {
      */
     public Company(String name){
         this.name = name;
+        users = new ArrayList<>();
         employees = new ArrayList<>();
         passengers = new ArrayList<>();
         planes = new ArrayList<>();
         airports = new ArrayList<>();
         flights = new ArrayList<>();
         uuids = new ArrayList<>();
-        permissions_uuids = new ArrayList<>();
+        permissions_editing_uuids = new ArrayList<>();
         administrators = new ArrayList<>();
         customerServices = new ArrayList<>();
+        pilots = new ArrayList<>();
         coupons = new ArrayList<>();
         System.out.println("You are working on "+this.name + " company");
     }
@@ -75,48 +80,95 @@ public class Company {
     /**
      * Add new employee to the system
      * @param company   the company who new employee works for
+     * @param user      the user who use system right not
      */
-    public void addEmployee(Company company){
+    public void addEmployee(Company company,User user){
+        Employee employee = null;
         try {
-                System.out.print("Enter employee first name: ");
-                String first_name = sc.next();
-                sc.nextLine();
-                System.out.print("Enter employee last name: ");
-                String last_name = sc.next();
-                sc.nextLine();
-                System.out.print("Enter employee age: ");
-                int age = sc.nextInt();
-                sc.nextLine();
-                System.out.print("Enter employee tel_number: ");
-                String tel_number = sc.next();
-                sc.nextLine();
-                System.out.print("Enter employee address: ");
-                String address = sc.nextLine();
-                System.out.print("Enter employee role: ");
-                String role = sc.nextLine();
-                System.out.print("Enter employee password: ");
-                String employee_pin = sc.next();
-                sc.nextLine();
-                boolean  isAdmin = setUserRules();
-                boolean permission_access = false;
-                Employee newEmployee;
-                if(isAdmin){
-                    System.out.print("Has editing permissions: ");
-                    permission_access = sc.nextBoolean();
+            System.out.print("Enter employee first name: ");
+            String first_name = sc.next();
+            sc.nextLine();
+            System.out.print("Enter employee last name: ");
+            String last_name = sc.next();
+            sc.nextLine();
+            System.out.print("Enter employee age: ");
+            int age = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Enter employee tel_number: ");
+            String tel_number = sc.next();
+            sc.nextLine();
+            System.out.print("Enter employee address: ");
+            String address = sc.nextLine();
+            System.out.print("Enter employee role: ");
+            String role = sc.nextLine();
+            System.out.print("Enter employee password: ");
+            String employee_pin = sc.next();
+            sc.nextLine();
+            if(superVisor == null){
+                Company.superVisor =  new SuperVisor(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+            }else {
+                if (user.getClass().equals(SuperVisor.class)) {
+                    System.out.println("1.Manager           2.Director ");
+                    System.out.println("3.Software Engineer         4.Pilot");
+                    System.out.print("Enter the choice: ");
+                    int option = sc.nextInt();
                     sc.nextLine();
-                    newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin,isAdmin, company);
-                    Company.administrators.add(newEmployee);
-                    hasPermission(permission_access,newEmployee);
-                    employees.add(newEmployee);
-                }else if(!Company.administrators.isEmpty()){
-                    newEmployee = new Employee(first_name, last_name, age, tel_number, address, role, employee_pin, company);
-                    Company.customerServices.add(newEmployee);
-                    employees.add(newEmployee);
+                    switch (option) {
+                        case 1:
+                            employee = new Manager(first_name, last_name, age, address, address, role, employee_pin, company);
+                            break;
+                        case 2:
+                            employee = new Director(first_name, last_name, age, tel_number, address, role, employee_pin, company);
+                            break;
+                        case 3:
+                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            break;
+                        case 4:
+                            new Pilot(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            break;
+                    }
                 }
-
+                if (user.getClass().equals(Manager.class)) {
+                    System.out.println("1.Director       2.Software Engineer         3.Pilot");
+                    System.out.print("Enter the choice: ");
+                    int option = sc.nextInt();
+                    sc.nextLine();
+                    switch (option) {
+                        case 1:
+                            employee = new Director(first_name, last_name, age, tel_number, address, role, employee_pin, company);
+                            break;
+                        case 2:
+                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            break;
+                        case 3:
+                            new Pilot(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            break;
+                    }
+                }
+                if (user.getClass().equals(Director.class)) {
+                    System.out.println("1.Software Engineer         2.Pilot");
+                    System.out.print("Enter the choice: ");
+                    int option = sc.nextInt();
+                    sc.nextLine();
+                    switch (option) {
+                        case 1:
+                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            break;
+                        case 2:
+                            new Pilot(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            break;
+                    }
+                }
+            }
         }catch(NoSuchElementException e ){
             System.out.println("Input not found. Please enter text without spaces");
             sc.nextLine();
+        }
+        System.out.print("has editing permission: ");
+        boolean canEditing = sc.nextBoolean();
+        sc.nextLine();
+        if(canEditing && employee != null){
+            permissions_editing_uuids.add(employee.getUuid());
         }
     }
 
@@ -148,12 +200,13 @@ public class Company {
                 System.out.print("Enter passenger tel_number: ");
                 String tel_number = sc.next();
                 sc.nextLine();
+                System.out.print("Enter passenger address: ");
+                String address = sc.nextLine();
                 System.out.print("Enter passenger password: ");
                 String passenger_pin = sc.next();
                 sc.nextLine();
 
-                Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, passenger_pin, company);
-                passengers.add(newPassenger);
+                new Passenger(first_name, last_name, age, tel_number,address, passenger_pin, company);
             }
         }catch(NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
@@ -193,11 +246,13 @@ public class Company {
                     System.out.print("Enter passenger tel_number: ");
                     String tel_number = sc.next();
                     sc.nextLine();
+                    System.out.print("Enter passenger address: ");
+                    String address = sc.nextLine();
                     System.out.print("Enter passenger password: ");
                     String passenger_pin = sc.next();
                     sc.nextLine();
 
-                    Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number, passenger_pin, company);
+                    Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number,address, passenger_pin, company);
                     passengers.add(newPassenger);
                     flight.passengers.add(newPassenger);
 
@@ -216,13 +271,15 @@ public class Company {
 
     /**
      * Get the employee object associated with a particular UUID and pin, if they are valid
-     * @param employee_id   the UUID of the employee to log in
-     * @param employee_pin  the password of the employee
+     * @param user_id   the UUID of the employee to log in
+     * @param user_pin  the password of the employee
      * @return              the employee if the log is successful, or null if it's not
      */
-    public Employee employeeLogin(String employee_id, String employee_pin) {
-        for (Employee employee : Company.employees) {
-            if (employee.getUuid().compareTo(employee_id) == 0 && employee.validatePin(employee_pin)) return employee;
+    public User userLogin(String user_id, String user_pin) {
+        for (User user: users) {
+            if (user.getUuid().compareTo(user_id) == 0 && user.validatePin(user_pin)){
+                return user;
+            }
         }
         return null;
     }
@@ -235,7 +292,9 @@ public class Company {
      */
     public Passenger passengerLogin(String passenger_id,String passenger_pin){
         for (Passenger passenger : passengers) {
-            if(passenger.getUuid().compareTo(passenger_id) == 0 && passenger.validatePin(passenger_pin)) return passenger;
+            if(passenger.getUuid().compareTo(passenger_id) == 0 && passenger.validatePin(passenger_pin)){
+                return passenger;
+            }
         }
         return null;
     }
@@ -359,42 +418,6 @@ public class Company {
         }catch (NoSuchElementException e){
             System.out.println("Input not found.Please enter text without spaces");
             sc.nextLine();
-        }
-    }
-
-    /**
-     * Check if the passed employee has permission to  whole system or nto
-     * @param permission_access     the employee has permission or not
-     * @param employee              the employee who used the system currently
-     */
-    public void hasPermission(boolean permission_access,Employee employee){
-        if(permission_access) {
-            permissions_uuids.add(employee.getUuid());
-        }
-    }
-    public void hasPermission(boolean permission_access){
-        if(permission_access) {
-            permissions_uuids.add(this.uuid);
-        }
-    }
-
-    /**
-     * Set roll of the employee is admin or normal employee
-     * @return      it is admin or not
-     */
-    public boolean setUserRules(){
-        while(true){
-            System.out.print("Is 1.Administrator or 2.CostumerService: ");
-            int choice = sc.nextInt();
-            sc.nextLine();
-            if(choice == 1){
-                return true;
-            }else if(choice == 2){
-                return false;
-            }else{
-                System.out.println("*** Please enter a valid choice ***");
-                sc.nextLine();
-            }
         }
     }
 }
