@@ -1,7 +1,7 @@
 package com.hishamfactory;
 import java.util.Scanner;
 
-public class Airport {
+public class Airport implements Identifiable {
     private  String airport_code;
     private String airport_name;
     private String airport_location;
@@ -70,5 +70,10 @@ public class Airport {
                 ", airport_number_runways=" + airport_number_runways +
                 ", airport_number_gates=" + airport_number_gates +
                 '}';
+    }
+
+    @Override
+    public String identify() {
+        return this.airport_code;
     }
 }

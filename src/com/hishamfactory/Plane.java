@@ -1,6 +1,6 @@
 package com.hishamfactory;
 
-public class Plane {
+public class Plane implements Identifiable{
     private String plane_id;
     private String plane_model;
     private String plane_manufacturer;
@@ -70,5 +70,9 @@ public class Plane {
                 ", plane_capacity=" + plane_capacity +
                 ", plane_current_passengers=" + plane_current_passengers +
                 '}';
+    }
+    @Override
+    public String identify(){
+        return this.plane_id;
     }
 }

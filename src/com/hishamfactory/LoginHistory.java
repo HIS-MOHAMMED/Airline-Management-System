@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class LoginHistory {
     private String date_and_time;
-    private Person user;
+    private User user;
     public  static ArrayList<LoginHistory> login_history = new ArrayList<>();
     public LoginHistory(){}
-    public LoginHistory(String date_and_time,Person user){
+    public LoginHistory(String date_and_time, User user){
         this.date_and_time = date_and_time;
         this.user = user;
         login_history.add(this);
@@ -26,7 +26,7 @@ public class LoginHistory {
     public String getDate_and_time() {
         return date_and_time;
     }
-    public Person getUser() {
+    public User getUser() {
         return user;
     }
 

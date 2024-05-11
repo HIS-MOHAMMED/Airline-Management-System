@@ -1,8 +1,8 @@
 package com.hishamfactory;
-import com.sun.security.jgss.GSSUtil;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class EmployeesController{
@@ -10,13 +10,14 @@ public class EmployeesController{
 
     /**
      * Get employee after check if it's exist
-     * @param first_last_name   the first and last names of employee
-     * @return                  the employee if it's exist or null if it's not
+     *
+     * @param first_last_name the first and last names of employee
+     * @return the employee if it's exist or null if it's not
      */
-    public Employee getEmployeeByName(String first_last_name){
-        for (Employee employee1 : Company.employees) {
-            String name = employee1.getFirst_name()+employee1.getLast_name();
-            if(first_last_name.equalsIgnoreCase(name))return employee1;
+    public Employee getEmployeeByName(String first_last_name) {
+        for (Employee employee : Company.employees) {
+            String name = employee.getFirst_name() + employee.getLast_name();
+            if (first_last_name.equalsIgnoreCase(name)) return employee;
         }
         return null;
     }
@@ -24,12 +25,12 @@ public class EmployeesController{
     /**
      * print all employees that exists on system
      */
-    public  void printAllEmployees(){
-        if(Company.employees.isEmpty()){
+    public void printAllEmployees() {
+        if (Company.employees.isEmpty()) {
             System.out.println("** Sorry,The list of employees is empty **");
-        }else{
+        } else {
             System.out.println("..................Employees List............................");
-            for(Employee employee : Company.employees){
+            for (Employee employee : Company.employees) {
                 System.out.print("Name: ");
                 System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
                 System.out.print("Age:");
@@ -49,27 +50,23 @@ public class EmployeesController{
 
     /**
      * Modify any information of employee
-     * @param name  the name of the employee
-     * @param u     the employee who do the modification
+     *
+     * @param name the name of the employee
+     * @param u    the employee who do the modification
      */
-    public void editEmployeeInfo(String name,Person u) {
+    public void editEmployeeInfo(String name, User u) {
         boolean outer_flag = true;
         boolean flag = false;
-        Employee employee;
+        User employee;
         while (outer_flag) {
-                employee = getEmployeeByName(name);
-                if(employee != null) {
-                    Employee user = getEmployeeByName(u.getFirst_name() + u.getLast_name());
-                    for (String permissionsUuid : Company.permissions_uuids) {
-                        if (user.uuid.equals(permissionsUuid)) {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (!flag) {
-                        System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
-                        break;
-                    }
+            employee = getEmployeeByName(name);
+            if (employee != null) {
+                User user = getEmployeeByName(u.getFirst_name() + u.getLast_name());
+                if (user.getClass().equals(SuperVisor.class)) flag = true;
+                if (!flag) {
+                    System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
+                    break;
+                }else {
                     try {
                         System.out.println(".....................Editing Menu....................");
                         System.out.println("1.Edit Name");
@@ -125,9 +122,10 @@ public class EmployeesController{
                         System.out.println("*** The input you provided is not valid ***");
                         sc.nextLine();
                     }
-                }else {
-                    System.out.println("*** This employee doesn't exists ***");
                 }
+            } else {
+                System.out.println("*** This employee doesn't exists ***");
+            }
             outer_flag = false;
 
         }
@@ -135,58 +133,71 @@ public class EmployeesController{
 
     /**
      * Delete any employee from system
-     * @param name  the name of employee wanted to delete
+     *
+     * @param name the name of employee wanted to delete
      */
-    public void deleteEmployee(String name){
-        if(Company.administrators.size() == 1){
-            System.out.println("*** You can't delete this account***");
-        }else{
-            Employee employee = getEmployeeByName(name);
-            if(employee != null){
-                if(Company.administrators.contains(employee)){
-                    Company.administrators.remove(employee);
+    public void deleteEmployee(String name,User user) {
+        Employee employee = getEmployeeByName(name);
+        if (employee != null) {
+            if (!user.getUuid().equals(employee.getUuid()) && !employee.getClass().equals(SuperVisor.class)) {
+                if (user.getClass().equals(SuperVisor.class)) {
+                    Company.users.remove(employee);
                     Company.employees.remove(employee);
-                }else{
-                    Company.customerServices.remove(employee);
-                    Company.employees.remove(employee);
+                    System.out.println(employee.getRole() +" " +employee.getFirst_name() + ","+employee.getLast_name() +" was deleted");
                 }
-            }else{
-                System.out.println("*** This account doesn't exists ***");
+                else if (user.getClass().equals(Manager.class)) {
+                    Company.users.remove(employee);
+                    Company.employees.remove(employee);
+                    System.out.println(employee.getRole() +" " +employee.getFirst_name() + ","+employee.getLast_name() +" was deleted");
+                }
+                else if (user.getClass().equals(Director.class) && !employee.getClass().equals(Manager.class)) {
+                    Company.users.remove(employee);
+                    Company.employees.remove(employee);
+                    System.out.println(employee.getRole() +" " +employee.getFirst_name() + ","+employee.getLast_name() +" was deleted");
+                }else{
+                    System.out.println("*** You don't have permission to delete this account.Please contact with your manager ***");
+                }
+            } else {
+                System.out.println("*** You can't delete this account ***");
             }
+        } else {
+            System.out.println("*** This account doesn't exists ***");
         }
     }
 
     /**
      * Process of firing any employee
-     * @param name  the name of employee wanted to fire
+     *
+     * @param name the name of employee wanted to fire
      */
-    public void fireEmployee(String name){
+    public void fireEmployee(String name,User user) {
         Employee employee = getEmployeeByName(name);
-        if(Company.administrators.size() == 1){
-            System.out.println("*** You can't delete this account ***");
-        }else {
-            if (employee != null) {
-                employee.setStatus("non-active");
-                System.out.println("Status: " + employee.getStatus());
+        if (employee != null) {
+            if (employee.getClass().equals(SuperVisor.class)) {
+                System.out.println("*** You can't delete this account ***");
+            } else {
+                user.setStatus("non-active");
+                System.out.println("Status: " + user.getStatus());
                 //Notify Relevant Parties
                 System.out.println("Send to relevant parties...done");
                 //Revoke Access Privileges
-                deleteEmployee(name);
+                deleteEmployee(name, user);
                 System.out.println("Delete Access Privileges...done");
-            } else {
-                System.out.println("*** This account doesn't exists ***");
             }
+        } else {
+            System.out.println("*** This account doesn't exists ***");
         }
     }
 
     /**
      * show employee menu to do any employee's operation
-     * @param company       the company who has the system
-     * @param controller    the controller object whose do operation by it
-     * @param user          the employee who do the operation
-     * @return              the boolean value stay on employee menu or go out from it
+     *
+     * @param company    the company who has the system
+     * @param controller the controller object whose do operation by it
+     * @param user       the employee who do the operation
+     * @return the boolean value stay on employee menu or go out from it
      */
-    public boolean showEmployeeMenu(Company company,EmployeesController controller,Person user) {
+    public boolean showEmployeeMenu(Company company, EmployeesController controller, User user) {
         boolean flag = true;
         try {
             System.out.println(".......................Employee Menu..........................");
@@ -211,13 +222,13 @@ public class EmployeesController{
             }
             switch (option) {
                 case 1:
-                    company.addEmployee(company);
+                    company.addEmployee(company, user);
                     break;
                 case 2:
-                    Employee employee = controller.getEmployeeByName(name);
-                    if(employee != null){
-                        System.out.println(employee);
-                    }else {
+                    User user1 = controller.getEmployeeByName(name);
+                    if (user1 != null) {
+                        System.out.println(user1);
+                    } else {
                         System.out.println("*** This employee don't exists ***");
                     }
                     break;
@@ -225,22 +236,22 @@ public class EmployeesController{
                     controller.printAllEmployees();
                     break;
                 case 4:
-                    controller.editEmployeeInfo(name,user);
+                    controller.editEmployeeInfo(name, user);
                     break;
                 case 5:
-                    controller.deleteEmployee(name);
+                    controller.deleteEmployee(name,user);
                     break;
                 case 6:
-                    controller.fireEmployee(name);
+                    controller.fireEmployee(name,user);
                     break;
                 default:
                     flag = false;
                     break;
             }
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println(" *** Please enter a valid choice *** ");
             sc.nextLine();
         }
-        return  flag;
+        return flag;
     }
 }

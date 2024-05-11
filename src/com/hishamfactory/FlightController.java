@@ -1,7 +1,5 @@
 package com.hishamfactory;
-import com.sun.security.jgss.GSSUtil;
 
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -66,15 +64,17 @@ public class FlightController {
     /**
      * Edit information that related to flight section
      * @param flight_code   the code identifying the flight to be edited
-     * @param person        the employee who do this modification
+     * @param user        the employee who do this modification
      * @param company       the company who has this system
      */
-    public void editFlightInfo(String flight_code,Person person,Company company) {
+    public void editFlightInfo(String flight_code, User user, Company company) {
         Flight flight = getFlightById(flight_code);
         if (flight != null) {
             boolean hasPermission = false;
-            for (String permissionsUuid : Company.permissions_uuids) {
-                if (permissionsUuid.equalsIgnoreCase(person.getUuid())) {
+            for (String permissionsUuid : Company.permissions_editing_uuids) {
+                System.out.println(user.getUuid());
+                System.out.println(permissionsUuid);
+                if (permissionsUuid.equalsIgnoreCase(user.getUuid())) {
                     hasPermission = true;
                     break;
                 }
@@ -317,10 +317,10 @@ public class FlightController {
      * Show operations can be performed on flight
      * @param company       the airline company who has this system
      * @param controller    the controller object can perform operation by it
-     * @param person        the person who do these operations
+     * @param user        the person who do these operations
      * @return              boolean value to stay on login on this menu or log out from it
      */
-    public boolean showFlightMenu(Company company, FlightController controller,Person person) {
+    public boolean showFlightMenu(Company company, FlightController controller, User user) {
         boolean flag = true;
         try {
             System.out.println(".................Flight Menu..............................");
@@ -354,7 +354,7 @@ public class FlightController {
                     controller.showFlightInfo(flight_code);
                     break;
                 case 5:
-                    controller.editFlightInfo(flight_code,person,company);
+                    controller.editFlightInfo(flight_code, user,company);
                     break;
                 case 6:
                     controller.cancelFlight(flight_code);

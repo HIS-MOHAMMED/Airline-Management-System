@@ -1,49 +1,31 @@
 package com.hishamfactory;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-public class Person {
+public abstract class Person {
     protected String first_name;
     protected String last_name;
     protected int age;
-    protected String  tel_number;
-    protected String uuid;
-    protected byte pinHash[];
+    protected String tel_number;
+    protected String address;
+    protected String status;
+    protected String role;
 
-    Person(String first_name,String last_name,int age,String tel_number,String person_pin,Company company){
-        this.first_name =first_name;
-        this.last_name = last_name;
-        this.age = age;
-        this.tel_number = tel_number;
-
-        try{
-            MessageDigest md =MessageDigest.getInstance("SHA-256");
-            this.pinHash =md.digest(person_pin.getBytes(StandardCharsets.UTF_8));
-        }catch (NoSuchAlgorithmException e){
-            System.err.println("error, caught NoSuchAlgorithmException.");
-            e.printStackTrace();
-            System.exit(0);
-        }
-        this.uuid = company.getNewUUID();
-    }
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
+    Person(String first_name,String last_name,int age,String tel_number,String address,String role){
         this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
         this.last_name = last_name;
+        this.age =age;
+        this.tel_number = tel_number;
+        this.address = address;
+        this.role = role;
+        this.status  = "Active";
     }
-
+    Person(String first_name,String last_name,int age,String tel_number,String address){
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.age =age;
+        this.tel_number = tel_number;
+        this.address = address;
+        this.status  = "Active";
+    }
     public int getAge() {
         return age;
     }
@@ -60,25 +42,42 @@ public class Person {
         this.tel_number = tel_number;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getLast_name() {
+        return last_name;
     }
 
-    /**
-     * Sets the hash value of the person's password using SHA-256 encryption.
-     * @param person_pin The PIN of the person to be hashed.
-     */
-    public void setPinHash(String person_pin){
-        try{
-            MessageDigest md =MessageDigest.getInstance("SHA-256");
-            this.pinHash =md.digest(person_pin.getBytes(StandardCharsets.UTF_8));
-        }catch (NoSuchAlgorithmException e){
-            System.err.println("error, caught NoSuchAlgorithmException.");
-            e.printStackTrace();
-            System.exit(0);
-        }
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
-    public byte[] getPinHash() {
-        return pinHash;
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
