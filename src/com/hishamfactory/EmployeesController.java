@@ -41,6 +41,8 @@ public class EmployeesController{
                 System.out.println(employee.getUuid());
                 System.out.print("Role: ");
                 System.out.println(employee.getRole());
+                System.out.print("Basic Salary: ");
+                System.out.println(employee.getNet_salary());
                 System.out.print("Address: ");
                 System.out.println(employee.getAddress());
                 System.out.println(".............................");
@@ -204,15 +206,16 @@ public class EmployeesController{
             System.out.println("1.Add new employee");
             System.out.println("2.Get employee by name");
             System.out.println("3.Show all employees");
-            System.out.println("4.Edit employee info");
-            System.out.println("5.Delete employee");
-            System.out.println("6.Fire employee");
-            System.out.println("7.Quit");
+            System.out.println("4.Calculate employee salary");
+            System.out.println("5.Edit employee info");
+            System.out.println("6.Delete employee");
+            System.out.println("7.Fire employee");
+            System.out.println("8.Quit");
             System.out.print("Enter a choice: ");
             int option = sc.nextInt();
             sc.nextLine();
             String name = "";
-            if (option != 1 && option != 3 && option != 7) {
+            if (option != 1 && option != 3 && option != 8) {
                 System.out.print("Enter employee first name: ");
                 name = sc.next();
                 sc.nextLine();
@@ -236,12 +239,19 @@ public class EmployeesController{
                     controller.printAllEmployees();
                     break;
                 case 4:
+                    Employee employee = getEmployeeByName(name);
+                    if(employee != null){
+                        System.out.println(employee.getFirst_name()+","+employee.getLast_name() + "'s net salary is " + employee.calculateSalary()+"$");
+                    }else{
+                        System.out.println("*** This employee doesn't exists ***");
+                    }
+                case 5:
                     controller.editEmployeeInfo(name, user);
                     break;
-                case 5:
+                case 6:
                     controller.deleteEmployee(name,user);
                     break;
-                case 6:
+                case 7:
                     controller.fireEmployee(name,user);
                     break;
                 default:

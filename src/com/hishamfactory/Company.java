@@ -102,11 +102,14 @@ public class Company {
             String address = sc.nextLine();
             System.out.print("Enter employee role: ");
             String role = sc.nextLine();
+            System.out.print("Enter employee basic salary: ");
+            double basic_salary = sc.nextDouble();
+            sc.nextLine();
             System.out.print("Enter employee password: ");
             String employee_pin = sc.next();
             sc.nextLine();
             if(superVisor == null){
-                Company.superVisor =  new SuperVisor(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                Company.superVisor =  new SuperVisor(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
             }else {
                 if (user.getClass().equals(SuperVisor.class)) {
                     System.out.println("1.Manager           2.Director ");
@@ -116,16 +119,16 @@ public class Company {
                     sc.nextLine();
                     switch (option) {
                         case 1:
-                            employee = new Manager(first_name, last_name, age, address, address, role, employee_pin, company);
+                            employee = new Manager(first_name, last_name, age, address, address, role,basic_salary, employee_pin, company);
                             break;
                         case 2:
-                            employee = new Director(first_name, last_name, age, tel_number, address, role, employee_pin, company);
+                            employee = new Director(first_name, last_name, age, tel_number, address, role,basic_salary, employee_pin, company);
                             break;
                         case 3:
-                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                         case 4:
-                            new Pilot(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            new Pilot(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                     }
                 }
@@ -136,13 +139,13 @@ public class Company {
                     sc.nextLine();
                     switch (option) {
                         case 1:
-                            employee = new Director(first_name, last_name, age, tel_number, address, role, employee_pin, company);
+                            employee = new Director(first_name, last_name, age, tel_number, address, role,basic_salary, employee_pin, company);
                             break;
                         case 2:
-                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                         case 3:
-                            new Pilot(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            new Pilot(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                     }
                 }
@@ -153,10 +156,10 @@ public class Company {
                     sc.nextLine();
                     switch (option) {
                         case 1:
-                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                         case 2:
-                            new Pilot(first_name,last_name,age,tel_number,address,role,employee_pin,company);
+                            new Pilot(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                     }
                 }

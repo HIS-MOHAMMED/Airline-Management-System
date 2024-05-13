@@ -6,7 +6,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public abstract class Employee extends User {
-
+    protected double basic_salary;
+    protected double tax;
+    protected double net_salary;
     /**
      * Create new employee regardless of role
      * @param first_name    the first name of admin
@@ -18,9 +20,24 @@ public abstract class Employee extends User {
      * @param user_pin      the password of admin on system
      * @param company       the company who has the system
      */
-    Employee(String first_name, String last_name, int age, String tel_number, String address, String role, String user_pin, Company company){
+    Employee(String first_name, String last_name, int age, String tel_number, String address, String role,double basic_salary, String user_pin, Company company){
         super(first_name,last_name,age,tel_number,address,role,user_pin,company);
+        this.basic_salary = basic_salary;
     }
+    public abstract double calculateSalary();
+
+    public double getBasic_salary() {
+        return basic_salary;
+    }
+
+    public double getTax() {
+        return tax;
+    }
+
+    public double getNet_salary() {
+        return net_salary;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
