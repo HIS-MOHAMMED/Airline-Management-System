@@ -380,22 +380,30 @@ public class Company {
                     String arrival_time = sc.next();
                     sc.nextLine();
                     System.out.println("............................Available Planes................................");
+                    int plane_in_order= 1;
                     for (Plane plane : Company.planes) {
-                        System.out.println(plane.toString());
+                        System.out.println(plane_in_order+"." +plane.toString());
+                        plane_in_order++;
                     }
                     System.out.println("...........................................................................");
-                    System.out.print("Enter plane code: ");
-                    Plane plane = PlaneController.getPlaneById(sc.next());
-                    sc.nextLine();
-                    if(plane != null) {
-                        System.out.print("Enter ticket price: ");
-                        double ticket_price = sc.nextDouble();
+                    boolean flag = true;
+                    while(flag) {
+                        System.out.print("Enter number of plane in order or 0 to exit: ");
+                        int plane_index = sc.nextInt();
                         sc.nextLine();
+                        if(plane_index == 0) break;
+                        if (plane_index <= Company.planes.size()) {
+                            flag = false;
+                            Plane plane = Company.planes.get(plane_index-1);
+                            System.out.print("Enter ticket price: ");
+                            double ticket_price = sc.nextDouble();
+                            sc.nextLine();
 
-                        Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane, ticket_price, company);
-                        flights.add(newFlight);
-                    }else{
-                        System.out.println("*** This flight not exits ***");
+                            Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane, ticket_price, company);
+                            flights.add(newFlight);
+                        } else {
+                            System.out.println("*** Input not found.Please enter a valid choice ***");
+                        }
                     }
                 }else{
                     System.out.println("*** The des airport not exits ***");
