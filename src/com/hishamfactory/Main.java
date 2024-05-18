@@ -335,56 +335,6 @@ public class Main {
                         break;
                 }
             }
-            if(user.getClass().equals(Passenger.class)) {
-                while (inner_flag1) {
-                    System.out.println("\n........................Home Menu.....................");
-                    System.out.println(user.getFirst_name() + ", " + user.getLast_name() + ".Welcome to " + company.getName());
-                    System.out.println("1.Airports");
-                    System.out.println("2.Planes");
-                    System.out.println("3.Flights");
-                    System.out.println("4.Quit");
-                    System.out.print("Enter a choice: ");
-                    option = sc.nextInt();
-                    sc.nextLine();
-                    sc.nextLine();
-                    if (option >= 1 && option <= 6) {
-                        inner_flag1 = false;
-                    } else {
-                        System.out.println("Just form 1 to 4 you can choose");
-                    }
-                }
-                switch (option) {
-                    case 1:
-                        AirportController controller1 = new AirportController();
-                        while (inner_flag2) {
-                            inner_flag2 = controller1.showAirportMenu(company, controller1);
-                        }
-                        break;
-                    case 2:
-                        if (Company.airports.isEmpty()) {
-                            System.out.println("**You must create airport before**");
-                            break;
-                        }
-                        PlaneController controller2 = new PlaneController();
-                        while (inner_flag2) {
-                            inner_flag2 = controller2.showPlaneMenu(company, controller2);
-                        }
-                        break;
-                    case 3:
-                        if (Company.planes.isEmpty()) {
-                            System.out.println("**You must create plane before**");
-                            break;
-                        }
-                        FlightController controller3 = new FlightController();
-                        while (inner_flag2) {
-                            inner_flag2 = controller3.showFlightMenu(company, controller3, user);
-                        }
-                        break;
-                    case 4:
-                        flag = false;
-                        break;
-                }
-            }
         }catch (InputMismatchException e){
             System.out.println("*** Don't input text only integers accepted here ***");
             sc.nextLine();
