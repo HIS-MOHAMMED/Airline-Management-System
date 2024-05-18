@@ -37,8 +37,8 @@ public class Main {
             try {
                 flag = true;
                 int user;
-                String user_id = "";
-                String user_pin = "";
+                String user_id;
+                String user_pin;
                 System.out.println(".................User Type............................");
                 System.out.println("1.Employee                  2.Passenger");
                 System.out.print("Enter a choice: ");
@@ -52,7 +52,7 @@ public class Main {
                     System.out.print("Enter  password: ");
                     user_pin = sc.next();
                     sc.nextLine();
-                    isAuthenticate = company.userLogin(user_id, user_pin);
+                    isAuthenticate = company.employeeLogin(user_id, user_pin);
                     if (isAuthenticate == null) {
                         System.out.println("ID or password incorrect.please try again");
                     } else {
