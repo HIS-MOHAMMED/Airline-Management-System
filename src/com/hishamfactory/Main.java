@@ -10,7 +10,7 @@ public class Main {
         boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             if(Company.superVisor == null) {
                 while (isNew) {
                     System.out.println("**As first employee you must to create SuperVisor role**");
@@ -174,6 +174,7 @@ public class Main {
                         while (inner_flag2) {
                             inner_flag2 = controller3.showFlightMenu(company, controller3, user);
                         }
+                        System.out.println("Flag is: " + flag);
                         break;
                     case 5:
                         if (Company.flights.isEmpty()) {
@@ -334,7 +335,7 @@ public class Main {
                         break;
                 }
             }
-            else {
+            if(user.getClass().equals(Passenger.class)) {
                 while (inner_flag1) {
                     System.out.println("\n........................Home Menu.....................");
                     System.out.println(user.getFirst_name() + ", " + user.getLast_name() + ".Welcome to " + company.getName());
