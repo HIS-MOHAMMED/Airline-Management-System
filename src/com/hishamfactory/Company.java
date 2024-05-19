@@ -257,7 +257,6 @@ public class Company {
                     sc.nextLine();
 
                     Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number,address, passenger_pin, company);
-                    passengers.add(newPassenger);
                     flight.passengers.add(newPassenger);
 
                 }
