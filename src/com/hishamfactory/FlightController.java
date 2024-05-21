@@ -234,6 +234,13 @@ public class FlightController {
     public  void cancelFlight(String flight_code){
         Flight flight = getFlightById(flight_code);
         if(flight != null){
+            if(!flight.passengers.isEmpty()){
+                for (int i = 0; i < flight.passengers.size();i++) {
+                    System.out.println("Sending email to " + flight.passengers.get(i)+" .......");
+                    Passenger passenger = flight.passengers.get(i);
+                    passenger.passenger_flights.remove(flight);
+                }
+            }
             Company.flights.remove(flight);
             System.out.println("Flight " + flight.getFlight_code() +" removed from system");
         }else{
