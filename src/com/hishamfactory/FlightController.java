@@ -188,7 +188,7 @@ public class FlightController {
                         System.out.print("Enter passenger last name: ");
                         String passenger_last_name_to_remove = sc.next();
                         sc.nextLine();
-                        Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + " " + passenger_last_name_to_remove);
+                        Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + passenger_last_name_to_remove);
                         if(passenger_to_remove != null){
                             flight.passengers.remove(passenger_to_remove);
                             System.out.println("Passenger " +passenger_to_remove.getFirst_name() +","+passenger_to_remove.getLast_name() + " removed from flight");
