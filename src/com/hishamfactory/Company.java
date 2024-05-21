@@ -257,7 +257,6 @@ public class Company {
                     sc.nextLine();
 
                     Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number,address, passenger_pin, company);
-                    passengers.add(newPassenger);
                     flight.passengers.add(newPassenger);
 
                 }
@@ -279,10 +278,10 @@ public class Company {
      * @param user_pin  the password of the employee
      * @return              the employee if the log is successful, or null if it's not
      */
-    public User userLogin(String user_id, String user_pin) {
-        for (User user: users) {
-            if (user.getUuid().compareTo(user_id) == 0 && user.validatePin(user_pin)){
-                return user;
+    public Employee employeeLogin(String user_id, String user_pin) {
+        for (Employee employee: employees) {
+            if (employee.getUuid().compareTo(user_id) == 0 && employee.validatePin(user_pin)){
+                return employee;
             }
         }
         return null;

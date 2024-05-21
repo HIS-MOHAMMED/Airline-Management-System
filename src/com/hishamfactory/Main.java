@@ -10,7 +10,7 @@ public class Main {
         boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             if(Company.superVisor == null) {
                 while (isNew) {
                     System.out.println("**As first employee you must to create SuperVisor role**");
@@ -37,8 +37,8 @@ public class Main {
             try {
                 flag = true;
                 int user;
-                String user_id = "";
-                String user_pin = "";
+                String user_id;
+                String user_pin;
                 System.out.println(".................User Type............................");
                 System.out.println("1.Employee                  2.Passenger");
                 System.out.print("Enter a choice: ");
@@ -52,7 +52,7 @@ public class Main {
                     System.out.print("Enter  password: ");
                     user_pin = sc.next();
                     sc.nextLine();
-                    isAuthenticate = company.userLogin(user_id, user_pin);
+                    isAuthenticate = company.employeeLogin(user_id, user_pin);
                     if (isAuthenticate == null) {
                         System.out.println("ID or password incorrect.please try again");
                     } else {
@@ -174,6 +174,7 @@ public class Main {
                         while (inner_flag2) {
                             inner_flag2 = controller3.showFlightMenu(company, controller3, user);
                         }
+                        System.out.println("Flag is: " + flag);
                         break;
                     case 5:
                         if (Company.flights.isEmpty()) {
@@ -330,56 +331,6 @@ public class Main {
                         }
                         break;
                     case 6:
-                        flag = false;
-                        break;
-                }
-            }
-            else {
-                while (inner_flag1) {
-                    System.out.println("\n........................Home Menu.....................");
-                    System.out.println(user.getFirst_name() + ", " + user.getLast_name() + ".Welcome to " + company.getName());
-                    System.out.println("1.Airports");
-                    System.out.println("2.Planes");
-                    System.out.println("3.Flights");
-                    System.out.println("4.Quit");
-                    System.out.print("Enter a choice: ");
-                    option = sc.nextInt();
-                    sc.nextLine();
-                    sc.nextLine();
-                    if (option >= 1 && option <= 6) {
-                        inner_flag1 = false;
-                    } else {
-                        System.out.println("Just form 1 to 4 you can choose");
-                    }
-                }
-                switch (option) {
-                    case 1:
-                        AirportController controller1 = new AirportController();
-                        while (inner_flag2) {
-                            inner_flag2 = controller1.showAirportMenu(company, controller1);
-                        }
-                        break;
-                    case 2:
-                        if (Company.airports.isEmpty()) {
-                            System.out.println("**You must create airport before**");
-                            break;
-                        }
-                        PlaneController controller2 = new PlaneController();
-                        while (inner_flag2) {
-                            inner_flag2 = controller2.showPlaneMenu(company, controller2);
-                        }
-                        break;
-                    case 3:
-                        if (Company.planes.isEmpty()) {
-                            System.out.println("**You must create plane before**");
-                            break;
-                        }
-                        FlightController controller3 = new FlightController();
-                        while (inner_flag2) {
-                            inner_flag2 = controller3.showFlightMenu(company, controller3, user);
-                        }
-                        break;
-                    case 4:
                         flag = false;
                         break;
                 }

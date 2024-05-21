@@ -14,7 +14,7 @@ public class PassengersController {
     public static Passenger getPassengerByName(String first_last_name) {
         int i = 0;
         while (i < Company.passengers.size()) {
-            String name = Company.passengers.get(i).getFirst_name() + " " + Company.passengers.get(i).getLast_name();
+            String name = Company.passengers.get(i).getFirst_name() + Company.passengers.get(i).getLast_name();
             if (first_last_name.equals(name)) {
                 return Company.passengers.get(i);
             }
@@ -64,7 +64,7 @@ public class PassengersController {
                         System.out.print("Enter new last name: ");
                         passenger.setLast_name(sc.next());
                         sc.nextLine();
-                        System.out.println("Name Changed to " + passenger.getFirst_name() + " " + passenger.getLast_name());
+                        System.out.println("Name Changed to " + passenger.getFirst_name() + passenger.getLast_name());
                         break;
                     case 2:
                         System.out.print("Enter new age: ");
@@ -189,7 +189,7 @@ public class PassengersController {
                 name = sc.next();
                 sc.nextLine();
                 System.out.print("Enter last name: ");
-                name += " " + sc.next();
+                name += sc.next();
                 sc.nextLine();
             }
             switch (option) {
@@ -197,7 +197,7 @@ public class PassengersController {
                     company.addPassenger(company);
                     break;
                 case 2:
-                    System.out.println(controller.getPassengerByName(name).toString());
+                    System.out.println(getPassengerByName(name));
                     break;
                 case 3:
                     controller.printAllPassengers();
