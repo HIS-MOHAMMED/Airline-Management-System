@@ -12,13 +12,13 @@ public class Flight implements Identifiable{
     private double ticket_price;
     public ArrayList<Passenger> passengers = new ArrayList<>();
 
-    Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane, double ticket_price,Company company) {
+    Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Company company) {
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
         this.departure_time = departure_time;
         this.arrival_time = arrival_time;
         this.plane = plane;
-        this.ticket_price = ticket_price;
+        this.ticket_price = 0.0;
         this.flight_code =company.getNewUUID();
         System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
     }
@@ -78,7 +78,15 @@ public class Flight implements Identifiable{
     }
 
     public void setTicket_price(double ticket_price) {
-        this.ticket_price = ticket_price;
+        if(ticket_price >= 100.0 &&  ticket_price <= 1000.0){
+            this.ticket_price = ticket_price;
+        }else{
+            System.out.println("**************Sorry pricing Max($1000.0 and Min($100.0).Try set it again**************");
+            if(this.ticket_price == 0.0) {
+                this.ticket_price = 100.0;
+                System.out.println("****************Ticket price changed to default price($100.0)******************");
+            }
+        }
     }
     public boolean hasAvailableSeat(Flight flight){
         return flight.passengers.size() < flight.getPlane().getPlane_capacity();

@@ -399,7 +399,8 @@ public class Company {
                             double ticket_price = sc.nextDouble();
                             sc.nextLine();
 
-                            Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane, ticket_price, company);
+                            Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane,company);
+                            newFlight.setTicket_price(ticket_price);
                             flights.add(newFlight);
                         } else {
                             System.out.println("*** Input not found.Please enter a valid choice ***");

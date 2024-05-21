@@ -72,8 +72,6 @@ public class FlightController {
         if (flight != null) {
             boolean hasPermission = false;
             for (String permissionsUuid : Company.permissions_editing_uuids) {
-                System.out.println(user.getUuid());
-                System.out.println(permissionsUuid);
                 if (permissionsUuid.equalsIgnoreCase(user.getUuid())) {
                     hasPermission = true;
                     break;
@@ -171,7 +169,6 @@ public class FlightController {
                         double ticket_price_new = sc.nextDouble();
                         sc.nextLine();
                         flight.setTicket_price(ticket_price_new);
-                        System.out.println("Flight's price changed to " + flight.getTicket_price());
                         break;
                     case 7:
                         company.addPassenger(company,flight);
