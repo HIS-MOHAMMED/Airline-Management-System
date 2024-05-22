@@ -188,6 +188,8 @@ public class FlightController {
                         Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + passenger_last_name_to_remove);
                         if(passenger_to_remove != null){
                             flight.passengers.remove(passenger_to_remove);
+                            passenger_to_remove.passenger_flights.remove(getFlightById(flight_code));
+                            System.out.println("Send email to  "+ passenger_to_remove.getFirst_name()+","+passenger_to_remove.getLast_name()+"..............");
                             System.out.println("Passenger " +passenger_to_remove.getFirst_name() +","+passenger_to_remove.getLast_name() + " removed from flight");
                         }else{
                             System.out.println("*** This passenger doesn't exists ***");
@@ -233,7 +235,7 @@ public class FlightController {
         if(flight != null){
             if(!flight.passengers.isEmpty()){
                 for (int i = 0; i < flight.passengers.size();i++) {
-                    System.out.println("Sending email to " + flight.passengers.get(i)+" .......");
+                    System.out.println("Sending email to " + flight.passengers.get(i).getFirst_name()+","+flight.passengers.get(i).getLast_name()+" ...........");
                     Passenger passenger = flight.passengers.get(i);
                     passenger.passenger_flights.remove(flight);
                 }
