@@ -2,7 +2,6 @@ package com.hishamfactory;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class EmployeesController{
@@ -25,7 +24,7 @@ public class EmployeesController{
     /**
      * print all employees that exists on system
      */
-    public void printAllEmployees() {
+    public void showAllEmployees() {
         if (Company.employees.isEmpty()) {
             System.out.println("** Sorry,The list of employees is empty **");
         } else {
@@ -236,7 +235,7 @@ public class EmployeesController{
                     }
                     break;
                 case 3:
-                    controller.printAllEmployees();
+                    controller.showAllEmployees();
                     break;
                 case 4:
                     Employee employee = getEmployeeByName(name);

@@ -60,7 +60,7 @@ public class Main {
                         String date = simpleDateFormat.format(new Date());
                         new LoginHistory(date, isAuthenticate);
                         while (flag) {
-                            flag = showUserMenu(company, isAuthenticate, sc);
+                            flag = showHomeMenu(company, isAuthenticate, sc);
                         }
                     }
                 } else if (user == 2) {
@@ -115,7 +115,7 @@ public class Main {
      * @param sc        the scanner object to input user
      * @return          the boolean value to stay login or log out
      */
-    public static boolean showUserMenu(Company company, User user, Scanner sc) {
+    public static boolean showHomeMenu(Company company, User user, Scanner sc) {
         boolean flag = true;
         boolean inner_flag1 = true;
         boolean inner_flag2 = true;

@@ -34,7 +34,7 @@ public class AirportController {
     /**
      * Print all airports that exist on system
      */
-    public void printAllAirports(){
+    public void showAllAirports(){
         if(Company.airports.isEmpty()){
             System.out.println("** Sorry.The airport list is empty **");
         }else{
@@ -148,7 +148,7 @@ public class AirportController {
                     company.addAirport(company);
                     break;
                 case 2:
-                    controller.printAllAirports();
+                    controller.showAllAirports();
                     break;
                 case 3:
                     Airport airport = getAirportByID(airport_code);

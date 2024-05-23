@@ -26,7 +26,7 @@ public class PassengersController {
     /**
      * Print all passenger on the system
      */
-    public void printAllPassengers() {
+    public void showAllPassengers() {
         if(Company.passengers.isEmpty()){
             System.out.println("*** Sorry,The list of passengers is empty ***");
         }else{
@@ -200,7 +200,7 @@ public class PassengersController {
                     System.out.println(getPassengerByName(name));
                     break;
                 case 3:
-                    controller.printAllPassengers();
+                    controller.showAllPassengers();
                     break;
                 case 4:
                     controller.editPassengerInfo(name);
