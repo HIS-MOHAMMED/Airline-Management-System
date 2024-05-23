@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-        boolean isNew = true;
+	    boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
             System.out.println("--------------------------------------------------------------------------------------------------------------------------");
@@ -130,13 +130,14 @@ public class Main {
                     System.out.println("3.Planes");
                     System.out.println("4.Flights");
                     System.out.println("5.Passengers");
-                    System.out.println("6.Create Coupon");
-                    System.out.println("7.Show login history");
-                    System.out.println("8.Quit");
+                    System.out.println("6.Pilots");
+                    System.out.println("7.Create Coupon");
+                    System.out.println("8.Show login history");
+                    System.out.println("9.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
-                    if (option >= 1 && option <= 8) {
+                    if (option >= 1 && option <= 9) {
                         inner_flag1 = false;
                     } else {
                         System.out.println("Just form 1 to 6 you can choose");
@@ -187,12 +188,18 @@ public class Main {
                         }
                         break;
                     case 6:
-                        company.CreateCoupon(company);
+                        PilotsController controller5 = new PilotsController();
+                        while(inner_flag2){
+                            inner_flag2 = controller5.showPilotMenu(company);
+                        }
                         break;
                     case 7:
-                        new LoginHistory().printLoginHistory();
+                        company.CreateCoupon(company);
                         break;
                     case 8:
+                        new LoginHistory().printLoginHistory();
+                        break;
+                    case 9:
                         flag = false;
                         break;
                 }

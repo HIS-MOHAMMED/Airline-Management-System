@@ -426,6 +426,44 @@ public class Company {
             sc.nextLine();
         }
     }
+    public void addPilot(Company company){
+        try {
+            System.out.print("Enter pilot first name: ");
+            String first_name = sc.next();
+            sc.nextLine();
+
+            System.out.print("Enter pilot last name: ");
+            String last_name = sc.next();
+            sc.nextLine();
+
+            System.out.print("Enter pilot age: ");
+            int age = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter pilot tel number: ");
+            String tel_number = sc.next();
+            sc.nextLine();
+
+            System.out.print("Enter pilot address: ");
+            String address = sc.nextLine();
+
+            System.out.print("Enter pilot role: ");
+            String role = sc.nextLine();
+
+            System.out.print("Enter pilot basic salary: ");
+            double basic_salary = sc.nextDouble();
+            sc.nextLine();
+
+            System.out.print("Enter pilot password: ");
+            String pilot_pin = sc.next();
+            sc.nextLine();
+
+            new Pilot(first_name, last_name, age, tel_number, address, role, basic_salary, pilot_pin, company);
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.nextLine();
+        }
+    }
     public void CreateCoupon(Company company){
         try {
             System.out.print("Enter coupon code: ");

@@ -5,5 +5,6 @@ public class Pilot extends RegularUser{
         super(first_name,last_name,age,tel_number,address,role,pilot_basic_salary,pilot_pin,company);
         Company.users.add(this);
         Company.employees.add(this);
+        Company.pilots.add(this);
     }
 }
