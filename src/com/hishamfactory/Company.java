@@ -385,26 +385,36 @@ public class Company {
                         plane_in_order++;
                     }
                     System.out.println("...........................................................................");
-                    boolean flag = true;
-                    while(flag) {
                         System.out.print("Enter number of plane in order or 0 to exit: ");
                         int plane_index = sc.nextInt();
                         sc.nextLine();
-                        if(plane_index == 0) break;
-                        if (plane_index <= Company.planes.size()) {
-                            flag = false;
+                        if (!(plane_index <= 0 ) && plane_index <= Company.planes.size()) {
                             Plane plane = Company.planes.get(plane_index-1);
-                            System.out.print("Enter ticket price: ");
-                            double ticket_price = sc.nextDouble();
+                            System.out.println("...........................Available Pilots.........................");
+                            int pilot_in_order = 1;
+                            for (Pilot pilot : Company.pilots) {
+                                System.out.println(pilot_in_order +"."+pilot.toString());
+                                pilot_in_order++;
+                            }
+                            System.out.println("....................................................................");
+                            System.out.print("Enter number of pilot in order or 0 to exit: ");
+                            int pilot_index = sc.nextInt();
                             sc.nextLine();
+                            if(!(pilot_index <= 0) && pilot_index <= Company.pilots.size()){
+                                Pilot pilot = Company.pilots.get(pilot_index-1);
+                                System.out.print("Enter ticket price: ");
+                                double ticket_price = sc.nextDouble();
+                                sc.nextLine();
 
-                            Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane,company);
-                            newFlight.setTicket_price(ticket_price);
-                            flights.add(newFlight);
+                                Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane,pilot,company);
+                                newFlight.setTicket_price(ticket_price);
+                                flights.add(newFlight);
+                            }else {
+                                System.out.println("*** Input not found.Please enter a valid choice from list ***");
+                            }
                         } else {
-                            System.out.println("*** Input not found.Please enter a valid choice ***");
+                            System.out.println("*** Input not found.Please enter a valid choice from list ***");
                         }
-                    }
                 }else{
                     System.out.println("*** The des airport not exits ***");
                 }

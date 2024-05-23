@@ -10,14 +10,16 @@ public class Flight implements Identifiable{
     private String arrival_time;
     public Plane plane;
     private double ticket_price;
+    private Pilot flight_captain;
     public ArrayList<Passenger> passengers = new ArrayList<>();
 
-    Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Company company) {
+    Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,Company company) {
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
         this.departure_time = departure_time;
         this.arrival_time = arrival_time;
         this.plane = plane;
+        this.flight_captain = flight_captain;
         this.ticket_price = 0.0;
         this.flight_code =company.getNewUUID();
         System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
@@ -77,6 +79,14 @@ public class Flight implements Identifiable{
         return ticket_price;
     }
 
+    public Pilot getFlight_captain() {
+        return flight_captain;
+    }
+
+    public void setFlight_captain(Pilot flight_captain) {
+        this.flight_captain = flight_captain;
+    }
+
     public void setTicket_price(double ticket_price) {
         if(ticket_price >= 100.0 &&  ticket_price <= 1000.0){
             this.ticket_price = ticket_price;
@@ -91,16 +101,19 @@ public class Flight implements Identifiable{
     public boolean hasAvailableSeat(Flight flight){
         return flight.passengers.size() < flight.getPlane().getPlane_capacity();
     }
+
     @Override
     public String toString() {
         return "Flight{" +
-                "flight_id='" + flight_code + '\'' +
-                ", departure_airport=" + departure_airport.getAirport_name() +
-                ", destination_airport=" + destination_airport.getAirport_name() +
+                "flight_code='" + flight_code + '\'' +
+                ", departure_airport=" + departure_airport +
+                ", destination_airport=" + destination_airport +
                 ", departure_time='" + departure_time + '\'' +
                 ", arrival_time='" + arrival_time + '\'' +
-                ", plane=" + plane.getPlane_id() +
+                ", plane=" + plane +
                 ", ticket_price=" + ticket_price +
+                ", flight_captain=" + flight_captain +
+                ", passengers=" + passengers +
                 '}';
     }
 
