@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-	    boolean isNew = true;
+	boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
             System.out.println("--------------------------------------------------------------------------------------------------------------------------");
@@ -37,7 +37,7 @@ public class Main {
             try {
                 flag = true;
                 int user;
-                String user_id;
+                String user_name_or_id;
                 String user_pin;
                 System.out.println(".................User Type............................");
                 System.out.println("1.Employee                  2.Passenger");
@@ -46,15 +46,15 @@ public class Main {
                 sc.nextLine();
                 if (user == 1) {
                     System.out.println("................Login Menu............................");
-                    System.out.print("Enter  ID: ");
-                    user_id = sc.next();
+                    System.out.print("Enter  ID or Username: ");
+                    user_name_or_id = sc.next();
                     sc.nextLine();
                     System.out.print("Enter  password: ");
                     user_pin = sc.next();
                     sc.nextLine();
-                    isAuthenticate = company.employeeLogin(user_id, user_pin);
+                    isAuthenticate = company.employeeLoginByUserNameOrId(user_name_or_id, user_pin);
                     if (isAuthenticate == null) {
-                        System.out.println("ID or password incorrect.please try again");
+                        System.out.println("ID,Username or password incorrect.please try again");
                     } else {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());
@@ -79,14 +79,14 @@ public class Main {
                     }
                     System.out.println(".....................Login Menu.......................");
                     System.out.print("Enter  ID: ");
-                    user_id = sc.next();
+                    user_name_or_id = sc.next();
                     sc.nextLine();
                     System.out.print("Enter  password: ");
                     user_pin = sc.next();
                     sc.nextLine();
-                    isAuthenticate = company.passengerLogin(user_id, user_pin);
+                    isAuthenticate = company.passengerLoginByUserNameOrID(user_name_or_id, user_pin);
                     if (isAuthenticate == null) {
-                        System.out.println("ID or password incorrect.please try again");
+                        System.out.println("ID,Username or password incorrect.please try again");
                     } else {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());

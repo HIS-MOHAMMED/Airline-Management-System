@@ -7,7 +7,8 @@ import java.security.NoSuchAlgorithmException;
 public abstract class User extends Person implements Identifiable {
     protected String uuid;
     protected byte[] pinHash;
-    User(String first_name, String last_name, int age, String tel_number,String address,String role, String person_pin, Company company){
+    protected  String user_name;
+    User(String first_name, String last_name,String user_name, int age, String tel_number,String address,String role, String person_pin, Company company){
         super(first_name,last_name,age,tel_number,address,role);
         try{
             MessageDigest md =MessageDigest.getInstance("SHA-256");
@@ -18,8 +19,9 @@ public abstract class User extends Person implements Identifiable {
             System.exit(0);
         }
         this.uuid = company.getNewUUID();
+        this.user_name = user_name;
     }
-    User(String first_name, String last_name, int age, String tel_number,String address, String person_pin, Company company){
+    User(String first_name, String last_name,String user_name, int age, String tel_number,String address, String person_pin, Company company){
         super(first_name,last_name,age,tel_number,address);
         try{
             MessageDigest md =MessageDigest.getInstance("SHA-256");
@@ -30,6 +32,7 @@ public abstract class User extends Person implements Identifiable {
             System.exit(0);
         }
         this.uuid = company.getNewUUID();
+        this.user_name = user_name;
     }
     public String getUuid() {
         return uuid;
@@ -71,6 +74,14 @@ public abstract class User extends Person implements Identifiable {
     }
     public byte[] getPinHash() {
         return pinHash;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     @Override
