@@ -140,6 +140,7 @@ public class EmployeesController{
     public void deleteEmployee(String name,User user) {
         Employee employee = getEmployeeByName(name);
         if (employee != null) {
+            employee.messages.add("Now You are unable to access your privileges as "+employee.getRole()+".Thank you to work us we hope the best for you");
             if (!user.getUuid().equals(employee.getUuid()) && !employee.getClass().equals(SuperVisor.class)) {
                 if (user.getClass().equals(SuperVisor.class)) {
                     Company.users.remove(employee);

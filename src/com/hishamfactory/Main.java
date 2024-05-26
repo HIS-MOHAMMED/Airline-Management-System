@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-	boolean isNew = true;
+	    boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
             System.out.println("--------------------------------------------------------------------------------------------------------------------------");
@@ -59,6 +59,11 @@ public class Main {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());
                         new LoginHistory(date, isAuthenticate);
+                        System.out.println("........................Messages..............................");
+                        for (String message : isAuthenticate.messages) {
+                            System.out.println(message);
+                        }
+                        System.out.println("..............................................................");
                         while (flag) {
                             flag = showHomeMenu(company, isAuthenticate, sc);
                         }
@@ -91,6 +96,11 @@ public class Main {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());
                         new LoginHistory(date, isAuthenticate);
+                        System.out.println("........................Messages..............................");
+                        for (String message : isAuthenticate.messages) {
+                            System.out.println(message);
+                        }
+                        System.out.println("..............................................................");
                         while (flag) {
                             PassengersController controller = new PassengersController();
                             flag = controller.showPassengerMenu((Passenger) isAuthenticate);

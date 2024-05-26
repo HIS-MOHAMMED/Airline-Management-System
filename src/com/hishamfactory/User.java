@@ -3,11 +3,13 @@ package com.hishamfactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public abstract class User extends Person implements Identifiable {
     protected String uuid;
     protected byte[] pinHash;
     protected  String user_name;
+    protected ArrayList<String> messages = new ArrayList<>();
     User(String first_name, String last_name,String user_name, int age, String tel_number,String address,String role, String person_pin, Company company){
         super(first_name,last_name,age,tel_number,address,role);
         try{

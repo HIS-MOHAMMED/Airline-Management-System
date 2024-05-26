@@ -254,9 +254,8 @@ public class FlightController {
         if(flight != null){
             if(!flight.passengers.isEmpty()){
                 for (int i = 0; i < flight.passengers.size();i++) {
-                    System.out.println("Sending email to " + flight.passengers.get(i)+" .......");
-                    Passenger passenger = flight.passengers.get(i);
-                    passenger.passenger_flights.remove(flight);
+                    flight.passengers.get(i).messages.add("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
+                    flight.passengers.get(i).passenger_flights.remove(flight);
                 }
             }
             Company.flights.remove(flight);
@@ -280,6 +279,7 @@ public class FlightController {
         sc.nextLine();
         if(flight != null){
             passenger.passenger_flights.remove(flight);
+            passenger.messages.add("Your flight from "+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancel");
             flight.passengers.remove(passenger);
         }else{
             System.out.println("*** This flight not exists ***");
