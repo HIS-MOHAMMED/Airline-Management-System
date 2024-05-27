@@ -59,11 +59,14 @@ public class Main {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());
                         new LoginHistory(date, isAuthenticate);
-                        System.out.println("........................Messages..............................");
-                        for (String message : isAuthenticate.messages) {
-                            System.out.println(message);
+                        if(isAuthenticate.isNewMessages) {
+                            System.out.println("........................New Messages.....................");
+                            for (String message : isAuthenticate.messages) {
+                                System.out.println(message);
+                            }
+                            isAuthenticate.messages = null;
+                            isAuthenticate.isNewMessages = false;
                         }
-                        System.out.println("..............................................................");
                         while (flag) {
                             flag = showHomeMenu(company, isAuthenticate, sc);
                         }
@@ -96,11 +99,14 @@ public class Main {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());
                         new LoginHistory(date, isAuthenticate);
-                        System.out.println("........................Messages..............................");
-                        for (String message : isAuthenticate.messages) {
-                            System.out.println(message);
+                        if(isAuthenticate.isNewMessages) {
+                            System.out.println("........................New Messages.....................");
+                            for (String message : isAuthenticate.messages) {
+                                System.out.println(message);
+                            }
+                            isAuthenticate.messages = null;
+                            isAuthenticate.isNewMessages= false;
                         }
-                        System.out.println("..............................................................");
                         while (flag) {
                             PassengersController controller = new PassengersController();
                             flag = controller.showPassengerMenu((Passenger) isAuthenticate);

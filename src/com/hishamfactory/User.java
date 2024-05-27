@@ -10,6 +10,7 @@ public abstract class User extends Person implements Identifiable {
     protected byte[] pinHash;
     protected  String user_name;
     protected ArrayList<String> messages = new ArrayList<>();
+    protected boolean isNewMessages = false;
     User(String first_name, String last_name,String user_name, int age, String tel_number,String address,String role, String person_pin, Company company){
         super(first_name,last_name,age,tel_number,address,role);
         try{
@@ -85,7 +86,10 @@ public abstract class User extends Person implements Identifiable {
     public void setUser_name(String user_name) {
         this.user_name = user_name;
     }
-
+    public void hasNewMessages(String new_messages){
+        this.messages.add(new_messages);
+        this.isNewMessages =  true;
+    }
     @Override
     public String identify() {
         return this.uuid;

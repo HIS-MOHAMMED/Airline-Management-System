@@ -188,6 +188,7 @@ public class FlightController {
                         sc.nextLine();
                         Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + passenger_last_name_to_remove);
                         if(passenger_to_remove != null){
+                            passenger_to_remove.hasNewMessages("Your ticket was removed by admin");
                             flight.passengers.remove(passenger_to_remove);
                             System.out.println("Passenger " +passenger_to_remove.getFirst_name() +","+passenger_to_remove.getLast_name() + " removed from flight");
                         }else{
@@ -254,7 +255,7 @@ public class FlightController {
         if(flight != null){
             if(!flight.passengers.isEmpty()){
                 for (int i = 0; i < flight.passengers.size();i++) {
-                    flight.passengers.get(i).messages.add("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
+                    flight.passengers.get(i).hasNewMessages("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
                     flight.passengers.get(i).passenger_flights.remove(flight);
                 }
             }
@@ -279,7 +280,7 @@ public class FlightController {
         sc.nextLine();
         if(flight != null){
             passenger.passenger_flights.remove(flight);
-            passenger.messages.add("Your flight from "+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancel");
+            passenger.hasNewMessages("Your flight was cancelled");
             flight.passengers.remove(passenger);
         }else{
             System.out.println("*** This flight not exists ***");
