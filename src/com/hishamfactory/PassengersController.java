@@ -277,11 +277,11 @@ public class PassengersController {
      */
     public static boolean checkPassengerNotExist(String name) {
         for (Passenger passenger : Company.passengers) {
-            String passenger_name = passenger.getFirst_name() + " " + passenger.getLast_name();
+            String passenger_name = passenger.getFirst_name()  + passenger.getLast_name();
             if (passenger_name.equalsIgnoreCase(name)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }

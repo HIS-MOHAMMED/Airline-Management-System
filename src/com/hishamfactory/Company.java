@@ -196,7 +196,7 @@ public class Company {
                 System.out.print("Enter passenger last name: ");
                 last_name = sc.next();
                 sc.nextLine();
-                if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
+                if (PassengersController.checkPassengerNotExist(first_name + last_name)) {
                     System.out.println("****This name had already created****");
                     continue;
                 }
@@ -245,7 +245,7 @@ public class Company {
                     System.out.print("Enter passenger last name: ");
                     last_name = sc.next();
                     sc.nextLine();
-                    if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
+                    if (PassengersController.checkPassengerNotExist(first_name + last_name)) {
                         System.out.println("****This name had already created****");
                         continue;
                     }
