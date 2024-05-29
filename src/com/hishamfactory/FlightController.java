@@ -188,7 +188,7 @@ public class FlightController {
                         sc.nextLine();
                         Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + passenger_last_name_to_remove);
                         if(passenger_to_remove != null){
-                            passenger_to_remove.hasNewMessages("Your ticket was removed by admin");
+                            passenger_to_remove.hasNewMessages("Your flight(hold code: "+flight.getFlight_code()+") has been canceled as per your request.");
                             flight.passengers.remove(passenger_to_remove);
                             System.out.println("Passenger " +passenger_to_remove.getFirst_name() +","+passenger_to_remove.getLast_name() + " removed from flight");
                         }else{
@@ -255,7 +255,7 @@ public class FlightController {
         if(flight != null){
             if(!flight.passengers.isEmpty()){
                 for (Passenger passenger : flight.passengers) {
-                    passenger.hasNewMessages("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
+                    passenger.hasNewMessages("Unfortunately, you flight from "+flight.getDeparture_airport().getAirport_name()+" to "+flight.getDestination_airport().getAirport_name()+" was cancelled.We are sorry for that.");
                     passenger.passenger_flights.remove(flight);
                 }
             }
@@ -280,7 +280,7 @@ public class FlightController {
         sc.nextLine();
         if(flight != null){
             passenger.passenger_flights.remove(flight);
-            passenger.hasNewMessages("Your flight was cancelled");
+            passenger.hasNewMessages("Your flight (hold code: "+flight.getFlight_code()+") cancellation has been processed successfully.");
             flight.passengers.remove(passenger);
         }else{
             System.out.println("*** This flight not exists ***");
