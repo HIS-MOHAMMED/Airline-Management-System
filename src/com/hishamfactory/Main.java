@@ -64,7 +64,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = null;
+                            isAuthenticate.messages = new ArrayList<>();
                             isAuthenticate.isNewMessages = false;
                         }
                         while (flag) {
@@ -104,7 +104,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = null;
+                            isAuthenticate.messages = new ArrayList<>();
                             isAuthenticate.isNewMessages= false;
                         }
                         while (flag) {
