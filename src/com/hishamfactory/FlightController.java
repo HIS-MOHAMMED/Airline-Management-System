@@ -89,7 +89,8 @@ public class FlightController {
                 System.out.println("6.Edit Ticket Price");
                 System.out.println("7.Add New Passenger");
                 System.out.println("8.Remove Passenger");
-                System.out.println("9.Quit");
+                System.out.println("9.Change flight captain");
+                System.out.println("10.Quit");
                 System.out.print("Enter a choice: ");
                 int option = sc.nextInt();
                 sc.nextLine();
@@ -187,15 +188,34 @@ public class FlightController {
                         sc.nextLine();
                         Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + passenger_last_name_to_remove);
                         if(passenger_to_remove != null){
+                            passenger_to_remove.hasNewMessages("Your ticket was removed by admin");
                             flight.passengers.remove(passenger_to_remove);
-                            passenger_to_remove.passenger_flights.remove(getFlightById(flight_code));
-                            System.out.println("Send email to  "+ passenger_to_remove.getFirst_name()+","+passenger_to_remove.getLast_name()+"..............");
                             System.out.println("Passenger " +passenger_to_remove.getFirst_name() +","+passenger_to_remove.getLast_name() + " removed from flight");
                         }else{
                             System.out.println("*** This passenger doesn't exists ***");
                         }
                         break;
                     case 9:
+                        System.out.println("...................................Available Pilots..............................");
+                        for (Pilot pilot : Company.pilots) {
+                            System.out.println(pilot.toString());
+                        }
+                        System.out.println(".................................................................................");
+                        System.out.print("Enter pilot first name: ");
+                        String name = sc.next();
+                        sc.nextLine();
+                        System.out.print("Enter pilot last name: ");
+                        name += sc.next();
+                        sc.nextLine();
+                        EmployeesController employeesController = new EmployeesController();
+                        Pilot  pilot = (Pilot) employeesController.getEmployeeByName(name);
+                        if(pilot != null){
+                            flight.setFlight_captain(pilot);
+                            System.out.println("Flight's captain change to pilot has ID " + pilot.getUuid());
+                        }else {
+                            System.out.println("*** This pilot doesn't exists ***");
+                        }
+                    case 10:
                         break;
                     default:
                         System.out.println("*** Please enter a valid choice ***");
@@ -235,9 +255,8 @@ public class FlightController {
         if(flight != null){
             if(!flight.passengers.isEmpty()){
                 for (int i = 0; i < flight.passengers.size();i++) {
-                    System.out.println("Sending email to " + flight.passengers.get(i).getFirst_name()+","+flight.passengers.get(i).getLast_name()+" ...........");
-                    Passenger passenger = flight.passengers.get(i);
-                    passenger.passenger_flights.remove(flight);
+                    flight.passengers.get(i).hasNewMessages("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
+                    flight.passengers.get(i).passenger_flights.remove(flight);
                 }
             }
             Company.flights.remove(flight);
@@ -261,6 +280,7 @@ public class FlightController {
         sc.nextLine();
         if(flight != null){
             passenger.passenger_flights.remove(flight);
+            passenger.hasNewMessages("Your flight was cancelled");
             flight.passengers.remove(passenger);
         }else{
             System.out.println("*** This flight not exists ***");
