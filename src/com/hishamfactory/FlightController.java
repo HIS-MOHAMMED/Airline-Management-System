@@ -254,9 +254,9 @@ public class FlightController {
         Flight flight = getFlightById(flight_code);
         if(flight != null){
             if(!flight.passengers.isEmpty()){
-                for (int i = 0; i < flight.passengers.size();i++) {
-                    flight.passengers.get(i).hasNewMessages("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
-                    flight.passengers.get(i).passenger_flights.remove(flight);
+                for (Passenger passenger : flight.passengers) {
+                    passenger.hasNewMessages("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
+                    passenger.passenger_flights.remove(flight);
                 }
             }
             Company.flights.remove(flight);
@@ -391,9 +391,7 @@ public class FlightController {
                 default:
                     System.out.println("*** Please enter a valid choice ***");
             }
-        } catch (NullPointerException e) {
-            System.out.println("*** This flight not exists ***");
-            sc.nextLine();
+
         } catch (InputMismatchException e) {
             System.out.println("*** Please enter a valid choice ***");
             sc.nextLine();
