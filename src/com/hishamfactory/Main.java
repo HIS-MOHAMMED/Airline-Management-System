@@ -144,9 +144,9 @@ public class Main {
                     System.out.println("1.Employees");
                     System.out.println("2.Airports");
                     System.out.println("3.Planes");
-                    System.out.println("4.Flights");
-                    System.out.println("5.Passengers");
-                    System.out.println("6.Pilots");
+                    System.out.println("4.Pilots");
+                    System.out.println("5.Flights");
+                    System.out.println("6.Passengers");
                     System.out.println("7.Create Coupon");
                     System.out.println("8.Show login history");
                     System.out.println("9.Quit");
@@ -183,8 +183,18 @@ public class Main {
                         }
                         break;
                     case 4:
+                        PilotsController controller5 = new PilotsController();
+                        while(inner_flag2){
+                            inner_flag2 = controller5.showPilotMenu(company);
+                        }
+                        break;
+                    case 5:
                         if (Company.planes.isEmpty()) {
                             System.out.println("**You must create plane before**");
+                            break;
+                        }
+                        if(Company.pilots.isEmpty()){
+                            System.out.println("*** You must add pilots before ***");
                             break;
                         }
                         FlightController controller3 = new FlightController();
@@ -193,7 +203,7 @@ public class Main {
                         }
                         System.out.println("Flag is: " + flag);
                         break;
-                    case 5:
+                    case 6:
                         if (Company.flights.isEmpty()) {
                             System.out.println("**You must create flight before**");
                             break;
@@ -201,12 +211,6 @@ public class Main {
                         PassengersController controller4 = new PassengersController();
                         while (inner_flag2) {
                             inner_flag2 = controller4.showPassengerMenu(company, controller4);
-                        }
-                        break;
-                    case 6:
-                        PilotsController controller5 = new PilotsController();
-                        while(inner_flag2){
-                            inner_flag2 = controller5.showPilotMenu(company);
                         }
                         break;
                     case 7:
