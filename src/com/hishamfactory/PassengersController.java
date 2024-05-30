@@ -26,7 +26,7 @@ public class PassengersController {
     /**
      * Print all passenger on the system
      */
-    public void printAllPassengers() {
+    public void showAllPassengers() {
         if(Company.passengers.isEmpty()){
             System.out.println("*** Sorry,The list of passengers is empty ***");
         }else{
@@ -173,6 +173,7 @@ public class PassengersController {
     public boolean showPassengerMenu(Company company, PassengersController controller) {
         boolean flag = true;
         try {
+
             System.out.println(".......................Passenger Menu...............................");
             System.out.println("1.Add new passenger");
             System.out.println("2.Get passenger by name");
@@ -200,7 +201,7 @@ public class PassengersController {
                     System.out.println(getPassengerByName(name));
                     break;
                 case 3:
-                    controller.printAllPassengers();
+                    controller.showAllPassengers();
                     break;
                 case 4:
                     controller.editPassengerInfo(name);
@@ -271,16 +272,15 @@ public class PassengersController {
 
     /**
      * Check if the passenger itself has already exist on specific flight or not
-     * @param name  the name of passenger
+     * @param user_name  the name of passenger
      * @return      already exist or not
      */
-    public static boolean checkPassengerNotExist(String name) {
+    public static boolean checkPassengerNotExist(String user_name) {
         for (Passenger passenger : Company.passengers) {
-            String passenger_name = passenger.getFirst_name() + " " + passenger.getLast_name();
-            if (passenger_name.equalsIgnoreCase(name)) {
-                return false;
+            if (passenger.getUser_name().equalsIgnoreCase(user_name)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }

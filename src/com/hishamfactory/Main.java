@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-        boolean isNew = true;
+	    boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
             System.out.println("--------------------------------------------------------------------------------------------------------------------------");
@@ -37,7 +37,7 @@ public class Main {
             try {
                 flag = true;
                 int user;
-                String user_id;
+                String user_name_or_id;
                 String user_pin;
                 System.out.println(".................User Type............................");
                 System.out.println("1.Employee                  2.Passenger");
@@ -46,21 +46,29 @@ public class Main {
                 sc.nextLine();
                 if (user == 1) {
                     System.out.println("................Login Menu............................");
-                    System.out.print("Enter  ID: ");
-                    user_id = sc.next();
+                    System.out.print("Enter  ID or Username: ");
+                    user_name_or_id = sc.next();
                     sc.nextLine();
                     System.out.print("Enter  password: ");
                     user_pin = sc.next();
                     sc.nextLine();
-                    isAuthenticate = company.employeeLogin(user_id, user_pin);
+                    isAuthenticate = company.employeeLoginByUserNameOrId(user_name_or_id, user_pin);
                     if (isAuthenticate == null) {
-                        System.out.println("ID or password incorrect.please try again");
+                        System.out.println("ID,Username or password incorrect.please try again");
                     } else {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());
                         new LoginHistory(date, isAuthenticate);
+                        if(isAuthenticate.isNewMessages) {
+                            System.out.println("........................New Messages.....................");
+                            for (String message : isAuthenticate.messages) {
+                                System.out.println(message);
+                            }
+                            isAuthenticate.messages = new ArrayList<>();
+                            isAuthenticate.isNewMessages = false;
+                        }
                         while (flag) {
-                            flag = showUserMenu(company, isAuthenticate, sc);
+                            flag = showHomeMenu(company, isAuthenticate, sc);
                         }
                     }
                 } else if (user == 2) {
@@ -79,18 +87,26 @@ public class Main {
                     }
                     System.out.println(".....................Login Menu.......................");
                     System.out.print("Enter  ID: ");
-                    user_id = sc.next();
+                    user_name_or_id = sc.next();
                     sc.nextLine();
                     System.out.print("Enter  password: ");
                     user_pin = sc.next();
                     sc.nextLine();
-                    isAuthenticate = company.passengerLogin(user_id, user_pin);
+                    isAuthenticate = company.passengerLoginByUserNameOrID(user_name_or_id, user_pin);
                     if (isAuthenticate == null) {
-                        System.out.println("ID or password incorrect.please try again");
+                        System.out.println("ID,Username or password incorrect.please try again");
                     } else {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh-mm-ss");
                         String date = simpleDateFormat.format(new Date());
                         new LoginHistory(date, isAuthenticate);
+                        if(isAuthenticate.isNewMessages) {
+                            System.out.println("........................New Messages.....................");
+                            for (String message : isAuthenticate.messages) {
+                                System.out.println(message);
+                            }
+                            isAuthenticate.messages = new ArrayList<>();
+                            isAuthenticate.isNewMessages= false;
+                        }
                         while (flag) {
                             PassengersController controller = new PassengersController();
                             flag = controller.showPassengerMenu((Passenger) isAuthenticate);
@@ -115,7 +131,7 @@ public class Main {
      * @param sc        the scanner object to input user
      * @return          the boolean value to stay login or log out
      */
-    public static boolean showUserMenu(Company company, User user, Scanner sc) {
+    public static boolean showHomeMenu(Company company, User user, Scanner sc) {
         boolean flag = true;
         boolean inner_flag1 = true;
         boolean inner_flag2 = true;
@@ -128,15 +144,16 @@ public class Main {
                     System.out.println("1.Employees");
                     System.out.println("2.Airports");
                     System.out.println("3.Planes");
-                    System.out.println("4.Flights");
-                    System.out.println("5.Passengers");
-                    System.out.println("6.Create Coupon");
-                    System.out.println("7.Show login history");
-                    System.out.println("8.Quit");
+                    System.out.println("4.Pilots");
+                    System.out.println("5.Flights");
+                    System.out.println("6.Passengers");
+                    System.out.println("7.Create Coupon");
+                    System.out.println("8.Show login history");
+                    System.out.println("9.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
-                    if (option >= 1 && option <= 8) {
+                    if (option >= 1 && option <= 9) {
                         inner_flag1 = false;
                     } else {
                         System.out.println("Just form 1 to 6 you can choose");
@@ -166,8 +183,18 @@ public class Main {
                         }
                         break;
                     case 4:
+                        PilotsController controller5 = new PilotsController();
+                        while(inner_flag2){
+                            inner_flag2 = controller5.showPilotMenu(company);
+                        }
+                        break;
+                    case 5:
                         if (Company.planes.isEmpty()) {
                             System.out.println("**You must create plane before**");
+                            break;
+                        }
+                        if(Company.pilots.isEmpty()){
+                            System.out.println("*** You must add pilots before ***");
                             break;
                         }
                         FlightController controller3 = new FlightController();
@@ -176,7 +203,7 @@ public class Main {
                         }
                         System.out.println("Flag is: " + flag);
                         break;
-                    case 5:
+                    case 6:
                         if (Company.flights.isEmpty()) {
                             System.out.println("**You must create flight before**");
                             break;
@@ -186,13 +213,13 @@ public class Main {
                             inner_flag2 = controller4.showPassengerMenu(company, controller4);
                         }
                         break;
-                    case 6:
+                    case 7:
                         company.CreateCoupon(company);
                         break;
-                    case 7:
+                    case 8:
                         new LoginHistory().printLoginHistory();
                         break;
-                    case 8:
+                    case 9:
                         flag = false;
                         break;
                 }
