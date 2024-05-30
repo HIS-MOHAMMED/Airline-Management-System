@@ -92,6 +92,9 @@ public class Company {
             System.out.print("Enter employee last name: ");
             String last_name = sc.next();
             sc.nextLine();
+            System.out.print("Enter employee username: ");
+            String user_name = sc.next();
+            sc.nextLine();
             System.out.print("Enter employee age: ");
             int age = sc.nextInt();
             sc.nextLine();
@@ -109,7 +112,7 @@ public class Company {
             String employee_pin = sc.next();
             sc.nextLine();
             if(superVisor == null){
-                Company.superVisor =  new SuperVisor(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+                Company.superVisor =  new SuperVisor(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
             }else {
                 if (user.getClass().equals(SuperVisor.class)) {
                     System.out.println("1.Manager           2.Director ");
@@ -119,16 +122,16 @@ public class Company {
                     sc.nextLine();
                     switch (option) {
                         case 1:
-                            employee = new Manager(first_name, last_name, age, address, address, role,basic_salary, employee_pin, company);
+                            employee = new Manager(first_name, last_name,user_name, age, address, address, role,basic_salary, employee_pin, company);
                             break;
                         case 2:
-                            employee = new Director(first_name, last_name, age, tel_number, address, role,basic_salary, employee_pin, company);
+                            employee = new Director(first_name, last_name,user_name,age, tel_number, address, role,basic_salary, employee_pin, company);
                             break;
                         case 3:
-                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+                            new SoftwareEngineer(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                         case 4:
-                            new Pilot(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+                            new Pilot(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                     }
                 }
@@ -139,13 +142,13 @@ public class Company {
                     sc.nextLine();
                     switch (option) {
                         case 1:
-                            employee = new Director(first_name, last_name, age, tel_number, address, role,basic_salary, employee_pin, company);
+                            employee = new Director(first_name, last_name,user_name, age, tel_number, address, role,basic_salary, employee_pin, company);
                             break;
                         case 2:
-                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+                            new SoftwareEngineer(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                         case 3:
-                            new Pilot(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+                            new Pilot(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                     }
                 }
@@ -156,10 +159,10 @@ public class Company {
                     sc.nextLine();
                     switch (option) {
                         case 1:
-                            new SoftwareEngineer(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+                            new SoftwareEngineer(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                         case 2:
-                            new Pilot(first_name,last_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+                            new Pilot(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
                             break;
                     }
                 }
@@ -193,11 +196,14 @@ public class Company {
                 System.out.print("Enter passenger last name: ");
                 last_name = sc.next();
                 sc.nextLine();
-                if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
+                if (PassengersController.checkPassengerNotExist(first_name + last_name)) {
                     System.out.println("****This name had already created****");
                     continue;
                 }
                 flag = false;
+                System.out.print("Enter passenger username: ");
+                String user_name = sc.next();
+                sc.nextLine();
                 System.out.print("Enter passenger age: ");
                 int age = sc.nextInt();
                 sc.nextLine();
@@ -210,7 +216,7 @@ public class Company {
                 String passenger_pin = sc.next();
                 sc.nextLine();
 
-                new Passenger(first_name, last_name, age, tel_number,address, passenger_pin, company);
+                new Passenger(first_name, last_name,user_name, age, tel_number,address, passenger_pin, company);
             }
         }catch(NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
@@ -239,11 +245,14 @@ public class Company {
                     System.out.print("Enter passenger last name: ");
                     last_name = sc.next();
                     sc.nextLine();
-                    if (!PassengersController.checkPassengerNotExist(first_name + " " + last_name)) {
+                    if (PassengersController.checkPassengerNotExist(first_name + last_name)) {
                         System.out.println("****This name had already created****");
                         continue;
                     }
                     flag = false;
+                    System.out.print("Enter passenger username: ");
+                    String user_name = sc.next();
+                    sc.nextLine();
                     System.out.print("Enter passenger age: ");
                     int age = sc.nextInt();
                     sc.nextLine();
@@ -256,7 +265,7 @@ public class Company {
                     String passenger_pin = sc.next();
                     sc.nextLine();
 
-                    Passenger newPassenger = new Passenger(first_name, last_name, age, tel_number,address, passenger_pin, company);
+                    Passenger newPassenger = new Passenger(first_name, last_name,user_name, age, tel_number,address, passenger_pin, company);
                     flight.passengers.add(newPassenger);
 
                 }
@@ -274,13 +283,13 @@ public class Company {
 
     /**
      * Get the employee object associated with a particular UUID and pin, if they are valid
-     * @param user_id   the UUID of the employee to log in
+     * @param user_name_or_id       the UUID of the employee to log in
      * @param user_pin  the password of the employee
      * @return              the employee if the log is successful, or null if it's not
      */
-    public Employee employeeLogin(String user_id, String user_pin) {
+    public Employee employeeLoginByUserNameOrId(String user_name_or_id, String user_pin) {
         for (Employee employee: employees) {
-            if (employee.getUuid().compareTo(user_id) == 0 && employee.validatePin(user_pin)){
+            if ((employee.getUuid().compareTo(user_name_or_id) == 0 || employee.getUser_name().equalsIgnoreCase(user_name_or_id)) && employee.validatePin(user_pin)){
                 return employee;
             }
         }
@@ -289,13 +298,13 @@ public class Company {
 
     /**
      *Get the passenger object associated with a particular UUID and pin, if they are valid
-     * @param passenger_id  the UUID of the passenger to log in
+     * @param passenger_username_or_id  the UUID of the passenger to log in
      * @param passenger_pin the password of the employee
      * @return              the employee if the log is successful, or null if it's not
      */
-    public Passenger passengerLogin(String passenger_id,String passenger_pin){
+    public Passenger passengerLoginByUserNameOrID(String passenger_username_or_id, String passenger_pin){
         for (Passenger passenger : passengers) {
-            if(passenger.getUuid().compareTo(passenger_id) == 0 && passenger.validatePin(passenger_pin)){
+            if((passenger.getUuid().compareTo(passenger_username_or_id) == 0 || passenger.getUser_name().equalsIgnoreCase(passenger_username_or_id)) && passenger.validatePin(passenger_pin)){
                 return passenger;
             }
         }
@@ -385,32 +394,84 @@ public class Company {
                         plane_in_order++;
                     }
                     System.out.println("...........................................................................");
-                    boolean flag = true;
-                    while(flag) {
                         System.out.print("Enter number of plane in order or 0 to exit: ");
                         int plane_index = sc.nextInt();
                         sc.nextLine();
-                        if(plane_index == 0) break;
-                        if (plane_index <= Company.planes.size()) {
-                            flag = false;
+                        if (!(plane_index <= 0 ) && plane_index <= Company.planes.size()) {
                             Plane plane = Company.planes.get(plane_index-1);
-                            System.out.print("Enter ticket price: ");
-                            double ticket_price = sc.nextDouble();
+                            System.out.println("...........................Available Pilots.........................");
+                            int pilot_in_order = 1;
+                            for (Pilot pilot : Company.pilots) {
+                                System.out.println(pilot_in_order +"."+pilot.toString());
+                                pilot_in_order++;
+                            }
+                            System.out.println("....................................................................");
+                            System.out.print("Enter number of pilot in order or 0 to exit: ");
+                            int pilot_index = sc.nextInt();
                             sc.nextLine();
+                            if(!(pilot_index <= 0) && pilot_index <= Company.pilots.size()){
+                                Pilot pilot = Company.pilots.get(pilot_index-1);
+                                System.out.print("Enter ticket price: ");
+                                double ticket_price = sc.nextDouble();
+                                sc.nextLine();
 
-                            Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane,company);
-                            newFlight.setTicket_price(ticket_price);
-                            flights.add(newFlight);
+                                Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane,pilot,company);
+                                newFlight.setTicket_price(ticket_price);
+                                flights.add(newFlight);
+                            }else {
+                                System.out.println("*** Input not found.Please enter a valid choice from list ***");
+                            }
                         } else {
-                            System.out.println("*** Input not found.Please enter a valid choice ***");
+                            System.out.println("*** Input not found.Please enter a valid choice from list ***");
                         }
-                    }
                 }else{
                     System.out.println("*** The des airport not exits ***");
                 }
             }else {
                 System.out.println("*** The dep airport not exits ***");
             }
+        }catch (NoSuchElementException e){
+            System.out.println("Input not found. Please enter text without spaces");
+            sc.nextLine();
+        }
+    }
+    public void addPilot(Company company){
+        try {
+            System.out.print("Enter pilot first name: ");
+            String first_name = sc.next();
+            sc.nextLine();
+
+            System.out.print("Enter pilot last name: ");
+            String last_name = sc.next();
+            sc.nextLine();
+
+            System.out.print("Enter pilot user name: ");
+            String user_name = sc.next();
+            sc.nextLine();
+
+            System.out.print("Enter pilot age: ");
+            int age = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter pilot tel number: ");
+            String tel_number = sc.next();
+            sc.nextLine();
+
+            System.out.print("Enter pilot address: ");
+            String address = sc.nextLine();
+
+            System.out.print("Enter pilot role: ");
+            String role = sc.nextLine();
+
+            System.out.print("Enter pilot basic salary: ");
+            double basic_salary = sc.nextDouble();
+            sc.nextLine();
+
+            System.out.print("Enter pilot password: ");
+            String pilot_pin = sc.next();
+            sc.nextLine();
+
+            new Pilot(first_name, last_name,user_name, age, tel_number, address, role, basic_salary, pilot_pin, company);
         }catch (NoSuchElementException e){
             System.out.println("Input not found. Please enter text without spaces");
             sc.nextLine();
