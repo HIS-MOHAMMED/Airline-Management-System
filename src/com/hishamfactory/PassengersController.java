@@ -272,13 +272,12 @@ public class PassengersController {
 
     /**
      * Check if the passenger itself has already exist on specific flight or not
-     * @param name  the name of passenger
+     * @param user_name  the name of passenger
      * @return      already exist or not
      */
-    public static boolean checkPassengerNotExist(String name) {
+    public static boolean checkPassengerNotExist(String user_name) {
         for (Passenger passenger : Company.passengers) {
-            String passenger_name = passenger.getFirst_name()  + passenger.getLast_name();
-            if (passenger_name.equalsIgnoreCase(name)) {
+            if (passenger.getUser_name().equalsIgnoreCase(user_name)) {
                 return true;
             }
         }
