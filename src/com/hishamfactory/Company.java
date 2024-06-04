@@ -486,7 +486,7 @@ public class Company {
             int coupon_in_percentage = sc.nextInt();
             sc.nextLine();
 
-            Coupon coupon = new Coupon(coupon_code, coupon_in_percentage);
+            Coupon coupon = new Coupon(coupon_code, coupon_in_percentage,company);
             Company.coupons.add(coupon);
         }catch (NoSuchElementException e){
             System.out.println("Input not found.Please enter text without spaces");
