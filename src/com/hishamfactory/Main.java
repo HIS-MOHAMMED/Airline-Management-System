@@ -7,22 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-        Airport aden = new Airport("Aden","Yemen",300,300,company);
-        Company.airports.add(aden);
-        Airport sanaa = new Airport("Sana'a","Yemen",200,200,company);
-        Company.airports.add(sanaa);
-        Airport istanbul = new Airport("Istanbul","Turkey",200,300,company);
-        Company.airports.add(istanbul);
-        Airport ankara = new Airport("Ankara","Turkey",340,340,company);
-        Company.airports.add(ankara);
-
-        Plane plane1 = new Plane("AB1","Boing","2023",300,company);
-        Plane plane2 = new Plane("AB2","Airbus","2023",300,company);
-        Plane plane3 = new Plane("AB3","Boing","2023",300,company);
-        Company.superVisor = new SuperVisor("Hisham","Mohammed","hisham1234",23,"0394839048","Yemen","Super Visor",2000.0,"1234",company);
-        Company.planes.add(plane1);
-        Company.planes.add(plane2);
-        Company.planes.add(plane3);
 	    boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
@@ -80,7 +64,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = new ArrayList<>();
+                            isAuthenticate.messages = null;
                             isAuthenticate.isNewMessages = false;
                         }
                         while (flag) {
@@ -120,7 +104,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = new ArrayList<>();
+                            isAuthenticate.messages = null;
                             isAuthenticate.isNewMessages= false;
                         }
                         while (flag) {
