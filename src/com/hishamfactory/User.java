@@ -40,11 +40,6 @@ public abstract class User extends Person implements Identifiable {
     public String getUuid() {
         return uuid;
     }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
     /**
      * Sets the hash value of the person's password using SHA-256 encryption.
      * @param person_pin The PIN of the person to be hashed.
@@ -74,9 +69,6 @@ public abstract class User extends Person implements Identifiable {
             System.exit(1);
         }
         return false;
-    }
-    public byte[] getPinHash() {
-        return pinHash;
     }
 
     public String getUser_name() {
