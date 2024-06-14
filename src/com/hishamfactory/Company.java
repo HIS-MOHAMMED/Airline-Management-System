@@ -171,12 +171,6 @@ public class Company {
             System.out.println("Input not found. Please enter text without spaces");
             sc.nextLine();
         }
-        System.out.print("has editing permission: ");
-        boolean canEditing = sc.nextBoolean();
-        sc.nextLine();
-        if(canEditing && employee != null){
-            permissions_editing_uuids.add(employee.getUuid());
-        }
     }
 
     /**

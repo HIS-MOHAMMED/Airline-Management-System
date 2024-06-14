@@ -4,11 +4,13 @@ package com.hishamfactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 public abstract class Employee extends User {
     protected double basic_salary;
     protected double tax;
     protected double net_salary;
+    protected int permissionLevel = 0;
     /**
      * Create new employee regardless of role
      * @param first_name    the first name of admin
@@ -37,7 +39,10 @@ public abstract class Employee extends User {
     public double getNet_salary() {
         return net_salary;
     }
-
+    public void changePermissionLevelOfEmployee(Employee employee,int new_level) {
+            employee.permissionLevel = new_level;
+            System.out.println("The level of permission of " + employee.getFirst_name() +","+employee.getLast_name() + " had changes.");
+    }
     @Override
     public String toString() {
         return "Employee{" +
