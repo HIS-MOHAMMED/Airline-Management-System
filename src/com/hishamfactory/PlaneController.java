@@ -23,7 +23,7 @@ public class PlaneController {
      * Print all planes the company has its
      */
     public void showAllPlanes() {
-        if(Company.flights.isEmpty()){
+        if(Company.planes.isEmpty()){
             System.out.println("** Sorry.The plane list is empty **");
         }else{
             System.out.println(".......................List of Planes.............");
