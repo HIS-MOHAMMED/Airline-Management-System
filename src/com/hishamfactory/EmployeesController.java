@@ -57,14 +57,14 @@ public class EmployeesController{
      */
     public void editEmployeeInfo(String name, User u) {
         boolean outer_flag = true;
-        boolean flag = false;
-        User employee;
+        boolean has_permission = false;
+        Employee employee_to_be_edited;
         while (outer_flag) {
-            employee = getEmployeeByName(name);
-            if (employee != null) {
-                User user = getEmployeeByName(u.getFirst_name() + u.getLast_name());
-                if (user.getClass().equals(SuperVisor.class)) flag = true;
-                if (!flag) {
+            employee_to_be_edited = getEmployeeByName(name);
+            if (employee_to_be_edited != null) {
+                Employee employee_to_do_editing = getEmployeeByName(u.getFirst_name() + u.getLast_name());
+                if (employee_to_do_editing.permissionLevel > employee_to_be_edited.permissionLevel) has_permission = true;
+                if (!has_permission) {
                     System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
                     break;
                 }else {
@@ -75,46 +75,56 @@ public class EmployeesController{
                         System.out.println("3.Edit Tel Number");
                         System.out.println("4.Edit Role");
                         System.out.println("5.Edit Address");
-                        System.out.println("6.Quit");
+                        System.out.println("6.Change PermissionLevel");
+                        System.out.println("7.Quit");
                         System.out.print("select option: ");
                         int option = sc.nextInt();
                         sc.nextLine();
                         switch (option) {
                             case 1:
                                 System.out.print("Enter new first name: ");
-                                employee.setFirst_name(sc.next());
+                                employee_to_be_edited.setFirst_name(sc.next());
                                 sc.nextLine();
                                 System.out.print("Enter new last name: ");
-                                employee.setLast_name(sc.next());
+                                employee_to_be_edited.setLast_name(sc.next());
                                 sc.nextLine();
-                                System.out.println("Name Changed to " + employee.getFirst_name() + " " + employee.getLast_name());
+                                System.out.println("Name Changed to " + employee_to_be_edited.getFirst_name() + " " + employee_to_be_edited.getLast_name());
                                 break;
                             case 2:
                                 System.out.print("Enter new age: ");
-                                employee.setAge(sc.nextInt());
+                                employee_to_be_edited.setAge(sc.nextInt());
                                 sc.nextLine();
-                                System.out.println("Age changed to " + employee.getAge());
+                                System.out.println("Age changed to " + employee_to_be_edited.getAge());
                                 break;
 
                             case 3:
                                 System.out.print("Enter new tel number: ");
-                                employee.setTel_number(sc.next());
+                                employee_to_be_edited.setTel_number(sc.next());
                                 sc.nextLine();
-                                System.out.println("Tel number changed to " + employee.getTel_number());
+                                System.out.println("Tel number changed to " + employee_to_be_edited.getTel_number());
                                 break;
                             case 4:
                                 System.out.print("Enter new role: ");
-                                employee.setRole(sc.nextLine());
+                                employee_to_be_edited.setRole(sc.nextLine());
                                 sc.nextLine();
-                                System.out.println("Role changed to " + employee.getRole());
+                                System.out.println("Role changed to " + employee_to_be_edited.getRole());
                                 break;
                             case 5:
                                 System.out.print("Enter new address: ");
-                                employee.setAddress(sc.nextLine());
+                                employee_to_be_edited.setAddress(sc.nextLine());
                                 sc.nextLine();
-                                System.out.println("Address changed to " + employee.getAddress());
+                                System.out.println("Address changed to " + employee_to_be_edited.getAddress());
                                 break;
                             case 6:
+                                System.out.print("Enter the new level of permission(0-10): ");
+                                int new_level = sc.nextInt();
+                                if (new_level >= 0 && new_level <= 10) {
+                                    employee_to_do_editing.changePermissionLevelOfEmployee(employee_to_be_edited,new_level);
+                                }else{
+                                    System.out.println("*** Invalid input, Please enter number between 0 and 10 ***");
+                                }
+                                break;
+                            case 7:
                                 break;
                             default:
                                 System.out.println("*** Please enter a valid choice ***");
@@ -199,7 +209,7 @@ public class EmployeesController{
      * @param user       the employee who do the operation
      * @return the boolean value stay on employee menu or go out from it
      */
-    public boolean showEmployeeMenu(Company company, EmployeesController controller, User user) {
+    public boolean  showEmployeeMenu(Company company, EmployeesController controller, User user) {
         boolean flag = true;
         try {
             System.out.println(".......................Employee Menu..........................");
