@@ -13,6 +13,7 @@ public class Flight implements Identifiable{
     private Pilot flight_captain;
     public ArrayList<Passenger> passengers = new ArrayList<>();
 
+    Flight(){}
     Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,Company company) {
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
@@ -91,10 +92,12 @@ public class Flight implements Identifiable{
         if(ticket_price >= 100.0 &&  ticket_price <= 1000.0){
             this.ticket_price = ticket_price;
         }else{
-            System.out.println("**************Sorry pricing Max($1000.0 and Min($100.0).Try set it again**************");
             if(this.ticket_price == 0.0) {
-                this.ticket_price = 100.0;
-                System.out.println("****************Ticket price changed to default price($100.0)******************");
+                System.out.println("**************Sorry pricing Max($1000.0 and Min($100.0).Try set it again**************");
+                if (this.ticket_price == 0.0) {
+                    this.ticket_price = 100.0;
+                    System.out.println("****************Ticket price changed to default price($100.0)******************");
+                }
             }
         }
     }
