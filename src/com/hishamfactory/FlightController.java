@@ -305,8 +305,8 @@ public class FlightController {
             if (flight.getDeparture_airport().equals(dep_airport) && flight.getDestination_airport().equals(des_airport)) {
                 System.out.println(flight);
                 flight_exit = true;
+                System.out.println("...........................................................");
             }
-            System.out.println("...........................................................");
         }
         if (flight_exit) {
 
