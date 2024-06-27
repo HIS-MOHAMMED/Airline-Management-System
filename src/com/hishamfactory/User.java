@@ -9,8 +9,8 @@ public abstract class User extends Person implements Identifiable {
     protected String uuid;
     protected byte[] pinHash;
     protected  String user_name;
-    protected ArrayList<String> messages = new ArrayList<>();
-    protected boolean isNewMessages = false;
+    protected ArrayList<String> messages;
+    protected boolean isNewMessages;
     User(String first_name, String last_name,String user_name, int age, String tel_number,String address,String role, String person_pin, Company company){
         super(first_name,last_name,age,tel_number,address,role);
         try{
@@ -23,6 +23,8 @@ public abstract class User extends Person implements Identifiable {
         }
         this.uuid = company.getNewUUID();
         this.user_name = user_name;
+        messages = new ArrayList<>();
+        isNewMessages = false;
     }
     User(String first_name, String last_name,String user_name, int age, String tel_number,String address, String person_pin, Company company){
         super(first_name,last_name,age,tel_number,address);
@@ -36,6 +38,8 @@ public abstract class User extends Person implements Identifiable {
         }
         this.uuid = company.getNewUUID();
         this.user_name = user_name;
+        messages = new ArrayList<>();
+        isNewMessages = false;
     }
     public String getUuid() {
         return uuid;

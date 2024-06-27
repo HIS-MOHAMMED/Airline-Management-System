@@ -11,7 +11,7 @@ public class Flight implements Identifiable{
     public Plane plane;
     private double ticket_price;
     private Pilot flight_captain;
-    public ArrayList<Passenger> passengers = new ArrayList<>();
+    public ArrayList<Passenger> passengers;
 
     Flight(){}
     Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,Company company) {
@@ -23,6 +23,7 @@ public class Flight implements Identifiable{
         this.flight_captain = flight_captain;
         this.ticket_price = 0.0;
         this.flight_code =company.getNewUUID();
+        passengers = new ArrayList<>();
         System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
     }
 
