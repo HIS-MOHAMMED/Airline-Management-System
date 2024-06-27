@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-	    boolean isNew = true;
+        boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
             System.out.println("--------------------------------------------------------------------------------------------------------------------------");
@@ -64,7 +64,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = null;
+                            isAuthenticate.messages.clear();
                             isAuthenticate.isNewMessages = false;
                         }
                         while (flag) {
@@ -104,7 +104,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = null;
+                            isAuthenticate.messages.clear();
                             isAuthenticate.isNewMessages= false;
                         }
                         while (flag) {
