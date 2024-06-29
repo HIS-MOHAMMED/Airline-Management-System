@@ -1,7 +1,6 @@
 package com.hishamfactory;
 
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EmployeesController{
@@ -68,7 +67,6 @@ public class EmployeesController{
                     System.out.println("Sorry, you don't have permission to editing, please contact with your manager.");
                     break;
                 }else {
-                    try {
                         System.out.println(".....................Editing Menu....................");
                         System.out.println("1.Edit Name");
                         System.out.println("2.Edit Age");
@@ -129,10 +127,6 @@ public class EmployeesController{
                             default:
                                 System.out.println("*** Please enter a valid choice ***");
                         }
-                    } catch (InputMismatchException e) {
-                        System.out.println("*** The input you provided is not valid ***");
-                        sc.nextLine();
-                    }
                 }
             } else {
                 System.out.println("*** This employee doesn't exists ***");
@@ -211,7 +205,6 @@ public class EmployeesController{
      */
     public boolean  showEmployeeMenu(Company company, EmployeesController controller, User user) {
         boolean flag = true;
-        try {
             System.out.println(".......................Employee Menu..........................");
             System.out.println("1.Add new employee");
             System.out.println("2.Get employee by name");
@@ -222,6 +215,7 @@ public class EmployeesController{
             System.out.println("7.Fire employee");
             System.out.println("8.Quit");
             System.out.print("Enter a choice: ");
+        try{
             int option = sc.nextInt();
             sc.nextLine();
             String name = "";
@@ -268,8 +262,8 @@ public class EmployeesController{
                     flag = false;
                     break;
             }
-        } catch (NoSuchElementException e) {
-            System.out.println(" *** Please enter a valid choice *** ");
+        }catch (InputMismatchException e) {
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;

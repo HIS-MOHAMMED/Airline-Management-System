@@ -52,13 +52,11 @@ public class FlightController {
      * @param flight_code   the flight code identifying the flight
      */
     public void showFlightInfo(String flight_code) {
-        try {
             Flight flight = getFlightById(flight_code);
-            System.out.println(flight.toString());
-        }catch (NullPointerException e){
-            System.out.println("*** This flight not exits ***");
-            sc.next();
-        }
+            if(flight != null)
+                System.out.println(flight.toString());
+            else
+                System.out.println("*** This flight not exits ***");
     }
 
     /**
@@ -393,7 +391,6 @@ public class FlightController {
      */
     public boolean showFlightMenu(Company company, FlightController controller, User user) {
         boolean flag = true;
-        try {
             System.out.println(".................Flight Menu..............................");
             System.out.println("1.add flight");
             System.out.println("2.Show all flights");
@@ -403,6 +400,7 @@ public class FlightController {
             System.out.println("6.Cancel flight");
             System.out.println("7.Quit");
             System.out.print("Enter a choice: ");
+        try {
             int option = sc.nextInt();
             sc.nextLine();
             String flight_code = null;
@@ -436,11 +434,8 @@ public class FlightController {
                 default:
                     System.out.println("*** Please enter a valid choice ***");
             }
-        } catch (NullPointerException e) {
-            System.out.println("*** This flight not exists ***");
-            sc.nextLine();
-        } catch (InputMismatchException e) {
-            System.out.println("*** Please enter a valid choice ***");
+        }catch (InputMismatchException e) {
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;

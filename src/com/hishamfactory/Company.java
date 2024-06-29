@@ -167,8 +167,8 @@ public class Company {
                     }
                 }
             }
-        }catch(NoSuchElementException e ){
-            System.out.println("Input not found. Please enter text without spaces");
+        }catch(InputMismatchException e ){
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
     }
@@ -181,10 +181,10 @@ public class Company {
         boolean flag = true;
         String first_name;
         String last_name;
-        try {
             while(flag) {
                 System.out.println(".................Create New Passenger...................");
                 System.out.print("Enter passenger first name: ");
+                try {
                 first_name = sc.next();
                 sc.nextLine();
                 System.out.print("Enter passenger last name: ");
@@ -211,13 +211,10 @@ public class Company {
                 sc.nextLine();
 
                 new Passenger(first_name, last_name,user_name, age, tel_number,address, passenger_pin, company);
-            }
-        }catch(NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
-        }catch (NullPointerException e){
-            System.out.println("*** The Flight code is wrong ***");
-            sc.nextLine();
+            }catch (InputMismatchException e){
+                    System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
+                    sc.nextLine();
+                }
         }
     }
 
@@ -263,11 +260,8 @@ public class Company {
                     flight.passengers.add(newPassenger);
 
                 }
-            } catch (NoSuchElementException e) {
-                System.out.println("Input not found. Please enter text without spaces");
-                sc.nextLine();
-            } catch (NullPointerException e) {
-                System.out.println("*** The Flight code is wrong ***");
+            } catch (InputMismatchException e) {
+                System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
                 sc.nextLine();
             }
         }else{
@@ -310,7 +304,6 @@ public class Company {
      * @param company   the company who has the system
      */
     public void addPlane(Company company){
-        try {
             System.out.print("Enter plane model: ");
             String model = sc.next();
             sc.nextLine();
@@ -324,10 +317,6 @@ public class Company {
 
             Plane newPlane = new Plane(model, manufacturer, year_manufacturer, capacity, company);
             planes.add(newPlane);
-        }catch (InputMismatchException e){
-            System.out.println("*** Please enter capacity as integer ***");
-            sc.nextLine();
-        }
     }
 
     /**
@@ -335,7 +324,6 @@ public class Company {
      * @param company   the company who has the system
      */
     public void addAirport(Company company){
-        try {
             System.out.print("Enter airport_name: ");
             String airport_name = sc.next();
             sc.nextLine();
@@ -350,10 +338,6 @@ public class Company {
 
             Airport newAirport = new Airport(airport_name, airport_location, airport_runways, airport_gates, company);
             airports.add(newAirport);
-        }catch (NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
-        }
     }
 
     /**
@@ -361,7 +345,6 @@ public class Company {
      * @param company   the company who has the system
      */
     public void addFlight(Company company){
-        try {
             System.out.println("..........................Available Airports..............................");
             for (Airport airport : Company.airports) {
                 System.out.println(airport.toString());
@@ -424,13 +407,8 @@ public class Company {
             }else {
                 System.out.println("*** The dep airport not exits ***");
             }
-        }catch (NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
-        }
     }
     public void addPilot(Company company){
-        try {
             System.out.print("Enter pilot first name: ");
             String first_name = sc.next();
             sc.nextLine();
@@ -466,13 +444,8 @@ public class Company {
             sc.nextLine();
 
             new Pilot(first_name, last_name,user_name, age, tel_number, address, role, basic_salary, pilot_pin, company);
-        }catch (NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
-        }
     }
     public void CreateCoupon(Company company){
-        try {
             System.out.print("Enter coupon code: ");
             String coupon_code = sc.next();
             sc.nextLine();
@@ -482,9 +455,5 @@ public class Company {
 
             Coupon coupon = new Coupon(coupon_code, coupon_in_percentage,company);
             Company.coupons.add(coupon);
-        }catch (NoSuchElementException e){
-            System.out.println("Input not found.Please enter text without spaces");
-            sc.nextLine();
-        }
     }
 }
