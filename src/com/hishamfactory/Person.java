@@ -31,7 +31,13 @@ public abstract class Person {
     }
 
     public void setAge(int age) {
-        this.age = age;
+        int official_work_age = 18;
+        if(official_work_age > age) {
+            System.out.println("*** Since age less than official age,the default age (18) applied ***");
+            this.age = official_work_age;
+        }else{
+            this.age = age;
+        }
     }
 
     public String getTel_number() {
