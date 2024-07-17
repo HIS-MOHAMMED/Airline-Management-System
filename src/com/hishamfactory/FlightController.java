@@ -52,13 +52,11 @@ public class FlightController {
      * @param flight_code   the flight code identifying the flight
      */
     public void showFlightInfo(String flight_code) {
-        try {
             Flight flight = getFlightById(flight_code);
-            System.out.println(flight.toString());
-        }catch (NullPointerException e){
-            System.out.println("*** This flight not exits ***");
-            sc.next();
-        }
+            if(flight != null)
+                System.out.println(flight.toString());
+            else
+                System.out.println("*** This flight not exits ***");
     }
 
     /**
@@ -305,11 +303,10 @@ public class FlightController {
             if (flight.getDeparture_airport().equals(dep_airport) && flight.getDestination_airport().equals(des_airport)) {
                 System.out.println(flight);
                 flight_exit = true;
+                System.out.println(".......................................................");
             }
-            System.out.println("...........................................................");
         }
         if (flight_exit) {
-
             System.out.print("Enter flight code: ");
             Flight flight = getFlightById(sc.next());
             sc.nextLine();
@@ -322,10 +319,44 @@ public class FlightController {
                         }
                     }
                     if (!passenger_exit) {
-                        passenger.passenger_flights.add(flight);
+                        boolean flightIsAdded = false;
+                        System.out.print("Do you have a coupon code(Yes(y) or No(n)): ");
+                        String have_coupon = sc.next();
+                        sc.nextLine();
+                        if(have_coupon.equalsIgnoreCase("Y") || have_coupon.equalsIgnoreCase("Yes")){
+                            boolean isValidCoupon = true;
+                            while(isValidCoupon){
+                            System.out.print("Enter coupon code: ");
+                            String coupon_code = sc.next();
+                            sc.nextLine();
+                            CouponController couponController = new CouponController();
+                            Coupon coupon = couponController.getCouponByCode(coupon_code);
+                            if(coupon == null){
+                                System.out.println(" *** The coupon is invalid *** ");
+                                System.out.println("........................................................");
+                                System.out.print("Do you want try again(Y or N): ");
+                                String try_again = sc.next();
+                                sc.nextLine();
+                                System.out.println("........................................................");
+                                if(try_again.equalsIgnoreCase("N")) break;
+                                continue;
+                            }
+                            isValidCoupon = false;
+                            passenger.passenger_flights.add(flight);
+                            flightIsAdded = true;
+                            double price_after_discount = couponController.discountCalculation(flight.getTicket_price(),coupon.getCoupon_in_percentage());
+                            Flight passengerFlight = changePriceAfterDiscount(price_after_discount,flight,passenger);
+                            if(passengerFlight != null){
+                                System.out.println("The new price of flight after discount is " + passengerFlight.getTicket_price());
+                            }else{
+                                System.out.println("*** The flight doesn't exists ***");
+                            }
+                        }
+                        }
+                        if(!flightIsAdded) passenger.passenger_flights.add(flight);
                         flight.passengers.add(passenger);
                         System.out.println("Flight booked from " + flight.getDeparture_airport().getAirport_name() + " to " + flight.getDestination_airport().getAirport_name() + " at " + flight.getDeparture_time());
-                    } else {
+                    }else {
                         System.out.println("*** You already booked into this flight ***");
                     }
                 }else{
@@ -338,6 +369,18 @@ public class FlightController {
             System.out.println("*** Sorry, There aren't any flight to your Trip ***");
         }
     }
+    public Flight changePriceAfterDiscount(double price_after_discount, Flight flight, Passenger passenger) {
+        for (Flight passengerFlight : passenger.passenger_flights) {
+            if(passengerFlight.getFlight_code().equals(flight.getFlight_code())){
+                Flight flight1 = new Flight();
+                flight1.setTicket_price(price_after_discount);
+                passengerFlight = flight1;
+                return passengerFlight;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Show operations can be performed on flight
@@ -348,7 +391,6 @@ public class FlightController {
      */
     public boolean showFlightMenu(Company company, FlightController controller, User user) {
         boolean flag = true;
-        try {
             System.out.println(".................Flight Menu..............................");
             System.out.println("1.add flight");
             System.out.println("2.Show all flights");
@@ -358,6 +400,7 @@ public class FlightController {
             System.out.println("6.Cancel flight");
             System.out.println("7.Quit");
             System.out.print("Enter a choice: ");
+        try {
             int option = sc.nextInt();
             sc.nextLine();
             String flight_code = null;
@@ -391,11 +434,8 @@ public class FlightController {
                 default:
                     System.out.println("*** Please enter a valid choice ***");
             }
-        } catch (NullPointerException e) {
-            System.out.println("*** This flight not exists ***");
-            sc.nextLine();
-        } catch (InputMismatchException e) {
-            System.out.println("*** Please enter a valid choice ***");
+        }catch (InputMismatchException e) {
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;

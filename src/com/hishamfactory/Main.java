@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Company company = new Company("Turkish Airline");
-	    boolean isNew = true;
+        boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
             System.out.println("--------------------------------------------------------------------------------------------------------------------------");
@@ -34,14 +34,14 @@ public class Main {
         User isAuthenticate = null;
         boolean flag;
         do {
+            flag = true;
+            int user;
+            String user_name_or_id;
+            String user_pin;
+            System.out.println(".................User Type............................");
+            System.out.println("1.Employee                  2.Passenger");
+            System.out.print("Enter a choice: ");
             try {
-                flag = true;
-                int user;
-                String user_name_or_id;
-                String user_pin;
-                System.out.println(".................User Type............................");
-                System.out.println("1.Employee                  2.Passenger");
-                System.out.print("Enter a choice: ");
                 user = sc.nextInt();
                 sc.nextLine();
                 if (user == 1) {
@@ -64,7 +64,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = null;
+                            isAuthenticate.messages.clear();
                             isAuthenticate.isNewMessages = false;
                         }
                         while (flag) {
@@ -104,7 +104,7 @@ public class Main {
                             for (String message : isAuthenticate.messages) {
                                 System.out.println(message);
                             }
-                            isAuthenticate.messages = null;
+                            isAuthenticate.messages.clear();
                             isAuthenticate.isNewMessages= false;
                         }
                         while (flag) {
@@ -116,10 +116,8 @@ public class Main {
                     System.out.println("Answer not found. Please enter only 1(employees) or 2(passengers)");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("*** Invalid Input. Please enter valid integer input ***");
+                System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
                 sc.next();
-            } catch (NoSuchElementException e) {
-                System.out.println("*** Input not found. Please enter text without spaces ***");
             }
         } while (isAuthenticate == null);
     }
@@ -363,7 +361,7 @@ public class Main {
                 }
             }
         }catch (InputMismatchException e){
-            System.out.println("*** Don't input text only integers accepted here ***");
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;

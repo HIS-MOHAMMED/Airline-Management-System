@@ -1,6 +1,6 @@
 package com.hishamfactory;
 
-import java.util.NoSuchElementException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PassengersController {
@@ -42,7 +42,6 @@ public class PassengersController {
      * @param name the name of the passenger
      */
     public void editPassengerInfo(String name) {
-        try {
             Passenger passenger = getPassengerByName(name);
             if (passenger == null) {
                 System.out.println("*** This passenger doesn't exists ***");
@@ -90,10 +89,6 @@ public class PassengersController {
                     default:
                         System.out.println("*** Please enter a valid choice ***");
                 }
-            }
-        } catch (NoSuchElementException e) {
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
         }
     }
 
@@ -102,7 +97,6 @@ public class PassengersController {
      * @param passenger     the name of passenger
      */
     public void editPassengerInfo(Passenger passenger) {
-        try {
             System.out.println("....................Editing Menu..........................");
             System.out.println("1.Edit Name");
             System.out.println("2.Edit Age");
@@ -145,10 +139,6 @@ public class PassengersController {
                 default:
                     System.out.println("*** Please enter a valid choice ***");
             }
-        } catch (NoSuchElementException e) {
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
-        }
     }
 
     /**
@@ -172,8 +162,6 @@ public class PassengersController {
      */
     public boolean showPassengerMenu(Company company, PassengersController controller) {
         boolean flag = true;
-        try {
-
             System.out.println(".......................Passenger Menu...............................");
             System.out.println("1.Add new passenger");
             System.out.println("2.Get passenger by name");
@@ -182,6 +170,7 @@ public class PassengersController {
             System.out.println("5.Delete passenger");
             System.out.println("6.Quit");
             System.out.print("Enter a choice: ");
+        try {
             int option = sc.nextInt();
             sc.nextLine();
             String name = "";
@@ -213,11 +202,8 @@ public class PassengersController {
                     flag = false;
                     break;
             }
-        } catch (NoSuchElementException e) {
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
-        } catch (NullPointerException e) {
-            System.out.println("*** This passenger doesn't exits ***");
+        } catch (InputMismatchException e) {
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;
@@ -260,11 +246,8 @@ public class PassengersController {
                 default:
                     System.out.println("*** Please enter a valid choice ***");
             }
-        } catch (NoSuchElementException e) {
-            System.out.println("Input not found. Please enter text without spaces");
-            sc.nextLine();
-        } catch (NullPointerException e) {
-            System.out.println("*** This passenger doesn't exits ***");
+        } catch (InputMismatchException e) {
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;

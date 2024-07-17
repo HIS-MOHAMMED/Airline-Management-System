@@ -1,6 +1,6 @@
 package com.hishamfactory;
 
-import java.util.NoSuchElementException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AirportController {
@@ -49,8 +49,7 @@ public class AirportController {
      * Edit airport information
      * @param airport_code  the airport code identifying the airport to be deleted
      */
-    public void editAirport(String airport_code){
-        try {
+    public void editAirport(String airport_code) {
             Airport airport = getAirportByID(airport_code);
             if (airport != null) {
                 System.out.println("....................Editing Menu......................");
@@ -99,10 +98,6 @@ public class AirportController {
             } else {
                 System.out.println("*** This airport not exists ***");
             }
-        } catch (NoSuchElementException e) {
-            System.out.println("*** Input not found. Please enter text without spaces ***");
-            sc.nextLine();
-        }
     }
     /**
      * Delete airport from system
@@ -126,15 +121,15 @@ public class AirportController {
      */
     public boolean showAirportMenu(Company company,AirportController controller) {
         boolean flag = true;
+        System.out.println(".....................Airport Menu..........................");
+        System.out.println("1.Add new airport");
+        System.out.println("2.Show all airport");
+        System.out.println("3.Get Airport by ID");
+        System.out.println("4.Edit airport info");
+        System.out.println("5.Delete airport");
+        System.out.println("6.Quit");
+        System.out.print("Enter a choice: ");
         try {
-            System.out.println(".....................Airport Menu..........................");
-            System.out.println("1.Add new airport");
-            System.out.println("2.Show all airport");
-            System.out.println("3.Get Airport by ID");
-            System.out.println("4.Edit airport info");
-            System.out.println("5.Delete airport");
-            System.out.println("6.Quit");
-            System.out.print("Enter a choice: ");
             int option = sc.nextInt();
             sc.nextLine();
             String airport_code = null;
@@ -170,11 +165,8 @@ public class AirportController {
                 default:
                     System.out.println("Please enter a valid choice");
             }
-        } catch (NullPointerException e) {
-            System.out.println("A NullPointerException occurred.System will exit");
-            System.exit(0);
-        } catch (NoSuchElementException e) {
-            System.out.println("Input not found. Please enter text without spaces");
+        }catch (InputMismatchException e) {
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;

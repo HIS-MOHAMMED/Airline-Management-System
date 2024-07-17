@@ -1,7 +1,6 @@
 package com.hishamfactory;
 
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class PlaneController {
@@ -23,7 +22,7 @@ public class PlaneController {
      * Print all planes the company has its
      */
     public void showAllPlanes() {
-        if(Company.flights.isEmpty()){
+        if(Company.planes.isEmpty()){
             System.out.println("** Sorry.The plane list is empty **");
         }else{
             System.out.println(".......................List of Planes.............");
@@ -47,7 +46,6 @@ public class PlaneController {
             System.out.println("4.Edit Capacity");
             System.out.println("5.Quit");
             System.out.print("select option: ");
-            try {
                 int option = sc.nextInt();
                 switch (option) {
                     case 1:
@@ -81,10 +79,6 @@ public class PlaneController {
                     default:
                         System.out.println("*** Please enter a valid choice ***");
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("*** Please enter capacity as integer ***");
-                sc.nextLine();
-            }
         }else {
             System.out.println("*** This plane not exits ***");
         }
@@ -113,7 +107,6 @@ public class PlaneController {
      */
     public boolean showPlaneMenu(Company company,PlaneController controller) {
         boolean flag = true;
-        try {
             System.out.println(".....................Plane Menu....................");
             System.out.println("1.Add new plane");
             System.out.println("2.Print all planes");
@@ -121,6 +114,7 @@ public class PlaneController {
             System.out.println("4.Delete plane");
             System.out.println("5.Quit");
             System.out.print("Enter a choice: ");
+        try {
             int option = sc.nextInt();
             sc.nextLine();
             String plane_code = null;
@@ -148,8 +142,8 @@ public class PlaneController {
                 default:
                     System.out.println("*** Please enter a valid choice ***");
             }
-        }catch (NoSuchElementException e){
-            System.out.println("Input not found. Please enter text without spaces");
+        }catch (InputMismatchException e){
+            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
         }
         return flag;
