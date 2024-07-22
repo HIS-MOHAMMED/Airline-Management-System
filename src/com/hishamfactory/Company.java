@@ -257,7 +257,7 @@ public class Company {
                     sc.nextLine();
 
                     Passenger newPassenger = new Passenger(first_name, last_name,user_name, age, tel_number,address, passenger_pin, company);
-                    flight.passengers.add(newPassenger);
+                    flight.getPassengers().add(newPassenger);
 
                 }
             } catch (InputMismatchException e) {
@@ -391,8 +391,11 @@ public class Company {
                                 System.out.print("Enter ticket price: ");
                                 double ticket_price = sc.nextDouble();
                                 sc.nextLine();
+                                System.out.print("Enter number of seats of flight: ");
+                                int flight_seats = sc.nextInt();
+                                sc.nextLine();
 
-                                Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane,pilot,company);
+                                Flight newFlight = new Flight(dep_airport, des_airport, dep_time, arrival_time, plane,pilot,flight_seats,company);
                                 newFlight.setTicket_price(ticket_price);
                                 flights.add(newFlight);
                             }else {

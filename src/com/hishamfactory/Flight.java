@@ -3,18 +3,19 @@ package com.hishamfactory;
 import java.util.ArrayList;
 
 public class Flight implements Identifiable{
-    private String flight_code;
-    public Airport departure_airport;
-    public Airport destination_airport;
-    private String departure_time;
-    private String arrival_time;
-    public Plane plane;
-    private double ticket_price;
+    protected String flight_code;
+    protected Airport departure_airport;
+    protected Airport destination_airport;
+    protected String departure_time;
+    protected String arrival_time;
+    protected Plane plane;
+    protected double ticket_price;
     private Pilot flight_captain;
-    public ArrayList<Passenger> passengers;
+    private ArrayList<Passenger> passengers;
+    private String[] flight_seats;
 
     Flight(){}
-    Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,Company company) {
+    Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,int flight_seats,Company company) {
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
         this.departure_time = departure_time;
@@ -22,6 +23,7 @@ public class Flight implements Identifiable{
         this.plane = plane;
         this.flight_captain = flight_captain;
         this.ticket_price = 0.0;
+        this.flight_seats = new String[flight_seats];
         this.flight_code =company.getNewUUID();
         passengers = new ArrayList<>();
         System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
@@ -101,6 +103,16 @@ public class Flight implements Identifiable{
                 }
             }
         }
+    }
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
+    }
+    public String[] getFlight_seats() {
+        return flight_seats;
+    }
+
+    public void setFlight_seats(String[] flight_seats) {
+        this.flight_seats = flight_seats;
     }
     public boolean hasAvailableSeat(Flight flight){
         return flight.passengers.size() < flight.getPlane().getPlane_capacity();
