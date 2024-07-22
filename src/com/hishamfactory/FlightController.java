@@ -1,5 +1,6 @@
 package com.hishamfactory;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -29,8 +30,8 @@ public class FlightController {
             System.out.println("*** Sorry,There is not any flight booked ***");
         }else{
             System.out.println(".......................List of Flights..........................");
-            for (Flight flight : passenger.passenger_flights) {
-                System.out.println(flight.toString());
+            for (FlightBooked flightBooked : passenger.passenger_flights) {
+                System.out.println(flightBooked.toString());
             }
         }
     }
@@ -174,7 +175,8 @@ public class FlightController {
                         break;
                     case 8:
                         System.out.println(".......................Flight's Passengers.................");
-                        for (Passenger passenger : flight.passengers) {
+                        ArrayList<Passenger> passengers = flight.getPassengers();
+                        for (Passenger passenger : passengers) {
                             System.out.println(passenger.toString());
                         }
                         System.out.println("............................................................");
@@ -187,7 +189,7 @@ public class FlightController {
                         Passenger passenger_to_remove = PassengersController.getPassengerByName(passenger_first_name_to_remove + passenger_last_name_to_remove);
                         if(passenger_to_remove != null){
                             passenger_to_remove.hasNewMessages("Your ticket was removed by admin");
-                            flight.passengers.remove(passenger_to_remove);
+                            flight.getPassengers().remove(passenger_to_remove);
                             System.out.println("Passenger " +passenger_to_remove.getFirst_name() +","+passenger_to_remove.getLast_name() + " removed from flight");
                         }else{
                             System.out.println("*** This passenger doesn't exists ***");
@@ -231,11 +233,12 @@ public class FlightController {
     public void showFlightPassengers(String flight_code) {
         Flight flight = getFlightById(flight_code);
         if(flight != null) {
-            if(flight.passengers.isEmpty()){
+            if(flight.getPassengers().isEmpty()){
                 System.out.println("** Sorry.The Passengers list of this flight is empty ***");
             }else{
                 System.out.println(".................Passengers of flight..........................");
-                for (Passenger passenger :flight.passengers) {
+                ArrayList<Passenger> passengers = flight.getPassengers();
+                for (Passenger passenger : passengers) {
                     System.out.println(passenger.toString());
                 }
             }
@@ -251,10 +254,11 @@ public class FlightController {
     public  void cancelFlight(String flight_code){
         Flight flight = getFlightById(flight_code);
         if(flight != null){
-            if(!flight.passengers.isEmpty()){
-                for (int i = 0; i < flight.passengers.size();i++) {
-                    flight.passengers.get(i).hasNewMessages("Unfortunately, you flight from"+flight.getDeparture_airport()+" to "+flight.getDestination_airport()+" was cancelled we are sorry for that");
-                    flight.passengers.get(i).passenger_flights.remove(flight);
+            ArrayList<Passenger> passengers = flight.getPassengers();
+            if(!passengers.isEmpty()){
+                for (Passenger passenger : passengers) {
+                    passenger.hasNewMessages("Unfortunately, you flight from" + flight.getDeparture_airport() + " to " + flight.getDestination_airport() + " was cancelled we are sorry for that");
+                    passenger.passenger_flights.remove(flight);
                 }
             }
             Company.flights.remove(flight);
@@ -270,16 +274,17 @@ public class FlightController {
      */
     public  void cancelFlight(Passenger passenger){
         System.out.println(".......................Future Flights........................");
-        for (Flight passengerFlight : passenger.passenger_flights) {
-            System.out.println(passengerFlight);
+        for (FlightBooked flightBooked : passenger.passenger_flights) {
+            System.out.println(flightBooked);
         }
         System.out.print("Enter flight code you want cancel: ");
         Flight flight = getFlightById(sc.next());
         sc.nextLine();
         if(flight != null){
+            ArrayList<Passenger> passengers = flight.getPassengers();
             passenger.passenger_flights.remove(flight);
             passenger.hasNewMessages("Your flight was cancelled");
-            flight.passengers.remove(passenger);
+            passengers.remove(passenger);
         }else{
             System.out.println("*** This flight not exists ***");
         }
@@ -312,7 +317,8 @@ public class FlightController {
             sc.nextLine();
             if (flight != null) {
                 if(flight.hasAvailableSeat(flight)) {
-                    for (Passenger passenger1 : flight.passengers) {
+                    ArrayList<Passenger> passengers =flight.getPassengers();
+                    for (Passenger passenger1 : passengers) {
                         if (passenger1.getUuid().equals(passenger.getUuid())) {
                             passenger_exit = true;
                             break;
@@ -320,9 +326,28 @@ public class FlightController {
                     }
                     if (!passenger_exit) {
                         boolean flightIsAdded = false;
+                        int counter = 0;
+                        String[] flight_seats = flight.getFlight_seats();
+                        System.out.println("    ");
+                        for (int i = 0; i < flight_seats.length; i++) {
+                            if(flight_seats[i] == null){
+                                System.out.print(i+1 +" ");
+                                counter++;
+                            }
+                            if(counter > 15){
+                                counter = 0;
+                                System.out.println("    ");
+                            }
+                        }
+                        System.out.println();
+                        System.out.print("Select your seat's number : ");
+                        int passenger_seat = sc.nextInt();
+                        sc.nextLine();
+                        flight_seats[passenger_seat-1] = passenger.getFirst_name()+" "+passenger.getLast_name();
                         System.out.print("Do you have a coupon code(Yes(y) or No(n)): ");
                         String have_coupon = sc.next();
                         sc.nextLine();
+                        FlightBooked flightBooked = new FlightBooked(flight.getDeparture_airport(),flight.getDestination_airport(),flight.getDeparture_time(),flight.getArrival_time(),flight.getTicket_price(),passenger_seat);
                         if(have_coupon.equalsIgnoreCase("Y") || have_coupon.equalsIgnoreCase("Yes")){
                             boolean isValidCoupon = true;
                             while(isValidCoupon){
@@ -342,19 +367,16 @@ public class FlightController {
                                 continue;
                             }
                             isValidCoupon = false;
-                            passenger.passenger_flights.add(flight);
+                            passenger.passenger_flights.add(flightBooked);
                             flightIsAdded = true;
                             double price_after_discount = couponController.discountCalculation(flight.getTicket_price(),coupon.getCoupon_in_percentage());
-                            Flight passengerFlight = changePriceAfterDiscount(price_after_discount,flight,passenger);
-                            if(passengerFlight != null){
-                                System.out.println("The new price of flight after discount is " + passengerFlight.getTicket_price());
-                            }else{
-                                System.out.println("*** The flight doesn't exists ***");
-                            }
+                            flightBooked.setTicket_price(price_after_discount);
+                                System.out.println("The new price of flight after discount is " + flightBooked.getTicket_price());
+
                         }
                         }
-                        if(!flightIsAdded) passenger.passenger_flights.add(flight);
-                        flight.passengers.add(passenger);
+                        if(!flightIsAdded) passenger.passenger_flights.add(flightBooked);
+                        flight.getPassengers().add(passenger);
                         System.out.println("Flight booked from " + flight.getDeparture_airport().getAirport_name() + " to " + flight.getDestination_airport().getAirport_name() + " at " + flight.getDeparture_time());
                     }else {
                         System.out.println("*** You already booked into this flight ***");
@@ -369,19 +391,6 @@ public class FlightController {
             System.out.println("*** Sorry, There aren't any flight to your Trip ***");
         }
     }
-    public Flight changePriceAfterDiscount(double price_after_discount, Flight flight, Passenger passenger) {
-        for (Flight passengerFlight : passenger.passenger_flights) {
-            if(passengerFlight.getFlight_code().equals(flight.getFlight_code())){
-                Flight flight1 = new Flight();
-                flight1.setTicket_price(price_after_discount);
-                passengerFlight = flight1;
-                return passengerFlight;
-            }
-        }
-        return null;
-    }
-
-
     /**
      * Show operations can be performed on flight
      * @param company       the airline company who has this system

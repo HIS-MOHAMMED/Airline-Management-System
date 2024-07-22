@@ -1,12 +1,9 @@
 package com.hishamfactory;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class Passenger extends NormalUser {
-    public ArrayList<Flight> passenger_flights = new ArrayList<>();
+    public ArrayList<FlightBooked> passenger_flights = new ArrayList<>();
     Passenger(String first_name,String last_name,String user_name,int age,String tel_number,String address,String passenger_pin,Company company){
         super(first_name,last_name,user_name,age,tel_number,address,passenger_pin,company);
         Company.passengers.add(this);
