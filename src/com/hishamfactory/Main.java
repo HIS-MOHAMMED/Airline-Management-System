@@ -202,10 +202,6 @@ public class Main {
                         System.out.println("Flag is: " + flag);
                         break;
                     case 6:
-                        if (Company.flights.isEmpty()) {
-                            System.out.println("**You must create flight before**");
-                            break;
-                        }
                         PassengersController controller4 = new PassengersController();
                         while (inner_flag2) {
                             inner_flag2 = controller4.showPassengerMenu(company, controller4);
