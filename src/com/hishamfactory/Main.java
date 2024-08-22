@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         File directory = new File("DataFiles");
         if(!directory.exists()){
@@ -31,9 +31,6 @@ public class Main {
 
         }
         Company company = new Company("Turkish Airline");
-//        File file = new File("DataFiles/companies");
-//        PrintWriter out = new PrintWriter(file);
-//        out.close();
         boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
@@ -245,7 +242,7 @@ public class Main {
                         try {
                             company.storeCopiesFromData();
                         }catch (IOException ex){
-                            System.out.println("IO Exception");
+                            System.out.println("*** The system couldn't complete storing data.Try again ***");
                         }
                         break;
                     case 10:

@@ -28,10 +28,8 @@ public class Company {
      * Create new company with empty employee list and so on
      * @param name  the name of the company
      */
-    public Company(String name)throws IOException {
+    public Company(String name){
         this.name = name;
-        String line;
-        String[] tokens;
         users = new ArrayList<>();
         uuids = new ArrayList<>();
         permissions_editing_uuids = new ArrayList<>();
@@ -39,109 +37,18 @@ public class Company {
         customerServices = new ArrayList<>();
         employees = new ArrayList<>();
         pilots = new ArrayList<>();
-        FileReader employeesFile = new FileReader("DataFiles/employees");
-        try(BufferedReader reader = new BufferedReader(employeesFile)){
-            while((line = reader.readLine())!= null){
-                tokens = line.split(";");
-                String[] hashedPasswordString = tokens[6].split(", ");
-                byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
-                for (int i = 0; i < hashedPasswordString.length; i++) {
-                    hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
-                }
-                if(tokens[7].equalsIgnoreCase("SuperVisor")) {
-                    superVisor = new SuperVisor(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte,  tokens[7],Double.parseDouble(tokens[8]), getCompany());
-                    employees.add(superVisor);
-                    users.add(superVisor);
-                }
-                else if(tokens[7].equals("Manager")){
-                    Manager manager = new Manager(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, tokens[7], Double.parseDouble(tokens[8]), getCompany());
-                    employees.add(manager);
-                    users.add(manager);
-                }else if(tokens[7].equals("Director")){
-                    Director director = new Director(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, tokens[7], Double.parseDouble(tokens[8]), getCompany());
-                    employees.add(director);
-                    users.add(director);
-                }else if(tokens[7].equals("Software Engineer")){
-                    SoftwareEngineer softwareEngineer = new SoftwareEngineer(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4],tokens[5],hashedPasswordByte, tokens[7],Double.parseDouble(tokens[8]),  getCompany());
-                    employees.add(softwareEngineer);
-                    users.add(softwareEngineer);
-                }else if(tokens[7].equals("Pilot")){
-                    Pilot pilot = new Pilot(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5],hashedPasswordByte, tokens[7],Double.parseDouble(tokens[8]), getCompany());
-                    pilots.add(pilot);
-                    employees.add(pilot);
-                    users.add(pilot);
-                }
-            }
-        }
         passengers = new ArrayList<>();
-        FileReader usersFile = new FileReader("DataFiles/passengers");
-        try(BufferedReader reader = new BufferedReader(usersFile)) {
-            while ((line = reader.readLine()) != null) {
-                tokens = line.split(";");
-                String[] hashedPasswordString = tokens[6].split(", ");
-                byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
-                for (int i = 0; i < hashedPasswordString.length; i++) {
-                    hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
-                }
-                Passenger passenger = new Passenger(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, getCompany());
-                passengers.add(passenger);
-            }
-        }
         planes = new ArrayList<>();
-        FileReader planesFile = new FileReader("DataFiles/planes");
-        try(BufferedReader reader = new BufferedReader(planesFile)){
-            while ((line = reader.readLine()) != null) {
-                tokens = line.split(";");
-                Plane plane = new Plane(tokens[0], tokens[1], tokens[2],tokens[3], Integer.parseInt(tokens[4]), getCompany());
-                planes.add(plane);
-            }
-        }
         airports = new ArrayList<>();
-        FileReader airportsFile = new FileReader("DataFiles/airports");
-        try(BufferedReader reader = new BufferedReader(airportsFile)){
-            while((line = reader.readLine()) != null){
-                tokens = line.split(";");
-                Airport airport = new Airport(tokens[0], tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), getCompany());
-                airports.add(airport);
-            }
-        }
         flights = new ArrayList<>();
-        FileReader flightsFile = new FileReader("DataFiles/flights");
-        try(BufferedReader reader = new BufferedReader(flightsFile)){
-            while((line = reader.readLine()) != null){
-                tokens = line.split(";");
-                String[] flightSeatsStringToArray = tokens[7].split(",");
-                String[] flightPassengersStringToStringArray =  tokens[8].split(",");
-                ArrayList<Passenger> flightPassengers = new ArrayList<>();
-                for (String passengerUserName : flightPassengersStringToStringArray) {
-                    Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
-                    if(passenger != null){
-                        flightPassengers.add(passenger);
-                    }
-
-                }
-                Flight flight = new Flight(tokens[0],AirportController.getAirportByName(tokens[1]), AirportController.getAirportByName(tokens[2]),tokens[3],tokens[4],PlaneController.getPlaneBySerialNumber(tokens[5]),PilotsController.getPilotByID(tokens[6]),flightSeatsStringToArray,flightPassengers);
-                flights.add(flight);
-            }
-        }
         coupons = new ArrayList<>();
-        FileReader couponsFile = new FileReader("DataFiles/coupons");
-        try(BufferedReader reader = new BufferedReader(couponsFile)){
-            while((line = reader.readLine()) != null){
-                tokens = line.split(";");
-                Coupon coupon = new Coupon(tokens[0],Integer.parseInt(tokens[1]),getCompany());
-                coupons.add(coupon);
-            }
-        }
         logs = new ArrayList<>();
-        FileReader logsFile = new FileReader("DataFiles/logs");
-        try(BufferedReader reader = new BufferedReader(logsFile)){
-            while ((line = reader.readLine()) != null){
-                tokens = line.split(";");
-                LoginHistory log =new LoginHistory(tokens[0],UserController.getUserByUserName(tokens[1]));
-                logs.add(log);
-            }
+        try{
+            uploadDataFromFiles();
+        }catch (IOException ex){
+            System.out.println("*** Upload Error, some data may don't upload from files ***");
         }
+
         this.uuid = getNewUUID();
         System.out.println("You are working on "+this.name + " company with ID " + this.uuid);
     }
@@ -624,6 +531,107 @@ public class Company {
         try(FileWriter fileWriter = new FileWriter(logsFile)){
             for (LoginHistory log : logs) {
                 fileWriter.write(log.getDate_and_time()+";"+log.getUser().getUser_name()+"\n");
+            }
+        }
+    }
+    public void uploadDataFromFiles()throws  IOException{
+        String line;
+        String[] tokens;
+        FileReader employeesFile = new FileReader("DataFiles/employees");
+        try(BufferedReader reader = new BufferedReader(employeesFile)){
+            while((line = reader.readLine())!= null){
+                tokens = line.split(";");
+                String[] hashedPasswordString = tokens[6].split(", ");
+                byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
+                for (int i = 0; i < hashedPasswordString.length; i++) {
+                    hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
+                }
+                if(tokens[7].equalsIgnoreCase("SuperVisor")) {
+                    superVisor = new SuperVisor(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte,  tokens[7],Double.parseDouble(tokens[8]), getCompany());
+                    employees.add(superVisor);
+                    users.add(superVisor);
+                }
+                else if(tokens[7].equals("Manager")){
+                    Manager manager = new Manager(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, tokens[7], Double.parseDouble(tokens[8]), getCompany());
+                    employees.add(manager);
+                    users.add(manager);
+                }else if(tokens[7].equals("Director")){
+                    Director director = new Director(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, tokens[7], Double.parseDouble(tokens[8]), getCompany());
+                    employees.add(director);
+                    users.add(director);
+                }else if(tokens[7].equals("Software Engineer")){
+                    SoftwareEngineer softwareEngineer = new SoftwareEngineer(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4],tokens[5],hashedPasswordByte, tokens[7],Double.parseDouble(tokens[8]),  getCompany());
+                    employees.add(softwareEngineer);
+                    users.add(softwareEngineer);
+                }else if(tokens[7].equals("Pilot")){
+                    Pilot pilot = new Pilot(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5],hashedPasswordByte, tokens[7],Double.parseDouble(tokens[8]), getCompany());
+                    pilots.add(pilot);
+                    employees.add(pilot);
+                    users.add(pilot);
+                }
+            }
+        }
+        FileReader usersFile = new FileReader("DataFiles/passengers");
+        try(BufferedReader reader = new BufferedReader(usersFile)) {
+            while ((line = reader.readLine()) != null) {
+                tokens = line.split(";");
+                String[] hashedPasswordString = tokens[6].split(", ");
+                byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
+                for (int i = 0; i < hashedPasswordString.length; i++) {
+                    hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
+                }
+                Passenger passenger = new Passenger(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, getCompany());
+                passengers.add(passenger);
+            }
+        }
+        FileReader planesFile = new FileReader("DataFiles/planes");
+        try(BufferedReader reader = new BufferedReader(planesFile)){
+            while ((line = reader.readLine()) != null) {
+                tokens = line.split(";");
+                Plane plane = new Plane(tokens[0], tokens[1], tokens[2],tokens[3], Integer.parseInt(tokens[4]), getCompany());
+                planes.add(plane);
+            }
+        }
+        FileReader airportsFile = new FileReader("DataFiles/airports");
+        try(BufferedReader reader = new BufferedReader(airportsFile)){
+            while((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                Airport airport = new Airport(tokens[0], tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), getCompany());
+                airports.add(airport);
+            }
+        }
+        FileReader flightsFile = new FileReader("DataFiles/flights");
+        try(BufferedReader reader = new BufferedReader(flightsFile)){
+            while((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                String[] flightSeatsStringToArray = tokens[7].split(",");
+                String[] flightPassengersStringToStringArray =  tokens[8].split(",");
+                ArrayList<Passenger> flightPassengers = new ArrayList<>();
+                for (String passengerUserName : flightPassengersStringToStringArray) {
+                    Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
+                    if(passenger != null){
+                        flightPassengers.add(passenger);
+                    }
+
+                }
+                Flight flight = new Flight(tokens[0],AirportController.getAirportByName(tokens[1]), AirportController.getAirportByName(tokens[2]),tokens[3],tokens[4],PlaneController.getPlaneBySerialNumber(tokens[5]),PilotsController.getPilotByID(tokens[6]),flightSeatsStringToArray,flightPassengers);
+                flights.add(flight);
+            }
+        }
+        FileReader couponsFile = new FileReader("DataFiles/coupons");
+        try(BufferedReader reader = new BufferedReader(couponsFile)){
+            while((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                Coupon coupon = new Coupon(tokens[0],Integer.parseInt(tokens[1]),getCompany());
+                coupons.add(coupon);
+            }
+        }
+        FileReader logsFile = new FileReader("DataFiles/logs");
+        try(BufferedReader reader = new BufferedReader(logsFile)){
+            while ((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                LoginHistory log =new LoginHistory(tokens[0],UserController.getUserByUserName(tokens[1]));
+                logs.add(log);
             }
         }
     }
