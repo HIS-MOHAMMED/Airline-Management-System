@@ -4,6 +4,14 @@ import java.util.Scanner;
 
 public class PilotsController {
     Scanner sc = new Scanner(System.in);
+    public static Pilot getPilotByID(String id){
+        for (Pilot pilot : Company.pilots) {
+            if(pilot.getUuid().equals(id)){
+                return pilot;
+            }
+        }
+        return null;
+    }
     public boolean showPilotMenu(Company company){
         boolean flag = true;
         while(flag){

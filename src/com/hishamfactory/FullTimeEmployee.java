@@ -7,7 +7,11 @@ public abstract class FullTimeEmployee extends Employee{
     protected double insurance_premium;
     Scanner sc = new Scanner(System.in);
     public FullTimeEmployee(String first_name,String last_name,String user_name,int age,String tel_number,String address,String role,double basic_salary,String employee_pin,Company company){
-        super(first_name,last_name,user_name,age,tel_number,address,role,basic_salary,employee_pin,company);
+        super(first_name,last_name,user_name,age,tel_number,address,employee_pin,role,basic_salary,company);
+        setTax((double) 10 / 100);
+    }
+    public FullTimeEmployee(String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] employee_pin,String role,double basic_salary,Company company){
+        super(first_name,last_name,user_name,age,tel_number,address,employee_pin,role,basic_salary,company);
         setTax((double) 10 / 100);
     }
     public double getBonuses() {

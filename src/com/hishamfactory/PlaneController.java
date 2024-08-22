@@ -18,6 +18,13 @@ public class PlaneController {
         return null;
     }
 
+    public static Plane getPlaneBySerialNumber(String serial_number){
+        for (Plane plane : Company.planes) {
+            if(plane.getSerial_number().equalsIgnoreCase(serial_number)) return plane;
+        }
+        return null;
+    }
+
     /**
      * Print all planes the company has its
      */

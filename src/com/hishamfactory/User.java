@@ -11,8 +11,9 @@ public abstract class User extends Person implements Identifiable {
     protected  String user_name;
     protected ArrayList<String> messages;
     protected boolean isNewMessages;
-    User(String first_name, String last_name,String user_name, int age, String tel_number,String address,String role, String person_pin, Company company){
+    User(String first_name, String last_name,String user_name, int age, String tel_number,String address,String person_pin,String role, Company company){
         super(first_name,last_name,age,tel_number,address,role);
+
         try{
             MessageDigest md =MessageDigest.getInstance("SHA-256");
             this.pinHash =md.digest(person_pin.getBytes(StandardCharsets.UTF_8));
@@ -26,16 +27,12 @@ public abstract class User extends Person implements Identifiable {
         messages = new ArrayList<>();
         isNewMessages = false;
     }
-    User(String first_name, String last_name,String user_name, int age, String tel_number,String address, String person_pin, Company company){
-        super(first_name,last_name,age,tel_number,address);
-        try{
-            MessageDigest md =MessageDigest.getInstance("SHA-256");
-            this.pinHash =md.digest(person_pin.getBytes(StandardCharsets.UTF_8));
-        }catch (NoSuchAlgorithmException e){
-            System.err.println("error, caught NoSuchAlgorithmException.");
-            e.printStackTrace();
-            System.exit(0);
-        }
+    /*
+    constructor to create users objects when reading from files
+     */
+    User(String first_name, String last_name,String user_name, int age, String tel_number,String address, byte[] person_pin,String role, Company company){
+        super(first_name,last_name,age,tel_number,address,role);
+        this.pinHash = person_pin;
         this.uuid = company.getNewUUID();
         this.user_name = user_name;
         messages = new ArrayList<>();
@@ -58,12 +55,15 @@ public abstract class User extends Person implements Identifiable {
             System.exit(0);
         }
     }
+    public byte[] getPinHash() {
+        return this.pinHash;
+    }
     /**
      *Check whether a given password matches the UserRoot password or not
      * @param user_pin  the password of the UserRoot
      * @return              whether the password is valid or not
      */
-    public boolean validatePin(String user_pin){
+    public boolean validatePinByUserPin(String user_pin){
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             return MessageDigest.isEqual(md.digest(user_pin.getBytes(StandardCharsets.UTF_8)),this.pinHash);

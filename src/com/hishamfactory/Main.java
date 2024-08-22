@@ -1,12 +1,39 @@
 package com.hishamfactory;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         Scanner sc = new Scanner(System.in);
+        File directory = new File("DataFiles");
+        if(!directory.exists()){
+            if(directory.mkdir()){
+                System.out.println(directory.getName() +" directory was created...");
+            }
+            String[] entitiesFiles = {"companies","users","employees","airports","pilots","planes","flights","passengers","coupons","logs"};
+            File file;
+            int i = 0;
+            while(i < entitiesFiles.length){
+                file = new File("DataFiles/"+ entitiesFiles[i]);
+                try{
+                    if(!file.exists()){
+                        if(file.createNewFile()){
+                            System.out.println(file.getName()+ " file was created...");
+                        }
+                    }
+                    i++;
+                }catch (IOException ex){
+                    System.out.println("IO Exception");
+                }
+            }
+
+        }
         Company company = new Company("Turkish Airline");
+//        File file = new File("DataFiles/companies");
+//        PrintWriter out = new PrintWriter(file);
+//        out.close();
         boolean isNew = true;
         do {
             System.out.println("Welcome to Airline System Management");
@@ -147,11 +174,12 @@ public class Main {
                     System.out.println("6.Passengers");
                     System.out.println("7.Create Coupon");
                     System.out.println("8.Show login history");
-                    System.out.println("9.Quit");
+                    System.out.println("9.Store copies form data");
+                    System.out.println("10.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
-                    if (option >= 1 && option <= 9) {
+                    if (option >= 1 && option <= 10) {
                         inner_flag1 = false;
                     } else {
                         System.out.println("Just form 1 to 6 you can choose");
@@ -211,9 +239,16 @@ public class Main {
                         company.CreateCoupon(company);
                         break;
                     case 8:
-                        new LoginHistory().printLoginHistory();
+                        LogsController.printLoginHistory();
                         break;
                     case 9:
+                        try {
+                            company.storeCopiesFromData();
+                        }catch (IOException ex){
+                            System.out.println("IO Exception");
+                        }
+                        break;
+                    case 10:
                         flag = false;
                         break;
                 }
