@@ -23,6 +23,12 @@ public class PassengersController {
         return null;
     }
 
+    public static Passenger getPassengerByUserName(String passengerUserName) {
+        for (Passenger passenger : Company.passengers) {
+            if(passenger.getUser_name().equals(passengerUserName)) return passenger;
+        }
+        return null;
+    }
     /**
      * Print all passenger on the system
      */

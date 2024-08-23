@@ -23,8 +23,13 @@ public abstract class Employee extends User {
      * @param company       the company who has the system
      */
     Employee(String first_name,
-String last_name,String  user_name, int age, String tel_number, String address, String role,double basic_salary, String user_pin, Company company){
-        super(first_name,last_name,user_name,age,tel_number,address,role,user_pin,company);
+String last_name,String  user_name, int age, String tel_number, String address, String user_pin, String role,double basic_salary, Company company){
+        super(first_name,last_name,user_name,age,tel_number,address,user_pin,role,company);
+        setBasic_salary(basic_salary);
+    }
+    Employee(String first_name,
+             String last_name,String  user_name, int age, String tel_number, String address, byte[] user_pin, String role,double basic_salary, Company company){
+        super(first_name,last_name,user_name,age,tel_number,address,user_pin,role,company);
         setBasic_salary(basic_salary);
     }
     public abstract double calculateSalary();

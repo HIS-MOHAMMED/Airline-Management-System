@@ -14,7 +14,6 @@ public class Flight implements Identifiable{
     private ArrayList<Passenger> passengers;
     private String[] flight_seats;
 
-    Flight(){}
     Flight(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,int flight_seats,Company company) {
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
@@ -26,6 +25,19 @@ public class Flight implements Identifiable{
         this.flight_seats = new String[flight_seats];
         this.flight_code =company.getNewUUID();
         passengers = new ArrayList<>();
+        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
+    }
+    Flight(String flight_code,Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,String[] flight_seats,ArrayList<Passenger> passengers) {
+        this.departure_airport = departure_airport;
+        this.destination_airport = destination_airport;
+        this.departure_time = departure_time;
+        this.arrival_time = arrival_time;
+        this.plane = plane;
+        this.flight_captain = flight_captain;
+        this.ticket_price = 0.0;
+        this.flight_seats = flight_seats;
+        this.flight_code = flight_code;
+        this.passengers = passengers;
         System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
     }
 

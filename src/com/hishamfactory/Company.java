@@ -1,5 +1,6 @@
 package com.hishamfactory;
 
+import java.io.*;
 import java.util.*;
 
 public class Company {
@@ -18,6 +19,7 @@ public class Company {
     public static ArrayList<Pilot> pilots;
     public static ArrayList<Passenger> passengers;
     public static ArrayList<Coupon> coupons;
+    public static ArrayList<LoginHistory> logs;
 
     Random rm = new Random();
     Scanner sc = new Scanner(System.in);
@@ -29,17 +31,24 @@ public class Company {
     public Company(String name){
         this.name = name;
         users = new ArrayList<>();
-        employees = new ArrayList<>();
-        passengers = new ArrayList<>();
-        planes = new ArrayList<>();
-        airports = new ArrayList<>();
-        flights = new ArrayList<>();
         uuids = new ArrayList<>();
         permissions_editing_uuids = new ArrayList<>();
         administrators = new ArrayList<>();
         customerServices = new ArrayList<>();
+        employees = new ArrayList<>();
         pilots = new ArrayList<>();
+        passengers = new ArrayList<>();
+        planes = new ArrayList<>();
+        airports = new ArrayList<>();
+        flights = new ArrayList<>();
         coupons = new ArrayList<>();
+        logs = new ArrayList<>();
+        try{
+            uploadDataFromFiles();
+        }catch (IOException ex){
+            System.out.println("*** Upload Error, some data may don't upload from files ***");
+        }
+
         this.uuid = getNewUUID();
         System.out.println("You are working on "+this.name + " company with ID " + this.uuid);
     }
@@ -122,7 +131,7 @@ public class Company {
                     sc.nextLine();
                     switch (option) {
                         case 1:
-                            employee = new Manager(first_name, last_name,user_name, age, address, address, role,basic_salary, employee_pin, company);
+                            employee = new Manager(first_name, last_name,user_name, age, tel_number, address, role,basic_salary, employee_pin, company);
                             break;
                         case 2:
                             employee = new Director(first_name, last_name,user_name,age, tel_number, address, role,basic_salary, employee_pin, company);
@@ -174,7 +183,7 @@ public class Company {
     }
 
     /**
-     * Add new passenger manually by employee
+     * Add new passenger into system database
      * @param company   the company who has the system
      */
     public void addPassenger(Company company){
@@ -277,7 +286,7 @@ public class Company {
      */
     public Employee employeeLoginByUserNameOrId(String user_name_or_id, String user_pin) {
         for (Employee employee: employees) {
-            if ((employee.getUuid().compareTo(user_name_or_id) == 0 || employee.getUser_name().equalsIgnoreCase(user_name_or_id)) && employee.validatePin(user_pin)){
+            if ((employee.getUuid().compareTo(user_name_or_id) == 0 || employee.getUser_name().equalsIgnoreCase(user_name_or_id)) && employee.validatePinByUserPin(user_pin)){
                 return employee;
             }
         }
@@ -292,7 +301,7 @@ public class Company {
      */
     public Passenger passengerLoginByUserNameOrID(String passenger_username_or_id, String passenger_pin){
         for (Passenger passenger : passengers) {
-            if((passenger.getUuid().compareTo(passenger_username_or_id) == 0 || passenger.getUser_name().equalsIgnoreCase(passenger_username_or_id)) && passenger.validatePin(passenger_pin)){
+            if((passenger.getUuid().compareTo(passenger_username_or_id) == 0 || passenger.getUser_name().equalsIgnoreCase(passenger_username_or_id)) && passenger.validatePinByUserPin(passenger_pin)){
                 return passenger;
             }
         }
@@ -307,6 +316,9 @@ public class Company {
             System.out.print("Enter plane model: ");
             String model = sc.next();
             sc.nextLine();
+            System.out.print("Enter plane serial number: ");
+            String serial_number = sc.next();
+            sc.nextLine();
             System.out.print("Enter plane manufacturer: ");
             String manufacturer = sc.nextLine();
             System.out.print("Enter year of manufacturer: ");
@@ -315,7 +327,7 @@ public class Company {
             int capacity = sc.nextInt();
             sc.nextLine();
 
-            Plane newPlane = new Plane(model, manufacturer, year_manufacturer, capacity, company);
+            Plane newPlane = new Plane(model,serial_number, manufacturer, year_manufacturer, capacity, company);
             planes.add(newPlane);
     }
 
@@ -458,5 +470,169 @@ public class Company {
 
             Coupon coupon = new Coupon(coupon_code, coupon_in_percentage,company);
             Company.coupons.add(coupon);
+    }
+    public Company getCompany(){
+        return this;
+    }
+    public void storeCopiesFromData() throws IOException{
+        File usersFile = new File("DataFiles/users");
+        try(FileWriter fileWriter = new FileWriter(usersFile)){
+            for (User user : users) {
+                String hashedPasswordString = Arrays.toString(user.getPinHash());
+                fileWriter.write(user.getFirst_name()+";"+user.getLast_name()+";"+user.getUser_name()+";"+user.getAge()+";"+user.getTel_number()+";"+user.getAddress()+";"+hashedPasswordString.substring(1,hashedPasswordString.length()-1)+";"+user.getRole()+"\n");
+            }
+        }
+        File employeesFile = new File("DataFiles/employees");
+        try(FileWriter fileWriter = new FileWriter(employeesFile)){
+            for (Employee employee : employees) {
+                String hashedPasswordString = Arrays.toString(employee.getPinHash());
+                fileWriter.write(employee.getFirst_name()+";"+employee.getLast_name()+";"+employee.getUser_name()+";"+employee.getAge()+";"+employee.getTel_number()+";"+employee.getAddress()+";"+hashedPasswordString.substring(1,hashedPasswordString.length()-1)+";"+employee.getRole()+";"+employee.getBasic_salary()+"\n");
+            }
+        }
+        File passengersFile = new File("DataFiles/passengers");
+        try(FileWriter fileWriter = new FileWriter(passengersFile)){
+            for (Passenger passenger : passengers) {
+                String hashedPasswordString = Arrays.toString(passenger.getPinHash());
+                fileWriter.write(passenger.getFirst_name()+";"+passenger.getLast_name()+";"+passenger.getUser_name()+";"+passenger.getAge()+";"+passenger.getTel_number()+";"+passenger.getAddress()+";"+hashedPasswordString.substring(1,hashedPasswordString.length()-1)+";"+passenger.getRole()+"\n");
+            }
+        }
+        File planesFile = new File("DataFiles/planes");
+        try(FileWriter fileWriter = new FileWriter(planesFile)){
+            for (Plane plane: planes) {
+                fileWriter.write(plane.getPlane_model() +";"+plane.getSerial_number()+";"+plane.getPlane_manufacturer()+";"+plane.getPlane_year()+";"+plane.getPlane_capacity()+"\n");
+            }
+        }
+        File flightsFile = new File("DataFiles/flights");
+        try(FileWriter fileWriter = new FileWriter(flightsFile)){
+            for (Flight flight : flights) {
+                ArrayList<Passenger> flightPassengers = flight.getPassengers();
+                String[] flightPassengersToStringArray = new String[flightPassengers.size()];
+                for (int i = 0; i < flightPassengers.size(); i++) {
+                    flightPassengersToStringArray[i] = flightPassengers.get(i).getUser_name();
+                }
+                String flightPassengersToString = Arrays.toString(flightPassengersToStringArray);
+                String flightSeatsArrayToString = Arrays.toString(flight.getFlight_seats());
+                fileWriter.write(flight.getFlight_code()+";"+flight.getDeparture_airport().getAirport_name()+";"+flight.getDestination_airport().getAirport_name()+";"+flight.getDeparture_time()+";"+flight.getArrival_time()+";"+flight.getPlane().getSerial_number()+";"+flight.getFlight_captain().getUuid()+";"+ flightSeatsArrayToString.substring(1,flightSeatsArrayToString.length()-1) +";"+flightPassengersToString.substring(1,flightSeatsArrayToString.length()-1)+"\n");
+            }
+        }
+        File airportsFile = new File("DataFiles/airports");
+        try(FileWriter fileWriter = new FileWriter(airportsFile)){
+            for (Airport airport : airports) {
+                fileWriter.write(airport.getAirport_name()+";"+airport.getAirport_location()+";"+airport.getAirport_number_gates()+";"+airport.getAirport_number_runways()+"\n");
+            }
+        }
+        File couponsFile = new File("DataFiles/coupons");
+        try(FileWriter fileWriter = new FileWriter(couponsFile)){
+            for (Coupon coupon : coupons) {
+                fileWriter.write(coupon.getCoupon_code()+";"+coupon.getCoupon_in_percentage()+"\n");
+            }
+        }
+        File logsFile = new File("DataFiles/logs");
+        try(FileWriter fileWriter = new FileWriter(logsFile)){
+            for (LoginHistory log : logs) {
+                fileWriter.write(log.getDate_and_time()+";"+log.getUser().getUser_name()+"\n");
+            }
+        }
+    }
+    public void uploadDataFromFiles()throws  IOException{
+        String line;
+        String[] tokens;
+        FileReader employeesFile = new FileReader("DataFiles/employees");
+        try(BufferedReader reader = new BufferedReader(employeesFile)){
+            while((line = reader.readLine())!= null){
+                tokens = line.split(";");
+                String[] hashedPasswordString = tokens[6].split(", ");
+                byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
+                for (int i = 0; i < hashedPasswordString.length; i++) {
+                    hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
+                }
+                if(tokens[7].equalsIgnoreCase("SuperVisor")) {
+                    superVisor = new SuperVisor(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte,  tokens[7],Double.parseDouble(tokens[8]), getCompany());
+                    employees.add(superVisor);
+                    users.add(superVisor);
+                }
+                else if(tokens[7].equals("Manager")){
+                    Manager manager = new Manager(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, tokens[7], Double.parseDouble(tokens[8]), getCompany());
+                    employees.add(manager);
+                    users.add(manager);
+                }else if(tokens[7].equals("Director")){
+                    Director director = new Director(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, tokens[7], Double.parseDouble(tokens[8]), getCompany());
+                    employees.add(director);
+                    users.add(director);
+                }else if(tokens[7].equals("Software Engineer")){
+                    SoftwareEngineer softwareEngineer = new SoftwareEngineer(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4],tokens[5],hashedPasswordByte, tokens[7],Double.parseDouble(tokens[8]),  getCompany());
+                    employees.add(softwareEngineer);
+                    users.add(softwareEngineer);
+                }else if(tokens[7].equals("Pilot")){
+                    Pilot pilot = new Pilot(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5],hashedPasswordByte, tokens[7],Double.parseDouble(tokens[8]), getCompany());
+                    pilots.add(pilot);
+                    employees.add(pilot);
+                    users.add(pilot);
+                }
+            }
+        }
+        FileReader usersFile = new FileReader("DataFiles/passengers");
+        try(BufferedReader reader = new BufferedReader(usersFile)) {
+            while ((line = reader.readLine()) != null) {
+                tokens = line.split(";");
+                String[] hashedPasswordString = tokens[6].split(", ");
+                byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
+                for (int i = 0; i < hashedPasswordString.length; i++) {
+                    hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
+                }
+                Passenger passenger = new Passenger(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, getCompany());
+                passengers.add(passenger);
+            }
+        }
+        FileReader planesFile = new FileReader("DataFiles/planes");
+        try(BufferedReader reader = new BufferedReader(planesFile)){
+            while ((line = reader.readLine()) != null) {
+                tokens = line.split(";");
+                Plane plane = new Plane(tokens[0], tokens[1], tokens[2],tokens[3], Integer.parseInt(tokens[4]), getCompany());
+                planes.add(plane);
+            }
+        }
+        FileReader airportsFile = new FileReader("DataFiles/airports");
+        try(BufferedReader reader = new BufferedReader(airportsFile)){
+            while((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                Airport airport = new Airport(tokens[0], tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), getCompany());
+                airports.add(airport);
+            }
+        }
+        FileReader flightsFile = new FileReader("DataFiles/flights");
+        try(BufferedReader reader = new BufferedReader(flightsFile)){
+            while((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                String[] flightSeatsStringToArray = tokens[7].split(",");
+                String[] flightPassengersStringToStringArray =  tokens[8].split(",");
+                ArrayList<Passenger> flightPassengers = new ArrayList<>();
+                for (String passengerUserName : flightPassengersStringToStringArray) {
+                    Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
+                    if(passenger != null){
+                        flightPassengers.add(passenger);
+                    }
+
+                }
+                Flight flight = new Flight(tokens[0],AirportController.getAirportByName(tokens[1]), AirportController.getAirportByName(tokens[2]),tokens[3],tokens[4],PlaneController.getPlaneBySerialNumber(tokens[5]),PilotsController.getPilotByID(tokens[6]),flightSeatsStringToArray,flightPassengers);
+                flights.add(flight);
+            }
+        }
+        FileReader couponsFile = new FileReader("DataFiles/coupons");
+        try(BufferedReader reader = new BufferedReader(couponsFile)){
+            while((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                Coupon coupon = new Coupon(tokens[0],Integer.parseInt(tokens[1]),getCompany());
+                coupons.add(coupon);
+            }
+        }
+        FileReader logsFile = new FileReader("DataFiles/logs");
+        try(BufferedReader reader = new BufferedReader(logsFile)){
+            while ((line = reader.readLine()) != null){
+                tokens = line.split(";");
+                LoginHistory log =new LoginHistory(tokens[0],UserController.getUserByUserName(tokens[1]));
+                logs.add(log);
+            }
+        }
     }
 }

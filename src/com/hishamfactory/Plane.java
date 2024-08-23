@@ -3,13 +3,15 @@ package com.hishamfactory;
 public class Plane implements Identifiable{
     private String plane_id;
     private String plane_model;
+    private String serial_number;
     private String plane_manufacturer;
     private String plane_year;
     private int plane_capacity;
     private int plane_current_passengers;
 
-    Plane(String plane_model,String plane_manufacturer,String plane_year,int plane_capacity,Company company){
+    Plane(String plane_model,String serial_number,String plane_manufacturer, String plane_year, int plane_capacity, Company company){
         this.plane_model = plane_model;
+        this.serial_number =serial_number;
         this.plane_capacity  = plane_capacity;
         this.plane_manufacturer = plane_manufacturer;
         this.plane_current_passengers = 0 ;
@@ -60,11 +62,20 @@ public class Plane implements Identifiable{
         this.plane_current_passengers += plane_current_passengers;
     }
 
+    public String getSerial_number() {
+        return serial_number;
+    }
+
+    public void setSerial_number(String serial_number) {
+        this.serial_number = serial_number;
+    }
+
     @Override
     public String toString() {
         return "Plane{" +
                 "plane_id='" + plane_id + '\'' +
                 ", plane_model='" + plane_model + '\'' +
+                ", serial_number='" + serial_number +'\''+
                 ", plane_manufacturer='" + plane_manufacturer + '\'' +
                 ", plane_year='" + plane_year + '\'' +
                 ", plane_capacity=" + plane_capacity +
