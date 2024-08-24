@@ -475,11 +475,15 @@ public class Company {
         return this;
     }
     public void storeCopiesFromData() throws IOException{
+        File companyFile = new File("DataFiles/company");
+        try(FileWriter fileWriter = new FileWriter(companyFile)){
+            fileWriter.write(this.getName());
+        }
         File usersFile = new File("DataFiles/users");
         try(FileWriter fileWriter = new FileWriter(usersFile)){
             for (User user : users) {
                 String hashedPasswordString = Arrays.toString(user.getPinHash());
-                fileWriter.write(user.getFirst_name()+";"+user.getLast_name()+";"+user.getUser_name()+";"+user.getAge()+";"+user.getTel_number()+";"+user.getAddress()+";"+hashedPasswordString.substring(1,hashedPasswordString.length()-1)+";"+user.getRole()+"\n");
+                fileWriter.write(user.getUuid()+";"+user.getFirst_name()+";"+user.getLast_name()+";"+user.getUser_name()+";"+user.getAge()+";"+user.getTel_number()+";"+user.getAddress()+";"+hashedPasswordString.substring(1,hashedPasswordString.length()-1)+";"+user.getRole()+"\n");
             }
         }
         File employeesFile = new File("DataFiles/employees");
@@ -505,14 +509,19 @@ public class Company {
         File flightsFile = new File("DataFiles/flights");
         try(FileWriter fileWriter = new FileWriter(flightsFile)){
             for (Flight flight : flights) {
-                ArrayList<Passenger> flightPassengers = flight.getPassengers();
-                String[] flightPassengersToStringArray = new String[flightPassengers.size()];
-                for (int i = 0; i < flightPassengers.size(); i++) {
-                    flightPassengersToStringArray[i] = flightPassengers.get(i).getUser_name();
-                }
-                String flightPassengersToString = Arrays.toString(flightPassengersToStringArray);
                 String flightSeatsArrayToString = Arrays.toString(flight.getFlight_seats());
-                fileWriter.write(flight.getFlight_code()+";"+flight.getDeparture_airport().getAirport_name()+";"+flight.getDestination_airport().getAirport_name()+";"+flight.getDeparture_time()+";"+flight.getArrival_time()+";"+flight.getPlane().getSerial_number()+";"+flight.getFlight_captain().getUuid()+";"+ flightSeatsArrayToString.substring(1,flightSeatsArrayToString.length()-1) +";"+flightPassengersToString.substring(1,flightSeatsArrayToString.length()-1)+"\n");
+                if(!flight.getPassengers().isEmpty()){
+                    ArrayList<Passenger> flightPassengers = flight.getPassengers();
+                    String[] flightPassengersToStringArray = new String[flightPassengers.size()];
+                    for (int i = 0; i < flightPassengers.size(); i++) {
+                        flightPassengersToStringArray[i] = flightPassengers.get(i).getUser_name();
+                    }
+                    String flightPassengersToString = Arrays.toString(flightPassengersToStringArray);
+                    fileWriter.write(flight.getFlight_code()+";"+flight.getDeparture_airport().getAirport_name()+";"+flight.getDestination_airport().getAirport_name()+";"+flight.getDeparture_time()+";"+flight.getArrival_time()+";"+flight.getPlane().getSerial_number()+";"+flight.getFlightPilot().getUuid()+";"+ flightSeatsArrayToString.substring(1,flightSeatsArrayToString.length()-1) +";"+flightPassengersToString.substring(1,flightPassengersToString.length()-1)+"\n");
+                }else{
+                    fileWriter.write(flight.getFlight_code()+";"+flight.getDeparture_airport().getAirport_name()+";"+flight.getDestination_airport().getAirport_name()+";"+flight.getDeparture_time()+";"+flight.getArrival_time()+";"+flight.getPlane().getSerial_number()+";"+flight.getFlightPilot().getUuid()+";"+ flightSeatsArrayToString.substring(1,flightSeatsArrayToString.length()-1) +";"+null+"\n");
+                }
+
             }
         }
         File airportsFile = new File("DataFiles/airports");
@@ -581,6 +590,7 @@ public class Company {
                     hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
                 }
                 Passenger passenger = new Passenger(tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), tokens[4], tokens[5], hashedPasswordByte, getCompany());
+                users.add(passenger);
                 passengers.add(passenger);
             }
         }
@@ -605,14 +615,15 @@ public class Company {
             while((line = reader.readLine()) != null){
                 tokens = line.split(";");
                 String[] flightSeatsStringToArray = tokens[7].split(",");
-                String[] flightPassengersStringToStringArray =  tokens[8].split(",");
-                ArrayList<Passenger> flightPassengers = new ArrayList<>();
-                for (String passengerUserName : flightPassengersStringToStringArray) {
-                    Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
-                    if(passenger != null){
-                        flightPassengers.add(passenger);
+                ArrayList<Passenger> flightPassengers = new ArrayList<>();;
+                if(tokens[8] != null){
+                    String[] flightPassengersStringToStringArray =  tokens[8].split(",");
+                    for (String passengerUserName : flightPassengersStringToStringArray) {
+                        Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
+                        if(passenger != null){
+                            flightPassengers.add(passenger);
+                        }
                     }
-
                 }
                 Flight flight = new Flight(tokens[0],AirportController.getAirportByName(tokens[1]), AirportController.getAirportByName(tokens[2]),tokens[3],tokens[4],PlaneController.getPlaneBySerialNumber(tokens[5]),PilotsController.getPilotByID(tokens[6]),flightSeatsStringToArray,flightPassengers);
                 flights.add(flight);
@@ -630,8 +641,7 @@ public class Company {
         try(BufferedReader reader = new BufferedReader(logsFile)){
             while ((line = reader.readLine()) != null){
                 tokens = line.split(";");
-                LoginHistory log =new LoginHistory(tokens[0],UserController.getUserByUserName(tokens[1]));
-                logs.add(log);
+                new LoginHistory(tokens[0],UserController.getUserByUserName(tokens[1]));
             }
         }
     }
