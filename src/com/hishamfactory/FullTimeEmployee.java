@@ -10,8 +10,8 @@ public abstract class FullTimeEmployee extends Employee{
         super(first_name,last_name,user_name,age,tel_number,address,employee_pin,role,basic_salary,company);
         setTax((double) 10 / 100);
     }
-    public FullTimeEmployee(String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] employee_pin,String role,double basic_salary,Company company){
-        super(first_name,last_name,user_name,age,tel_number,address,employee_pin,role,basic_salary,company);
+    public FullTimeEmployee(String uuid,String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] employee_pin,String role,double basic_salary,Company company){
+        super(uuid,first_name,last_name,user_name,age,tel_number,address,employee_pin,role,basic_salary,company);
         setTax((double) 10 / 100);
     }
     public double getBonuses() {

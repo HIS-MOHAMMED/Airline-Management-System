@@ -1,7 +1,7 @@
 package com.hishamfactory;
 
 public class Plane implements Identifiable{
-    private String plane_id;
+    private String planeUuid;
     private String plane_model;
     private String serial_number;
     private String plane_manufacturer;
@@ -16,11 +16,21 @@ public class Plane implements Identifiable{
         this.plane_manufacturer = plane_manufacturer;
         this.plane_current_passengers = 0 ;
         this.plane_year =plane_year;
-        this.plane_id =company.getNewUUID();
-        System.out.println(this.plane_model + "'s plane added with code " + this.plane_id);
+        this.planeUuid =company.getNewUUID();
+        System.out.println(this.plane_model + "'s plane added with code " + this.planeUuid);
     }
-    public String getPlane_id() {
-        return plane_id;
+    Plane(String uuid,String plane_model,String serial_number,String plane_manufacturer, String plane_year, int plane_capacity){
+        this.plane_model = plane_model;
+        this.serial_number =serial_number;
+        this.plane_capacity  = plane_capacity;
+        this.plane_manufacturer = plane_manufacturer;
+        this.plane_current_passengers = 0 ;
+        this.plane_year =plane_year;
+        this.planeUuid = uuid;
+        System.out.println(this.plane_model + "'s plane added with code " + this.planeUuid);
+    }
+    public String getPlaneUuid() {
+        return planeUuid;
     }
 
     public String getPlane_model() {
@@ -73,7 +83,7 @@ public class Plane implements Identifiable{
     @Override
     public String toString() {
         return "Plane{" +
-                "plane_id='" + plane_id + '\'' +
+                "plane_id='" + planeUuid + '\'' +
                 ", plane_model='" + plane_model + '\'' +
                 ", serial_number='" + serial_number +'\''+
                 ", plane_manufacturer='" + plane_manufacturer + '\'' +
@@ -84,6 +94,6 @@ public class Plane implements Identifiable{
     }
     @Override
     public String identify(){
-        return this.plane_id;
+        return this.planeUuid;
     }
 }

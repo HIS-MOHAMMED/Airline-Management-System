@@ -30,10 +30,10 @@ public abstract class User extends Person implements Identifiable {
     /*
     constructor to create users objects when reading from files
      */
-    User(String first_name, String last_name,String user_name, int age, String tel_number,String address, byte[] person_pin,String role, Company company){
+    User(String uuid,String first_name, String last_name,String user_name, int age, String tel_number,String address, byte[] person_pin,String role, Company company){
         super(first_name,last_name,age,tel_number,address,role);
         this.pinHash = person_pin;
-        this.uuid = company.getNewUUID();
+        this.uuid = uuid;
         this.user_name = user_name;
         messages = new ArrayList<>();
         isNewMessages = false;

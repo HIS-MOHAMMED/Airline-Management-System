@@ -8,8 +8,8 @@ public class SuperVisor extends RootUser {
         Company.employees.add(this);
         Company.permissions_editing_uuids.add(this.getUuid());
     }
-    SuperVisor(String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] SuperVisor_pin,String role,double basic_salary,Company company){
-        super(first_name,last_name,user_name,age,tel_number,address,SuperVisor_pin,role,basic_salary,company);
+    SuperVisor(String uuid,String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] SuperVisor_pin,String role,double basic_salary,Company company){
+        super(uuid,first_name,last_name,user_name,age,tel_number,address,SuperVisor_pin,role,basic_salary,company);
         this.permissionLevel = 10;
         Company.users.add(this);
         Company.employees.add(this);

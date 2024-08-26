@@ -6,8 +6,8 @@ public class SoftwareEngineer extends RegularUser{
         Company.users.add(this);
         Company.employees.add(this);
     }
-    SoftwareEngineer(String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] software_engineer_pin,String role,double basic_salary,Company company){
-        super(first_name,last_name,user_name,age,tel_number,address,software_engineer_pin,role,basic_salary,company);
+    SoftwareEngineer(String uuid,String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] software_engineer_pin,String role,double basic_salary,Company company){
+        super(uuid,first_name,last_name,user_name,age,tel_number,address,software_engineer_pin,role,basic_salary,company);
         Company.users.add(this);
         Company.employees.add(this);
     }

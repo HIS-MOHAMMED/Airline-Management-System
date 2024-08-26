@@ -2,7 +2,7 @@ package com.hishamfactory;
 import java.util.Scanner;
 
 public class Airport implements Identifiable {
-    private  String airport_code;
+    private  String airportUuid;
     private String airport_name;
     private String airport_location;
     private int airport_number_runways;
@@ -23,8 +23,16 @@ public class Airport implements Identifiable {
         this.airport_location = airport_location;
         this.airport_number_runways = airport_number_runways;
         this.airport_number_gates= airport_number_gates;
-        this.airport_code = company.getNewUUID();
-        System.out.println(this.airport_name +" airport added with code " + this.airport_code);
+        this.airportUuid = company.getNewUUID();
+        System.out.println(this.airport_name +" airport added with code " + this.airportUuid);
+    }
+    Airport(String uuid,String airport_name,String airport_location,int airport_number_runways,int airport_number_gates){
+        this.airport_name = airport_name;
+        this.airport_location = airport_location;
+        this.airport_number_runways = airport_number_runways;
+        this.airport_number_gates= airport_number_gates;
+        this.airportUuid = uuid;
+        System.out.println(this.airport_name +" airport added with code " + this.airportUuid);
     }
     public int getAirport_number_gates() {
         return airport_number_gates;
@@ -58,13 +66,13 @@ public class Airport implements Identifiable {
         this.airport_location = airport_location;
     }
 
-    public String getAirport_code() {
-        return airport_code;
+    public String getAirportUuid() {
+        return airportUuid;
     }
     @Override
     public String toString() {
         return "Airport{" +
-                "airport_id='" + airport_code + '\'' +
+                "airport_id='" + airportUuid + '\'' +
                 ", airport_name='" + airport_name + '\'' +
                 ", airport_location='" + airport_location + '\'' +
                 ", airport_number_runways=" + airport_number_runways +
@@ -74,6 +82,6 @@ public class Airport implements Identifiable {
 
     @Override
     public String identify() {
-        return this.airport_code;
+        return this.airportUuid;
     }
 }

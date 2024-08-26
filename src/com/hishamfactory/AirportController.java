@@ -13,7 +13,7 @@ public class AirportController {
      */
     public static Airport getAirportByID(String airport_code){
             for (Airport airport : Company.airports) {
-                if(airport.getAirport_code().equals(airport_code)){
+                if(airport.getAirportUuid().equals(airport_code)){
                     return airport;
                 }
             }

@@ -3,7 +3,7 @@ package com.hishamfactory;
 import java.util.ArrayList;
 
 public class Flight implements Identifiable{
-    protected String flight_code;
+    protected String flightUuid;
     protected Airport departure_airport;
     protected Airport destination_airport;
     protected String departure_time;
@@ -23,11 +23,11 @@ public class Flight implements Identifiable{
         this.flight_captain = flight_captain;
         this.ticket_price = 0.0;
         this.flight_seats = new String[flight_seats];
-        this.flight_code =company.getNewUUID();
+        this.flightUuid =company.getNewUUID();
         passengers = new ArrayList<>();
-        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
+        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flightUuid);
     }
-    Flight(String flight_code,Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane,Pilot flight_captain,String[] flight_seats,ArrayList<Passenger> passengers) {
+    Flight(String flightUuid, Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane, Pilot flight_captain, String[] flight_seats, ArrayList<Passenger> passengers) {
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
         this.departure_time = departure_time;
@@ -36,9 +36,9 @@ public class Flight implements Identifiable{
         this.flight_captain = flight_captain;
         this.ticket_price = 0.0;
         this.flight_seats = flight_seats;
-        this.flight_code = flight_code;
+        this.flightUuid = flightUuid;
         this.passengers = passengers;
-        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_code);
+        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flightUuid);
     }
 
     public Airport getDestination_airport() {
@@ -48,8 +48,8 @@ public class Flight implements Identifiable{
     public void setDestination_airport(Airport destination_airport) {
         this.destination_airport = destination_airport;
     }
-    public String getFlight_code() {
-        return flight_code;
+    public String getFlightUuid() {
+        return flightUuid;
     }
 
     public Airport getDeparture_airport() {
@@ -133,7 +133,7 @@ public class Flight implements Identifiable{
     @Override
     public String toString() {
         return "Flight{" +
-                "flight_code='" + flight_code + '\'' +
+                "flight_code='" + flightUuid + '\'' +
                 ", departure_airport=" + departure_airport +
                 ", destination_airport=" + destination_airport +
                 ", departure_time='" + departure_time + '\'' +
@@ -147,6 +147,6 @@ public class Flight implements Identifiable{
 
     @Override
     public String identify() {
-        return this.flight_code;
+        return this.flightUuid;
     }
 }
