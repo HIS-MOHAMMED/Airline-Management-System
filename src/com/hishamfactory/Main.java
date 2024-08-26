@@ -12,7 +12,7 @@ public class Main {
             if(directory.mkdir()){
                 System.out.println(directory.getName() +" directory was created...");
             }
-            String[] entitiesFiles = {"companies","users","employees","airports","pilots","planes","flights","passengers","coupons","logs"};
+            String[] entitiesFiles = {"company","users","employees","airports","planes","flights","passengers","coupons","logs"};
             File file;
             int i = 0;
             while(i < entitiesFiles.length){
@@ -30,14 +30,31 @@ public class Main {
             }
 
         }
-        Company company = new Company("Turkish Airline");
+        String line;
+        Company company = null;
+        try {
+            FileReader companyFile = new FileReader("DataFiles/company");
+            try (BufferedReader reader = new BufferedReader(companyFile)) {
+                while ((line = reader.readLine()) != null) {
+                    company = new Company(line);
+                }
+            }
+        }catch (IOException ex){
+            System.out.println("*** The system couldn't complete storing data.Try again ***");
+        }
+        if(company == null){
+            System.out.println("AS first using of system you have to provide your company name");
+            System.out.print("Enter your company name: ");
+            company = new Company(sc.next());
+            sc.nextLine();
+        }
         boolean isNew = true;
         do {
-            System.out.println("Welcome to Airline System Management");
+            System.out.println("Welcome to "+company.getName()+"'s Airline System Management");
             System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             if(Company.superVisor == null) {
                 while (isNew) {
-                    System.out.println("**As first employee you must to create SuperVisor role**");
+                    System.out.println("**As first user you must to create SuperVisor role**");
                     company.addEmployee(company, null);
                     if (Company.superVisor != null) {
                         isNew = false;

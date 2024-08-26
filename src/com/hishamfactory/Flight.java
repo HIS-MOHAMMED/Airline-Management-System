@@ -95,7 +95,7 @@ public class Flight implements Identifiable{
         return ticket_price;
     }
 
-    public Pilot getFlight_captain() {
+    public Pilot getFlightPilot() {
         return flight_captain;
     }
 
