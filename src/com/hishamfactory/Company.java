@@ -539,7 +539,7 @@ public class Company {
         String[] tokens;
         FileReader employeesFile = new FileReader("DataFiles/employees");
         try(BufferedReader reader = new BufferedReader(employeesFile)){
-            while((line = reader.readLine())!= null){
+            while((line = reader.readLine())!= null && !line.isEmpty()){
                 tokens = line.split(";");
                 String[] hashedPasswordString = tokens[6].split(", ");
                 byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
@@ -573,7 +573,7 @@ public class Company {
         }
         FileReader usersFile = new FileReader("DataFiles/passengers");
         try(BufferedReader reader = new BufferedReader(usersFile)) {
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null && !line.isEmpty()) {
                 tokens = line.split(";");
                 String[] hashedPasswordString = tokens[6].split(", ");
                 byte[] hashedPasswordByte = new byte[hashedPasswordString.length];
@@ -586,7 +586,7 @@ public class Company {
         }
         FileReader planesFile = new FileReader("DataFiles/planes");
         try(BufferedReader reader = new BufferedReader(planesFile)){
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null && !line.isEmpty()) {
                 tokens = line.split(";");
                 Plane plane = new Plane(tokens[0], tokens[1], tokens[2],tokens[3], Integer.parseInt(tokens[4]), getCompany());
                 planes.add(plane);
@@ -594,7 +594,7 @@ public class Company {
         }
         FileReader airportsFile = new FileReader("DataFiles/airports");
         try(BufferedReader reader = new BufferedReader(airportsFile)){
-            while((line = reader.readLine()) != null){
+            while((line = reader.readLine()) != null && !line.isEmpty()){
                 tokens = line.split(";");
                 Airport airport = new Airport(tokens[0], tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), getCompany());
                 airports.add(airport);
@@ -602,7 +602,7 @@ public class Company {
         }
         FileReader flightsFile = new FileReader("DataFiles/flights");
         try(BufferedReader reader = new BufferedReader(flightsFile)){
-            while((line = reader.readLine()) != null){
+            while((line = reader.readLine()) != null && !line.isEmpty()){
                 tokens = line.split(";");
                 String[] flightSeatsStringToArray = tokens[7].split(",");
                 String[] flightPassengersStringToStringArray =  tokens[8].split(",");
@@ -620,7 +620,7 @@ public class Company {
         }
         FileReader couponsFile = new FileReader("DataFiles/coupons");
         try(BufferedReader reader = new BufferedReader(couponsFile)){
-            while((line = reader.readLine()) != null){
+            while((line = reader.readLine()) != null && !line.isEmpty()){
                 tokens = line.split(";");
                 Coupon coupon = new Coupon(tokens[0],Integer.parseInt(tokens[1]),getCompany());
                 coupons.add(coupon);
@@ -628,7 +628,7 @@ public class Company {
         }
         FileReader logsFile = new FileReader("DataFiles/logs");
         try(BufferedReader reader = new BufferedReader(logsFile)){
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null && !line.isEmpty()){
                 tokens = line.split(";");
                 LoginHistory log =new LoginHistory(tokens[0],UserController.getUserByUserName(tokens[1]));
                 logs.add(log);
