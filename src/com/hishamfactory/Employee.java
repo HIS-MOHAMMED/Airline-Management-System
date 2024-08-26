@@ -27,9 +27,9 @@ String last_name,String  user_name, int age, String tel_number, String address, 
         super(first_name,last_name,user_name,age,tel_number,address,user_pin,role,company);
         setBasic_salary(basic_salary);
     }
-    Employee(String first_name,
+    Employee(String uuid,String first_name,
              String last_name,String  user_name, int age, String tel_number, String address, byte[] user_pin, String role,double basic_salary, Company company){
-        super(first_name,last_name,user_name,age,tel_number,address,user_pin,role,company);
+        super(uuid,first_name,last_name,user_name,age,tel_number,address,user_pin,role,company);
         setBasic_salary(basic_salary);
     }
     public abstract double calculateSalary();

@@ -13,7 +13,7 @@ public class PlaneController {
      */
     public static Plane getPlaneById(String plane_code) {
         for (Plane plane : Company.planes) {
-            if (plane_code.equals(plane.getPlane_id())) return plane;
+            if (plane_code.equals(plane.getPlaneUuid())) return plane;
         }
         return null;
     }
@@ -99,7 +99,7 @@ public class PlaneController {
         Plane plane = getPlaneById(plane_code);
         if(plane != null) {
             Company.planes.remove(plane);
-            System.out.println("Plane has ID " + plane.getPlane_id() + " was deleted...");
+            System.out.println("Plane has ID " + plane.getPlaneUuid() + " was deleted...");
         }
         else{
             System.out.println("*** This plane not exits ***");

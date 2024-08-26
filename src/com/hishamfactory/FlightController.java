@@ -43,7 +43,7 @@ public class FlightController {
      */
     public static Flight getFlightById(String id) {
         for (Flight flight : Company.flights) {
-            if (flight.getFlight_code().equals(id)) return flight;
+            if (flight.getFlightUuid().equals(id)) return flight;
         }
         return null;
     }
@@ -159,7 +159,7 @@ public class FlightController {
                         sc.nextLine();
                         if(plane != null){
                             flight.setPlane(plane);
-                            System.out.println("Flight's plane change to Plane has ID " + plane.getPlane_id());
+                            System.out.println("Flight's plane change to Plane has ID " + plane.getPlaneUuid());
                         }else{
                             System.out.println("*** This plane doesn't exists ***");
                         }
@@ -262,7 +262,7 @@ public class FlightController {
                 }
             }
             Company.flights.remove(flight);
-            System.out.println("Flight " + flight.getFlight_code() +" removed from system");
+            System.out.println("Flight " + flight.getFlightUuid() +" removed from system");
         }else{
             System.out.println("*** This flight not exists ***");
         }
