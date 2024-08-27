@@ -590,6 +590,7 @@ public class Company {
                     hashedPasswordByte[i] = Byte.parseByte(hashedPasswordString[i]);
                 }
                 Passenger passenger = new Passenger(tokens[0], tokens[1], tokens[2],tokens[3], Integer.parseInt(tokens[4]), tokens[5], tokens[6], hashedPasswordByte, getCompany());
+                users.add(passenger);
                 passengers.add(passenger);
             }
         }
