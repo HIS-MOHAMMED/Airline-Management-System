@@ -614,10 +614,10 @@ public class Company {
         try(BufferedReader reader = new BufferedReader(flightsFile)){
             while((line = reader.readLine()) != null && !line.isEmpty()){
                 tokens = line.split(";");
-                String[] flightSeatsStringToArray = tokens[7].split(",");
+                String[] flightSeatsStringToArray = tokens[7].split(", ");
                 ArrayList<Passenger> flightPassengers = new ArrayList<>();;
                 if(tokens[8] != null){
-                    String[] flightPassengersStringToStringArray =  tokens[8].split(",");
+                    String[] flightPassengersStringToStringArray =  tokens[8].split(", ");
                     for (String passengerUserName : flightPassengersStringToStringArray) {
                         Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
                         if(passenger != null){
