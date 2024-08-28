@@ -258,8 +258,9 @@ public class Main {
                     case 9:
                         try {
                             company.storeCopiesFromData();
-                        }catch (IOException ex){
-                            System.out.println("*** The system couldn't complete storing data.Try again ***");
+                        }catch (IOException | NullPointerException ex){
+                            System.out.println("hello");
+                            System.out.println(ex.getMessage());
                         }
                         break;
                     case 10:
