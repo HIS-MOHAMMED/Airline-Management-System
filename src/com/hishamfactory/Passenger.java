@@ -13,6 +13,9 @@ public class Passenger extends NormalUser {
     Passenger(String uuid,String first_name,String last_name,String user_name,int age,String tel_number,String address,byte[] passenger_pin,Company company) {
         super(uuid, first_name, last_name, user_name, age, tel_number, address, passenger_pin, "Passenger", company);
     }
+    public ArrayList<FlightBooked> getPassenger_flights() {
+        return passenger_flights;
+    }
     @Override
     public String toString() {
         return "Passenger{" +

@@ -1,6 +1,7 @@
 package com.hishamfactory;
 
 public class FlightBooked {
+    protected String flightUuid;
     protected Airport departure_airport;
     protected Airport destination_airport;
     protected String departure_time;
@@ -8,13 +9,18 @@ public class FlightBooked {
     protected double ticket_price;
     protected int passenger_seat;
 
-    FlightBooked(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, double ticket_price, int passenger_seat){
+    FlightBooked(String flightUuid,Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, double ticket_price, int passenger_seat){
+        this.flightUuid = flightUuid;
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
         this.departure_time = departure_time;
         this.arrival_time = arrival_time;
         this.ticket_price  = ticket_price;
         this.passenger_seat = passenger_seat;
+    }
+
+    public String getFlightUuid() {
+        return flightUuid;
     }
 
     public Airport getDestination_airport() {
