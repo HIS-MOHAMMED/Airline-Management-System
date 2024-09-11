@@ -1,8 +1,10 @@
 package com.hishamfactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Coupon {
+public class Coupon implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String coupon_id;
     private String coupon_code;
     private int coupon_in_percentage;

@@ -1,11 +1,13 @@
 package com.hishamfactory;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class FullTimeEmployee extends Employee{
+public abstract class FullTimeEmployee extends Employee implements Serializable{
+    private static final long serialVersionUID = 1L;
     protected double bonuses;
     protected double insurance_premium;
-    Scanner sc = new Scanner(System.in);
     public FullTimeEmployee(String first_name,String last_name,String user_name,int age,String tel_number,String address,String role,double basic_salary,String employee_pin,Company company){
         super(first_name,last_name,user_name,age,tel_number,address,employee_pin,role,basic_salary,company);
         setTax((double) 10 / 100);
@@ -44,6 +46,7 @@ public abstract class FullTimeEmployee extends Employee{
 
     @Override
     public double calculateSalary() {
+            Scanner sc = new Scanner(System.in);
             System.out.print("Enter employee bonuses: ");
             this.setBonuses(sc.nextDouble());
             sc.nextLine();

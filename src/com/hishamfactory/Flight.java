@@ -1,8 +1,10 @@
 package com.hishamfactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Flight implements Identifiable{
+public class Flight implements Identifiable, Serializable {
+    private static final long serialVersionUID = 1L;
     protected String flightUuid;
     protected Airport departure_airport;
     protected Airport destination_airport;

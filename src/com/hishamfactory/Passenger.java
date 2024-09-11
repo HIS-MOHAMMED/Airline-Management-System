@@ -1,8 +1,11 @@
 package com.hishamfactory;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Passenger extends NormalUser {
+public class Passenger extends NormalUser implements Serializable {
+    private static final long serialVersionUID = 1L;
     public ArrayList<FlightBooked> passenger_flights = new ArrayList<>();
     Passenger(String first_name,String last_name,String user_name,int age,String tel_number,String address,String passenger_pin,Company company){
         super(first_name,last_name,user_name,age,tel_number,address,passenger_pin,"Passenger",company);

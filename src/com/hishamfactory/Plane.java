@@ -1,6 +1,9 @@
 package com.hishamfactory;
 
-public class Plane implements Identifiable{
+import java.io.Serializable;
+
+public class Plane implements Identifiable, Serializable {
+    private static final long serialVersionUID = 1L;
     private String planeUuid;
     private String plane_model;
     private String serial_number;
