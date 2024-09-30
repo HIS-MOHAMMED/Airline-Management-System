@@ -3,6 +3,7 @@ package com.hishamfactory;
 import java.io.Serializable;
 
 public abstract class Person implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected String first_name;
     protected String last_name;
     protected int age;

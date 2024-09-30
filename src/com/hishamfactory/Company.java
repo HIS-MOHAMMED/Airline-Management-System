@@ -22,8 +22,8 @@ public class Company implements Serializable{
     public static ArrayList<Coupon> coupons;
     public static ArrayList<LoginHistory> logs;
 
-    transient Random rm = new Random();
-    transient Scanner sc = new Scanner(System.in);
+    static Random rm = new Random();
+    static Scanner sc = new Scanner(System.in);
 
     /**
      * Create new company with empty employee list and so on

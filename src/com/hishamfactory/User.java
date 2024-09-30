@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public abstract class User extends Person implements Identifiable, Serializable {
-    private static final long serailVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     protected String uuid;
     protected byte[] pinHash;
     protected  String user_name;
