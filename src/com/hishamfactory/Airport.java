@@ -1,14 +1,16 @@
 package com.hishamfactory;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Airport implements Identifiable {
+public class Airport implements Identifiable, Serializable {
+    private static final long serialVersionUID = 1L;
     private  String airportUuid;
     private String airport_name;
     private String airport_location;
     private int airport_number_runways;
     private int airport_number_gates;
 
-    Scanner sc = new Scanner(System.in);
+    transient Scanner sc = new Scanner(System.in);
 
     /**
      * Create new airport
