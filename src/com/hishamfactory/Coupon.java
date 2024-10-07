@@ -1,8 +1,11 @@
 package com.hishamfactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Coupon {
+public class Coupon implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String coupon_id;
     private String coupon_code;
     private int coupon_in_percentage;
@@ -24,5 +27,14 @@ public class Coupon {
     }
     public int getCoupon_in_percentage(){
         return coupon_in_percentage;
+    }
+
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "coupon_id='" + coupon_id + '\'' +
+                ", coupon_code='" + coupon_code + '\'' +
+                ", coupon_in_percentage=" + coupon_in_percentage +
+                '}';
     }
 }

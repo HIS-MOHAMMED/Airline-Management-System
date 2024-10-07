@@ -1,8 +1,11 @@
 package com.hishamfactory;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LoginHistory {
+public class LoginHistory implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String date_and_time;
     private User user;
     public LoginHistory(String date_and_time, User user){

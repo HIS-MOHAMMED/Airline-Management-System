@@ -1,12 +1,14 @@
 package com.hishamfactory;
 
 
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-public abstract class Employee extends User {
+public abstract class Employee extends User implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected double basic_salary;
     protected double tax;
     protected double net_salary;

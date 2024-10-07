@@ -1,5 +1,6 @@
 package com.hishamfactory;
 
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

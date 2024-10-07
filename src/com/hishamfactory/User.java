@@ -1,11 +1,13 @@
 package com.hishamfactory;
 
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-public abstract class User extends Person implements Identifiable {
+public abstract class User extends Person implements Identifiable, Serializable {
+    private static final long serialVersionUID = 1L;
     protected String uuid;
     protected byte[] pinHash;
     protected  String user_name;
