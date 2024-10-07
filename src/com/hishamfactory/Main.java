@@ -8,29 +8,39 @@ public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         File directory = new File("DataFiles");
-        if(!directory.exists()) {
-            if (directory.mkdir()) {
-                System.out.println(directory.getName() + " directory was created...");
+        if(!directory.exists()){
+            if(directory.mkdir()){
+                System.out.println(directory.getName() +" directory was created...");
             }
-        }
             String[] entitiesFiles = {"company","users","employees","airports","planes","flights","passengers","coupons","logs"};
             File file;
             int i = 0;
             while(i < entitiesFiles.length){
                 file = new File("DataFiles/"+ entitiesFiles[i]);
-                if(file.exists()){
-                    if(file.delete()){
-                        System.out.println(file.getName()+ " none required file was deleted.....");
+                try{
+                    if(!file.exists()){
+                        if(file.createNewFile()){
+                            System.out.println(file.getName()+ " file was created...");
+                        }
                     }
+                    i++;
+                }catch (IOException ex){
+                    System.out.println("IO Exception");
                 }
-                i++;
             }
+
+        }
+        String line;
         Company company = null;
-        try(ObjectInputStream companyInput = new ObjectInputStream(new FileInputStream("DataFiles/company.dat"))){
-            company = (Company) companyInput.readObject();
-            new Company(company.getName(),company.getUuid());
-        }catch (IOException | ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
+        try {
+            FileReader companyFile = new FileReader("DataFiles/company");
+            try (BufferedReader reader = new BufferedReader(companyFile)) {
+                while ((line = reader.readLine()) != null) {
+                    company = new Company(line);
+                }
+            }
+        }catch (IOException ex){
+            System.out.println("*** The system couldn't complete storing data.Try again ***");
         }
         if(company == null){
             System.out.println("AS first using of system you have to provide your company name");

@@ -474,7 +474,7 @@ public class Company {
     public Company getCompany(){
         return this;
     }
-    public void storeCopiesFromData() throws IOException{
+    public void storeCopiesFromData() throws IOException, NullPointerException{
         File companyFile = new File("DataFiles/company");
         try(FileWriter fileWriter = new FileWriter(companyFile)){
             fileWriter.write(this.getName());
