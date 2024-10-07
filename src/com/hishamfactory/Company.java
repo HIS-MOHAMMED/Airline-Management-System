@@ -591,6 +591,7 @@ public class Company {
                 }
                 Passenger passenger = new Passenger(tokens[0], tokens[1], tokens[2],tokens[3], Integer.parseInt(tokens[4]), tokens[5], tokens[6], hashedPasswordByte, getCompany());
                 passengers.add(passenger);
+                users.add(passenger);
             }
         }
         FileReader planesFile = new FileReader("DataFiles/planes");
@@ -613,10 +614,11 @@ public class Company {
         try(BufferedReader reader = new BufferedReader(flightsFile)){
             while((line = reader.readLine()) != null && !line.isEmpty()){
                 tokens = line.split(";");
-                String[] flightSeatsStringToArray = tokens[7].split(",");
-                ArrayList<Passenger> flightPassengers = new ArrayList<>();;
+                String[] flightSeatsStringToArray = tokens[7].split(", ");
+                ArrayList<Passenger> flightPassengers = new ArrayList<>();
+                String[] flightPassengersStringToStringArray = null;
                 if(tokens[8] != null){
-                    String[] flightPassengersStringToStringArray =  tokens[8].split(",");
+                    flightPassengersStringToStringArray =  tokens[8].split(", ");
                     for (String passengerUserName : flightPassengersStringToStringArray) {
                         Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
                         if(passenger != null){
@@ -626,6 +628,15 @@ public class Company {
                 }
                 Flight flight = new Flight(tokens[0],AirportController.getAirportByName(tokens[1]), AirportController.getAirportByName(tokens[2]),tokens[3],tokens[4],PlaneController.getPlaneBySerialNumber(tokens[5]),PilotsController.getPilotByID(tokens[6]),flightSeatsStringToArray,flightPassengers);
                 flights.add(flight);
+                if(flightPassengersStringToStringArray != null){
+                    for (String passengerUserName : flightPassengersStringToStringArray) {
+                        Passenger passenger = PassengersController.getPassengerByUserName(passengerUserName);
+                        if(passenger != null){
+                            FlightBooked flightBooked = new FlightBooked(flight.getFlightUuid(),flight.getDeparture_airport(),flight.getDestination_airport(),flight.getDeparture_time(),flight.getArrival_time(),flight.getTicket_price(),FlightController.getNumberOfSeatOfPassenger(flight,passenger.getFirst_name()+" "+passenger.getLast_name()));
+                            passenger.passenger_flights.add(flightBooked);
+                        }
+                    }
+                }
             }
         }
         FileReader couponsFile = new FileReader("DataFiles/coupons");
