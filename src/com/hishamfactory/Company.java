@@ -488,7 +488,7 @@ public class Company implements Serializable{
 
             new Pilot(first_name, last_name,user_name, age, tel_number, address, role, basic_salary, pilot_pin, company);
     }
-    public void CreateCoupon(Company company){
+    public void addCoupon(Company company){
             System.out.print("Enter coupon code: ");
             String coupon_code = sc.next();
             sc.nextLine();

@@ -176,7 +176,7 @@ public class Main {
                     System.out.println("4.Pilots");
                     System.out.println("5.Flights");
                     System.out.println("6.Passengers");
-                    System.out.println("7.Create Coupon");
+                    System.out.println("7.Coupons");
                     System.out.println("8.Show login history");
                     System.out.println("9.Store copies form data");
                     System.out.println("10.Quit");
@@ -240,7 +240,10 @@ public class Main {
                         }
                         break;
                     case 7:
-                        company.CreateCoupon(company);
+                        CouponController controller6 = new CouponController();
+                        while(inner_flag2){
+                            inner_flag2 = controller6.showCouponMenu(company,controller6);
+                        }
                         break;
                     case 8:
                         LogsController.printLoginHistory();
@@ -266,7 +269,7 @@ public class Main {
                     System.out.println("3.Planes");
                     System.out.println("4.Flights");
                     System.out.println("5.Passengers");
-                    System.out.println("6.Create Coupon");
+                    System.out.println("6.Coupons");
                     System.out.println("7.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
@@ -321,7 +324,10 @@ public class Main {
                         }
                         break;
                     case 6:
-                        company.CreateCoupon(company);
+                        CouponController controller5 = new CouponController();
+                        while(inner_flag2){
+                            inner_flag2 = controller5.showCouponMenu(company,controller5);
+                        }
                         break;
                     case 7:
                         flag = false;
