@@ -261,8 +261,7 @@ public class Main {
                     case 9:
                         try {
                             company.storeCopiesFromData();
-                        }catch (IOException | NullPointerException ex){
-                            System.out.println("hello");
+                        }catch (IOException ex){
                             System.out.println(ex.getMessage());
                         }
                         break;

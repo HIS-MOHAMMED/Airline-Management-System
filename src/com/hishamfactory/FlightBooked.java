@@ -1,6 +1,8 @@
 package com.hishamfactory;
 
-public class FlightBooked {
+import java.io.Serializable;
+
+public class FlightBooked implements Serializable {
     protected Airport departure_airport;
     protected Airport destination_airport;
     protected String departure_time;

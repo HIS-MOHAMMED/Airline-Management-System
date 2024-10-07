@@ -1,6 +1,9 @@
 package com.hishamfactory;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable,Comparable<Person> {
+    private static final long serialVersionUID = 1L;
     protected String first_name;
     protected String last_name;
     protected int age;
@@ -8,7 +11,6 @@ public abstract class Person {
     protected String address;
     protected String status;
     protected String role;
-
     Person(String first_name,String last_name,int age,String tel_number,String address,String role){
         this.first_name = first_name;
         this.last_name = last_name;
@@ -85,5 +87,10 @@ public abstract class Person {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        return this.first_name.compareToIgnoreCase(person.first_name);
     }
 }
