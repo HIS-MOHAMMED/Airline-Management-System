@@ -2,8 +2,9 @@ package com.hishamfactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Flight implements Identifiable, Serializable {
+public class Flight implements Identifiable, Serializable{
     private static final long serialVersionUID = 1L;
     protected String flightUuid;
     protected Airport departure_airport;
@@ -151,4 +152,13 @@ public class Flight implements Identifiable, Serializable {
     public String identify() {
         return this.flightUuid;
     }
+    /*
+    compares flights by departure time
+     */
+    public static final Comparator<Flight> comparesFlightsByDepartureTime = new Comparator<Flight>() {
+        @Override
+        public int compare(Flight o1, Flight o2) {
+            return o1.getDeparture_time().compareToIgnoreCase(o2.getDeparture_time());
+        }
+    };
 }

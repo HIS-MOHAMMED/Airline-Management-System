@@ -3,6 +3,7 @@ package com.hishamfactory;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Passenger extends NormalUser implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -28,4 +29,14 @@ public class Passenger extends NormalUser implements Serializable {
                 ", uuid='" + uuid + '\'' +
                 '}';
     }
+
+    /*
+    compare passengers by age
+     */
+   public static  Comparator<Passenger> comparePassengersByAge = new Comparator<Passenger>() {
+        @Override
+        public int compare(Passenger o1, Passenger o2) {
+                return Integer.compare(o1.getAge(),o2.getAge());
+        }
+    };
 }

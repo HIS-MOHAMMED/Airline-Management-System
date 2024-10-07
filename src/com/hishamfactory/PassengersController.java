@@ -1,5 +1,7 @@
 package com.hishamfactory;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -36,6 +38,7 @@ public class PassengersController {
         if(Company.passengers.isEmpty()){
             System.out.println("*** Sorry,The list of passengers is empty ***");
         }else{
+            Collections.sort(Company.passengers,Passenger.comparePassengersByAge);
             System.out.println("................................................................");
             for (Passenger passenger : Company.passengers) {
                 System.out.println(passenger.toString());
