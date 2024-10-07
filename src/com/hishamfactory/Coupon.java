@@ -1,6 +1,7 @@
 package com.hishamfactory;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Coupon {
     private String coupon_id;
@@ -24,5 +25,14 @@ public class Coupon {
     }
     public int getCoupon_in_percentage(){
         return coupon_in_percentage;
+    }
+
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "coupon_id='" + coupon_id + '\'' +
+                ", coupon_code='" + coupon_code + '\'' +
+                ", coupon_in_percentage=" + coupon_in_percentage +
+                '}';
     }
 }
