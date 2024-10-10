@@ -349,7 +349,7 @@ public class FlightController {
                         System.out.print("Do you have a coupon code(Yes(y) or No(n)): ");
                         String have_coupon = sc.next();
                         sc.nextLine();
-                        FlightBooked flightBooked = new FlightBooked(flight.getFlightUuid(),flight.getDeparture_airport(),flight.getDestination_airport(),flight.getDeparture_time(),flight.getArrival_time(),flight.getTicket_price(),passenger_seat);
+                        FlightBooked flightBooked = new FlightBooked(flight.getDeparture_airport(),flight.getDestination_airport(),flight.getDeparture_time(),flight.getArrival_time(),flight.getTicket_price(),passenger_seat);
                         if(have_coupon.equalsIgnoreCase("Y") || have_coupon.equalsIgnoreCase("Yes")){
                             boolean isValidCoupon = true;
                             while(isValidCoupon){
