@@ -12,6 +12,7 @@ public class Main {
             if (directory.mkdir()) {
                 System.out.println(directory.getName() + " directory was created...");
             }
+        }
             String[] entitiesFiles = {"company", "users", "employees", "airports", "planes", "flights", "passengers", "coupons", "logs"};
             File file;
             int i = 0;
@@ -24,7 +25,6 @@ public class Main {
                 }
                 i++;
             }
-        }
         Company company = null;
         try(ObjectInputStream companyInput = new ObjectInputStream(new FileInputStream("DataFiles/company.dat"))){
             company = (Company) companyInput.readObject();
