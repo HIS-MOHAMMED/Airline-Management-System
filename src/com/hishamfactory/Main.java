@@ -179,7 +179,8 @@ public class Main {
                     System.out.println("7.Coupons");
                     System.out.println("8.Show login history");
                     System.out.println("9.Store copies form data");
-                    System.out.println("10.Quit");
+                    System.out.println("10.Clear data from file");
+                    System.out.println("11.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
@@ -246,7 +247,11 @@ public class Main {
                         }
                         break;
                     case 8:
-                        LogsController.printLoginHistory();
+                        LogsController logsController = new LogsController();
+                        while (inner_flag2){
+                            inner_flag2 = logsController.showLogsMenu();
+                            break;
+                        }
                         break;
                     case 9:
                         try {
@@ -256,6 +261,13 @@ public class Main {
                         }
                         break;
                     case 10:
+                        try{
+                            company.clearDataFromFile();
+                        }catch (IOException ex){
+                            System.out.println(ex.getMessage());
+                        }
+                        break;
+                    case 11:
                         flag = false;
                         break;
                 }
@@ -270,7 +282,8 @@ public class Main {
                     System.out.println("4.Flights");
                     System.out.println("5.Passengers");
                     System.out.println("6.Coupons");
-                    System.out.println("7.Quit");
+                    System.out.println("7.Clear data from file");
+                    System.out.println("8.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
@@ -330,6 +343,13 @@ public class Main {
                         }
                         break;
                     case 7:
+                        try{
+                            company.clearDataFromFile();
+                        }catch (IOException ex){
+                            System.out.println(ex.getMessage());
+                        }
+                        break;
+                    case 8:
                         flag = false;
                         break;
                 }

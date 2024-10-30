@@ -1,9 +1,10 @@
 package com.hishamfactory;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class CouponController {
+public class CouponController extends ClearData {
     Scanner sc = new Scanner(System.in);
     public Coupon getCouponByCode(String coupon_code){
         for (Coupon coupon : Company.coupons) {
@@ -36,7 +37,8 @@ public class CouponController {
         System.out.println("2.Show all coupons");
         System.out.println("3.Get coupon by ID");
         System.out.println("4.Delete airport");
-        System.out.println("5.Quit");
+        System.out.println("5.Clear coupons file");
+        System.out.println("6.Quit");
         System.out.print("Enter a choice: ");
         try {
             int option = sc.nextInt();
@@ -72,6 +74,9 @@ public class CouponController {
                     }
                     break;
                 case 5:
+                    clearDataFromFile("DataFiles/coupons.dat");
+                    break;
+                case 6:
                     flag = false;
                     break;
                 default:
@@ -80,6 +85,8 @@ public class CouponController {
         }catch (InputMismatchException e) {
             System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
         return flag;
     }

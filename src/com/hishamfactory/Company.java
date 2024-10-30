@@ -71,7 +71,7 @@ public class Company implements Serializable{
         try{
             uploadDataFromFiles();
         }catch (IOException | ClassNotFoundException ex ){
-            System.out.println(ex.getMessage());
+           ex.printStackTrace();
         }
 
         this.uuid = uuid;
@@ -560,6 +560,23 @@ public class Company implements Serializable{
         }
         try(ObjectInputStream logsInput  = new ObjectInputStream(new FileInputStream("DataFiles/logs.dat"))){
             logs = (ArrayList<LoginHistory>) logsInput.readObject();
+        }
+    }
+    public void clearDataFromFile()  throws IOException{
+        System.out.println("\n..................Clear Data Menu..............................");
+        System.out.println("1.Users");
+        System.out.println("2.Company");
+        System.out.print("Enter a option: ");
+        int option = sc.nextInt();
+        switch (option){
+            case 1:
+                try(ObjectOutputStream usersOutput = new ObjectOutputStream(new FileOutputStream("DataFiles/users.dat"))){
+            }
+            case 2:
+                try(ObjectOutputStream companyOutput = new ObjectOutputStream(new FileOutputStream("DataFiles/company.dat"))){
+                }
+            default:
+                System.out.println("***Please enter a valid number***");
         }
     }
 }
