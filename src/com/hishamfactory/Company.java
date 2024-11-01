@@ -68,8 +68,10 @@ public class Company implements Serializable{
         flights = new ArrayList<>();
         coupons = new ArrayList<>();
         logs = new ArrayList<>();
-        try{
+        try {
             uploadDataFromFiles();
+        }catch (EOFException ex){
+            //instead printStackTrace just log it
         }catch (IOException | ClassNotFoundException ex ){
            ex.printStackTrace();
         }
