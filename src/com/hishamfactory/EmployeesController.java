@@ -1,10 +1,11 @@
 package com.hishamfactory;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class EmployeesController{
+public class EmployeesController extends ClearData{
     Scanner sc = new Scanner(System.in);
 
     /**
@@ -214,7 +215,8 @@ public class EmployeesController{
             System.out.println("5.Edit employee info");
             System.out.println("6.Delete employee");
             System.out.println("7.Fire employee");
-            System.out.println("8.Quit");
+            System.out.println("8.Clear employees File");
+            System.out.println("9.Quit");
             System.out.print("Enter a choice: ");
         try{
             int option = sc.nextInt();
@@ -259,13 +261,20 @@ public class EmployeesController{
                 case 7:
                     controller.fireEmployee(name,user);
                     break;
-                default:
+                case 8:
+                    clearDataFromFile("DataFiles/employees.dat");
+                    break;
+                case 9:
                     flag = false;
                     break;
+                default:
+                    System.out.println("**Please enter valid value**");
             }
         }catch (InputMismatchException e) {
             System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
         return flag;
     }

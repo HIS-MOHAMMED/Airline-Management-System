@@ -1,9 +1,10 @@
 package com.hishamfactory;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class AirportController {
+public class AirportController extends ClearData {
     Scanner sc = new Scanner(System.in);
 
     /**
@@ -127,7 +128,8 @@ public class AirportController {
         System.out.println("3.Get Airport by ID");
         System.out.println("4.Edit airport info");
         System.out.println("5.Delete airport");
-        System.out.println("6.Quit");
+        System.out.println("6.Clear airports file");
+        System.out.println("7.Quit");
         System.out.print("Enter a choice: ");
         try {
             int option = sc.nextInt();
@@ -160,6 +162,9 @@ public class AirportController {
                     controller.deleteAirport(airport_code);
                     break;
                 case 6:
+                    clearDataFromFile("DataFiles/airports.dat");
+                    break;
+                case 7:
                     flag = false;
                     break;
                 default:
@@ -168,6 +173,8 @@ public class AirportController {
         }catch (InputMismatchException e) {
             System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
             sc.nextLine();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
         return flag;
     }

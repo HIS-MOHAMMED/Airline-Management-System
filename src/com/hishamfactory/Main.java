@@ -8,39 +8,29 @@ public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         File directory = new File("DataFiles");
-        if(!directory.exists()){
-            if(directory.mkdir()){
-                System.out.println(directory.getName() +" directory was created...");
+        if(!directory.exists()) {
+            if (directory.mkdir()) {
+                System.out.println(directory.getName() + " directory was created...");
             }
-            String[] entitiesFiles = {"company","users","employees","airports","planes","flights","passengers","coupons","logs"};
+        }
+            String[] entitiesFiles = {"company", "users", "employees", "airports", "planes", "flights", "passengers", "coupons", "logs"};
             File file;
             int i = 0;
-            while(i < entitiesFiles.length){
-                file = new File("DataFiles/"+ entitiesFiles[i]);
-                try{
-                    if(!file.exists()){
-                        if(file.createNewFile()){
-                            System.out.println(file.getName()+ " file was created...");
-                        }
+            while (i < entitiesFiles.length) {
+                file = new File("DataFiles/" + entitiesFiles[i]);
+                if (file.exists()) {
+                    if (file.delete()) {
+                        System.out.println(file.getName() + " none required file was deleted.....");
                     }
-                    i++;
-                }catch (IOException ex){
-                    System.out.println("IO Exception");
                 }
+                i++;
             }
-
-        }
-        String line;
         Company company = null;
-        try {
-            FileReader companyFile = new FileReader("DataFiles/company");
-            try (BufferedReader reader = new BufferedReader(companyFile)) {
-                while ((line = reader.readLine()) != null) {
-                    company = new Company(line);
-                }
-            }
-        }catch (IOException ex){
-            System.out.println("*** The system couldn't complete storing data.Try again ***");
+        try(ObjectInputStream companyInput = new ObjectInputStream(new FileInputStream("DataFiles/company.dat"))){
+            company = (Company) companyInput.readObject();
+            new Company(company.getName(),company.getUuid());
+        }catch (IOException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
         }
         if(company == null){
             System.out.println("AS first using of system you have to provide your company name");
@@ -186,10 +176,11 @@ public class Main {
                     System.out.println("4.Pilots");
                     System.out.println("5.Flights");
                     System.out.println("6.Passengers");
-                    System.out.println("7.Create Coupon");
+                    System.out.println("7.Coupons");
                     System.out.println("8.Show login history");
                     System.out.println("9.Store copies form data");
-                    System.out.println("10.Quit");
+                    System.out.println("10.Clear data from file");
+                    System.out.println("11.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
@@ -250,19 +241,33 @@ public class Main {
                         }
                         break;
                     case 7:
-                        company.CreateCoupon(company);
+                        CouponController controller6 = new CouponController();
+                        while(inner_flag2){
+                            inner_flag2 = controller6.showCouponMenu(company,controller6);
+                        }
                         break;
                     case 8:
-                        LogsController.printLoginHistory();
+                        LogsController logsController = new LogsController();
+                        while (inner_flag2){
+                            inner_flag2 = logsController.showLogsMenu();
+                            break;
+                        }
                         break;
                     case 9:
                         try {
                             company.storeCopiesFromData();
-                        }catch (IOException | NullPointerException ex){
-                        System.out.println(ex.getMessage());
+                        }catch (IOException ex){
+                            System.out.println(ex.getMessage());
                         }
                         break;
                     case 10:
+                        try{
+                            company.clearDataFromFile();
+                        }catch (IOException ex){
+                            System.out.println(ex.getMessage());
+                        }
+                        break;
+                    case 11:
                         flag = false;
                         break;
                 }
@@ -276,8 +281,9 @@ public class Main {
                     System.out.println("3.Planes");
                     System.out.println("4.Flights");
                     System.out.println("5.Passengers");
-                    System.out.println("6.Create Coupon");
-                    System.out.println("7.Quit");
+                    System.out.println("6.Coupons");
+                    System.out.println("7.Clear data from file");
+                    System.out.println("8.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
@@ -331,9 +337,19 @@ public class Main {
                         }
                         break;
                     case 6:
-                        company.CreateCoupon(company);
+                        CouponController controller5 = new CouponController();
+                        while(inner_flag2){
+                            inner_flag2 = controller5.showCouponMenu(company,controller5);
+                        }
                         break;
                     case 7:
+                        try{
+                            company.clearDataFromFile();
+                        }catch (IOException ex){
+                            System.out.println(ex.getMessage());
+                        }
+                        break;
+                    case 8:
                         flag = false;
                         break;
                 }
