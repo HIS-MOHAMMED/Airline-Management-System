@@ -14,7 +14,7 @@ public class PlaneController extends ClearData{
      */
     public static Plane getPlaneById(String plane_code) {
         for (Plane plane : Company.planes) {
-            if (plane_code.equals(plane.getPlaneUuid())) return plane;
+            if (plane_code.equals(plane.getPlane_uuid())) return plane;
         }
         return null;
     }
@@ -72,9 +72,9 @@ public class PlaneController extends ClearData{
 
                     case 3:
                         System.out.print("Enter new year of manufactured: ");
-                        plane.setPlane_year(sc.next());
+                        plane.setManufactured_year(sc.next());
                         sc.nextLine();
-                        System.out.println("Year of manufactured changed to " + plane.getPlane_year());
+                        System.out.println("Year of manufactured changed to " + plane.getManufactured_year());
                         break;
                     case 4:
                         System.out.print("Enter new Capacity: ");
@@ -100,7 +100,7 @@ public class PlaneController extends ClearData{
         Plane plane = getPlaneById(plane_code);
         if(plane != null) {
             Company.planes.remove(plane);
-            System.out.println("Plane has ID " + plane.getPlaneUuid() + " was deleted...");
+            System.out.println("Plane has ID " + plane.getPlane_uuid() + " was deleted...");
         }
         else{
             System.out.println("*** This plane not exits ***");

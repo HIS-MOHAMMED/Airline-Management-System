@@ -1,20 +1,18 @@
 package com.hishamfactory;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Coupon implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String coupon_id;
+    private String coupon_uuid;
     private String coupon_code;
     private int coupon_in_percentage;
 
     public Coupon(String coupon_code,int coupon_in_percentage,Company company){
-        this.coupon_id = company.getNewUUID();
+        this.coupon_uuid = company.getNewUUID();
         this.coupon_code = coupon_code;
         this.coupon_in_percentage = coupon_in_percentage;
-        System.out.println("Coupon id: "+ this.coupon_id + ",has using code: " + this.getCoupon_code() + " created in percentage " + this.getCoupon_in_percentage()+"%");
+        System.out.println("Coupon id: "+ this.coupon_uuid + ",has using code: " + this.getCoupon_code() + " created in percentage " + this.getCoupon_in_percentage()+"%");
     }
     public void setCoupon_code(String coupon_code){
         this.coupon_code = coupon_code;
@@ -32,7 +30,7 @@ public class Coupon implements Serializable {
     @Override
     public String toString() {
         return "Coupon{" +
-                "coupon_id='" + coupon_id + '\'' +
+                "coupon_id='" + coupon_uuid + '\'' +
                 ", coupon_code='" + coupon_code + '\'' +
                 ", coupon_in_percentage=" + coupon_in_percentage +
                 '}';

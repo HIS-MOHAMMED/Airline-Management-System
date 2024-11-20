@@ -1,4 +1,4 @@
 package com.hishamfactory;
 
-public class PartTimeEmployee {
+public abstract class PartTimeEmployee {
 }
