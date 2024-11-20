@@ -222,7 +222,7 @@ public class EmployeesController extends ClearData{
             int option = sc.nextInt();
             sc.nextLine();
             String name = "";
-            if (option != 1 && option != 3 && option != 8) {
+            if (option != 1 && option != 3 && option != 8 && option != 9) {
                 System.out.print("Enter employee first name: ");
                 name = sc.next();
                 sc.nextLine();

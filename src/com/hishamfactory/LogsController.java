@@ -20,7 +20,7 @@ public class LogsController extends ClearData {
         Scanner sc = new Scanner(System.in);
         System.out.println("...............................Coupon History.............................");
         System.out.println("1.Show Login History");
-        System.out.println("2.Clear coupons file");
+        System.out.println("2.Clear logs file");
         System.out.println("3.Quit");
         System.out.print("Enter a option: ");
         try{
@@ -39,7 +39,7 @@ public class LogsController extends ClearData {
                     System.out.println("Please enter valid option");
             }
         }catch (InputMismatchException ex){
-            System.out.println("*** Your input mismatch whats excepted, please enter valid input ***");
+            System.out.println(ex.getMessage());
         }catch (IOException ex){
             System.out.println(ex.getMessage());
         }

@@ -177,17 +177,17 @@ public class Main {
                     System.out.println("5.Flights");
                     System.out.println("6.Passengers");
                     System.out.println("7.Coupons");
-                    System.out.println("8.Show login history");
+                    System.out.println("8.Logs");
                     System.out.println("9.Store copies form data");
                     System.out.println("10.Clear data from file");
                     System.out.println("11.Quit");
                     System.out.print("Enter a choice: ");
                     option = sc.nextInt();
                     sc.nextLine();
-                    if (option >= 1 && option <= 10) {
+                    if (option >= 1 && option <= 11) {
                         inner_flag1 = false;
                     } else {
-                        System.out.println("Just form 1 to 6 you can choose");
+                        System.out.println("Just form 1 to 11 you can choose");
                     }
                 }
                 switch (option) {
@@ -250,7 +250,6 @@ public class Main {
                         LogsController logsController = new LogsController();
                         while (inner_flag2){
                             inner_flag2 = logsController.showLogsMenu();
-                            break;
                         }
                         break;
                     case 9:
