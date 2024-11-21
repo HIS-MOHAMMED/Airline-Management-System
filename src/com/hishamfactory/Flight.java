@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class Flight implements Identifiable, Serializable{
     private static final long serialVersionUID = 1L;
-    protected String flightUuid;
+    protected String flight_uuid;
     protected Airport departure_airport;
     protected Airport destination_airport;
     protected String departure_time;
@@ -26,9 +26,9 @@ public class Flight implements Identifiable, Serializable{
         this.flight_captain = flight_captain;
         this.ticket_price = 0.0;
         this.flight_seats = new String[flight_seats];
-        this.flightUuid =company.getNewUUID();
+        this.flight_uuid =company.getNewUUID();
         passengers = new ArrayList<>();
-        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flightUuid);
+        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_uuid);
     }
     Flight(String flightUuid, Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, Plane plane, Pilot flight_captain, String[] flight_seats, ArrayList<Passenger> passengers) {
         this.departure_airport = departure_airport;
@@ -39,9 +39,9 @@ public class Flight implements Identifiable, Serializable{
         this.flight_captain = flight_captain;
         this.ticket_price = 0.0;
         this.flight_seats = flight_seats;
-        this.flightUuid = flightUuid;
+        this.flight_uuid = flightUuid;
         this.passengers = passengers;
-        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flightUuid);
+        System.out.println("From "+this.departure_airport.getAirport_name() +" to " +this.destination_airport.getAirport_name()+" flight booked with code " + this.flight_uuid);
     }
 
     public Airport getDestination_airport() {
@@ -51,8 +51,8 @@ public class Flight implements Identifiable, Serializable{
     public void setDestination_airport(Airport destination_airport) {
         this.destination_airport = destination_airport;
     }
-    public String getFlightUuid() {
-        return flightUuid;
+    public String getFlight_uuid() {
+        return flight_uuid;
     }
 
     public Airport getDeparture_airport() {
@@ -136,7 +136,7 @@ public class Flight implements Identifiable, Serializable{
     @Override
     public String toString() {
         return "Flight{" +
-                "flight_code='" + flightUuid + '\'' +
+                "flight_code='" + flight_uuid + '\'' +
                 ", departure_airport=" + departure_airport +
                 ", destination_airport=" + destination_airport +
                 ", departure_time='" + departure_time + '\'' +
@@ -150,7 +150,7 @@ public class Flight implements Identifiable, Serializable{
 
     @Override
     public String identify() {
-        return this.flightUuid;
+        return this.flight_uuid;
     }
     /*
     compares flights by departure time

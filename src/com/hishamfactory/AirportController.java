@@ -14,7 +14,7 @@ public class AirportController extends ClearData {
      */
     public static Airport getAirportByID(String airport_code){
             for (Airport airport : Company.airports) {
-                if(airport.getAirportUuid().equals(airport_code)){
+                if(airport.getAirport_uuid().equals(airport_code)){
                     return airport;
                 }
             }

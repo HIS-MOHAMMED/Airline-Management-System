@@ -2,7 +2,6 @@ package com.hishamfactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -46,7 +45,7 @@ public class FlightController extends ClearData{
      */
     public static Flight getFlightById(String id) {
         for (Flight flight : Company.flights) {
-            if (flight.getFlightUuid().equals(id)) return flight;
+            if (flight.getFlight_uuid().equals(id)) return flight;
         }
         return null;
     }
@@ -162,7 +161,7 @@ public class FlightController extends ClearData{
                         sc.nextLine();
                         if(plane != null){
                             flight.setPlane(plane);
-                            System.out.println("Flight's plane change to Plane has ID " + plane.getPlaneUuid());
+                            System.out.println("Flight's plane change to Plane has ID " + plane.getPlane_uuid());
                         }else{
                             System.out.println("*** This plane doesn't exists ***");
                         }
@@ -265,7 +264,7 @@ public class FlightController extends ClearData{
                 }
             }
             Company.flights.remove(flight);
-            System.out.println("Flight " + flight.getFlightUuid() +" removed from system");
+            System.out.println("Flight " + flight.getFlight_uuid() +" removed from system");
         }else{
             System.out.println("*** This flight not exists ***");
         }

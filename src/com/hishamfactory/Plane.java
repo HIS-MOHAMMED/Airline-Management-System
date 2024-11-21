@@ -4,36 +4,36 @@ import java.io.Serializable;
 
 public class Plane implements Identifiable, Serializable {
     private static final long serialVersionUID = 1L;
-    private String planeUuid;
+    private String plane_uuid;
     private String plane_model;
     private String serial_number;
     private String plane_manufacturer;
-    private String plane_year;
+    private String manufactured_year;
     private int plane_capacity;
     private int plane_current_passengers;
 
-    Plane(String plane_model,String serial_number,String plane_manufacturer, String plane_year, int plane_capacity, Company company){
+    Plane(String plane_model, String serial_number, String plane_manufacturer, String manufactured_year, int plane_capacity, Company company){
         this.plane_model = plane_model;
         this.serial_number =serial_number;
         this.plane_capacity  = plane_capacity;
         this.plane_manufacturer = plane_manufacturer;
         this.plane_current_passengers = 0 ;
-        this.plane_year =plane_year;
-        this.planeUuid =company.getNewUUID();
-        System.out.println(this.plane_model + "'s plane added with code " + this.planeUuid);
+        this.manufactured_year = manufactured_year;
+        this.plane_uuid =company.getNewUUID();
+        System.out.println(this.plane_model + "'s plane added with code " + this.plane_uuid);
     }
-    Plane(String uuid,String plane_model,String serial_number,String plane_manufacturer, String plane_year, int plane_capacity){
+    Plane(String uuid, String plane_model, String serial_number, String plane_manufacturer, String manufactured_year, int plane_capacity){
         this.plane_model = plane_model;
         this.serial_number =serial_number;
         this.plane_capacity  = plane_capacity;
         this.plane_manufacturer = plane_manufacturer;
         this.plane_current_passengers = 0 ;
-        this.plane_year =plane_year;
-        this.planeUuid = uuid;
-        System.out.println(this.plane_model + "'s plane added with code " + this.planeUuid);
+        this.manufactured_year = manufactured_year;
+        this.plane_uuid = uuid;
+        System.out.println(this.plane_model + "'s plane added with code " + this.plane_uuid);
     }
-    public String getPlaneUuid() {
-        return planeUuid;
+    public String getPlane_uuid() {
+        return plane_uuid;
     }
 
     public String getPlane_model() {
@@ -52,12 +52,12 @@ public class Plane implements Identifiable, Serializable {
         this.plane_manufacturer = plane_manufacturer;
     }
 
-    public String getPlane_year() {
-        return plane_year;
+    public String getManufactured_year() {
+        return manufactured_year;
     }
 
-    public void setPlane_year(String plane_year) {
-        this.plane_year = plane_year;
+    public void setManufactured_year(String manufactured_year) {
+        this.manufactured_year = manufactured_year;
     }
 
     public int getPlane_capacity() {
@@ -86,17 +86,17 @@ public class Plane implements Identifiable, Serializable {
     @Override
     public String toString() {
         return "Plane{" +
-                "plane_id='" + planeUuid + '\'' +
+                "plane_id='" + plane_uuid + '\'' +
                 ", plane_model='" + plane_model + '\'' +
                 ", serial_number='" + serial_number +'\''+
                 ", plane_manufacturer='" + plane_manufacturer + '\'' +
-                ", plane_year='" + plane_year + '\'' +
+                ", plane_year='" + manufactured_year + '\'' +
                 ", plane_capacity=" + plane_capacity +
                 ", plane_current_passengers=" + plane_current_passengers +
                 '}';
     }
     @Override
     public String identify(){
-        return this.planeUuid;
+        return this.plane_uuid;
     }
 }
