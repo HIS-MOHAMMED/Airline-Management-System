@@ -1,10 +1,7 @@
 package com.hishamfactory;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class PassengersController extends ClearData{
     Scanner sc = new Scanner(System.in);
@@ -15,13 +12,11 @@ public class PassengersController extends ClearData{
      * @return                      the passenger if it's exist or null it's not
      */
     public static Passenger getPassengerByName(String first_last_name) {
-        int i = 0;
-        while (i < Company.passengers.size()) {
-            String name = Company.passengers.get(i).getFirst_name() + Company.passengers.get(i).getLast_name();
-            if (first_last_name.equals(name)) {
-                return Company.passengers.get(i);
+        for (Passenger passenger : Company.passengers) {
+            String name = passenger.getFirst_name() + passenger.getLast_name();
+            if (name.equals(first_last_name)) {
+                return passenger;
             }
-            i++;
         }
         return null;
     }
@@ -39,9 +34,10 @@ public class PassengersController extends ClearData{
         if(Company.passengers.isEmpty()){
             System.out.println("*** Sorry,The list of passengers is empty ***");
         }else{
-            Collections.sort(Company.passengers,Passenger.comparePassengersByAge);
+            ArrayList<Passenger> passengerHashsetToArrayList = new ArrayList<>(Company.passengers);
+            Collections.sort(passengerHashsetToArrayList,Passenger.comparePassengersByAge);
             System.out.println("................................................................");
-            for (Passenger passenger : Company.passengers) {
+            for (Passenger passenger : passengerHashsetToArrayList) {
                 System.out.println(passenger.toString());
             }
         }
