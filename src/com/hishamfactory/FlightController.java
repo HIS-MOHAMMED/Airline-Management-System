@@ -2,6 +2,7 @@ package com.hishamfactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -15,9 +16,10 @@ public class FlightController extends ClearData{
         if(Company.flights.isEmpty()){
             System.out.println("** Sorry,The list of flights is empty **");
         }else{
-            Company.flights.sort(Flight.comparesFlightsByDepartureTime);
+            ArrayList<Flight> flightsHashsetToArrayList = new ArrayList<>(Company.flights);
+            Collections.sort(flightsHashsetToArrayList, Flight.comparesFlightsByDepartureTime);
             System.out.println(".......................List of Flights..........................");
-            for (Flight flight : Company.flights) {
+            for (Flight flight : flightsHashsetToArrayList) {
                 System.out.println(flight.toString());
             }
         }

@@ -7,20 +7,20 @@ public class Company implements Serializable{
     private static final long serialVersionUID = 1L;
     private String name;
     private String uuid;
-    public static ArrayList<User> users;
+    public static HashSet<User> users;
     public static ArrayList<Employee> employees;
     public static SuperVisor superVisor;
     public static ArrayList<Plane> planes;
-    public static ArrayList<Airport> airports;
-    public static ArrayList<Flight> flights;
-    public static ArrayList<String> uuids;
-    public static ArrayList<String> permissions_editing_uuids;
-    public static ArrayList<User> administrators;
-    public static ArrayList<Employee> customerServices;
+    public static HashSet<Airport> airports;
+    public static HashSet<Flight> flights;
+    public static HashSet<String> uuids;
+    public static HashSet<String> permissions_editing_uuids;
+    public static HashSet<User> administrators;
+    public static HashSet<Employee> customerServices;
     public static ArrayList<Pilot> pilots;
-    public static ArrayList<Passenger> passengers;
-    public static ArrayList<Coupon> coupons;
-    public static ArrayList<LoginHistory> logs;
+    public static HashSet<Passenger> passengers;
+    public static HashSet<Coupon> coupons;
+    public static HashSet<LoginHistory> logs;
 
     static Random rm = new Random();
     static Scanner sc = new Scanner(System.in);
@@ -31,19 +31,19 @@ public class Company implements Serializable{
      */
     public Company(String name){
         this.name = name;
-        users = new ArrayList<>();
-        uuids = new ArrayList<>();
-        permissions_editing_uuids = new ArrayList<>();
-        administrators = new ArrayList<>();
-        customerServices = new ArrayList<>();
+        users = new HashSet<>();
+        uuids = new HashSet<>();
+        permissions_editing_uuids = new HashSet<>();
+        administrators = new HashSet<>();
+        customerServices = new HashSet<>();
         employees = new ArrayList<>();
-        passengers = new ArrayList<>();
+        passengers = new HashSet<>();
         pilots = new ArrayList<>();
         planes = new ArrayList<>();
-        airports = new ArrayList<>();
-        flights = new ArrayList<>();
-        coupons = new ArrayList<>();
-        logs = new ArrayList<>();
+        airports = new HashSet<>();
+        flights = new HashSet<>();
+        coupons = new HashSet<>();
+        logs = new HashSet<>();
         this.uuid = getNewUUID();
         System.out.println("You are working on " + this.name + " company with ID " + this.uuid);
     }
@@ -55,19 +55,19 @@ public class Company implements Serializable{
      */
     public Company(String name,String uuid) {
         this.name = name;
-        users = new ArrayList<>();
-        uuids = new ArrayList<>();
-        permissions_editing_uuids = new ArrayList<>();
-        administrators = new ArrayList<>();
-        customerServices = new ArrayList<>();
+        users = new HashSet<>();
+        uuids = new HashSet<>();
+        permissions_editing_uuids = new HashSet<>();
+        administrators = new HashSet<>();
+        customerServices = new HashSet<>();
         employees = new ArrayList<>();
-        passengers = new ArrayList<>();
+        passengers = new HashSet<>();
         pilots = new ArrayList<>();
         planes = new ArrayList<>();
-        airports = new ArrayList<>();
-        flights = new ArrayList<>();
-        coupons = new ArrayList<>();
-        logs = new ArrayList<>();
+        airports = new HashSet<>();
+        flights = new HashSet<>();
+        coupons = new HashSet<>();
+        logs = new HashSet<>();
         try {
             uploadDataFromFiles();
         }catch (EOFException ex){
@@ -538,7 +538,7 @@ public class Company implements Serializable{
     public void uploadDataFromFiles() throws IOException, ClassNotFoundException {
 
         try(ObjectInputStream usersInput = new ObjectInputStream(new FileInputStream("DataFiles/users.dat"))){
-            users = (ArrayList<User>) usersInput.readObject();
+            users = (HashSet<User>) usersInput.readObject();
         }
         try(ObjectInputStream employeesInput  = new ObjectInputStream(new FileInputStream("DataFiles/employees.dat"))){
             employees = (ArrayList<Employee>) employeesInput.readObject();
@@ -550,18 +550,18 @@ public class Company implements Serializable{
             }
         }
         try(ObjectInputStream passengersInput  = new ObjectInputStream(new FileInputStream("DataFiles/passengers.dat"))){
-            passengers = (ArrayList<Passenger>) passengersInput.readObject();
+            passengers = (HashSet<Passenger>) passengersInput.readObject();
         }try(ObjectInputStream planesInput  = new ObjectInputStream(new FileInputStream("DataFiles/planes.dat"))){
             planes = (ArrayList<Plane>) planesInput.readObject();
         }try(ObjectInputStream airportsInput  = new ObjectInputStream(new FileInputStream("DataFiles/airports.dat"))){
-            airports = (ArrayList<Airport>) airportsInput.readObject();
+            airports = (HashSet<Airport>) airportsInput.readObject();
         }try(ObjectInputStream flightsInput  = new ObjectInputStream(new FileInputStream("DataFiles/flights.dat"))){
-            flights = (ArrayList<Flight>) flightsInput.readObject();
+            flights = (HashSet<Flight>) flightsInput.readObject();
         }try(ObjectInputStream couponsInput  = new ObjectInputStream(new FileInputStream("DataFiles/coupons.dat"))){
-            coupons =(ArrayList<Coupon>) couponsInput.readObject();
+            coupons =(HashSet<Coupon>) couponsInput.readObject();
         }
         try(ObjectInputStream logsInput  = new ObjectInputStream(new FileInputStream("DataFiles/logs.dat"))){
-            logs = (ArrayList<LoginHistory>) logsInput.readObject();
+            logs = (HashSet<LoginHistory>) logsInput.readObject();
         }
     }
     public void clearDataFromFile()  throws IOException{
