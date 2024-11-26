@@ -42,7 +42,7 @@ public class EmployeesController extends ClearData{
                 System.out.print("Role: ");
                 System.out.println(employee.getRole());
                 System.out.print("Basic Salary: ");
-                System.out.println(employee.getNet_salary());
+                System.out.println(employee.getBasic_salary());
                 System.out.print("Address: ");
                 System.out.println(employee.getAddress());
                 System.out.println(".............................");
