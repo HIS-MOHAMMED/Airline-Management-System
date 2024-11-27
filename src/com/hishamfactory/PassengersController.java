@@ -155,6 +155,7 @@ public class PassengersController extends ClearData{
         Passenger passenger = getPassengerByName(name);
         if (passenger != null) {
             Company.passengers.remove(passenger);
+            removePassengerFromFlights(passenger);
         } else {
             System.out.println("*** This passenger doesn't exists ***");
         }
@@ -276,5 +277,15 @@ public class PassengersController extends ClearData{
             }
         }
         return false;
+    }
+    public void removePassengerFromFlights(Passenger passenger){
+        ArrayList<FlightBooked> passengerFlights = passenger.passenger_flights;
+        for (FlightBooked passengerFlight : passengerFlights) {
+            Flight flight = FlightController.getFlightById(passengerFlight.getFlight_uuid());
+            if(flight != null)
+                flight.getPassengers().remove(passenger);
+            else
+                System.out.println("There is a something wrong,couldn't remove passenger from flight has uuid: " + passengerFlight.getFlight_uuid());
+        }
     }
 }
