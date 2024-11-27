@@ -3,6 +3,7 @@ package com.hishamfactory;
 import java.io.Serializable;
 
 public class FlightBooked implements Serializable {
+    protected String flight_uuid;
     protected Airport departure_airport;
     protected Airport destination_airport;
     protected String departure_time;
@@ -10,7 +11,8 @@ public class FlightBooked implements Serializable {
     protected double ticket_price;
     protected int passenger_seat;
 
-    FlightBooked(Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, double ticket_price, int passenger_seat){
+    FlightBooked(String flight_uuid,Airport departure_airport, Airport destination_airport, String departure_time, String arrival_time, double ticket_price, int passenger_seat){
+        this.flight_uuid = flight_uuid;
         this.departure_airport = departure_airport;
         this.destination_airport = destination_airport;
         this.departure_time = departure_time;
@@ -65,6 +67,14 @@ public class FlightBooked implements Serializable {
 
     public void setDeparture_airport(Airport departure_airport) {
         this.departure_airport = departure_airport;
+    }
+
+    public String getFlight_uuid() {
+        return flight_uuid;
+    }
+
+    public void setFlight_uuid(String flight_uuid) {
+        this.flight_uuid = flight_uuid;
     }
 
     @Override
