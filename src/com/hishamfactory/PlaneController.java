@@ -35,7 +35,9 @@ public class PlaneController extends ClearData{
         }else{
             System.out.println(".......................List of Planes.............");
             for (Plane plane : Company.planes) {
-                System.out.println(plane.toString());
+                System.out.println("[plane_model: " + plane.getPlane_model()+", serial_number:"+plane.getSerial_number()+"" +
+                        ", manufacturer:"+plane.getPlane_manufacturer()+", manufactured_year:"+plane.getManufactured_year()+"" +
+                        ", capacity:"+plane.getPlane_capacity()+", current_passengers_number: " +plane.getPlane_current_passengers()+"]");
             }
         }
     }

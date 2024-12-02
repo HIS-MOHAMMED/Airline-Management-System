@@ -20,7 +20,10 @@ public class FlightController extends ClearData{
             Collections.sort(flightsHashsetToArrayList, Flight.comparesFlightsByDepartureTime);
             System.out.println(".......................List of Flights..........................");
             for (Flight flight : flightsHashsetToArrayList) {
-                System.out.println(flight.toString());
+                System.out.println("[departure_airport:"+flight.getDeparture_airport().getAirport_name()
+                        +", destination_airport:"+flight.getDestination_airport().getAirport_name()+", pilot:"
+                        + flight.getFlightPilot().getLast_name()+", departure_time:"+flight.getDeparture_time()
+                        +", arrival_time:" + flight.getArrival_time()+", price:" +flight.getTicket_price()+"]");
             }
         }
     }

@@ -38,7 +38,7 @@ public class PassengersController extends ClearData{
             Collections.sort(passengerHashsetToArrayList,Passenger.comparePassengersByAge);
             System.out.println("................................................................");
             for (Passenger passenger : passengerHashsetToArrayList) {
-                System.out.println(passenger.toString());
+                System.out.println("[passenger_name:" + passenger.getFirst_name()+" " + passenger.getLast_name()+", age:" +passenger.getAge()+", tel:"+passenger.getTel_number()+", address:" +passenger.getAddress()+"]");
             }
         }
     }

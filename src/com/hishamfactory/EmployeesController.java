@@ -31,21 +31,7 @@ public class EmployeesController extends ClearData{
         } else {
             System.out.println("..................Employees List............................");
             for (Employee employee : Company.employees) {
-                System.out.print("Name: ");
-                System.out.println(employee.getFirst_name() + " " + employee.getLast_name());
-                System.out.print("Age:");
-                System.out.println(employee.getAge());
-                System.out.print("Tel Number: ");
-                System.out.println(employee.getTel_number());
-                System.out.print("Id: ");
-                System.out.println(employee.getUuid());
-                System.out.print("Role: ");
-                System.out.println(employee.getRole());
-                System.out.print("Basic Salary: ");
-                System.out.println(employee.getBasic_salary());
-                System.out.print("Address: ");
-                System.out.println(employee.getAddress());
-                System.out.println(".............................");
+                System.out.println("Employee's name:"+ employee.getFirst_name()+" " + employee.getLast_name()+", age:" +employee.getAge()+", tel:" + employee.getTel_number()+", role:" + employee.getRole()+", basic salary:"+employee.getBasic_salary() + ", address:" +employee.getAddress());
             }
         }
     }
