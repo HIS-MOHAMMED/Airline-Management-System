@@ -41,7 +41,7 @@ public class AirportController extends ClearData {
         }else{
             System.out.println("......................List of Airports......................");
             for (Airport airport : Company.airports) {
-                System.out.println(airport.toString());
+                System.out.println("[airport's name: " + airport.getAirport_name()+", location: " + airport.getAirport_location()+", runways: " + airport.getAirport_number_runways()+", gates:" + airport.getAirport_number_gates()+"]");
             }
         }
     }

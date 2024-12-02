@@ -22,7 +22,7 @@ public class CouponController extends ClearData {
         }else{
             System.out.println("......................List of Coupons......................");
             for (Coupon coupon: Company.coupons) {
-                System.out.println(coupon.toString());
+                System.out.println("[coupon's code: " + coupon.getCoupon_code()+", coupon_in_percentage: " +coupon.getCoupon_in_percentage()+"]");
             }
         }
     }
